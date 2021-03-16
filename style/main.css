@@ -1,0 +1,30 @@
+#formLogin{
+    max-width: 500px;
+    width: 70%;
+    height: 50%;
+    min-height: 250px;
+}
+
+#container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#formulario input{
+    width: 70%;
+}
+
+#enviar{
+    display: block;
+    margin: 0 auto 0 auto;
+}
+
+.control{
+    text-align: center;
+}
+
+.field label{
+    margin-left: 17%;
+}
