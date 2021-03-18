@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="style/main.css">
     <title>Controle de Despesas</title>
 </head>
-
 <body>
     <div id="container">
-        <div id="formLogin">
-            <form action="" method="" id="formulario">
+        <div id="divFormLogin">
+            <form action="#" method="" class="box" id="formulario">
+                <h1 class="title">Entrar</h1>
                 <div class="field">
                     <label class="label">Nome de usuário:</label>
                     <div class="control">
@@ -26,14 +26,23 @@
                         <input class="input is-rounded" type="password" placeholder="Escolha uma senha forte">
                     </div>
                 </div>
-                <div class="field is-grouped">
-                    <div class="control" id="enviar" >
-                        <button class="button is-link">Entrar</button>
-                    </div>
+                <p>Ainda não é um usuário? <a href="#">Cadastre-se!</a></p>
+                <div class="block">
+
+                </div>
+                <div class="buttons is-centered">
+                    <button class="button is-success">
+                        <span class="icon is-small">
+                            <i class="fas fa-check-circle"></i>
+                        </span>
+                        <span>Entrar</span>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
+    
+<script src="https://kit.fontawesome.com/2ecaa7524c.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
