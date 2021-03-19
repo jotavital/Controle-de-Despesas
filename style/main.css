@@ -1,7 +1,6 @@
 .divForm{
     max-width: 500px;
     width: 70%;
-    height: auto;
     min-height: 250px;
 }
 
@@ -14,7 +13,8 @@ p{
 }
 
 #container{
-    height: 100vh;
+    padding: 30px;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
