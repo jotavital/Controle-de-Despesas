@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <label class="label" for="sobrenome">Sobrenome (opcional):</label>
+                    <label class="label" for="sobrenome">Sobrenome:</label>
                     <div class="control">
                         <input class="input is-rounded" id="sobrenome" type="text" placeholder="Seu sobrenome">
                     </div>
