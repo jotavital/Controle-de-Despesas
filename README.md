@@ -1,2 +1,4 @@
-# estudo-laravel
- Estou estudando laravel para aplicar em um trabalho 
+# Projeto Integrador
+ Repo do projeto feito na disciplina projeto integrador 5
+ 
+Software de gestão de despesas
