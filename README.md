@@ -1,4 +1,2 @@
-# Projeto Integrador
- Repo do projeto feito na disciplina projeto integrador 5
- 
-Software de gestão de despesas
+# estudo-laravel
+ Estou estudando laravel para aplicar em um trabalho 
