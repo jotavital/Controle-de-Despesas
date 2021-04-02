@@ -1,0 +1,22 @@
+*{
+    font-family: 'Lexend', sans-serif;
+}
+
+.divForm{
+    max-width: 500px;
+    width: 70%;
+    min-height: 250px;
+    text-align: center;
+}
+
+.divForm h2{
+    text-align: center;
+}
+
+#container{
+    padding: 30px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
