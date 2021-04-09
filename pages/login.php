@@ -11,58 +11,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style/bulma.css">
     <link rel="stylesheet" href="/style/main.css">
     <title>Controle de Despesas - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 </head>
 <body>
     <div id="container">
         <div class="divForm">
-            <form action="#" method="" class="box" id="formulario">
+            <form action="#" method="" id="formulario">
                 <?php 
-                    // para teste de conexão ao banco
+                    //para teste de conexão ao banco
                     // if(isset($_SESSION['msg'])){
                     //     echo $_SESSION['msg'];
                     //     unset($_SESSION['msg']);
                     // }
                     // if(!$conn){
-                    //     die("<div class='notification is-danger'>" . "Falha na conexão com a base de dados: " . mysqli_connect_error() . ", verifique o arquivo de conexão e tente novamente</div>");
+                    //     die("<div class='alert alert-danger alert-dismissible fade show' role='alert'>" . "Falha na conexão com a base de dados: " . mysqli_connect_error() . ", verifique o arquivo de conexão e tente novamente</div>");
                     // }else{
-                    //     echo "<div class='notification is-success'>" . "Conexão ao banco de dados realizada com sucesso!" . "<button class='delete' aria-label='Close'></button></div>";
+                    //     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>" . "Conexão ao banco de dados realizada com sucesso!" . " <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
                     // }
                 ?>
-                <h1 class="title">Entrar</h1>
-                <div class="field">
-                    <label class="label" for="usuario">Nome de usuário:</label>
-                    <div class="control">
-                        <input class="input is-rounded" id="usuario" type="text" placeholder="Seu nome de usuário">
+                <h1>Entrar</h1>
+                <form>
+                    <div class="form-floating mb-3 d-flex justify-content-center"> 
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                        <label class="floatingLabel" for="floatingInput">Email address</label>
                     </div>
-                </div>
-                <div class="field">
-                    <label class="label" for="senha">Senha:</label>
-                    <div class="control">
-                        <input class="input is-rounded" id="senha" type="password" placeholder="Sua senha">
+                    <div class="form-floating mb-3 d-flex justify-content-center">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label class="floatingLabel" for="floatingPassword">Password</label>
                     </div>
-                </div>
-                <p>Ainda não é um usuário? <a href="register.php">Cadastre-se!</a></p>
-                <div class="block">
-
-                </div>
-                <div class="buttons is-centered">
-                    <button class="button is-success">
-                        <span class="icon is-small">
-                            <i class="fas fa-check-circle"></i>
-                        </span>
-                        <span>Entrar</span>
-                    </button>
-                </div>
+                    <button type="button" class="btn btn-success">Success</button>
             </form>
         </div>
     </div>
     <?php 
         mysqli_close($conn);
     ?>
-    <script src="https://kit.fontawesome.com/2ecaa7524c.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
 
 </html>

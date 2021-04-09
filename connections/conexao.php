@@ -4,7 +4,7 @@
     $servidor = "localhost";
     $usuario = "root";
     $senha = "";
-    $nomedb = "controle_despesas_db";
+    $nomedb = "controle_despesas";
     $porta = "3308";
 
     $conn = mysqli_connect($servidor, $usuario, $senha, $nomedb, $porta); //variavel de conexao do banco
