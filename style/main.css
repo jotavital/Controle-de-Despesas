@@ -1,14 +1,4 @@
 .divForm{
-    max-width: 500px;
-    width: 70%;
-    min-height: 250px;
-}
-
-p{
-    text-align: center;
-}
-
-#container{
     padding: 30px;
     min-height: 100vh;
     display: flex;
@@ -16,23 +6,11 @@ p{
     align-items: center;
 }
 
-#formulario{
+p{
     text-align: center;
 }
 
-.floatingLabel{
-    margin-left: 15%;
-}
-
-#formulario input{
-    width: 70%;
-}
-
-#enviar{
-    display: block;
-    margin: 0 auto 0 auto;
-}
-
-.control{
+#formulario{
+    padding: 10px;
     text-align: center;
 }

@@ -7,19 +7,32 @@
 <body>
     <div id="container">
         <div class="divForm">
-            <form action="#" method="" id="formulario">
+            <form action="#" method="" id="formulario" class="col-5">
                 <h1>Entrar</h1>
                 <br>
-                <form>
-                    <div class="form-floating mb-3 d-flex justify-content-center"> 
-                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label class="floatingLabel" for="floatingInput">Email address</label>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-8">
+                        <div class="form-floating mb-3"> 
+                            <input type="email" class="form-control" placeholder="E-mail">
+                            <label class="floatingLabel">E-mail</label>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3 d-flex justify-content-center">
-                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label class="floatingLabel" for="floatingPassword">Password</label>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-8">
+                        <div class="form-floating mb-3 d-flex justify-content-center">
+                            <input type="password" class="form-control" placeholder="Senha">
+                            <label class="floatingLabel">Senha</label>
+                        </div>
                     </div>
-                    <button type="button" class="btn btn-success">Pronto!</button>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-8">
+                        <div class="d-grid d-sm-flex justify-content-sm-center">
+                            <button type="button" class="btn btn-success">Pronto!</button>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
