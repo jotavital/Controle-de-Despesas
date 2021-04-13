@@ -27,6 +27,9 @@
                     </div>
                 </div>
                 <div class="row d-flex justify-content-center">
+                    <p>Ainda não tem cadastro? <a href="register.php">Cadastre-se aqui</a></p>
+                </div>
+                <div class="mt-2 row d-flex justify-content-center">
                     <div class="col-8">
                         <div class="d-grid d-sm-flex justify-content-sm-center">
                             <button type="button" class="btn btn-success">Pronto!</button>

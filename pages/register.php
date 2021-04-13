@@ -40,6 +40,9 @@
                 </div>
             </div>
             <div class="row d-flex justify-content-center">
+                <p>Já tem cadastro? <a href="login.php">Entre aqui</a></p>
+            </div>
+            <div class="mt-2 row d-flex justify-content-center">
                 <div class="col-8">
                     <div class="d-grid d-sm-flex justify-content-sm-center">
                         <button type="button" class="btn btn-success">Pronto!</button>
