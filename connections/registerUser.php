@@ -5,11 +5,12 @@
     $email = $_POST['email'];
 
     
-    $sql = $conn->prepare("INSERT INTO usuarios(nome, sobrenome, nome_usuario, senha) VALUES (:name, :surname, :username, :password)");
+    $sql = $conn->prepare("INSERT INTO usuario(nome, sobrenome, nome_usuario, email, senha) VALUES (:name, :surname, :username, :email, :password)");
     $sql->bindValue(":name", $_POST['name']);
     $sql->bindValue(":surname", $_POST['surname']);
     $sql->bindValue(":username", $_POST['username']);
-    $sql->bindValue(":password", $_POST['password']);
+    $sql->bindValue(":email", $_POST['email']);
+    $sql->bindValue(":password", md5($_POST['password']));
     
     if($sql->execute()){
         echo("certim parsa");
