@@ -7,7 +7,7 @@
 <body>
     <div id="container">
         <div class="divForm">
-            <form action="#" method="" id="formulario" class="col-5">
+            <form action="#" method="" id="formLogin" class="col-5">
                 <h1>Entrar</h1>
                 <br>
                 <div class="row d-flex justify-content-center">

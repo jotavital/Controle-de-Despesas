@@ -1,4 +1,5 @@
 <?php
+    include_once('../connections/connection.php');
     function setTitulo($title){
         
     }

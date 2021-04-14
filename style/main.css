@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-#formulario{
+#formRegister, #formLogin{
     padding: 10px;
     text-align: center;
 }
