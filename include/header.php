@@ -1,8 +1,12 @@
 <?php
     include_once('../connections/connection.php');
+
     function setTitulo($title){
         
     }
+    
+    $invalidFeedback = "Campo obrigatório!";
+    $validFeedback = "Muito bom!";
 ?>
 
 <!DOCTYPE html>

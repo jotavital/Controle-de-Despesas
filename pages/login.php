@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $title = "Login"; //titulo para o header.php
     include("../include/header.php"); //cabecalho da pagina
     setTitulo($title); //passa titulo pro header.php
@@ -7,32 +8,64 @@
 <body>
     <div id="container">
         <div class="divForm">
-            <form action="#" method="" id="formLogin" class="col-5">
-                <h1>Entrar</h1>
-                <br>
+            <form action="../connections/logUser.php" method="POST" id="formLogin" class="col-5 needs-validation" novalidate>
+                <h1 class="mb-3">Entrar</h1>
                 <div class="row d-flex justify-content-center">
-                    <div class="col-8">
+                    <div class="col-md">
                         <div class="form-floating mb-3"> 
-                            <input type="email" class="form-control" placeholder="E-mail">
+                            <input type="email" name="email" id="emailInput" class="form-control" placeholder="E-mail" required>
                             <label class="floatingLabel">E-mail</label>
+                            <div class="invalid-feedback">
+                                <?php
+                                    echo($invalidFeedback);
+                                ?>
+                            </div>
+                            <div class="valid-feedback">
+                                <?php
+                                    echo($validFeedback);
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row d-flex justify-content-center">
-                    <div class="col-8">
-                        <div class="form-floating mb-3 d-flex justify-content-center">
-                            <input type="password" class="form-control" placeholder="Senha">
+                    <div class="col-md">
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" id="passwordInput" class="form-control" placeholder="Senha" required>
                             <label class="floatingLabel">Senha</label>
+                            <div class="invalid-feedback">
+                                <?php
+                                    echo($invalidFeedback);
+                                ?>
+                            </div>
+                            <div class="valid-feedback">
+                                <?php
+                                    echo($validFeedback);
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <?php
+                    if(isset($_SESSION['msg'])) {
+
+                        echo("<div class='alert alert-danger alert-dismissible fade show' role='alert'>" 
+                                . "<p class='mt-3'>" . $_SESSION['msg'] . "</p>"
+                                . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>"
+                            . "</div>");
+                            
+                        unset($_SESSION['msg']);
+                    }
+                ?>
+
                 <div class="row d-flex justify-content-center">
-                    <p>Ainda não tem cadastro? <a href="register.php">Cadastre-se aqui</a></p>
+                    <p>Ainda não tem cadastro? <a style="text-decoration:none;" href="register.php">Cadastre-se aqui</a></p>
                 </div>
                 <div class="mt-2 row d-flex justify-content-center">
                     <div class="col-8">
                         <div class="d-grid d-sm-flex justify-content-sm-center">
-                            <button type="button" class="btn btn-success">Pronto!</button>
+                            <button type="submit" class="btn btn-success">Pronto!</button>
                         </div>
                     </div>
                 </div>
