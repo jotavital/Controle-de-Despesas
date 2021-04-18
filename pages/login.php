@@ -3,6 +3,12 @@
     $title = "Login"; //titulo para o header.php
     include("../include/header.php"); //cabecalho da pagina
     setTitulo($title); //passa titulo pro header.php
+
+    if(isset($_SESSION['userEmail'])){
+        if($_SESSION['userEmail']){
+            header("Location: ../pages/dashboard.php");
+        }
+    }
 ?>
 
 <body>

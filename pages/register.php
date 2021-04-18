@@ -3,6 +3,12 @@
     $title = "Cadastro";
     include("../include/header.php");
     setTitulo($title);
+
+    if(isset($_SESSION['userEmail'])){
+        if($_SESSION['userEmail']){
+            header("Location: ../pages/dashboard.php");
+        }
+    }
 ?>
 
 <div id="container">
