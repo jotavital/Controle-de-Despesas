@@ -1,7 +1,5 @@
 <?php
-    include_once('connection.php');
-
-    $email = $_POST['email'];
+    include('connection.php');
     
     $sql = $conn->prepare("INSERT INTO usuario(nome, sobrenome, email, senha) VALUES (:name, :surname, :email, :password)");
     $sql->bindValue(":name", $_POST['name']);

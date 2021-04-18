@@ -1,3 +1,9 @@
+<?php
+    if(isset($_SESSION['userEmail']) && $_SESSION['userEmail']){
+        echo("logado");
+    }
+?>
+
 <nav class="navbar navbar-expand navbar-dark bg-primary">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">

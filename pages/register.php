@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $title = "Cadastro";
     include("../include/header.php");
     setTitulo($title);

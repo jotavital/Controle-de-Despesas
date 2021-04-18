@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $title = "Home";
     include("../include/header.php");
     setTitulo($title);
