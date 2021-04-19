@@ -6,6 +6,9 @@
 ?>
 
 <body>
+    <?php
+        include("../include/sideNav.php");
+    ?>
     <div class="col-12 d-flex justify-content-center">
         <a class="mt-3 btn btn-outline-danger" href="../connections/logout.php" role="button">Logout</a>
     </div>
