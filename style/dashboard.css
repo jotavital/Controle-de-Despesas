@@ -1,0 +1,46 @@
+#containerDashboard{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+sidebar{
+    display: block;
+    width: 15%;
+    min-width: 150px;
+    height: 100%;
+}
+
+#sidebarItens li{
+    list-style-type: none;
+}
+
+#sidebarItens a{
+    text-decoration: none;
+}
+
+#sidebarHeader{
+    height: 50px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+a.btn.btn-outline-danger.col-5{
+    min-width: 100px;
+}
+
+main{
+    height: 100%;
+    background-color: lightblue;
+    width: calc(100% - 15%);
+}
+
+#headerDashboard{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+}

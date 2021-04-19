@@ -3,15 +3,26 @@
     $title = "Dashboard";
     include("../include/header.php");
     setTitulo($title);
+    // include("../include/navBar_dashboard.php");
 ?>
 
 <body>
-    <?php
-        include("../include/sideNav.php");
-    ?>
-    <div class="col-12 d-flex justify-content-center">
-        <a class="mt-3 btn btn-outline-danger" href="../connections/logout.php" role="button">Logout</a>
+    <div id="containerDashboard">
+        <sidebar>
+            <?php
+                include("../include/sideNav.php");
+            ?>
+        </sidebar>
+          
+        <main>
+            <div id="contentDashboard">
+                <div id="headerDashboard">
+                    <a href="#">Abrir menu</a>
+                </div>
+            </div>
+        </main>  
     </div>
+    
 </body>
 
 <?php

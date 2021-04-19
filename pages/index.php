@@ -3,6 +3,7 @@
     $title = "Home";
     include("../include/header.php");
     setTitulo($title);
+    include("../include/navBar_unlogged.php");
 ?>
 
 <body>

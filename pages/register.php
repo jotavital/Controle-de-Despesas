@@ -9,6 +9,8 @@
             header("Location: ../pages/dashboard.php");
         }
     }
+    
+    include("../include/navBar_unlogged.php");
 ?>
 
 <div id="container">

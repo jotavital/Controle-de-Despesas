@@ -9,17 +9,21 @@
             header("Location: ../pages/dashboard.php");
         }
     }
+    
+    include("../include/navBar_unlogged.php");
 ?>
 
 <body>
     <div id="container">
         <div class="divForm">
-            <form action="../connections/logUser.php" method="POST" id="formLogin" class="col-5 needs-validation" novalidate>
+            <form action="../connections/logUser.php" method="POST" id="formLogin" class="col-5 needs-validation"
+                novalidate>
                 <h1 class="mb-3">Entrar</h1>
                 <div class="row d-flex justify-content-center">
                     <div class="col-md">
-                        <div class="form-floating mb-3"> 
-                            <input type="email" name="email" id="emailInput" class="form-control" placeholder="E-mail" required>
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" id="emailInput" class="form-control" placeholder="E-mail"
+                                required>
                             <label class="floatingLabel">E-mail</label>
                             <div class="invalid-feedback">
                                 <?php
@@ -37,7 +41,8 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-md">
                         <div class="form-floating mb-3">
-                            <input type="password" name="password" id="passwordInput" class="form-control" placeholder="Senha" required>
+                            <input type="password" name="password" id="passwordInput" class="form-control"
+                                placeholder="Senha" required>
                             <label class="floatingLabel">Senha</label>
                             <div class="invalid-feedback">
                                 <?php
@@ -66,7 +71,8 @@
                 ?>
 
                 <div class="row d-flex justify-content-center">
-                    <p>Ainda não tem cadastro? <a style="text-decoration:none;" href="register.php">Cadastre-se aqui</a></p>
+                    <p>Ainda não tem cadastro? <a style="text-decoration:none;" href="register.php">Cadastre-se aqui</a>
+                    </p>
                 </div>
                 <div class="mt-2 row d-flex justify-content-center">
                     <div class="col-8">
