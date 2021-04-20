@@ -1,11 +1,15 @@
 <div id="sidebarHeader">
     <h4>Menu</h4>
+    
     <a href="#">Fechar</a>
 </div>
 <div id="sidebarItens">
     <ul>
         <li>
             <a href="../pages/dashboard.php">Dashboard</a>
+        </li>
+        <li>
+            <a href="">Despesas</a>
         </li>
         <li>
             <a href="../pages/dashboard.php">Perfil</a>

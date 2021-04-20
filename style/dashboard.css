@@ -34,7 +34,6 @@ a.btn.btn-outline-danger.col-5{
 
 main{
     height: 100%;
-    background-color: lightblue;
     width: calc(100% - 15%);
 }
 
@@ -42,5 +41,17 @@ main{
     height: 50px;
     display: flex;
     align-items: center;
-    background-color: white;
+    background-color: aliceblue;
+}
+
+#contentDashboard{
+    background-color: lightblue;
+    padding: 20px;
+    height: 100%;
+}
+
+#contentDashboard .card-body{
+    -webkit-box-shadow: 3px 3px 24px -6px rgba(61,61,61,1);
+    -moz-box-shadow: 3px 3px 24px -6px rgba(61,61,61,1);
+    box-shadow: 3px 3px 24px -6px rgba(61,61,61,1);
 }
