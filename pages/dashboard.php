@@ -23,7 +23,7 @@
                     <div class="col-sm-3">
                         <div class="card">
                             <div class="card-body p-4">
-                                <h5 class="card-title d-flex justify-content-center">Contas</h5>
+                                <h5 class="card-title d-flex justify-content-center">Carteiras</h5>
                                 <p class="card-text d-flex justify-content-center">Adicione suas carteiras</p>
                                 <div class="row col-md">
                                     <a href="#" class="btn btn-success col-md me-3">Adicionar</a>
