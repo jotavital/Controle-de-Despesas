@@ -1,7 +1,5 @@
 <div id="sidebarHeader">
     <h4>Menu</h4>
-    
-    <a href="#">Fechar</a>
 </div>
 <div id="sidebarItens">
     <ul>

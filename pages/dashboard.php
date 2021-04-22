@@ -8,15 +8,18 @@
 
 <body>
     <div id="containerDashboard">
-        <sidebar>
+        <sidebar class="sideNavMenu">
             <?php
                 include("../include/sideNav.php");
             ?>
         </sidebar>
+        
           
         <main>
             <div id="headerDashboard">
-                <a href="#">Abrir menu</a>
+                <div class="menuToggler">
+                    <i class="fas fa-bars fa-2x"></i>
+                </div>
             </div>
             <div id="contentDashboard">
                 <div class="row cardsContainer">
@@ -60,6 +63,8 @@
             </div>
         </main>  
     </div>
+
+    <script src="../js/sidenavCollapse.js"></script>
     
 </body>
 
