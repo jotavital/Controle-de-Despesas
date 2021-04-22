@@ -16,10 +16,9 @@
 <body>
     <div id="container">
         <div class="divForm">
-            <form action="../connections/logUser.php" method="POST" id="formLogin" class="col-5 needs-validation"
-                novalidate>
-                <img style="display: block; margin-left: auto; margin-right: auto; width: 180px" src="../image/apresentação.png" alt="">
-                <h1 style="font-weight: bolder; font-style: italic; font-size: 3em; text-align: center; color: #86EB51; margin-top: 5px; text-shadow: 4px 4px 3px #3D6B24">EasyLize Finanças</h1>
+            <form action="../connections/logUser.php" method="POST" id="formLogin" class="col-5 needs-validation" novalidate>
+                <img class="logo_big" src="../image/logo_big.png" alt="Easylize logo">
+                <h1 class="mainTitle">Easylize Finanças</h1>
                 <h1 class="mb-3">Entrar</h1>
                 <div class="row d-flex justify-content-center">
                     <div class="col-md">

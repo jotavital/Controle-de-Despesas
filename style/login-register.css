@@ -18,3 +18,13 @@ body{
 #logo{
     height: 60px;
 }
+
+h1.mainTitle{
+    font-weight: bolder; 
+    font-style: italic; 
+    font-size: 3em; 
+    text-align: center; 
+    color: #589b33; 
+    margin-top: 5px; 
+    text-shadow: 4px 4px 3px #3D6B24";
+}
