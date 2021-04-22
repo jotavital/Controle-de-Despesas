@@ -9,7 +9,13 @@
             <a href="../pages/dashboard.php">Dashboard</a>
         </li>
         <li>
+            <a href="">Carteiras</a>
+        </li>
+        <li>
             <a href="">Despesas</a>
+        </li>
+        <li>
+            <a href="">Economias</a>
         </li>
         <li>
             <a href="../pages/dashboard.php">Perfil</a>
