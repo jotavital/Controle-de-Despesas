@@ -7,7 +7,8 @@
 ?>
 
 <body>
-    <h1>conteudo</h1>
+    <h1 style="font-weight: bolder; font-style: italic; font-size: 3em; text-align: center; color: #86EB51; margin-top: 15px; text-shadow: 4px 4px 3px #3D6B24">EasyLize Finanças</h1>
+    
 
     <?php
         include("../include/footer.php");
