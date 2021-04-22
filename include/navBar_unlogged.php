@@ -1,5 +1,5 @@
 <div id="containerHeader">
-    <nav class="navbar navbar-expand navbar-light col-md" style="background-color: #d0ffb8; width:100%;">
+    <nav class="navbar navbar-expand navbar-light col-md">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
