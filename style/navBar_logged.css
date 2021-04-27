@@ -1,0 +1,11 @@
+#headerDashboard{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: #d0ffb8;
+}
+
+.menuToggler{
+    cursor: pointer;
+    margin-left: 15px;
+}

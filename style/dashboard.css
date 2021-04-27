@@ -42,15 +42,8 @@ main{
     width: 100%;
 }
 
-#headerDashboard{
-    height: 50px;
-    display: flex;
-    align-items: center;
-    background-color: aliceblue;
-}
-
 #contentDashboard{
-    background-color: lightblue;
+    background-color: rgb(221, 239, 255);
     padding-left: 25px;
     padding-top: 15px;
     height: 100%;
@@ -115,9 +108,4 @@ main{
 
 .hide{
     display: none;
-}
-
-.menuToggler{
-    cursor: pointer;
-    margin-left: 15px;
 }

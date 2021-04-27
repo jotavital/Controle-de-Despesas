@@ -3,31 +3,25 @@
     $title = "Dashboard";
     include("../include/header.php");
     setTitulo($title);
-    // include("../include/navBar_dashboard.php");
 ?>
 
 <body>
     <div id="containerDashboard">
-        <sidebar class="sideNavMenu">
-            <?php
-                include("../include/sideNav.php");
-            ?>
-        </sidebar>
-        
-          
+        <?php
+            include("../include/sideNav.php");
+        ?>
         <main>
-            <div id="headerDashboard">
-                <div class="menuToggler">
-                    <i class="fas fa-bars fa-2x"></i>
-                </div>
-            </div>
+            <?php
+                include("../include/navBar_logged.php");
+            ?>
+            
             <div id="contentDashboard">
                 <div class="row cardsContainer">
                     <div class="col-sm-3">
                         <div class="card">
                             <div class="card-body p-4">
-                                <h5 class="card-title d-flex justify-content-center">Carteiras</h5>
-                                <p class="card-text d-flex justify-content-center">Adicione suas carteiras</p>
+                                <h5 class="card-title d-flex justify-content-center">Contas</h5>
+                                <p class="card-text d-flex justify-content-center">Adicione suas contas</p>
                                 <div class="row col-sm d-flex justify-content-center">
                                     <a href="#" class="btn btn-success col-sm me-3">Adicionar</a>
                                     <a href="#" class="btn btn-primary col-sm">Ver tudo</a>
