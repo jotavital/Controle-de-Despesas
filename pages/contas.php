@@ -41,10 +41,18 @@ setTitulo($title);
                                         <div class="mb-3">
                                             <label for="categoriaSelect" class="form-label">Categoria</label>
                                             <select class="form-select" name="categoriaSelect" id="categoriaSelect">
-                                                <option value="1">Poupança</option>
-                                                <option value="2">Conta corrente</option>
-                                                <option value="3">Carteira</option>
-                                                <option value="4">Outros</option>
+                                                <?php
+                                                    include("connection.php");
+                                                    $sql = $conn->prepare("SELECT * FROM categoria");
+                                                    $sql->execute();
+                                                    $data = $sql->fetchAll();
+
+                                                    foreach($data as $row){
+                                                ?>
+                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_categoria'] ?></option>
+                                                <?php
+                                                    }
+                                                ?>
                                             </select>
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
@@ -62,20 +70,20 @@ setTitulo($title);
 
 
     <script>
-        $(document).ready(function(){
-            $('#formAddContas').submit(function(){
+        $(document).ready(function() {
+            $('#formAddContas').submit(function() {
                 var dados = jQuery(this).serialize();
 
                 $.ajax({
                     url: '../connections/insertConta.php',
                     method: 'POST',
                     data: dados,
-                    success: function(msg){
+                    success: function(msg) {
                         $("#formAddContas").trigger('reset');
                         alert(msg);
                     }
                 });
-                
+
                 return false;
             });
 
@@ -84,5 +92,5 @@ setTitulo($title);
 </body>
 
 <?php
-    include("../include/footer.php");
+include("../include/footer.php");
 ?>
