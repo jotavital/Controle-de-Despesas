@@ -13,6 +13,7 @@
                 header("Location: ../pages/login.php");
             }else{
                 $_SESSION['userEmail'] = $_POST['email'];
+                $_SESSION['userId'] = $sql->fetchColumn();
                 header("Location: ../pages/dashboard.php");
                 exit();
             }

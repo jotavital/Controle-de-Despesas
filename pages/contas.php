@@ -29,18 +29,18 @@ setTitulo($title);
                             </div>
                             <div class="modal-body">
                                 <div class="container-fluid">
-                                    <form method="POST" action="../connections/insertConta.php" id="formAddContas">
+                                    <form method="POST" id="formAddContas">
                                         <div class="mb-3">
                                             <label for="nomeContaInput" class="form-label">Nome da conta</label>
-                                            <input type="text" class="form-control" id="nomeContaInput" aria-describedby="Nome" placeholder="Ex.: Minha Poupança">
+                                            <input type="text" class="form-control" id="nomeContaInput" name="nomeConta" aria-describedby="Nome" placeholder="Ex.: Minha Poupança">
                                         </div>
                                         <div class="mb-3">
                                             <label for="saldoInput" class="form-label">Saldo atual</label>
-                                            <input type="text" class="form-control" id="saldoInput">
+                                            <input type="text" class="form-control" name="saldoConta" id="saldoInput">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="catogoriaSelect" class="form-label">Categoria</label>
-                                            <select class="form-select" name="catogoriaSelect" id="catogoriaSelect">
+                                            <label for="categoriaSelect" class="form-label">Categoria</label>
+                                            <select class="form-select" name="categoriaSelect" id="categoriaSelect">
                                                 <option value="1">Poupança</option>
                                                 <option value="2">Conta corrente</option>
                                                 <option value="3">Carteira</option>
@@ -48,7 +48,7 @@ setTitulo($title);
                                             </select>
                                         </div>
                                         <div class="modal-footer d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-success">Salvar</button>
+                                            <button type="submit" id="submit" class="btn btn-success">Salvar</button>
                                         </div>
                                     </form>
                                 </div>
@@ -62,7 +62,24 @@ setTitulo($title);
 
 
     <script>
-        
+        $(document).ready(function(){
+            $('#formAddContas').submit(function(){
+                var dados = jQuery(this).serialize();
+
+                $.ajax({
+                    url: '../connections/insertConta.php',
+                    method: 'POST',
+                    data: dados,
+                    success: function(msg){
+                        $("#formAddContas").trigger('reset');
+                        alert(msg);
+                    }
+                });
+                
+                return false;
+            });
+
+        });
     </script>
 </body>
 
