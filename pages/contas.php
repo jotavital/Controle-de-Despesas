@@ -21,7 +21,9 @@ setTitulo($title);
                 </div>
                 <div class="row col-12 cardsContainer" id="containerCardsContas">
                     <?php
-                    $sql = $conn->prepare("SELECT * FROM conta");
+                    $userId = $_SESSION['userId'];
+                    $sql = $conn->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
+                    $sql->bindValue(":userId", $userId);
                     $sql->execute();
                     $data = $sql->fetchAll();
 
