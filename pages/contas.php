@@ -16,9 +16,44 @@ setTitulo($title);
             ?>
 
             <div id="contentDashboard">
-                <div class="col-12 d-flex justify-content-center">
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddConta">Adicionar</button>
+                <div class="col-12 mb-3 d-flex justify-content-center">
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddConta">Nova conta</button>
                 </div>
+                <div class="row col-12 cardsContainer" id="containerCardsContas">
+                    <?php
+                    $sql = $conn->prepare("SELECT * FROM conta");
+                    $sql->execute();
+                    $data = $sql->fetchAll();
+
+                    foreach ($data as $row) {
+                    ?>
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <div class="card-body p-4">
+                                    <h5 class="card-title d-flex justify-content-center">
+                                        <?php
+                                        echo $row['nome_conta'];
+                                        ?>
+                                    </h5>
+                                    <p class="card-text d-flex justify-content-center">
+                                        <?php
+                                        $valor = $row['saldo_atual'];
+                                        $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
+                                        echo ($formatter->formatCurrency($valor, 'BRL'));
+                                        ?>
+                                    </p>
+                                    <div class="row col-sm d-flex justify-content-center">
+                                        <a href="#" class="btn btn-outline-primary col-sm me-3">Gerenciar</a>
+                                        <a href="#" class="btn btn-outline-danger col-sm">Excluir</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+
                 <!-- Modal -->
                 <div class="modal fade" id="modalAddConta" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalAddContaLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -36,22 +71,21 @@ setTitulo($title);
                                         </div>
                                         <div class="mb-3">
                                             <label for="saldoInput" class="form-label">Saldo atual</label>
-                                            <input type="text" class="form-control" name="saldoConta" id="saldoInput">
+                                            <input type="text" class="form-control" name="saldoConta" id="saldoInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});">
                                         </div>
                                         <div class="mb-3">
                                             <label for="categoriaSelect" class="form-label">Categoria</label>
                                             <select class="form-select" name="categoriaSelect" id="categoriaSelect">
                                                 <?php
-                                                    include("connection.php");
-                                                    $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 5");
-                                                    $sql->execute();
-                                                    $data = $sql->fetchAll();
+                                                $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 5");
+                                                $sql->execute();
+                                                $data = $sql->fetchAll();
 
-                                                    foreach($data as $row){
+                                                foreach ($data as $row) {
                                                 ?>
-                                                <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_categoria'] ?></option>
+                                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_categoria'] ?></option>
                                                 <?php
-                                                    }
+                                                }
                                                 ?>
                                             </select>
                                         </div>
@@ -72,6 +106,10 @@ setTitulo($title);
     <script>
         $(document).ready(function() {
             $('#formAddContas').submit(function() {
+                var x = $("#saldoInput").val();
+                x = x.replace(/[.]/gim, "");
+                x = x.replace(/[,]/gim, ".");
+                document.getElementById("saldoInput").value = x;
                 var dados = jQuery(this).serialize();
 
                 $.ajax({
@@ -80,13 +118,11 @@ setTitulo($title);
                     data: dados,
                     success: function(msg) {
                         $("#formAddContas").trigger('reset');
-                        alert(msg);
                     }
                 });
 
                 return false;
             });
-
         });
     </script>
 </body>

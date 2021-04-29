@@ -11,9 +11,9 @@
     $sql->bindValue(":categoria", $_POST['categoriaSelect']);
     
     if($sql->execute()){
-        $_SESSION['msg'] = "Tudo certo";
+        $_SESSION['msg'] = "Conta adicionada!";
     }else{
-        print_r($sql->errorInfo());
+        $_SESSION['msg'] = "Erro " . $sql->errorInfo();
     }
 
     $conn = null;
