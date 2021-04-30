@@ -14,6 +14,12 @@
                 <a href="">Despesas</a>
             </li>
             <li>
+                <a href="">Receitas</a>
+            </li>
+            <li>
+                <a href="">Transações</a>
+            </li>
+            <li>
                 <a href="">Metas</a>
             </li>
             <li>
