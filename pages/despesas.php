@@ -1,8 +1,8 @@
 <?php
 include("../connections/loginVerify.php");
-$title = "Contas";
+$title = "Despesas";
 include("../include/header.php");
-include("../pages/modals/modalAddConta.php");
+include("../pages/modals/modalAddDespesa.php");
 setTitulo($title);
 ?>
 
@@ -15,15 +15,14 @@ setTitulo($title);
             <?php
             include("../include/navBar_logged.php");
             ?>
-
             <div id="contentDashboard">
                 <div class="col-12 mb-3 d-flex justify-content-center">
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddConta">Nova conta</button>
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddDespesa">Nova despesa</button>
                 </div>
                 <div class="row col-12 cardsContainer" id="containerCardsContas">
                     <?php
                     $userId = $_SESSION['userId'];
-                    $sql = $conn->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
+                    $sql = $conn->prepare("SELECT * FROM despesa WHERE fk_usuario = :userId");
                     $sql->bindValue(":userId", $userId);
                     $sql->execute();
                     $data = $sql->fetchAll();
@@ -35,18 +34,18 @@ setTitulo($title);
                                 <div class="card-body p-4">
                                     <h5 class="card-title d-flex justify-content-center">
                                         <?php
-                                        echo $row['nome_conta'];
+                                        echo $row['descricao_despesa'];
                                         ?>
                                     </h5>
                                     <p class="card-text d-flex justify-content-center">
                                         <?php
-                                        $valor = $row['saldo_atual'];
+                                        $valor = $row['valor'];
                                         $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
                                         echo ($formatter->formatCurrency($valor, 'BRL'));
                                         ?>
                                     </p>
                                     <div class="row col-sm d-flex justify-content-center">
-                                        <a href="#" class="btn btn-outline-primary col-sm me-3">Gerenciar</a>
+                                        <a href="#" class="btn btn-outline-primary col-sm me-3">Editar</a>
                                         <a href="#" class="btn btn-outline-danger col-sm">Excluir</a>
                                     </div>
                                 </div>
@@ -56,13 +55,11 @@ setTitulo($title);
                     }
                     ?>
                 </div>
-                
+
             </div>
         </main>
     </div>
 
-
-    <script src="../js/submitFormAddConta.js"></script>
 </body>
 
 <?php

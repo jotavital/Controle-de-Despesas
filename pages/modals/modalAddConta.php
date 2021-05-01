@@ -10,11 +10,11 @@
                     <form method="POST" id="formAddContas">
                         <div class="mb-3">
                             <label for="nomeContaInput" class="form-label">Nome da conta</label>
-                            <input type="text" class="form-control" id="nomeContaInput" name="nomeConta" aria-describedby="Nome" placeholder="Ex.: Minha Poupança">
+                            <input type="text" class="form-control" id="nomeContaInput" name="nomeConta" aria-describedby="Nome" placeholder="Ex.: Minha Poupança" required>
                         </div>
                         <div class="mb-3">
                             <label for="saldoInput" class="form-label">Saldo atual</label>
-                            <input type="text" class="form-control" name="saldoConta" id="saldoInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});">
+                            <input type="text" class="form-control" name="saldoConta" id="saldoInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});" required>
                         </div>
                         <div class="mb-3">
                             <label for="categoriaSelect" class="form-label">Categoria</label>

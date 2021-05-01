@@ -11,7 +11,7 @@
                 <a href="../pages/contas.php">Contas</a>
             </li>
             <li>
-                <a href="">Despesas</a>
+                <a href="../pages/despesas.php">Despesas</a>
             </li>
             <li>
                 <a href="">Receitas</a>
