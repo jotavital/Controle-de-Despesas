@@ -3,6 +3,7 @@ include("../connections/loginVerify.php");
 $title = "Dashboard";
 include("../include/header.php");
 include("../pages/modals/modalAddConta.php");
+include("../pages/modals/modalAddDespesa.php");
 setTitulo($title);
 ?>
 
@@ -36,8 +37,8 @@ setTitulo($title);
                                 <h5 class="card-title d-flex justify-content-center">Despesas</h5>
                                 <p class="card-text d-flex justify-content-center">Adicione seus gastos</p>
                                 <div class="row col-sm d-flex justify-content-center">
-                                    <a href="#" class="btn btn-outline-success col-sm me-3">Adicionar</a>
-                                    <a href="#" class="btn btn-outline-primary col-sm">Ver tudo</a>
+                                <button class="btn btn-outline-success col-sm me-3" data-bs-toggle="modal" data-bs-target="#modalAddDespesa">Adicionar</button>
+                                    <a href="../pages/despesas.php" class="btn btn-outline-primary col-sm">Ver tudo</a>
                                 </div>
                             </div>
                         </div>
