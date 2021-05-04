@@ -109,11 +109,3 @@ main{
 .hide{
     display: none;
 }
-
-div.ss-multi-selected{
-    height: 38px;
-}
-
-div.ss-add{
-    padding-top: 5px;
-}

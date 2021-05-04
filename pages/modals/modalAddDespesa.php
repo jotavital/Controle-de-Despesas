@@ -30,22 +30,31 @@
                         </div>
                         <div class="mb-3">
                             <label for="contaSelect" class="form-label">Conta</label>
-                            <select class="form-select" name="contaSelect" id="contaSelect">
-                                <?php
-                                $userId = $_SESSION['userId'];
-                                $sql = $conn->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
-                                $sql->bindValue(':userId', $userId);
-                                $sql->execute();
-                                $data = $sql->fetchAll();
-                                $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
+                            <div class="row col-12 d-flex align-items-center">
+                                <div class="col-11">
+                                    <select name="contaSelect" id="contaSelect">
+                                        <?php
 
-                                foreach ($data as $row) {
-                                ?>
-                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_conta'] . " - " . $formatter->formatCurrency($row['saldo_atual'], 'BRL') ?></option>
-                                <?php
-                                }
-                                ?>
-                            </select>
+                                        $userId = $_SESSION['userId'];
+                                        $sql = $conn->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
+                                        $sql->bindValue(':userId', $userId);
+                                        $sql->execute();
+                                        $data = $sql->fetchAll();
+                                        $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
+
+                                        foreach ($data as $row) {
+                                        ?>
+                                            <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_conta'] . " - " . $formatter->formatCurrency($row['saldo_atual'], 'BRL') ?></option>
+                                        <?php
+                                        }
+
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-1">
+                                    <i class="fas fa-plus-square"></i>
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="imgInput" class="form-label">Imagem</label>
@@ -53,11 +62,32 @@
                         </div>
                         <div class="mb-3">
                             <label for="categoriaSelect" class="form-label">Categorias</label>
-                            <select id="categoriasSelect" multiple>
-                                <option value="value 1">Value 1</option>
-                                <option value="value 2">Value 2</option>
-                                <option value="value 3">Value 3</option>
-                            </select>
+                            <div class="row col-12 d-flex align-items-center">
+                                <div class="col-11">
+
+                                    <select id="categoriasSelect" multiple required>
+                                        <?php
+
+                                        $userId = $_SESSION['userId'];
+                                        $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 3");
+                                        $sql->bindValue(':userId', $userId);
+                                        $sql->execute();
+                                        $data = $sql->fetchAll();
+                                        $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
+
+                                        foreach ($data as $row) {
+                                        ?>
+                                            <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_categoria'] ?></option>
+                                        <?php
+                                        }
+
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col-1">
+                                    <i class="fas fa-plus-square"></i>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer d-flex justify-content-center">
                             <button type="submit" id="submit" class="btn btn-success">Salvar</button>
@@ -73,7 +103,20 @@
     new SlimSelect({
         select: '#categoriasSelect',
         allowDeselect: true,
+        searchPlaceholder: 'Pesquise categorias',
+        searchText: 'Nada com esse nome :/',
+        placeholder: "Selecione",
         deselectLabel: '<span class="white">✖</span>',
-        placeholder: "Selecione"
+        closeOnSelect: false,
+        hideSelectedOption: true
+    })
+
+    new SlimSelect({
+        select: '#contaSelect',
+        searchPlaceholder: 'Pesquise a conta',
+        searchText: 'Não achamos essa conta :/',
+        placeholder: "Selecione",
+        closeOnSelect: true,
+        hideSelectedOption: true
     })
 </script>
