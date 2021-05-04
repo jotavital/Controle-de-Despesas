@@ -23,12 +23,14 @@ $(document).ready(function () {
         x = x.replace(/[.]/gim, "");
         x = x.replace(/[,]/gim, ".");
         document.getElementById('valorInput').value = x;
-        var dados = jQuery(this).serialize();
+        var dados = new FormData(this);
 
         $.ajax({
             url: '../connections/inserts/insertDespesa.php',
             method: 'POST',
             data: dados,
+            processData: false,
+            contentType: false,
             success: function (msg) {
                 $('#formAddDespesas').trigger('reset');
             }
