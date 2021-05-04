@@ -1,13 +1,12 @@
 <?php
-    include("../connections/loginVerify.php");
-    include('connection.php');
 
-    $userId = $_SESSION['userId'];
+    include("../loginVerify.php");
+    include("../connection.php");
     
     $sql = $conn->prepare("INSERT INTO conta(nome_conta, saldo_atual, fk_usuario, fk_categoria) VALUES (:nome, :saldo, :userId, :categoria)");
     $sql->bindValue(":nome", $_POST['nomeConta']);
     $sql->bindValue(":saldo", $_POST['saldoConta']);
-    $sql->bindValue(":userId", $userId);
+    $sql->bindValue(":userId", $_SESSION['userId']);
     $sql->bindValue(":categoria", $_POST['categoriaSelect']);
     
     if($sql->execute()){
@@ -17,4 +16,5 @@
     }
 
     $conn = null;
+
 ?>

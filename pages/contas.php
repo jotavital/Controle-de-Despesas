@@ -62,7 +62,7 @@ setTitulo($title);
     </div>
 
 
-    <script src="../js/submitFormAddConta.js"></script>
+    <script src="../js/submitForms.js"></script>
 </body>
 
 <?php

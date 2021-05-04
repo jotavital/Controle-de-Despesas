@@ -62,6 +62,8 @@ setTitulo($title);
 
 </body>
 
+<script src="../js/submitForms.js"></script>
+
 <?php
 include("../include/footer.php");
 ?>

@@ -7,15 +7,15 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form method="POST" id="formAddDespesas">
+                    <form method="POST" id="formAddDespesas" enctype="multipart/form-data">
                         <div class="row col-md">
                             <div class="mb-3 col-8">
-                                <label for="nomeDespesaInput" class="form-label">Descrição da despesa</label>
-                                <input type="text" class="form-control" id="nomeDespesaInput" name="nomeDespesa" aria-describedby="Nome" placeholder="Ex.: Mercado" required>
+                                <label for="descDespesaInput" class="form-label">Descrição da despesa</label>
+                                <input type="text" class="form-control" id="descDespesaInput" name="descDespesaInput" aria-describedby="Nome" placeholder="Ex.: Mercado" required>
                             </div>
                             <div class="mb-3 col-4">
-                                <label for="saldoInput" class="form-label">Valor</label>
-                                <input type="text" class="form-control" name="saldoDespesa" id="saldoInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});" required>
+                                <label for="valorInput" class="form-label">Valor</label>
+                                <input type="text" class="form-control" name="valorInput" id="valorInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});" required>
                             </div>
                         </div>
                         <div class="row col-md">
@@ -25,7 +25,7 @@
                             </div>
                             <div class="mb-3 col-6">
                                 <label for="dataVencimentoDespesa" class="form-label">Data do vencimento</label>
-                                <input type="date" class="form-control" id="dataVencimentoDespesa" name="dataVencimentoDespesa" aria-describedby="Data da despesa" required>
+                                <input type="date" class="form-control" id="dataVencimentoDespesa" name="dataVencimentoDespesa" aria-describedby="Data da despesa">
                             </div>
                         </div>
                         <div class="mb-3">
@@ -41,6 +41,7 @@
                                         $sql->execute();
                                         $data = $sql->fetchAll();
                                         $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
+
 
                                         foreach ($data as $row) {
                                         ?>
