@@ -32,13 +32,16 @@
                             <label for="contaSelect" class="form-label">Conta</label>
                             <select class="form-select" name="contaSelect" id="contaSelect">
                                 <?php
-                                $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 5");
+                                $userId = $_SESSION['userId'];
+                                $sql = $conn->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
+                                $sql->bindValue(':userId', $userId);
                                 $sql->execute();
                                 $data = $sql->fetchAll();
+                                $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
 
                                 foreach ($data as $row) {
                                 ?>
-                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_categoria'] ?></option>
+                                    <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_conta'] . " - " . $formatter->formatCurrency($row['saldo_atual'], 'BRL') ?></option>
                                 <?php
                                 }
                                 ?>
@@ -50,8 +53,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="categoriaSelect" class="form-label">Categorias</label>
-                            <br>
-                            aqui estarão as categorias
+                            <select id="categoriasSelect" multiple>
+                                <option value="value 1">Value 1</option>
+                                <option value="value 2">Value 2</option>
+                                <option value="value 3">Value 3</option>
+                            </select>
                         </div>
                         <div class="modal-footer d-flex justify-content-center">
                             <button type="submit" id="submit" class="btn btn-success">Salvar</button>
@@ -62,3 +68,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    new SlimSelect({
+        select: '#categoriasSelect',
+        allowDeselect: true,
+        deselectLabel: '<span class="white">✖</span>',
+        placeholder: "Selecione"
+    })
+</script>
