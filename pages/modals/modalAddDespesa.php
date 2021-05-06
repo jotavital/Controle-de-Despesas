@@ -70,18 +70,16 @@
                                         <?php
 
                                         $userId = $_SESSION['userId'];
-                                        $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 3");
+                                        $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 3 AND fk_usuario = :userId");
                                         $sql->bindValue(':userId', $userId);
                                         $sql->execute();
                                         $data = $sql->fetchAll();
-                                        $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
 
                                         foreach ($data as $row) {
                                         ?>
                                             <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_categoria'] ?></option>
                                         <?php
                                         }
-
                                         ?>
                                     </select>
                                 </div>
@@ -102,7 +100,7 @@
 
 <script>
     $('#imgInput').bind('change', function() {
-        if(this.files[0].size > 5242880){
+        if (this.files[0].size > 5242880) {
             alert('Escolha uma imagem de até 5 MB');
             $('#imgInput').val('');
         }
