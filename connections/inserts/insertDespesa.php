@@ -20,17 +20,15 @@
         //armazena imagem da despesa na pasta
         $lastId = $conn->lastInsertId();
         $directory = '../../uploaded/user_images/despesas_images/' . $_SESSION['userId'];
-        
         mkdir($directory);
         $directory = $directory . '/' . $conn->lastInsertId() . '/';
         mkdir($directory);
 
-        if(move_uploaded_file($_FILES['imgInput']['tmp_name'], $directory . $nomeImg)){
-            $_SESSION['msg'] = "Foto adicionada com sucesso!";
+        if(copy($_FILES['imgInput']['tmp_name'], $directory . $nomeImg)){
+            $_SESSION['msg'] = "Foto adicionada com sucesso! ";
         }else{
-            $_SESSION['msg'] = "Erro ao adicionar foto!" . $directory;
+            $_SESSION['msg'] = "Erro ao adicionar foto! ";
         }
-
         
     }else{
         $_SESSION['msg'] = "Erro " . $sql->errorInfo();

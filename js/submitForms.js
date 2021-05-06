@@ -32,7 +32,7 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             success: function (msg) {
-                $('#formAddDespesas').trigger('reset');
+                window.location.href = "../pages/despesas.php";
             }
         });
 
