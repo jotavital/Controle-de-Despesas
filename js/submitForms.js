@@ -11,7 +11,7 @@ $(document).ready(function () {
             method: 'POST',
             data: dados,
             success: function (msg) {
-                $("#formAddContas").trigger('reset');
+                window.location.href = "../pages/contas.php";
             }
         });
 

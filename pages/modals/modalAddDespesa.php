@@ -29,6 +29,10 @@
                             </div>
                         </div>
                         <div class="mb-3">
+                            <label for="imgInput" class="form-label">Imagem</label>
+                            <input class="form-control" type="file" id="imgInput" name="imgInput" accept="image/*">
+                        </div>
+                        <div class="mb-3">
                             <label for="contaSelect" class="form-label">Conta</label>
                             <div class="row col-12 d-flex align-items-center">
                                 <div class="col-11">
@@ -56,10 +60,6 @@
                                     <i class="fas fa-plus-square"></i>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="imgInput" class="form-label">Imagem</label>
-                            <input class="form-control" type="file" id="imgInput" name="imgInput" accept="image/*">
                         </div>
                         <div class="mb-3">
                             <label for="categoriaSelect" class="form-label">Categorias</label>
@@ -101,6 +101,13 @@
 </div>
 
 <script>
+    $('#imgInput').bind('change', function() {
+        if(this.files[0].size > 5242880){
+            alert('Escolha uma imagem de até 5 MB');
+            $('#imgInput').val('');
+        }
+    });
+
     new SlimSelect({
         select: '#categoriasSelect',
         allowDeselect: true,
