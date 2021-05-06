@@ -15,7 +15,7 @@
                             </div>
                             <div class="mb-3 col-4">
                                 <label for="valorInput" class="form-label">Valor</label>
-                                <input type="text" class="form-control" name="valorInput" id="valorInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});" required>
+                                <input type="text" class="form-control" name="valorInput" id="valorInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});" required autocomplete="off">
                             </div>
                         </div>
                         <div class="row col-md">
