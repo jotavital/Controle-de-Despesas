@@ -56,6 +56,12 @@ setTitulo($title);
                     ?>
                 </div>
 
+                    <?php
+                        if(isset($_SESSION['msg'])){
+                            echo $_SESSION['msg'];
+                        }
+                    ?>
+
             </div>
         </main>
     </div>
