@@ -57,7 +57,7 @@
                                     </select>
                                 </div>
                                 <div class="col-1">
-                                    <i class="fas fa-plus-square"></i>
+                                    <a id="btnAddConta" data-bs-target="#modalAddConta" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-plus-square"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
         deselectLabel: '<span class="white">✖</span>',
         closeOnSelect: false,
         hideSelectedOption: true
-    })
+    });
 
     new SlimSelect({
         select: '#contaSelect',
@@ -124,5 +124,5 @@
         placeholder: "Selecione",
         closeOnSelect: true,
         hideSelectedOption: true
-    })
+    });
 </script>

@@ -3,10 +3,11 @@ include("../connections/loginVerify.php");
 $title = "Despesas";
 include("../include/header.php");
 include("../pages/modals/modalAddDespesa.php");
+include("../pages/modals/modalAddConta.php");
 setTitulo($title);
 ?>
 
-<body>
+<body id="bo">
     <div id="containerDashboard">
         <?php
         include("../include/sideNav.php");
@@ -62,6 +63,16 @@ setTitulo($title);
 </body>
 
 <script src="../js/submitForms.js"></script>
+
+<script>
+    $('#modalAddConta').on('shown.bs.modal', function() {
+        document.querySelector('#containerDashboard').classList.add('second-modal-open');
+    });
+
+    $('#modalAddConta').on('hide.bs.modal', function() {
+        document.querySelector('#containerDashboard').classList.remove('second-modal-open');
+    });
+</script>
 
 <?php
 include("../include/footer.php");

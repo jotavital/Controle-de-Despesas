@@ -20,3 +20,12 @@ div.ss-add{
     font-size: 25px;
     color: green;
 }
+
+.modal-open #containerDashboard, .second-modal-open {
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+}
+
+a{
+    cursor: pointer;
+}
