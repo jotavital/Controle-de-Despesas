@@ -30,4 +30,6 @@
             <a class="btn btn-outline-danger col-5" href="../connections/logout.php" role="button">Logout</a>
         </div>
     </div>
+
+    <script src="../js/sidenavCollapse.js"></script>
 </sidebar>

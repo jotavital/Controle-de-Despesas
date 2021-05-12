@@ -1,5 +1,4 @@
 <?php
-
     include("../loginVerify.php");
     include("../connection.php");
 
@@ -29,9 +28,20 @@
         }else{
             $_SESSION['msg'] = "Erro ao adicionar foto! ";
         }
-        
-    }else{
-        $_SESSION['msg'] = "Erro " . $sql->errorInfo();
+
+        //relacionando categorias com despesa
+        $despesaId = $conn->lastInsertId();
+
+        foreach($_POST['categoriasSelect'] as $categoria){
+            $sql2 = $conn->prepare("INSERT INTO categoria_despesa (fk_categoria, fk_despesa) VALUES (:fk_categoria, :fk_despesa)");
+            $sql2->bindValue(':fk_categoria', $categoria);
+            $sql2->bindValue(':fk_despesa', $despesaId);
+            $sql2->execute();
+            
+        }
+
+    } else {
+        $_SESSION['msg'] = "Erro ao criar despesa";
     }
 
     $conn = null;

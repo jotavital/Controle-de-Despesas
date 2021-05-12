@@ -60,8 +60,7 @@ setTitulo($title);
         </main>
     </div>
 
-    <script src="../js/sidenavCollapse.js"></script>
-    <script src="../js/submitFormAddConta.js"></script>
+    <script src="../js/submitForms.js"></script>
 </body>
 
 <?php

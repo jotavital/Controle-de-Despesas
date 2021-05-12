@@ -66,7 +66,7 @@
                             <div class="row col-12 d-flex align-items-center">
                                 <div class="col-11">
 
-                                    <select id="categoriasSelect" multiple required>
+                                    <select id="categoriasSelect" name="categoriasSelect[]" multiple required>
                                         <?php
 
                                         $userId = $_SESSION['userId'];

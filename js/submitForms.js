@@ -31,11 +31,11 @@ $(document).ready(function () {
             data: dados,
             processData: false,
             contentType: false,
-            success: function (msg) {
-                window.location.href = "../pages/despesas.php";
+            complete: function (msg) {
+                //window.location.href = "../pages/despesas.php";
             }
         });
-
+        
         return false;
     });
 });
