@@ -4,6 +4,7 @@ $title = "Despesas";
 include("../include/header.php");
 include("../pages/modals/modalAddDespesa.php");
 include("../pages/modals/modalAddConta.php");
+include("../pages/modals/modalAddCategoriaDespesa.php");
 setTitulo($title);
 ?>
 
@@ -70,6 +71,14 @@ setTitulo($title);
     });
 
     $('#modalAddConta').on('hide.bs.modal', function() {
+        document.querySelector('#containerDashboard').classList.remove('second-modal-open');
+    });
+
+    $('#modalAddCategoriaDespesa').on('shown.bs.modal', function() {
+        document.querySelector('#containerDashboard').classList.add('second-modal-open');
+    });
+
+    $('#modalAddCategoriaDespesa').on('hide.bs.modal', function() {
         document.querySelector('#containerDashboard').classList.remove('second-modal-open');
     });
 </script>

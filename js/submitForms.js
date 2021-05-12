@@ -12,6 +12,9 @@ $(document).ready(function () {
             data: dados,
             success: function (msg) {
                 window.location.href = "../pages/contas.php";
+            },
+            error: function (msg) {
+                alert("Erro ao cadastrar a conta!");
             }
         });
 
@@ -32,7 +35,31 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
             complete: function (msg) {
-                //window.location.href = "../pages/despesas.php";
+                window.location.href = "../pages/despesas.php";
+            },
+            error: function (msg) {
+                alert("Erro ao cadastrar a despesa!");
+            }
+        });
+        
+        return false;
+    });
+    
+    $('#formAddCategoriaDespesa').submit(function (e) {
+        e.preventDefault();
+        var dados = new FormData(this);
+
+        $.ajax({
+            url: '../connections/inserts/insertCategoriaDespesa.php',
+            method: 'POST',
+            data: dados,
+            processData: false,
+            contentType: false,
+            complete: function (msg) {
+                window.location.href = "../pages/despesas.php";
+            },
+            error: function (msg) {
+                alert("Erro ao cadastrar a categoria!");
             }
         });
         

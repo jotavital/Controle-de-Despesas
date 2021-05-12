@@ -84,7 +84,7 @@
                                     </select>
                                 </div>
                                 <div class="col-1">
-                                    <i class="fas fa-plus-square"></i>
+                                <a id="btnAddConta" data-bs-target="#modalAddCategoriaDespesa" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-plus-square"></i></a>
                                 </div>
                             </div>
                         </div>
