@@ -4,6 +4,7 @@ $title = "Dashboard";
 include("../include/header.php");
 include("../pages/modals/modalAddConta.php");
 include("../pages/modals/modalAddDespesa.php");
+include("../pages/modals/modalAddReceita.php");
 setTitulo($title);
 ?>
 
@@ -46,6 +47,18 @@ setTitulo($title);
                     <div class="col-sm-3">
                         <div class="card">
                             <div class="card-body p-4">
+                                <h5 class="card-title d-flex justify-content-center">Receitas</h5>
+                                <p class="card-text d-flex justify-content-center">Adicione seus ganhos</p>
+                                <div class="row col-sm d-flex justify-content-center">
+                                <button class="btn btn-outline-success col-sm me-3" data-bs-toggle="modal" data-bs-target="#modalAddReceita">Adicionar</button>
+                                    <a href="../pages/receitas.php" class="btn btn-outline-primary col-sm">Ver tudo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <div class="card-body p-4">
                                 <h5 class="card-title d-flex justify-content-center">Economias</h5>
                                 <p class="card-text d-flex justify-content-center">Adicione suas economias</p>
                                 <div class="row col-sm d-flex justify-content-center">
@@ -59,8 +72,6 @@ setTitulo($title);
             </div>
         </main>
     </div>
-
-    <script src="../js/submitForms.js"></script>
 </body>
 
 <?php

@@ -1,9 +1,9 @@
 <?php
 
 include("../connections/loginVerify.php");
-$title = "Despesas";
+$title = "Receitas";
 include("../include/header.php");
-include("../pages/modals/modalAddDespesa.php");
+include("../pages/modals/modalAddReceita.php");
 setTitulo($title);
 
 ?>
@@ -23,13 +23,13 @@ setTitulo($title);
 
             <div id="contentDashboard">
                 <div class="col-12 mb-3 d-flex justify-content-center">
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddDespesa">Nova despesa</button>
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddReceita">Nova receita</button>
                 </div>
-                <div class="row col-12 cardsContainer" id="containerCardsDespesas">
+                <div class="row col-12 cardsContainer" id="containerCardsReceitas">
 
                     <?php
                     $userId = $_SESSION['userId'];
-                    $sql = $conn->prepare("SELECT * FROM despesa WHERE fk_usuario = :userId");
+                    $sql = $conn->prepare("SELECT * FROM receita WHERE fk_usuario = :userId");
                     $sql->bindValue(":userId", $userId);
                     $sql->execute();
                     $data = $sql->fetchAll();
@@ -43,7 +43,7 @@ setTitulo($title);
                                     <h5 class="card-title d-flex justify-content-center">
 
                                         <?php
-                                        echo $row['descricao_despesa'];
+                                        echo $row['descricao_receita'];
                                         ?>
 
                                     </h5>
@@ -70,9 +70,9 @@ setTitulo($title);
 
                 </div>
             </div>
+
         </main>
     </div>
-
 </body>
 
 <?php

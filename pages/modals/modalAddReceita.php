@@ -1,48 +1,41 @@
 <?php
 
-include("modalAddCategoriaDespesa.php");
+include("../pages/modals/modalAddConta.php");
+include("modalAddCategoriaReceita.php");
 
 ?>
 
-<div class="modal fade" id="modalAddDespesa" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalAddDespesaLabel" aria-hidden="true">
+<div class="modal fade" id="modalAddReceita" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalAddReceitaLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalAddDespesaLabel">Adicione uma despesa</h5>
+                <h5 class="modal-title" id="modalAddReceitaLabel">Adicione uma receita</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form method="POST" id="formAddDespesas" enctype="multipart/form-data">
+                    <form method="POST" id="formAddReceitas" enctype="multipart/form-data">
                         <div class="row col-md">
-                            <div class="mb-3 col-8">
-                                <label for="descDespesaInput" class="form-label">Descrição da despesa</label>
-                                <input type="text" class="form-control" id="descDespesaInput" name="descDespesaInput" aria-describedby="Nome" placeholder="Ex.: Mercado" required>
+                            <div class="mb-3">
+                                <label for="descReceitaInput" class="form-label">Descrição da receita</label>
+                                <input type="text" class="form-control" id="descReceitaInput" name="descReceitaInput" aria-describedby="Descrição despesa" placeholder="Ex.: Salário de maio" required>
                             </div>
-                            <div class="mb-3 col-4">
+                        </div>
+                        <div class="row col-md">
+                            <div class="mb-3 col-6">
+                                <label for="dataReceita" class="form-label">Data da receita</label>
+                                <input type="date" class="form-control" id="dataReceita" name="dataReceita" aria-describedby="Data da receita" required>
+                            </div>
+                            <div class="mb-3 col-6">
                                 <label for="valorInput" class="form-label">Valor</label>
                                 <input type="text" class="form-control" name="valorInput" id="valorInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});" required autocomplete="off">
                             </div>
-                        </div>
-                        <div class="row col-md">
-                            <div class="mb-3 col-6">
-                                <label for="dataDespesa" class="form-label">Data da despesa</label>
-                                <input type="date" class="form-control" id="dataDespesa" name="dataDespesa" aria-describedby="Data da despesa" required>
-                            </div>
-                            <div class="mb-3 col-6">
-                                <label for="dataVencimentoDespesa" class="form-label">Data do vencimento</label>
-                                <input type="date" class="form-control" id="dataVencimentoDespesa" name="dataVencimentoDespesa" aria-describedby="Data da despesa">
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="imgInput" class="form-label">Imagem</label>
-                            <input class="form-control" type="file" id="imgInput" name="imgInput" accept="image/*">
                         </div>
                         <div class="mb-3">
                             <label for="contaSelect" class="form-label">Conta</label>
                             <div class="row col-12 d-flex align-items-center">
                                 <div class="col-11">
-                                    <select name="contaSelect" id="contaSelect">
+                                    <select name="contaSelect" id="contaReceitaSelect">
                                         <?php
 
                                         $userId = $_SESSION['userId'];
@@ -71,11 +64,11 @@ include("modalAddCategoriaDespesa.php");
                             <label for="categoriaSelect" class="form-label">Categorias</label>
                             <div class="row col-12 d-flex align-items-center">
                                 <div class="col-11">
-                                    <select id="categoriasSelect" name="categoriasSelect[]" multiple required>
+                                    <select id="categoriasReceitaSelect" name="categoriasSelect[]" multiple required>
                                         <?php
 
                                         $userId = $_SESSION['userId'];
-                                        $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 3 AND fk_usuario = :userId");
+                                        $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 4 AND fk_usuario = :userId");
                                         $sql->bindValue(':userId', $userId);
                                         $sql->execute();
                                         $data = $sql->fetchAll();
@@ -89,7 +82,7 @@ include("modalAddCategoriaDespesa.php");
                                     </select>
                                 </div>
                                 <div class="col-1">
-                                <a id="btnAddConta" data-bs-target="#modalAddCategoriaDespesa" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-plus-square"></i></a>
+                                    <a id="btnAddConta" data-bs-target="#modalAddCategoriaReceita" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-plus-square"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -104,40 +97,9 @@ include("modalAddCategoriaDespesa.php");
 </div>
 
 <script>
-    $('#formAddDespesas').submit(function() {
-        var x = $('#valorInput').val();
-        x = x.replace(/[.]/gim, "");
-        x = x.replace(/[,]/gim, ".");
-        document.getElementById('valorInput').value = x;
-        var dados = new FormData(this);
 
-        $.ajax({
-            url: '../connections/inserts/insertDespesa.php',
-            method: 'POST',
-            data: dados,
-            processData: false,
-            contentType: false,
-            success: function(msg) {
-                alert("Despesa cadastrada com sucesso!");
-                window.location.href = "../pages/despesas.php";
-            },
-            error: function(msg) {
-                alert("Erro ao cadastrar a despesa!");
-            }
-        });
-
-        return false;
-    });
-
-    $('#imgInput').bind('change', function() {
-        if (this.files[0].size > 5242880) {
-            alert('Escolha uma imagem de até 5 MB');
-            $('#imgInput').val('');
-        }
-    });
-
-    var select = new SlimSelect({
-        select: '#categoriasSelect',
+    new SlimSelect({
+        select: '#categoriasReceitaSelect',
         allowDeselect: true,
         searchPlaceholder: 'Pesquise categorias',
         searchText: 'Nada com esse nome :/',
@@ -147,12 +109,13 @@ include("modalAddCategoriaDespesa.php");
         hideSelectedOption: true
     });
 
-    var select2 = new SlimSelect({
-        select: '#contaSelect',
+    new SlimSelect({
+        select: '#contaReceitaSelect',
         searchPlaceholder: 'Pesquise a conta',
         searchText: 'Não achamos essa conta :/',
         placeholder: "Selecione",
         closeOnSelect: true,
         hideSelectedOption: true
     });
+
 </script>

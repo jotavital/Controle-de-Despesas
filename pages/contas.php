@@ -56,13 +56,10 @@ setTitulo($title);
                     }
                     ?>
                 </div>
-                
+
             </div>
         </main>
     </div>
-
-
-    <script src="../js/submitForms.js"></script>
 </body>
 
 <?php
