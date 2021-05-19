@@ -22,6 +22,9 @@ setTitulo($title);
             ?>
 
             <div id="contentDashboard">
+                <div class="row">
+                    <h3 class="mb-4 d-flex justify-content-center">Receitas</h3>
+                </div>
                 <div class="col-12 mb-3 d-flex justify-content-center">
                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddReceita">Nova receita</button>
                 </div>
