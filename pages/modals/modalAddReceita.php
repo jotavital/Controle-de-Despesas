@@ -14,7 +14,7 @@ include("modalAddCategoriaReceita.php");
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form method="POST" id="formAddReceitas" enctype="multipart/form-data">
+                    <form method="POST" id="formAddReceitas">
                         <div class="row col-md">
                             <div class="mb-3">
                                 <label for="descReceitaInput" class="form-label">Descrição da receita</label>
@@ -97,6 +97,34 @@ include("modalAddCategoriaReceita.php");
 </div>
 
 <script>
+
+    $('#formAddReceitas').submit(function () {
+        
+        var x = $('#valorInput').val();
+        x = x.replace(/[.]/gim, "");
+        x = x.replace(/[,]/gim, ".");
+        document.getElementById('valorInput').value = x;
+
+        var dados = new FormData(this);
+
+        $.ajax({
+            url: "../connections/inserts/insertReceita.php",
+            method: "POST",
+            data: dados,
+            processData: false,
+            contentType: false,
+            success: function (msg) {
+                alert("Receita cadastrada com sucesso!");
+                window.location.href = "../pages/receitas.php";
+            },
+            error: function(msg){
+                alert("Erro ao cadastrar a receita!");
+            }
+        });
+
+        return false;
+
+    });
 
     new SlimSelect({
         select: '#categoriasReceitaSelect',

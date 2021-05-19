@@ -1,4 +1,5 @@
 <?php
+
     include("../loginVerify.php");
     include("../connection.php");
 

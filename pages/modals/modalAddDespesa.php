@@ -118,7 +118,7 @@ include("modalAddCategoriaDespesa.php");
             processData: false,
             contentType: false,
             success: function(msg) {
-                alert("Despesa cadastrada com sucesso!");
+                alert("Despesa cadastrada com sucesso!" + msg);
                 window.location.href = "../pages/despesas.php";
             },
             error: function(msg) {
