@@ -20,6 +20,9 @@
                 <a href="">Transações</a>
             </li>
             <li>
+                <a href="">Estatísticas</a>
+            </li>
+            <li>
                 <a href="">Metas</a>
             </li>
             <li>

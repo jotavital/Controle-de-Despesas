@@ -3,6 +3,7 @@
 @import "../style/navBar_logged.css";
 @import "../style/dashboard.css";
 @import "../style/contas.css";
+@import "../style/profile.css";
 
 div.ss-single-selected{
     min-height: 38px;
@@ -20,10 +21,4 @@ div.ss-single-selected{
 
 a{
     cursor: pointer;
-}
-
-#profilePicture{
-    width: 110px;
-    height: 110px;
-    border-radius: 100%;
 }
