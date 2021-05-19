@@ -21,3 +21,9 @@ div.ss-single-selected{
 a{
     cursor: pointer;
 }
+
+#profilePicture{
+    width: 110px;
+    height: 110px;
+    border-radius: 100%;
+}

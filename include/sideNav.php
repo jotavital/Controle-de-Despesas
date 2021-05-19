@@ -23,7 +23,7 @@
                 <a href="">Metas</a>
             </li>
             <li>
-                <a href="">Perfil</a>
+                <a href="../pages/profile.php">Perfil</a>
             </li>
         </ul>
         <div class="d-flex justify-content-center">
