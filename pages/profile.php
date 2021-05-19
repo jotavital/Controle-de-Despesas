@@ -30,6 +30,8 @@ setTitulo($title);
                     $stm->execute();
 
                     $resultado = $stm->fetch();
+                    $data_cadastro = strtotime($resultado['data_cadastro']);
+                    $data_cadastro_formatada = date('d/m/Y', $data_cadastro);
                 } catch (PDOException $e) {
                     print_r($e);
                 }
@@ -47,6 +49,9 @@ setTitulo($title);
                             <div class="d-flex justify-content-center align-items-center">
                                 <h5><?php echo ($resultado['nome'] . " " . $resultado['sobrenome']); ?></h5>
                                 <i class="fas fa-edit"></i>
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <p>Membro desde: <?php echo ($data_cadastro_formatada); ?></p>
                             </div>
                         </div>
                     </div>
