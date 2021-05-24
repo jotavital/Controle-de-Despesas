@@ -3,6 +3,7 @@ include("../connections/loginVerify.php");
 $title = "Contas";
 include("../include/header.php");
 include("../pages/modals/modalAddConta.php");
+include("../pages/modals/modalDeleteConta.php");
 setTitulo($title);
 ?>
 
@@ -33,7 +34,7 @@ setTitulo($title);
                     $sql->execute();
                     $data = $sql->fetchAll();
 
-                    foreach ($data as $row) {
+                    foreach ($data as $index => $row) {
                     ?>
 
                         <div class="col-sm-3">
@@ -44,7 +45,7 @@ setTitulo($title);
                                         <?php
                                         echo $row['nome_conta'];
                                         ?>
-                                        
+
                                     </h5>
                                     <p class="card-text d-flex justify-content-center">
 
@@ -57,7 +58,7 @@ setTitulo($title);
                                     </p>
                                     <div class="row col-sm d-flex justify-content-center">
                                         <a href="#" class="btn btn-outline-primary col-sm me-3">Gerenciar</a>
-                                        <a href="#" class="btn btn-outline-danger col-sm">Excluir</a>
+                                        <button class="btn btn-outline-danger col-sm" data-bs-toggle="modal" data-bs-target="#modalDeleteConta">Excluir</button>
                                     </div>
                                 </div>
                             </div>
@@ -73,6 +74,11 @@ setTitulo($title);
         </main>
     </div>
 </body>
+
+<script>
+
+    
+</script>
 
 <?php
 include("../include/footer.php");
