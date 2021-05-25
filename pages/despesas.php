@@ -4,6 +4,7 @@ include("../connections/loginVerify.php");
 $title = "Despesas";
 include("../include/header.php");
 include("../pages/modals/modalAddDespesa.php");
+include("../pages/modals/modalDeleteDespesa.php");
 setTitulo($title);
 
 ?>
@@ -61,7 +62,7 @@ setTitulo($title);
                                     </p>
                                     <div class="row col-sm d-flex justify-content-center">
                                         <a href="#" class="btn btn-outline-primary col-sm me-3">Editar</a>
-                                        <a href="#" class="btn btn-outline-danger col-sm">Excluir</a>
+                                        <?php echo '<a href="../pages/despesas.php?delete=true&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&valor=' . sprintf("%.2f", $row['valor']) . '"' . 'class="btn btn-outline-danger col-sm btnExcluirDespesa">Excluir</a>'?>
                                     </div>
                                 </div>
                             </div>
@@ -80,4 +81,14 @@ setTitulo($title);
 
 <?php
 include("../include/footer.php");
+?>
+
+<?php
+
+    if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
+        echo    "<script>$(document).ready(function(){
+                    $('#modalDeleteDespesa').modal('show');
+                });</script>";
+    }
+
 ?>

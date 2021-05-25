@@ -58,7 +58,7 @@ setTitulo($title);
                                     </p>
                                     <div class="row col-sm d-flex justify-content-center">
                                         <a href="#" class="btn btn-outline-primary col-sm me-3">Gerenciar</a>
-                                        <?php echo '<a href="../pages/contas.php?delete=true&id=' . $row['id'] . ' " ' . 'class="btn btn-outline-danger col-sm btnExcluirConta">Excluir</a>'?>
+                                        <?php echo '<a href="../pages/contas.php?delete=true&id=' . $row['id'] . '&nome_conta=' . $row['nome_conta'] . "&saldo_atual=" . sprintf("%.2f", $row['saldo_atual']) . '"' . 'class="btn btn-outline-danger col-sm btnExcluirConta">Excluir</a>'?>
                                     </div>
                                 </div>
                             </div>
