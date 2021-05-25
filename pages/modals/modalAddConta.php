@@ -56,7 +56,6 @@
             data: dados,
             success: function(msg) {
                 alert("Conta cadastrada com sucesso!");
-                window.location.href = "../pages/contas.php";
             },
             error: function(msg) {
                 alert("Erro ao cadastrar a conta!");
