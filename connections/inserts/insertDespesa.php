@@ -3,18 +3,18 @@
     include("../loginVerify.php");
     include("../connection.php");
 
-    $sql = $conn->prepare("INSERT INTO despesa (descricao_despesa, imagem, data_despesa, data_vencimento, valor, data_inclusao, fk_conta, fk_usuario) VALUES (:descricao_despesa, :imagem, :data_despesa, :data_vencimento, :valor, :data_inclusao, :fk_conta, :fk_usuario)");
+    $stm = $conn->prepare("INSERT INTO despesa (descricao_despesa, imagem, data_despesa, data_vencimento, valor, data_inclusao, fk_conta, fk_usuario) VALUES (:descricao_despesa, :imagem, :data_despesa, :data_vencimento, :valor, :data_inclusao, :fk_conta, :fk_usuario)");
     $nomeImg = $_FILES['imgInput']['name'];
-    $sql->bindValue(':descricao_despesa', $_POST['descDespesaInput']);
-    $sql->bindValue(':imagem', $nomeImg);
-    $sql->bindValue(':data_despesa', $_POST['dataDespesa']);
-    $sql->bindValue(':data_vencimento', $_POST['dataVencimentoDespesa']);
-    $sql->bindValue(':valor', $_POST['valorInput']);
-    $sql->bindValue(':data_inclusao', date('Y' . '-' . 'm' . '-' . 'd'));
-    $sql->bindValue(':fk_conta', $_POST['contaSelect']);
-    $sql->bindValue(':fk_usuario', $_SESSION['userId']);
+    $stm->bindValue(':descricao_despesa', $_POST['descDespesaInput']);
+    $stm->bindValue(':imagem', $nomeImg);
+    $stm->bindValue(':data_despesa', $_POST['dataDespesa']);
+    $stm->bindValue(':data_vencimento', $_POST['dataVencimentoDespesa']);
+    $stm->bindValue(':valor', $_POST['valorInput']);
+    $stm->bindValue(':data_inclusao', date('Y' . '-' . 'm' . '-' . 'd'));
+    $stm->bindValue(':fk_conta', $_POST['contaSelect']);
+    $stm->bindValue(':fk_usuario', $_SESSION['userId']);
 
-    if($sql->execute()){
+    if($stm->execute()){
         $_SESSION['msg'] = "Conta adicionada!";
 
         //armazena imagem da despesa na pasta
@@ -34,10 +34,10 @@
         $despesaId = $conn->lastInsertId();
 
         foreach($_POST['categoriasSelect'] as $categoria){
-            $sql2 = $conn->prepare("INSERT INTO categoria_despesa (fk_categoria, fk_despesa) VALUES (:fk_categoria, :fk_despesa)");
-            $sql2->bindValue(':fk_categoria', $categoria);
-            $sql2->bindValue(':fk_despesa', $despesaId);
-            $sql2->execute();
+            $stm2 = $conn->prepare("INSERT INTO categoria_despesa (fk_categoria, fk_despesa) VALUES (:fk_categoria, :fk_despesa)");
+            $stm2->bindValue(':fk_categoria', $categoria);
+            $stm2->bindValue(':fk_despesa', $despesaId);
+            $stm2->execute();
             
         }
 
