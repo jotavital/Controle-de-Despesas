@@ -15,11 +15,11 @@ sidebar{
     height: 100%;
 }
 
-#sidebarItens li{
+#sidebarItems li{
     list-style-type: none;
 }
 
-#sidebarItens a{
+#sidebarItems a{
     text-decoration: none;
 }
 
@@ -107,4 +107,15 @@ main{
 
 .hide{
     display: none;
+}
+
+div.sideNavIcon{
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    margin-right: .5rem;
+}
+
+.sideNavIcon i{
+    font-size: 1rem;
 }
