@@ -4,28 +4,38 @@
     </div>
     <div id="sidebarItens">
         <ul>
+            <div class="row">
+                <li>
+                    <i class="fas fa-tachometer-alt"></i>
+                    <a href="../pages/dashboard.php">Dashboard</a>
+                </li>
+            </div>
             <li>
-                <a href="../pages/dashboard.php">Dashboard</a>
-            </li>
-            <li>
+                <i class="fas fa-wallet"></i>
                 <a href="../pages/contas.php">Contas</a>
             </li>
             <li>
+                <i class="fas fa-dollar-sign"></i>
                 <a href="../pages/despesas.php">Despesas</a>
             </li>
             <li>
+                <i class="fas fa-chart-line"></i>
                 <a href="../pages/receitas.php">Receitas</a>
             </li>
             <li>
+                <i class="fas fa-receipt"></i>
                 <a href="">Transações</a>
             </li>
             <li>
+                <i class="fas fa-chart-pie"></i>
                 <a href="">Estatísticas</a>
             </li>
             <li>
+                <i class="fas fa-bullseye"></i>
                 <a href="">Metas</a>
             </li>
             <li>
+                <i class="fas fa-user-circle"></i>
                 <a href="../pages/profile.php">Perfil</a>
             </li>
         </ul>
