@@ -12,7 +12,8 @@
     margin: 0;
     vertical-align: baseline;
     list-style: none;
-    border: 0 font-family: 'Lato', sans-serif;
+    border: 0 ;
+    font-family: 'Lato', sans-serif;
 }
 
 div.ss-single-selected {

@@ -1,9 +1,9 @@
 var iconMenu = document.querySelector(".menuToggler");
-var sideNav = document.querySelector(".sideNavMenu");
+var sideBar = document.querySelector(".sideBarMenu");
 
 window.onload = function(){
     iconMenu.addEventListener("click", function () {
-        sideNav.classList.toggle("hide");
+        sideBar.classList.toggle("hide");
     });
 };
 

@@ -1,5 +1,5 @@
 :root{
-    --sideNavWidth: 20%;
+    --sideBarWidth: 20%;
 }
 
 #containerDashboard{
@@ -10,7 +10,7 @@
 
 sidebar{
     display: block;
-    width: var(--sideNavWidth);
+    width: var(--sideBarWidth);
     min-width: 150px;
     height: 100%;
     background-color: #EBEBEB;
@@ -49,7 +49,7 @@ a.btn.btn-outline-danger.col-5{
 
 main{
     height: 100%;
-    /* width: calc(100% - var(--sideNavWidth)); */
+    /* width: calc(100% - var(--sideBarWidth)); */
     width: 100%;
 }
 
@@ -120,7 +120,7 @@ main{
     display: none;
 }
 
-div.sideNavIcon{
+div.sideBarIcon{
     width: 20px;
     height: 20px;
     margin-right: .5rem;
@@ -129,7 +129,7 @@ div.sideNavIcon{
     justify-content: center;
 }
 
-.sideNavIcon i{
+.sideBarIcon i{
     font-size: 1rem;
     color: #4F5D75;
 }
@@ -142,12 +142,12 @@ div.sideNavIcon{
     color: white;
 }
 
-div.sideNavItem:hover a, div.sideNavItem:hover i{
+div.sideBarItem:hover a, div.sideBarItem:hover i{
     color: #4895ef !important;
     cursor: pointer;
     font-size: 1.2rem;
 }
 
-.sideNavItem{
+.sideBarItem{
     width: fit-content;
 }

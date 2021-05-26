@@ -10,7 +10,7 @@ setTitulo($title);
     <div id="containerDashboard">
 
         <?php
-        include("../include/sideNav.php");
+        include("../include/sideBar.php");
         ?>
 
         <main>
