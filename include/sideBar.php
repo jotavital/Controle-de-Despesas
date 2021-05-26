@@ -1,6 +1,9 @@
 <sidebar class="sideBarMenu">
     <div id="sidebarHeader" class="d-flex align-items-center">
         <h4 class="col d-flex justify-content-center">Easylize</h4>
+        <div class="menuToggler">
+            <i class="fas fa-bars fa-2x"></i>
+        </div>
     </div>
     <div id="sidebarItems">
         <ul>
