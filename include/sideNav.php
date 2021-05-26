@@ -1,6 +1,6 @@
 <sidebar class="sideNavMenu">
-    <div id="sidebarHeader">
-        <h4 class="col d-flex justify-content-center">Menu</h4>
+    <div id="sidebarHeader" class="d-flex align-items-center">
+        <h4 class="col d-flex justify-content-center">Easylize</h4>
     </div>
     <div id="sidebarItems">
         <ul>
@@ -85,9 +85,6 @@
                 </div>
             </li>
         </ul>
-        <div class="d-flex justify-content-center">
-            <a class="btn btn-outline-danger col-5" href="../connections/logout.php" role="button">Logout</a>
-        </div>
     </div>
 
     <script src="../js/sidenavCollapse.js"></script>

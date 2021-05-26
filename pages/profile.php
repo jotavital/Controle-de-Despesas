@@ -55,8 +55,7 @@ setTitulo($title);
                             </div>
                         </div>
                     </div>
-
-                    <div class="row col-12 camposInfo d-flex justify-content-center">
+                    <div class="row mb-4 col-12 camposInfo d-flex justify-content-center">
                         <div class="col-md-4 d-flex align-items-center">
                             <label>Email:</label>
                             <input class="form-control" type="text" value=<?php echo ($resultado['email']); ?> readonly>
@@ -66,6 +65,9 @@ setTitulo($title);
                             <input class="form-control" type="password" value=<?php echo ($resultado['email']); ?> readonly>
                             <i class="fas fa-edit"></i>
                         </div>
+                    </div>
+                    <div class="col-md d-flex justify-content-center">
+                        <a class="btn btn-danger col-1.5" href="../connections/logout.php" role="button">Logout</a>
                     </div>
                 </div>
             </div>
