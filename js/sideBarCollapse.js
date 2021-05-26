@@ -1,4 +1,4 @@
-var menuIconDashboard = document.getElementById("headerDashboard").querySelector(".menuToggler");
+var menuIconDashboard = document.getElementById("navBarDashboard").querySelector(".menuToggler");
 var menuIconSideBar = document.getElementById("sidebarHeader").querySelector(".menuToggler");
 var sideBar = document.querySelector(".sideBarMenu");
 

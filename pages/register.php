@@ -16,8 +16,6 @@
 <div id="container">
     <div class="divForm">
         <form action="../connections/registerUser.php" method="POST" id="formRegister" class="col-5 needs-validation" novalidate>
-            <img class="logo_big" src="../image/logo_big.png" alt="Easylize logo">
-            <h1 class="mainTitle">Easylize Finanças</h1>
             <h1 class="mb-4">Cadastro</h1>
             <div class="row g-2 col-md">
                 <div class="col-md">

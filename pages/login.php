@@ -17,8 +17,6 @@
     <div id="container">
         <div class="divForm">
             <form action="../connections/logUser.php" method="POST" id="formLogin" class="col-5 needs-validation" novalidate>
-                <img class="logo_big" src="../image/logo_big.png" alt="Easylize logo">
-                <h1 class="mainTitle">Easylize Finanças</h1>
                 <h1 class="mb-3">Entrar</h1>
                 <div class="row d-flex justify-content-center">
                     <div class="col-md">
