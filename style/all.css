@@ -19,6 +19,18 @@ div.ss-single-selected {
     min-height: 38px;
 }
 
+div.ss-multi-selected {
+    display: flex;
+    align-items: center;
+    min-height: 38px !important;
+}
+
+div.ss-add{
+    width: 8px;
+    height: 24px;
+    padding: 3px;
+}
+
 .hide {
     display: none;
 }
