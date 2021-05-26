@@ -136,10 +136,9 @@ div.sideBarIcon{
 
 #headerDashboard{
     background-color: #4895ef;
-}
-
-#headerDashboard i{
-    color: white;
+    height: 50px;
+    display: flex;
+    align-items: center;
 }
 
 div.sideBarItem:hover a, div.sideBarItem:hover i{
@@ -150,4 +149,10 @@ div.sideBarItem:hover a, div.sideBarItem:hover i{
 
 .sideBarItem{
     width: fit-content;
+}
+
+.menuToggler{
+    cursor: pointer;
+    margin-left: 15px;
+    color: #EBEBEB;
 }
