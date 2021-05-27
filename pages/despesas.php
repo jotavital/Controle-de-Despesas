@@ -37,44 +37,62 @@ setTitulo($title);
 
                     <?php
                     $userId = $_SESSION['userId'];
-                    $sql = $conn->prepare("SELECT * FROM despesa WHERE fk_usuario = :userId");
-                    $sql->bindValue(":userId", $userId);
-                    $sql->execute();
-                    $data = $sql->fetchAll();
+                    $stm = $conn->prepare("SELECT d.*, c.nome_conta FROM despesa as d, conta as c WHERE d.fk_usuario = :userId AND d.fk_conta = c.id GROUP BY d.id");
+                    $stm->bindValue(":userId", $userId);
 
-                    foreach ($data as $row) {
+                    try {
+                        $stm->execute();
+                        $data = $stm->fetchAll();
+                    } catch (PDOException $e) {
+                        echo $e->getMessage();
+                    }
+
                     ?>
 
-                        <div class="col-sm-3">
-                            <div class="card">
-                                <div class="card-body p-4">
-                                    <h5 class="card-title d-flex justify-content-center">
+                    <!-- tabela do dataTables -->
+                    <div class="d-flex justify-content-center">
+                        <div class="col-12 tableDespesas" id="tableDespesasContainer">
+                            <table id="tableDespesas" class="display">
+                                <thead>
+                                    <tr>
+                                        <th>Descrição</th>
+                                        <th>Data</th>
+                                        <th>Vencimento</th>
+                                        <th>Valor</th>
+                                        <th>Conta</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
-                                        <?php
-                                        echo $row['descricao_despesa'];
-                                        ?>
-
-                                    </h5>
-                                    <p class="card-text d-flex justify-content-center">
-
-                                        <?php
+                                    <?php
+                                    foreach ($data as $row) {
                                         $valor = $row['valor'];
                                         $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
-                                        echo ($formatter->formatCurrency($valor, 'BRL'));
-                                        ?>
+                                    ?>
 
-                                    </p>
-                                    <div class="row col-sm d-flex justify-content-center">
-                                        <a href="#" class="btn btn-outline-primary col-sm me-3">Editar</a>
-                                        <?php echo '<a href="../pages/despesas.php?delete=true&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&valor=' . sprintf("%.2f", $row['valor']) . '"' . 'class="btn btn-outline-danger col-sm btnExcluirDespesa">Excluir</a>'?>
-                                    </div>
-                                </div>
-                            </div>
+                                        <tr>
+                                            <td><?php echo $row['descricao_despesa'] ?></td>
+                                            <td><?php echo $row['data_despesa'] ?></td>
+                                            <td><?php echo $row['data_vencimento'] ?></td>
+                                            <td><?php echo ($formatter->formatCurrency($valor, 'BRL')); ?></td>
+                                            <td><?php echo $row['nome_conta'] ?></td>
+                                            <td>
+                                                <div class="col-12 d-flex justify-content-center">
+                                                    <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    <?php
+                                    }
+                                    ?>
+
+                                </tbody>
+                            </table>
                         </div>
-
-                    <?php
-                    }
-                    ?>
+                    </div>
 
                 </div>
             </div>
@@ -89,10 +107,16 @@ include("../include/footer.php");
 
 <?php
 
-    if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
-        echo    "<script>$(document).ready(function(){
+if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
+    echo    "<script>$(document).ready(function(){
                     $('#modalDeleteDespesa').modal('show');
                 });</script>";
-    }
+}
 
 ?>
+
+<script>
+    $(document).ready(function() {
+        $('#tableDespesas').DataTable();
+    });
+</script>

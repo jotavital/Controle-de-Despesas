@@ -35,12 +35,17 @@ setTitulo($title);
                 </div>
 
                 <?php
-                
                 $userId = $_SESSION['userId'];
                 $sql = $conn->prepare("SELECT r.*, c.nome_conta FROM receita as r, conta as c WHERE r.fk_usuario = :userId AND r.fk_conta = c.id GROUP BY r.id");
                 $sql->bindValue(":userId", $userId);
-                $sql->execute();
-                $data = $sql->fetchAll();
+
+                try {
+                    $sql->execute();
+                    $data = $sql->fetchAll();
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                }
+
                 ?>
 
                 <!-- tabela do dataTables -->
