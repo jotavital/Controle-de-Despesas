@@ -6,7 +6,7 @@ include("../connections/connection.php");
 $conn = new Connection;
 $conexao = $conn->conectar();
 
-$title = "Perfil";
+$title = "Seu Perfil";
 include("../include/header.php");
 setTitulo($title);
 
@@ -44,9 +44,6 @@ setTitulo($title);
                 ?>
 
                 <div id="userInfo" class="col-md">
-                    <div class="row">
-                        <h3 class="mb-4 d-flex justify-content-center">Seu Perfil</h3>
-                    </div>
                     <div class="row mb-3">
                         <div class="mb-3 divProfilePicture d-flex justify-content-center">
                             <img id="profilePicture" src="../image/assets/no_profile_picture.png" alt="foto de perfil">

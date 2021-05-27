@@ -28,7 +28,6 @@ setTitulo($title);
             ?>
 
             <div id="contentDashboard">
-                <h3 class="mb-4 d-flex justify-content-center">Contas</h3>
                 <div class="col-12 mb-3 d-flex justify-content-center">
                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddConta">Nova conta</button>
                 </div>
