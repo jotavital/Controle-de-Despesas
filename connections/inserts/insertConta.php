@@ -3,6 +3,8 @@
     include("../loginVerify.php");
     include("../connection.php");
     
+    $conn = (new Connection)->conectar();
+
     $stm = $conn->prepare("INSERT INTO conta(nome_conta, saldo_atual, fk_usuario, fk_categoria) VALUES (:nome, :saldo, :userId, :categoria)");
     $stm->bindValue(":nome", $_POST['nomeConta']);
     $stm->bindValue(":saldo", $_POST['saldoConta']);

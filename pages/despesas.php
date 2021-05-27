@@ -1,6 +1,10 @@
 <?php
 
 include("../connections/loginVerify.php");
+
+include("../connections/connection.php");
+$conn = (new Connection)->conectar();
+
 $title = "Despesas";
 include("../include/header.php");
 include("../pages/modals/modalAddDespesa.php");

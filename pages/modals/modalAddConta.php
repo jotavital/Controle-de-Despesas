@@ -19,6 +19,7 @@
                         <div class="mb-3">
                             <label for="categoriaSelect" class="form-label">Categoria</label>
                             <select class="form-select" name="categoriaSelect" id="categoriaSelect">
+
                                 <?php
                                 $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 5");
                                 $sql->execute();
@@ -30,6 +31,7 @@
                                 <?php
                                 }
                                 ?>
+
                             </select>
                         </div>
                         <div class="modal-footer d-flex justify-content-center">

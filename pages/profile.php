@@ -1,9 +1,14 @@
 <?php
+
 include("../connections/loginVerify.php");
+
+include("../connections/connection.php");
+$conn = (new Connection)->conectar();
+
 $title = "Perfil";
 include("../include/header.php");
-include("../pages/modals/modalAddConta.php");
 setTitulo($title);
+
 ?>
 
 <body>

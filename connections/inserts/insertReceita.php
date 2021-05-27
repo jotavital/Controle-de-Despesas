@@ -3,6 +3,8 @@
     include("../loginVerify.php");
     include("../connection.php");
 
+    $conn = (new Connection)->conectar();
+
     $stm = $conn->prepare("INSERT INTO receita (descricao_receita, data_receita, valor, data_inclusao, fk_usuario, fk_conta) VALUES (:descricao_receita, :data_receita, :valor, :data_inclusao, :fk_usuario, :fk_conta)");
     $stm->bindValue(':descricao_receita', $_POST['descReceitaInput']);
     $stm->bindValue(':data_receita', $_POST['dataReceita']);

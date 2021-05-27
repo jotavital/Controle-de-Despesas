@@ -1,5 +1,7 @@
 <?php
     include('connection.php');
+
+    $conn = (new Connection)->conectar();
     
     $stm = $conn->prepare("INSERT INTO usuario(nome, sobrenome, email, senha, data_cadastro) VALUES (:name, :surname, :email, :password, :data_cadastro)");
     $stm->bindValue(":name", $_POST['name']);

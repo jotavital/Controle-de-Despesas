@@ -45,7 +45,6 @@ include("modalAddCategoriaDespesa.php");
                                 <div class="col-11">
                                     <select name="contaSelect" id="contaSelect">
                                         <?php
-
                                         $userId = $_SESSION['userId'];
                                         $sql = $conn->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
                                         $sql->bindValue(':userId', $userId);
@@ -74,7 +73,6 @@ include("modalAddCategoriaDespesa.php");
                                 <div class="col-11">
                                     <select id="categoriasSelect" name="categoriasSelect[]" multiple required>
                                         <?php
-
                                         $userId = $_SESSION['userId'];
                                         $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 3 AND fk_usuario = :userId");
                                         $sql->bindValue(':userId', $userId);
@@ -90,7 +88,7 @@ include("modalAddCategoriaDespesa.php");
                                     </select>
                                 </div>
                                 <div class="col-1">
-                                <a id="btnAddConta" data-bs-target="#modalAddCategoriaDespesa" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-plus-square"></i></a>
+                                    <a id="btnAddConta" data-bs-target="#modalAddCategoriaDespesa" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-plus-square"></i></a>
                                 </div>
                             </div>
                         </div>

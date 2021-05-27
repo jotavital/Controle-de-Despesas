@@ -37,7 +37,6 @@ include("modalAddCategoriaReceita.php");
                                 <div class="col-11">
                                     <select name="contaSelect" id="contaReceitaSelect">
                                         <?php
-
                                         $userId = $_SESSION['userId'];
                                         $sql = $conn->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
                                         $sql->bindValue(':userId', $userId);
@@ -97,9 +96,8 @@ include("modalAddCategoriaReceita.php");
 </div>
 
 <script>
+    $('#formAddReceitas').submit(function() {
 
-    $('#formAddReceitas').submit(function () {
-        
         var x = $('#valorInput').val();
         x = x.replace(/[.]/gim, "");
         x = x.replace(/[,]/gim, ".");
@@ -113,11 +111,11 @@ include("modalAddCategoriaReceita.php");
             data: dados,
             processData: false,
             contentType: false,
-            success: function (msg) {
+            success: function(msg) {
                 alert("Receita cadastrada com sucesso!");
                 window.location.href = "../pages/receitas.php";
             },
-            error: function(msg){
+            error: function(msg) {
                 alert("Erro ao cadastrar a receita!");
             }
         });
@@ -145,5 +143,4 @@ include("modalAddCategoriaReceita.php");
         closeOnSelect: true,
         hideSelectedOption: true
     });
-
 </script>

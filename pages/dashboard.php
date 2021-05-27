@@ -1,11 +1,17 @@
 <?php
+
 include("../connections/loginVerify.php");
+
+include("../connections/connection.php");
+$conn = (new Connection)->conectar();
+
 $title = "Dashboard";
 include("../include/header.php");
 include("../pages/modals/modalAddConta.php");
 include("../pages/modals/modalAddDespesa.php");
 include("../pages/modals/modalAddReceita.php");
 setTitulo($title);
+
 ?>
 
 <body>

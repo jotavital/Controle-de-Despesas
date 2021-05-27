@@ -3,6 +3,8 @@
     include("../loginVerify.php");
     include("../connection.php");
 
+    $conn = (new Connection)->conectar();
+
     $stm = $conn->prepare("INSERT INTO despesa (descricao_despesa, imagem, data_despesa, data_vencimento, valor, data_inclusao, fk_conta, fk_usuario) VALUES (:descricao_despesa, :imagem, :data_despesa, :data_vencimento, :valor, :data_inclusao, :fk_conta, :fk_usuario)");
     $nomeImg = $_FILES['imgInput']['name'];
     $stm->bindValue(':descricao_despesa', $_POST['descDespesaInput']);

@@ -3,6 +3,8 @@
     include("../loginVerify.php");
     include("../connection.php");
 
+    $conn = (new Connection)->conectar();
+
     $stm = $conn->prepare("INSERT INTO categoria (nome_categoria, fk_tipo, fk_usuario) VALUES (:nome_categoria, :fk_tipo, :fk_usuario)");
     $stm->bindValue(":nome_categoria", $_POST['nomeCategoriaInput']);
     $stm->bindValue(":fk_tipo", 4);

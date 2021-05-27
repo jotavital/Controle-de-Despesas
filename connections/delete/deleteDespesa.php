@@ -5,6 +5,8 @@
 
     $idDespesa = $_POST['idDespesa'];
 
+    $conn = (new Connection)->conectar();
+
     $stm = $conn->prepare("DELETE FROM categoria_despesa WHERE fk_despesa = :idDespesa");
     $stm->bindValue("idDespesa", $idDespesa);
 

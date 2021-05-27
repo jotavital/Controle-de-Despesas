@@ -2,6 +2,8 @@
     include("connection.php");
     session_start();
 
+    $conn = (new Connection)->conectar();
+
     if(isset($_POST['email']) && isset($_POST['password'])){
         $stm = $conn->prepare("SELECT * FROM `usuario` WHERE email= :email AND senha = :password");
         $stm->bindValue(":email", $_POST['email']);

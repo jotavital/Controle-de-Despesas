@@ -1,6 +1,10 @@
 <?php
 
 include("../connections/loginVerify.php");
+
+include("../connections/connection.php");
+$conn = (new Connection)->conectar();
+
 $title = "Receitas";
 include("../include/header.php");
 include("../pages/modals/modalAddReceita.php");
@@ -31,6 +35,7 @@ setTitulo($title);
                 </div>
 
                 <?php
+                
                 $userId = $_SESSION['userId'];
                 $sql = $conn->prepare("SELECT r.*, c.nome_conta FROM receita as r, conta as c WHERE r.fk_usuario = :userId AND r.fk_conta = c.id GROUP BY r.id");
                 $sql->bindValue(":userId", $userId);
