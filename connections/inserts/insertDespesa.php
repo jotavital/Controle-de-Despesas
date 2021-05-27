@@ -21,7 +21,6 @@ if ($stm->execute()) {
     $_SESSION['msg'] = "Conta adicionada!";
 
     //armazena imagem da despesa na pasta
-    $lastId = $conexao->lastInsertId();
     $directory = '../../uploaded/user_images/despesas_images/' . $_SESSION['userId'];
     mkdir($directory);
     $directory = $directory . '/' . $conexao->lastInsertId() . '/';
