@@ -3,7 +3,8 @@
 include("../connections/loginVerify.php");
 
 include("../connections/connection.php");
-$conn = (new Connection)->conectar();
+$conn = new Connection;
+$conexao = $conn->conectar();
 
 $title = "Receitas";
 include("../include/header.php");
@@ -36,7 +37,7 @@ setTitulo($title);
 
                 <?php
                 $userId = $_SESSION['userId'];
-                $sql = $conn->prepare("SELECT r.*, c.nome_conta FROM receita as r, conta as c WHERE r.fk_usuario = :userId AND r.fk_conta = c.id GROUP BY r.id");
+                $sql = $conexao->prepare("SELECT r.*, c.nome_conta FROM receita as r, conta as c WHERE r.fk_usuario = :userId AND r.fk_conta = c.id GROUP BY r.id");
                 $sql->bindValue(":userId", $userId);
 
                 try {
@@ -77,7 +78,7 @@ setTitulo($title);
                                         <td>
                                             <div class="col-12 d-flex justify-content-center">
                                                 <i class="fas fa-edit"></i>
-                                                <i class="fas fa-trash-alt"></i>
+                                                <?php echo '<a href="../pages/receitas.php?delete=true&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
                                             </div>
                                         </td>
                                     </tr>

@@ -3,7 +3,8 @@
 include("../connections/loginVerify.php");
 
 include("../connections/connection.php");
-$conn = (new Connection)->conectar();
+$conn = new Connection;
+$conexao = $conn->conectar();
 
 $title = "Despesas";
 include("../include/header.php");
@@ -37,7 +38,7 @@ setTitulo($title);
 
                     <?php
                     $userId = $_SESSION['userId'];
-                    $stm = $conn->prepare("SELECT d.*, c.nome_conta FROM despesa as d, conta as c WHERE d.fk_usuario = :userId AND d.fk_conta = c.id GROUP BY d.id");
+                    $stm = $conexao->prepare("SELECT d.*, c.nome_conta FROM despesa as d, conta as c WHERE d.fk_usuario = :userId AND d.fk_conta = c.id GROUP BY d.id");
                     $stm->bindValue(":userId", $userId);
 
                     try {
@@ -78,9 +79,9 @@ setTitulo($title);
                                             <td><?php echo ($formatter->formatCurrency($valor, 'BRL')); ?></td>
                                             <td><?php echo $row['nome_conta'] ?></td>
                                             <td>
-                                                <div class="col-12 d-flex justify-content-center">
+                                                <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
                                                     <i class="fas fa-edit"></i>
-                                                    <i class="fas fa-trash-alt"></i>
+                                                    <?php echo '<a href="../pages/despesas.php?delete=true&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa"><i class="fas fa-trash-alt"></i></a>' ?>
                                                 </div>
                                             </td>
                                         </tr>

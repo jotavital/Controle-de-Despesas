@@ -1,22 +1,21 @@
 <?php
 
-    include("../loginVerify.php");
-    include("../connection.php");
+include("../loginVerify.php");
+include("../connection.php");
 
-    $conn = (new Connection)->conectar();
+$conn = new Connection;
+$conexao = $conn->conectar();
 
-    $stm = $conn->prepare("INSERT INTO categoria (nome_categoria, fk_tipo, fk_usuario) VALUES (:nome_categoria, :fk_tipo, :fk_usuario)");
-    $stm->bindValue(":nome_categoria", $_POST['nomeCategoriaInput']);
-    $stm->bindValue(":fk_tipo", 4);
-    $stm->bindValue(":fk_usuario", $_SESSION['userId']);
+$stm = $conexao->prepare("INSERT INTO categoria (nome_categoria, fk_tipo, fk_usuario) VALUES (:nome_categoria, :fk_tipo, :fk_usuario)");
+$stm->bindValue(":nome_categoria", $_POST['nomeCategoriaInput']);
+$stm->bindValue(":fk_tipo", 4);
+$stm->bindValue(":fk_usuario", $_SESSION['userId']);
 
-    try {
-        $stm->execute();
+try {
+    $stm->execute();
 
-        $_SESSION['msg'] = "Categoria cadastrada com sucesso!";
-    } catch (PDOException $e) {
-        $_SESSION['msg'] = "Erro ao cadastrar categoria!";
-        print_r($e);
-    }
-
-?>
+    $_SESSION['msg'] = "Categoria cadastrada com sucesso!";
+} catch (PDOException $e) {
+    $_SESSION['msg'] = "Erro ao cadastrar categoria!";
+    echo $e->getMessage();
+}

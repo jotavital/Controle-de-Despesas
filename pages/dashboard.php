@@ -3,7 +3,8 @@
 include("../connections/loginVerify.php");
 
 include("../connections/connection.php");
-$conn = (new Connection)->conectar();
+$conn = new Connection;
+$conexao = $conn->conectar();
 
 $title = "Dashboard";
 include("../include/header.php");

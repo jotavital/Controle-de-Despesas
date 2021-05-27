@@ -11,8 +11,9 @@
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-                <form method="POST" action="../../connections/delete/deleteReceita.php">
+                <form method="POST" action="../../connections/delete/DeleteReceita.class.php">
                     <input type="text" name="idReceita" value="<?php echo $_GET['id'] ?>" class="hide">
+                    <input type="text" name="deleteReceita" class="hide">
                     <button type="submit" class="btn btn-danger">Excluir</button>
                 </form>
             </div>

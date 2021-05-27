@@ -3,7 +3,8 @@
 include("../connections/loginVerify.php");
 
 include("../connections/connection.php");
-$conn = (new Connection)->conectar();
+$conn = new Connection;
+$conexao = $conn->conectar();
 
 $title = "Perfil";
 include("../include/header.php");
@@ -28,7 +29,7 @@ setTitulo($title);
 
                 <?php
                 $sql = "SELECT * FROM usuario WHERE id = :userId";
-                $stm = $conn->prepare($sql);
+                $stm = $conexao->prepare($sql);
                 $stm->bindValue(':userId', $_SESSION['userId']);
 
                 try {
@@ -38,7 +39,7 @@ setTitulo($title);
                     $data_cadastro = strtotime($resultado['data_cadastro']);
                     $data_cadastro_formatada = date('d/m/Y', $data_cadastro);
                 } catch (PDOException $e) {
-                    print_r($e);
+                    echo $e->getMessage();
                 }
                 ?>
 

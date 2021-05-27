@@ -46,7 +46,7 @@ include("modalAddCategoriaDespesa.php");
                                     <select name="contaSelect" id="contaSelect">
                                         <?php
                                         $userId = $_SESSION['userId'];
-                                        $sql = $conn->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
+                                        $sql = $conexao->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
                                         $sql->bindValue(':userId', $userId);
                                         $sql->execute();
                                         $data = $sql->fetchAll();
@@ -74,7 +74,7 @@ include("modalAddCategoriaDespesa.php");
                                     <select id="categoriasSelect" name="categoriasSelect[]" multiple required>
                                         <?php
                                         $userId = $_SESSION['userId'];
-                                        $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 3 AND fk_usuario = :userId");
+                                        $sql = $conexao->prepare("SELECT * FROM categoria WHERE fk_tipo = 3 AND fk_usuario = :userId");
                                         $sql->bindValue(':userId', $userId);
                                         $sql->execute();
                                         $data = $sql->fetchAll();

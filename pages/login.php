@@ -1,5 +1,7 @@
 <?php
+    if (!isset($_SESSION)) {
     session_start();
+}
     $title = "Login"; //titulo para o header.php
     include("../include/header.php"); //cabecalho da pagina
     setTitulo($title); //passa titulo pro header.php

@@ -38,7 +38,7 @@ include("modalAddCategoriaReceita.php");
                                     <select name="contaSelect" id="contaReceitaSelect">
                                         <?php
                                         $userId = $_SESSION['userId'];
-                                        $sql = $conn->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
+                                        $sql = $conexao->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
                                         $sql->bindValue(':userId', $userId);
                                         $sql->execute();
                                         $data = $sql->fetchAll();
@@ -67,7 +67,7 @@ include("modalAddCategoriaReceita.php");
                                         <?php
 
                                         $userId = $_SESSION['userId'];
-                                        $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 4 AND fk_usuario = :userId");
+                                        $sql = $conexao->prepare("SELECT * FROM categoria WHERE fk_tipo = 4 AND fk_usuario = :userId");
                                         $sql->bindValue(':userId', $userId);
                                         $sql->execute();
                                         $data = $sql->fetchAll();

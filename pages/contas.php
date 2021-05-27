@@ -1,14 +1,17 @@
 <?php
+
 include("../connections/loginVerify.php");
 
 include("../connections/connection.php");
-$conn = (new Connection)->conectar();
+$conn = new Connection;
+$conexao = $conn->conectar();
 
 $title = "Contas";
 include("../include/header.php");
 include("../pages/modals/modalAddConta.php");
 include("../pages/modals/modalDeleteConta.php");
 setTitulo($title);
+
 ?>
 
 <body>
@@ -33,7 +36,7 @@ setTitulo($title);
 
                     <?php
                     $userId = $_SESSION['userId'];
-                    $sql = $conn->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
+                    $sql = $conexao->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
                     $sql->bindValue(":userId", $userId);
                     $sql->execute();
                     $data = $sql->fetchAll();
@@ -62,7 +65,7 @@ setTitulo($title);
                                     </p>
                                     <div class="row col-sm d-flex justify-content-center">
                                         <a href="#" class="btn btn-outline-primary col-sm me-3">Gerenciar</a>
-                                        <?php echo '<a href="../pages/contas.php?delete=true&id=' . $row['id'] . '&nome_conta=' . $row['nome_conta'] . "&saldo_atual=" . sprintf("%.2f", $row['saldo_atual']) . '"' . 'class="btn btn-outline-danger col-sm btnExcluirConta">Excluir</a>'?>
+                                        <?php echo '<a href="../pages/contas.php?delete=true&id=' . $row['id'] . '&nome_conta=' . $row['nome_conta'] . "&saldo_atual=" . sprintf("%.2f", $row['saldo_atual']) . '"' . 'class="btn btn-outline-danger col-sm btnExcluirConta">Excluir</a>' ?>
                                     </div>
                                 </div>
                             </div>
@@ -85,10 +88,10 @@ include("../include/footer.php");
 
 <?php
 
-    if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
-        echo    "<script>$(document).ready(function(){
-                    $('#modalDeleteConta').modal('show');
-                });</script>";
-    }
+if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
+    echo    "<script>$(document).ready(function(){
+                $('#modalDeleteConta').modal('show');
+            });</script>";
+}
 
 ?>

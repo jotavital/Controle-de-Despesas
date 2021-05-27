@@ -21,7 +21,7 @@
                             <select class="form-select" name="categoriaSelect" id="categoriaSelect">
 
                                 <?php
-                                $sql = $conn->prepare("SELECT * FROM categoria WHERE fk_tipo = 5");
+                                $sql = $conexao->prepare("SELECT * FROM categoria WHERE fk_tipo = 5");
                                 $sql->execute();
                                 $data = $sql->fetchAll();
 
