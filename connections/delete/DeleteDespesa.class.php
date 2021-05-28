@@ -14,7 +14,7 @@ class DeleteDespesa
         try {
             $stm = $conexao->prepare("DELETE FROM categoria_despesa WHERE fk_despesa = :idDespesa");
             $stm->bindValue("idDespesa", $idDespesa);
-            
+
             $stm->execute();
         } catch (PDOException $e) {
             $e->getMessage();
@@ -42,13 +42,31 @@ class DeleteDespesa
 
     function deletarTodasDespesasConta($idConta)
     {
+        echo "<h1>Entrou no deletar</h1>";
         $conn = new Connection;
         $conexao = $conn->conectar();
-        $stmDeleteDespesa = $conexao->prepare("DELETE FROM despesa WHERE fk_conta = :idConta");
-        $stmDeleteDespesa->bindValue("idConta", $idConta);
+        $deleteDespesa = new DeleteDespesa;
+
+        $stmSelectDespesasConta = $conexao->prepare("SELECT id as despesa_id FROM despesa where fk_conta = :idConta");
+        $stmSelectDespesasConta->bindValue("idConta", $idConta);
 
         try {
-            $stmDeleteDespesa->execute();
+            $stmSelectDespesasConta->execute();
+
+            $resultDespesasConta = $stmSelectDespesasConta->fetchAll();
+
+            foreach ($resultDespesasConta as $despesa) {
+                $deleteDespesa->desvincularTodasCategoriasDespesa($despesa['despesa_id']);
+            }
+
+            $stmDeleteDespesa = $conexao->prepare("DELETE FROM despesa WHERE fk_conta = :idConta");
+            $stmDeleteDespesa->bindValue("idConta", $idConta);
+
+            try {
+                $stmDeleteDespesa->execute();
+            } catch (PDOException $e) {
+                $e->getMessage();
+            }
         } catch (PDOException $e) {
             $e->getMessage();
         }
@@ -57,7 +75,7 @@ class DeleteDespesa
     }
 }
 
-if(isset($_POST['deleteDespesa'])){
+if (isset($_POST['deleteDespesa'])) {
     $deleteDespesa = new DeleteDespesa;
     $deleteDespesa->deletarDespesa($_POST['idDespesa']);
 }

@@ -8,6 +8,7 @@
             <div class="modal-body">
                 <p>Confirme a exclusão desta conta:</p>
                 <?php echo "<p>" . $_GET['nome_conta'] . " com saldo total de " . $_GET['saldo_atual'] . "</p>";?>
+                <p class="p-warning"><strong>ATENÇÃO! Todas as receitas e despesas vinculadas a esta conta serão permanentemente excluídas!</strong></p>
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
