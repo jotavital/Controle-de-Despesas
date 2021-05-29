@@ -49,7 +49,7 @@ setTitulo($title);
                 <!-- tabela do dataTables -->
                 <div class="d-flex justify-content-center">
                     <div class="col-12 tableReceitas" id="tableReceitasContainer">
-                        <table id="tableReceitas" class="display">
+                        <table id="tableReceitas" class="tabela display">
                             <thead>
                                 <tr>
                                     <th>Descrição</th>
@@ -108,7 +108,6 @@ if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
 
 <script>
     $(document).ready(function() {
-        $('#tableReceitas').DataTable();
 
         $('#modalDeleteReceita').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);

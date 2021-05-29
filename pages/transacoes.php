@@ -52,7 +52,7 @@ setTitulo($title);
                     <!-- tabela do dataTables -->
                     <div class="d-flex justify-content-center">
                         <div class="col-12 tableDespesas" id="tableDespesasContainer">
-                            <table id="tableDespesas" class="display">
+                            <table id="tableDespesas" class="tabela display">
                                 <thead>
                                     <tr>
                                         <th>Tipo</th>
@@ -74,7 +74,7 @@ setTitulo($title);
                                     ?>
 
                                             <tr>
-                                            <td class="d-flex justify-content-center">
+                                                <td class="d-flex justify-content-center">
                                                     <i style="color:red;" class="fas fa-hand-holding-usd"></i>
                                                 </td>
                                                 <td><?php echo $row['descricao_despesa'] ?></td>
@@ -153,7 +153,6 @@ if ($_GET['delete'] != null && $_GET['delete'] == "true") {
 
 <script>
     $(document).ready(function() {
-        $('#tableDespesas').DataTable();
 
         $('#modalDeleteDespesa').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);

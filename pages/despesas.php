@@ -50,7 +50,7 @@ setTitulo($title);
                     <!-- tabela do dataTables -->
                     <div class="d-flex justify-content-center">
                         <div class="col-12 tableDespesas" id="tableDespesasContainer">
-                            <table id="tableDespesas" class="display">
+                            <table id="tableDespesas" class="tabela display">
                                 <thead>
                                     <tr>
                                         <th>Descrição</th>
@@ -115,7 +115,6 @@ if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
 
 <script>
     $(document).ready(function() {
-        $('#tableDespesas').DataTable();
 
         $('#modalDeleteDespesa').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
