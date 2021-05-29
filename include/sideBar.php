@@ -53,7 +53,7 @@
                         <i class="fas fa-receipt"></i>
                     </div>
                     <div class="sideBarLink">
-                        <a href="">Transações</a>
+                        <a href="../pages/transacoes.php">Transações</a>
                     </div>
                 </div>
             </li>
@@ -63,7 +63,7 @@
                         <i class="fas fa-chart-pie"></i>
                     </div>
                     <div class="sideBarLink">
-                        <a href="">Estatísticas</a>
+                        <a href="../pages/estatisticas.php">Estatísticas</a>
                     </div>
                 </div>
             </li>
@@ -73,7 +73,7 @@
                         <i class="fas fa-bullseye"></i>
                     </div>
                     <div class="sideBarLink">
-                        <a href="">Metas</a>
+                        <a href="../pages/metas.php">Metas</a>
                     </div>
                 </div>
             </li>
@@ -84,6 +84,16 @@
                     </div>
                     <div class="sideBarLink">
                         <a href="../pages/profile.php">Perfil</a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="mb-1 sideBarItem d-flex align-items-center">
+                    <div class="sideBarIcon">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </div>
+                    <div class="sideBarLink">
+                        <a href="../connections/logout.php">Sair</a>
                     </div>
                 </div>
             </li>

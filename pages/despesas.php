@@ -107,8 +107,8 @@ include("../include/footer.php");
 
 if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
     echo    "<script>$(document).ready(function(){
-                    $('#modalDeleteDespesa').modal('show');
-                });</script>";
+                $('#modalDeleteDespesa').modal('show');
+            });</script>";
 }
 
 ?>
@@ -116,5 +116,9 @@ if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
 <script>
     $(document).ready(function() {
         $('#tableDespesas').DataTable();
+
+        $('#modalDeleteDespesa').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
     });
 </script>

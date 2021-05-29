@@ -94,3 +94,11 @@ if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
 }
 
 ?>
+
+<script>
+    $(document).ready(function() {
+        $('#modalDeleteConta').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
+    });
+</script>
