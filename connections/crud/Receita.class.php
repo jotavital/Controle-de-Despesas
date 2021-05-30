@@ -2,7 +2,7 @@
 
 include_once("../connection.php");
 
-class DeleteReceita
+class Receita
 {
 
     function desvincularTodasCategoriasReceita($idReceita)
@@ -26,7 +26,7 @@ class DeleteReceita
     {
         $conn = new Connection;
         $conexao = $conn->conectar();
-        $deleteReceita = new DeleteReceita;
+        $deleteReceita = new Receita;
 
         $deleteReceita->desvincularTodasCategoriasReceita($idReceita);
 
@@ -48,7 +48,7 @@ class DeleteReceita
     {
         $conn = new Connection;
         $conexao = $conn->conectar();
-        $deleteReceita = new DeleteReceita;
+        $deleteReceita = new Receita;
 
         $stmSelectReceitasConta = $conexao->prepare("SELECT id as receita_id FROM receita where fk_conta = :idConta");
         $stmSelectReceitasConta->bindValue("idConta", $idConta);
@@ -62,11 +62,11 @@ class DeleteReceita
                 $deleteReceita->desvincularTodasCategoriasReceita($receita['receita_id']);
             }
 
-            $stmDeleteReceita = $conexao->prepare("DELETE FROM receita WHERE fk_conta = :idConta");
-            $stmDeleteReceita->bindValue("idConta", $idConta);
+            $stmReceita = $conexao->prepare("DELETE FROM receita WHERE fk_conta = :idConta");
+            $stmReceita->bindValue("idConta", $idConta);
 
             try {
-                $stmDeleteReceita->execute();
+                $stmReceita->execute();
             } catch (PDOException $e) {
                 $e->getMessage();
             }
@@ -81,6 +81,6 @@ class DeleteReceita
 }
 
 if (isset($_POST['deleteReceita'])) {
-    $deleteReceita = new DeleteReceita;
+    $deleteReceita = new Receita;
     $deleteReceita->deletarReceita($_POST['idReceita']);
 }

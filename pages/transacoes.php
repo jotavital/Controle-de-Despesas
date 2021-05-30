@@ -8,8 +8,8 @@ $conexao = $conn->conectar();
 
 $title = "Transações";
 include("../include/header.php");
-include("../pages/modals/modalDeleteDespesa.php");
-include("../pages/modals/modalDeleteReceita.php");
+include("../pages/modals/modalDespesa.php");
+include("../pages/modals/modalReceita.php");
 setTitulo($title);
 
 ?>
@@ -139,12 +139,12 @@ if ($_GET['delete'] != null && $_GET['delete'] == "true") {
     if (isset($_GET['desc_despesa'])) {
 
         echo    "<script>$(document).ready(function(){
-                    $('#modalDeleteDespesa').modal('show');
+                    $('#modalDespesa').modal('show');
                 });</script>";
     } elseif (isset($_GET['type']) == "receita") {
 
         echo    "<script>$(document).ready(function(){
-                    $('#modalDeleteReceita').modal('show');
+                    $('#modalReceita').modal('show');
                 });</script>";
     }
 }
@@ -154,11 +154,11 @@ if ($_GET['delete'] != null && $_GET['delete'] == "true") {
 <script>
     $(document).ready(function() {
 
-        $('#modalDeleteDespesa').on('hidden.bs.modal', function() {
+        $('#modalDespesa').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
 
-        $('#modalDeleteReceita').on('hidden.bs.modal', function() {
+        $('#modalReceita').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
     });

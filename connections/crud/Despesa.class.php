@@ -3,7 +3,7 @@
 include_once("../connection.php");
 include("../loginVerify.php");
 
-class DeleteDespesa
+class Despesa
 {
 
     function desvincularTodasCategoriasDespesa($idDespesa)
@@ -26,7 +26,7 @@ class DeleteDespesa
         $conn = new Connection;
         $conexao = $conn->conectar();
 
-        $deleteDespesa = new DeleteDespesa;
+        $deleteDespesa = new Despesa;
         $deleteDespesa->desvincularTodasCategoriasDespesa($idDespesa);
 
         try {
@@ -45,7 +45,7 @@ class DeleteDespesa
         echo "<h1>Entrou no deletar</h1>";
         $conn = new Connection;
         $conexao = $conn->conectar();
-        $deleteDespesa = new DeleteDespesa;
+        $deleteDespesa = new Despesa;
 
         $stmSelectDespesasConta = $conexao->prepare("SELECT id as despesa_id FROM despesa where fk_conta = :idConta");
         $stmSelectDespesasConta->bindValue("idConta", $idConta);
@@ -59,11 +59,11 @@ class DeleteDespesa
                 $deleteDespesa->desvincularTodasCategoriasDespesa($despesa['despesa_id']);
             }
 
-            $stmDeleteDespesa = $conexao->prepare("DELETE FROM despesa WHERE fk_conta = :idConta");
-            $stmDeleteDespesa->bindValue("idConta", $idConta);
+            $stmDespesa = $conexao->prepare("DELETE FROM despesa WHERE fk_conta = :idConta");
+            $stmDespesa->bindValue("idConta", $idConta);
 
             try {
-                $stmDeleteDespesa->execute();
+                $stmDespesa->execute();
             } catch (PDOException $e) {
                 $e->getMessage();
             }
@@ -76,6 +76,6 @@ class DeleteDespesa
 }
 
 if (isset($_POST['deleteDespesa'])) {
-    $deleteDespesa = new DeleteDespesa;
+    $deleteDespesa = new Despesa;
     $deleteDespesa->deletarDespesa($_POST['idDespesa']);
 }

@@ -1,8 +1,8 @@
-<div class="modal fade" id="modalDeleteDespesa" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalDeleteDespesaLabel" aria-hidden="true">
+<div class="modal fade" id="modalDespesa" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalDespesaLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" id="modalDeleteDespesaLabel">Excluir</h5>
+                <h5 class="modal-title" id="modalDespesaLabel">Excluir</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
@@ -11,7 +11,7 @@
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-                <form method="POST" action="../../connections/delete/DeleteDespesa.class.php">
+                <form method="POST" action="../../connections/delete/Despesa.class.php">
                     <input type="text" name="idDespesa" value="<?php echo $_GET['id'] ?>" class="hide">
                     <input type="text" name="deleteDespesa" class="hide">
                     <button type="submit" class="btn btn-danger">Excluir</button>
