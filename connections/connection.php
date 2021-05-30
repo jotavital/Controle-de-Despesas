@@ -11,7 +11,7 @@ class Connection
     private $conexao;
 
 
-    public function conectar()
+    function conectar()
     {
 
         try {
@@ -24,7 +24,7 @@ class Connection
         }
     }
 
-    public function desconectar()
+    function desconectar()
     {
         $conexao = null;
     }

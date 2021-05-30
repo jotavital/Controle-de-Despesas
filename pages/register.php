@@ -17,7 +17,7 @@
 
 <div id="container">
     <div class="divForm">
-        <form action="../connections/registerUser.php" method="POST" id="formRegister" class="col-5 needs-validation" novalidate>
+        <form action="../connections/crud/Usuario.class.php" method="POST" id="formRegister" class="col-5 needs-validation" novalidate>
             <h1 class="mb-4">Cadastro</h1>
             <div class="row g-2 col-md">
                 <div class="col-md">
@@ -92,10 +92,11 @@
             <div class="row d-flex justify-content-center">
                 <p>Já tem cadastro? <a style="text-decoration:none;" href="login.php">Entre aqui</a></p>
             </div>
+            <input name="registerUser" class="hide">
             <div class="mt-2 row d-flex justify-content-center">
                 <div class="col-8">
                     <div class="d-grid d-sm-flex justify-content-sm-center">
-                        <button type="submit" name ="btnRegister" class="btn btn-success">Pronto!</button>
+                        <button type="submit" name="btnRegister" class="btn btn-success">Pronto!</button>
                     </div>
                 </div>
             </div>

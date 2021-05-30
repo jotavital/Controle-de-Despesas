@@ -15,7 +15,7 @@ class Conta
         $idConta = $_POST['idConta'];
     }
 
-    public function insertConta()
+    function insertConta()
     {
 
         $conn = new Connection;

@@ -70,7 +70,7 @@ setTitulo($title);
                         </div>
                     </div>
                     <div class="col-md d-flex justify-content-center">
-                        <a class="btn btn-danger col-1.5" href="../connections/logout.php" role="button">Logout</a>
+                        <a class="btn btn-danger col-1.5" href="../connections/crud/Usuario.class.php?logout" role="button">Logout</a>
                     </div>
                 </div>
             </div>

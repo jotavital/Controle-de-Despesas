@@ -18,7 +18,7 @@
 <body>
     <div id="container">
         <div class="divForm">
-            <form action="../connections/logUser.php" method="POST" id="formLogin" class="col-5 needs-validation" novalidate>
+            <form action="../connections/crud/Usuario.class.php" method="POST" id="formLogin" class="col-5 needs-validation" novalidate>
                 <h1 class="mb-3">Entrar</h1>
                 <div class="row d-flex justify-content-center">
                     <div class="col-md">
@@ -75,6 +75,7 @@
                     <p>Ainda não tem cadastro? <a style="text-decoration:none;" href="register.php">Cadastre-se aqui</a>
                     </p>
                 </div>
+                <input name="loginUser" class="hide">
                 <div class="mt-2 row d-flex justify-content-center">
                     <div class="col-8">
                         <div class="d-grid d-sm-flex justify-content-sm-center">
