@@ -9,7 +9,7 @@ $conexao = $conn->conectar();
 $title = "Receitas";
 include("../include/header.php");
 include("../pages/modals/modalAddReceita.php");
-include("../pages/modals/modalReceita.php");
+include("../pages/modals/modalDeleteReceita.php");
 setTitulo($title);
 
 ?>
@@ -100,7 +100,7 @@ include("../include/footer.php");
 
 if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
     echo    "<script>$(document).ready(function(){
-                $('#modalReceita').modal('show');
+                $('#modalDeleteReceita').modal('show');
             });</script>";
 }
 
@@ -109,7 +109,7 @@ if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
 <script>
     $(document).ready(function() {
 
-        $('#modalReceita').on('hidden.bs.modal', function() {
+        $('#modalDeleteReceita').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
     });

@@ -9,7 +9,7 @@ $conexao = $conn->conectar();
 $title = "Despesas";
 include("../include/header.php");
 include("../pages/modals/modalAddDespesa.php");
-include("../pages/modals/modalDespesa.php");
+include("../pages/modals/modalDeleteDespesa.php");
 setTitulo($title);
 
 ?>
@@ -107,7 +107,7 @@ include("../include/footer.php");
 
 if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
     echo    "<script>$(document).ready(function(){
-                $('#modalDespesa').modal('show');
+                $('#modalDeleteDespesa').modal('show');
             });</script>";
 }
 
@@ -116,7 +116,7 @@ if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
 <script>
     $(document).ready(function() {
 
-        $('#modalDespesa').on('hidden.bs.modal', function() {
+        $('#modalDeleteDespesa').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
     });

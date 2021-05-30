@@ -14,6 +14,7 @@
                                 <input type="text" class="form-control" id="nomeCategoriaInput" name="nomeCategoriaInput" aria-describedby="Nome" placeholder="Ex.: Salário" required>
                             </div>
                         </div>
+                        <input name="insertCategoriaReceita" class="hide">
                         <div class="modal-footer d-flex justify-content-center">
                             <button type="submit" id="submit" class="btn btn-success">Salvar</button>
                         </div>
@@ -30,7 +31,7 @@
         var dados = new FormData(this);
 
         $.ajax({
-            url: '../connections/inserts/insertCategoriaReceita.php',
+            url: '../connections/crud/Receita.class.php',
             method: 'POST',
             data: dados,
             processData: false,

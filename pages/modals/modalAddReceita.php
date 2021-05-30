@@ -85,6 +85,7 @@ include("modalAddCategoriaReceita.php");
                                 </div>
                             </div>
                         </div>
+                        <input name="insertReceita" class="hide">
                         <div class="modal-footer d-flex justify-content-center">
                             <button type="submit" id="submit" class="btn btn-success">Salvar</button>
                         </div>
@@ -106,7 +107,7 @@ include("modalAddCategoriaReceita.php");
         var dados = new FormData(this);
 
         $.ajax({
-            url: "../connections/inserts/insertReceita.php",
+            url: "../connections/crud/Receita.class.php",
             method: "POST",
             data: dados,
             processData: false,

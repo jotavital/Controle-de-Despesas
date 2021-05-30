@@ -62,6 +62,11 @@ class Conta
 }
 
 if (isset($_POST['deleteConta'])) {
-    $deleteConta = new Conta;
-    $deleteConta->deletarConta($_POST['idConta']);
+    $conta = new Conta;
+    $conta->deletarConta($_POST['idConta']);
+}
+
+if(isset($_POST['insertConta'])){
+    $conta = new Conta;
+    $conta->insertConta();
 }

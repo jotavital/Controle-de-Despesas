@@ -1,9 +1,69 @@
 <?php
 
 include_once("../connection.php");
+include("../loginVerify.php");
 
 class Receita
 {
+
+    function insertReceita()
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("INSERT INTO receita (descricao_receita, data_receita, valor, data_inclusao, fk_usuario, fk_conta) VALUES (:descricao_receita, :data_receita, :valor, :data_inclusao, :fk_usuario, :fk_conta)");
+        $stm->bindValue(':descricao_receita', $_POST['descReceitaInput']);
+        $stm->bindValue(':data_receita', $_POST['dataReceita']);
+        $stm->bindValue(':valor', $_POST['valorInput']);
+        $stm->bindValue(':data_inclusao', date('Y' . '-' . 'm' . '-' . 'd'));
+        $stm->bindValue(':fk_usuario', $_SESSION['userId']);
+        $stm->bindValue(':fk_conta', $_POST['contaSelect']);
+
+        try {
+            $stm->execute();
+
+            $receitaId = $conexao->lastInsertId();
+
+            foreach ($_POST['categoriasSelect'] as $categoria) {
+                $stm2 = $conexao->prepare("INSERT INTO categoria_receita (fk_categoria, fk_receita) VALUES (:fk_categoria, :fk_receita)");
+                $stm2->bindValue(':fk_categoria', $categoria);
+                $stm2->bindValue(':fk_receita', $receitaId);
+
+                try {
+                    $stm2->execute();
+                } catch (PDOException $th) {
+                    echo $th->errorInfo;
+                }
+            }
+        } catch (PDOException $th) {
+            echo $th->errorInfo;
+        }
+
+        $conn->desconectar();
+    }
+
+    function insertCategoriaReceita()
+    {
+        session_start();
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("INSERT INTO categoria (nome_categoria, fk_tipo, fk_usuario) VALUES (:nome_categoria, :fk_tipo, :fk_usuario)");
+        $stm->bindValue(":nome_categoria", $_POST['nomeCategoriaInput']);
+        $stm->bindValue(":fk_tipo", 4);
+        $stm->bindValue(":fk_usuario", $_SESSION['userId']);
+
+        try {
+            $stm->execute();
+
+            $_SESSION['msg'] = "Categoria cadastrada com sucesso!";
+        } catch (PDOException $e) {
+            $_SESSION['msg'] = "Erro ao cadastrar categoria!";
+            echo $e->getMessage();
+        }
+
+        $conn->desconectar();
+    }
 
     function desvincularTodasCategoriasReceita($idReceita)
     {
@@ -81,6 +141,16 @@ class Receita
 }
 
 if (isset($_POST['deleteReceita'])) {
-    $deleteReceita = new Receita;
-    $deleteReceita->deletarReceita($_POST['idReceita']);
+    $receita = new Receita;
+    $receita->deletarReceita($_POST['idReceita']);
+}
+
+if (isset($_POST['insertReceita'])) {
+    $receita = new Receita;
+    $receita->insertReceita();
+}
+
+if (isset($_POST['insertCategoriaReceita'])) {
+    $receita = new Receita;
+    $receita->insertCategoriaReceita();
 }

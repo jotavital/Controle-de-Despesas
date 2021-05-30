@@ -34,6 +34,7 @@
 
                             </select>
                         </div>
+                        <input name="insertConta" class="hide">
                         <div class="modal-footer d-flex justify-content-center">
                             <button type="submit" id="submit" class="btn btn-success">Salvar</button>
                         </div>
@@ -53,11 +54,12 @@
         var dados = jQuery(this).serialize();
 
         $.ajax({
-            url: '../connections/inserts/insertConta.php',
+            url: '../connections/crud/Conta.class.php',
             method: 'POST',
             data: dados,
             success: function(msg) {
                 alert("Conta cadastrada com sucesso!");
+                location.reload();
             },
             error: function(msg) {
                 alert("Erro ao cadastrar a conta!");
