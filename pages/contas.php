@@ -60,7 +60,7 @@ setTitulo($title);
                                         if ($valor < 0) {
                                             echo "<span class='p-danger'><strong>" . ($formatter->formatCurrency($valor, 'BRL')) . "</strong></span>";
                                         }else{
-                                            echo "<span class='p-success'><strong>" . ($formatter->formatCurrency($valor, 'BRL')) . "</strong></span>";
+                                            echo "<span class='p-primary'><strong>" . ($formatter->formatCurrency($valor, 'BRL')) . "</strong></span>";
                                         }
 
                                         ?>
