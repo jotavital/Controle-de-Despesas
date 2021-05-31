@@ -247,6 +247,7 @@ div.sideBarItem:hover a, div.sideBarItem:hover i {
     color: #4895ef !important;
     cursor: pointer;
     font-size: 1.2rem;
+    transition: all .1s;
 }
 
 .sideBarItem {
