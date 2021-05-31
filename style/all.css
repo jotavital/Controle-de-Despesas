@@ -19,6 +19,18 @@ h4 {
     color: #ef8354;
 }
 
+.p-danger{
+    color: #CF1C1C;
+}
+
+.p-primary{
+    color: #4361EE;
+}
+
+.p-success{
+    color: #239E18;
+}
+
 div.ss-single-selected {
     min-height: 38px;
 }

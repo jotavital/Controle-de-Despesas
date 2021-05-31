@@ -10,11 +10,6 @@ class Conta
 
     private $idConta;
 
-    function __construct()
-    {
-        $idConta = $_POST['idConta'];
-    }
-
     function insertConta()
     {
 
@@ -62,7 +57,7 @@ class Conta
 
     function somarValorReceita($idConta, $valorReceita)
     {
-        
+
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -78,11 +73,44 @@ class Conta
     }
 
     function subtrairValorReceita($idConta, $valorReceita){
+
         $conn = new Connection;
         $conexao = $conn->conectar();
 
         $stm = $conexao->prepare("UPDATE conta SET saldo_atual = saldo_atual - :valorReceita WHERE id = :idConta");
         $stm->bindValue(":valorReceita", $valorReceita);
+        $stm->bindValue(":idConta", $idConta);
+
+        try {
+            $stm->execute();
+        } catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
+
+    function subtrairValorDespesa($idConta, $valorDespesa){
+
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("UPDATE conta SET saldo_atual = saldo_atual - :valorDespesa WHERE id = :idConta");
+        $stm->bindValue(":valorDespesa", $valorDespesa);
+        $stm->bindValue(":idConta", $idConta);
+
+        try {
+            $stm->execute();
+        } catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
+
+    function somarValorDespesa($idConta, $valorDespesa){
+
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("UPDATE conta SET saldo_atual = saldo_atual + :valorDespesa WHERE id = :idConta");
+        $stm->bindValue(":valorDespesa", $valorDespesa);
         $stm->bindValue(":idConta", $idConta);
 
         try {

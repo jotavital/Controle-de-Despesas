@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <p>Confirme a exclusão desta receita:</p>
-                <?php echo "<p>" . $_GET['desc_receita'] . " com valor de " . "<span style='color:green'>" . $formatter->formatCurrency($_GET['valor'], 'BRL') . "</span></p>"; ?>
+                <?php echo "<p>" . $_GET['desc_receita'] . " com valor de <span class='p-success'><strong>" . $formatter->formatCurrency($_GET['valor'], 'BRL') . "</strong></span></p>"; ?>
                 <p class="p-warning"><strong>ATENÇÃO! A exclusão desta receita irá refletir no saldo atual da conta à qual ela pertence!</strong></p>
             </div>
             <div class="modal-footer d-flex justify-content-center">

@@ -57,8 +57,12 @@ setTitulo($title);
 
                                         <?php
                                         $valor = $row['saldo_atual'];
-                                        
-                                        echo ($formatter->formatCurrency($valor, 'BRL'));
+                                        if ($valor < 0) {
+                                            echo "<span class='p-danger'><strong>" . ($formatter->formatCurrency($valor, 'BRL')) . "</strong></span>";
+                                        }else{
+                                            echo "<span class='p-success'><strong>" . ($formatter->formatCurrency($valor, 'BRL')) . "</strong></span>";
+                                        }
+
                                         ?>
 
                                     </p>

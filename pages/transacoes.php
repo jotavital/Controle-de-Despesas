@@ -69,18 +69,19 @@ setTitulo($title);
                                     <?php
                                     foreach ($result as $row) {
                                         $valor = $row['valor'];
-                                        
                                         if (isset($row['descricao_despesa'])) {
+                                            $data_despesa_formatada = date('d/m/Y', strtotime($row['data_despesa']));
+                                            $data_vencimento_formatada = date('d/m/Y', strtotime($row['data_despesa']));
                                     ?>
 
                                             <tr>
                                                 <td class="d-flex justify-content-center">
-                                                    <i style="color:red;" class="fas fa-hand-holding-usd"></i>
+                                                    <i class="p-danger fas fa-hand-holding-usd"></i>
                                                 </td>
                                                 <td><?php echo $row['descricao_despesa'] ?></td>
-                                                <td><?php echo $row['data_despesa'] ?></td>
-                                                <td><?php echo $row['data_vencimento'] ?></td>
-                                                <td><?php echo ($formatter->formatCurrency($valor, 'BRL')); ?></td>
+                                                <td><?php echo $data_despesa_formatada ?></td>
+                                                <td><?php echo $data_vencimento_formatada ?></td>
+                                                <td><?php echo "<span class='p-danger'><strong>" . ($formatter->formatCurrency($valor, 'BRL')) . "</strong></span>"; ?></td>
                                                 <td><?php echo $row['nome_conta'] ?></td>
                                                 <td>
                                                     <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
@@ -92,16 +93,17 @@ setTitulo($title);
 
                                         <?php
                                         } elseif (isset($row['descricao_receita'])) {
+                                            $data_receita_formatada = date('d/m/Y', strtotime($row['data_receita']));
                                         ?>
 
                                             <tr>
                                                 <td class="d-flex justify-content-center">
-                                                    <i style="color:green;" class="fas fa-chart-line"></i>
+                                                    <i class="p-success fas fa-chart-line"></i>
                                                 </td>
                                                 <td><?php echo $row['descricao_receita'] ?></td>
-                                                <td><?php echo $row['data_receita'] ?></td>
+                                                <td><?php echo $data_receita_formatada ?></td>
                                                 <td> - </td>
-                                                <td><?php echo ($formatter->formatCurrency($valor, 'BRL')); ?></td>
+                                                <td><?php echo "<span class='p-success'><strong>" . ($formatter->formatCurrency($valor, 'BRL')) . "</strong></span>"; ?></td>
                                                 <td><?php echo $row['nome_conta'] ?></td>
                                                 <td>
                                                     <div class="actionIcons col-12 d-flex align-items-center justify-content-center">

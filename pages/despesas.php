@@ -74,12 +74,12 @@ setTitulo($title);
                                             <td><?php echo $row['descricao_despesa'] ?></td>
                                             <td><?php echo $data_despesa_formatada ?></td>
                                             <td><?php echo $data_vencimento_formatada ?></td>
-                                            <td><?php echo ($formatter->formatCurrency($valor, 'BRL')); ?></td>
+                                            <td><?php echo "<span class='p-danger'><strong>" . ($formatter->formatCurrency($valor, 'BRL')) . "</strong></span>"; ?></td>
                                             <td><?php echo $row['nome_conta'] ?></td>
                                             <td>
                                                 <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
                                                     <i class="fas fa-edit"></i>
-                                                    <?php echo '<a href="../pages/despesas.php?delete=true&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa"><i class="fas fa-trash-alt"></i></a>' ?>
+                                                    <?php echo '<a href="../pages/despesas.php?delete=true&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa"><i class="fas fa-trash-alt"></i></a>' ?>
                                                 </div>
                                             </td>
                                         </tr>

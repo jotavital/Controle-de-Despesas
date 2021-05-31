@@ -70,7 +70,7 @@ setTitulo($title);
                                     <tr>
                                         <td><?php echo $row['descricao_receita'] ?></td>
                                         <td><?php echo $data_receita_formatada ?></td>
-                                        <td><?php echo ($formatter->formatCurrency($valor, 'BRL')); ?></td>
+                                        <td><?php echo "<span class='p-success'><strong>" . ($formatter->formatCurrency($valor, 'BRL')) . "</strong></span>"; ?></td>
                                         <td><?php echo $row['nome_conta'] ?></td>
                                         <td>
                                             <div class="col-12 d-flex justify-content-center">

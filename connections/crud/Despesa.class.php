@@ -2,6 +2,7 @@
 
 include_once("../Connection.class.php");
 include_once("../loginVerify.php");
+include_once("../crud/Conta.class.php");
 
 class Despesa
 {
@@ -45,19 +46,22 @@ class Despesa
         $stm->bindValue(':fk_conta', $_POST['contaSelect']);
         $stm->bindValue(':fk_usuario', $_SESSION['userId']);
 
-        if ($stm->execute()) {
-            $_SESSION['msg'] = "Conta adicionada!";
+        try {
+            $stm->execute();
+            $_SESSION['msg'] = "Despesa adicionada!";
 
             //armazena imagem da despesa na pasta
-            $directory = '../../uploaded/user_images/despesas_images/' . $_SESSION['userId'];
-            mkdir($directory);
-            $directory = $directory . '/' . $conexao->lastInsertId() . '/';
-            mkdir($directory);
+            if ($nomeImg != null) {
+                $directory = '../../uploaded/user_images/despesas_images/' . $_SESSION['userId'];
+                mkdir($directory);
+                $directory = $directory . '/' . $conexao->lastInsertId() . '/';
+                mkdir($directory);
 
-            if (copy($_FILES['imgInput']['tmp_name'], $directory . $nomeImg)) {
-                $_SESSION['msg'] = "Foto adicionada com sucesso! ";
-            } else {
-                $_SESSION['msg'] = "Erro ao adicionar foto! ";
+                if (copy($_FILES['imgInput']['tmp_name'], $directory . $nomeImg)) {
+                    $_SESSION['msg'] = "Foto adicionada com sucesso! ";
+                } else {
+                    $_SESSION['msg'] = "Erro ao adicionar foto! ";
+                }
             }
 
             //relacionando categorias com despesa
@@ -69,8 +73,11 @@ class Despesa
                 $stm2->bindValue(':fk_despesa', $despesaId);
                 $stm2->execute();
             }
-        } else {
-            $_SESSION['msg'] = "Erro ao criar despesa";
+
+            $conta = new Conta;
+            $conta->subtrairValorDespesa($_POST['contaSelect'], $_POST['valorInput']);
+        } catch (PDOException $e) {
+            $_SESSION['msg'] = "Erro ao criar despesa! " . $e->getMessage();
         }
 
         $conexao = null;
@@ -101,11 +108,16 @@ class Despesa
         $deleteDespesa = new Despesa;
         $deleteDespesa->desvincularTodasCategoriasDespesa($idDespesa);
 
+        $stm = $conexao->prepare("DELETE FROM despesa WHERE id = :idDespesa");
+        $stm->bindValue("idDespesa", $idDespesa);
+
         try {
-            $stm = $conexao->prepare("DELETE FROM despesa WHERE id = :idDespesa");
-            $stm->bindValue("idDespesa", $idDespesa);
 
             $stm->execute();
+
+            $conta = new Conta;
+            $conta->somarValorDespesa($_POST['idConta'], $_POST['valorDespesa']);
+
             header('Location: ../../pages/despesas.php');
         } catch (PDOException $e) {
             echo $e->getMessage();

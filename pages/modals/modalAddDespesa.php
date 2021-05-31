@@ -50,8 +50,6 @@ include_once("modalAddCategoriaDespesa.php");
                                         $sql->bindValue(':userId', $userId);
                                         $sql->execute();
                                         $data = $sql->fetchAll();
-                                        
-
 
                                         foreach ($data as $row) {
                                         ?>
