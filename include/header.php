@@ -1,5 +1,5 @@
 <?php
-    include_once('../connections/connection.php');
+    include_once('../connections/Connection.class.php');
 
     function setTitulo($title){
         
@@ -7,6 +7,7 @@
     
     $invalidFeedback = "Campo obrigatório!";
     $validFeedback = "Muito bom!";
+    $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
 ?>
 
 <!DOCTYPE html>

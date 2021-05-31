@@ -5,9 +5,9 @@ if (!isset($_SESSION)) {
     }
 }
 $title = "Home";
-include("../include/header.php");
+include_once("../include/header.php");
 setTitulo($title);
-include("../include/navBar_unlogged.php");
+include_once("../include/navBar_unlogged.php");
 ?>
 
 <body>
@@ -15,7 +15,7 @@ include("../include/navBar_unlogged.php");
 
 
     <?php
-    include("../include/footer.php");
+    include_once("../include/footer.php");
     ?>
 </body>
 

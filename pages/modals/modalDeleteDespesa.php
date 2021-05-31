@@ -8,6 +8,7 @@
             <div class="modal-body">
                 <p>Confirme a exclusão desta despesa:</p>
                 <?php echo "<p>" . $_GET['desc_despesa'] . " da conta " . $_GET['nome_conta'] . " com valor de " . $_GET['valor'] . "</p>"; ?>
+                <p class="p-warning"><strong>ATENÇÃO! A exclusão desta despesa irá refletir no saldo atual da conta à qual ela pertence!</strong></p>
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>

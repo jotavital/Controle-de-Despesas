@@ -1,7 +1,7 @@
 <?php
 
-include("modalAddConta.php");
-include("modalAddCategoriaDespesa.php");
+include_once("modalAddConta.php");
+include_once("modalAddCategoriaDespesa.php");
 
 ?>
 
@@ -50,7 +50,7 @@ include("modalAddCategoriaDespesa.php");
                                         $sql->bindValue(':userId', $userId);
                                         $sql->execute();
                                         $data = $sql->fetchAll();
-                                        $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
+                                        
 
 
                                         foreach ($data as $row) {

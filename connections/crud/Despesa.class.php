@@ -1,7 +1,7 @@
 <?php
 
-include_once("../connection.php");
-include("../loginVerify.php");
+include_once("../Connection.class.php");
+include_once("../loginVerify.php");
 
 class Despesa
 {

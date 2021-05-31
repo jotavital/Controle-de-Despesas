@@ -1,16 +1,16 @@
 <?php
 
-include("../connections/loginVerify.php");
+include_once("../connections/loginVerify.php");
 
-include("../connections/connection.php");
+include_once("../connections/Connection.class.php");
 $conn = new Connection;
 $conexao = $conn->conectar();
 
 $title = "Dashboard";
-include("../include/header.php");
-include("../pages/modals/modalAddConta.php");
-include("../pages/modals/modalAddDespesa.php");
-include("../pages/modals/modalAddReceita.php");
+include_once("../include/header.php");
+include_once("../pages/modals/modalAddConta.php");
+include_once("../pages/modals/modalAddDespesa.php");
+include_once("../pages/modals/modalAddReceita.php");
 setTitulo($title);
 
 ?>
@@ -18,11 +18,11 @@ setTitulo($title);
 <body>
     <div id="containerDashboard">
         <?php
-        include("../include/sideBar.php");
+        include_once("../include/sideBar.php");
         ?>
         <main>
             <?php
-            include("../include/navBar_logged.php");
+            include_once("../include/navBar_logged.php");
             ?>
 
             <div id="contentDashboard">
@@ -70,5 +70,5 @@ setTitulo($title);
 </body>
 
 <?php
-include("../include/footer.php");
+include_once("../include/footer.php");
 ?>

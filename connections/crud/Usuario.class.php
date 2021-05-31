@@ -1,6 +1,6 @@
 <?php
 
-include_once("../connection.php");
+include_once("../Connection.class.php");
 
 
 class Usuario
@@ -21,7 +21,7 @@ class Usuario
             $stm->execute();
             header("Location:  ../../pages/login.php");
         } catch (PDOException $e) {
-            $e->errorInfo;
+            $e->getMessage();
         }
 
         $conn->desconectar();

@@ -1,15 +1,15 @@
 <?php
 
-include("../connections/loginVerify.php");
+include_once("../connections/loginVerify.php");
 
-include("../connections/connection.php");
+include_once("../connections/Connection.class.php");
 $conn = new Connection;
 $conexao = $conn->conectar();
 
 $title = "Receitas";
-include("../include/header.php");
-include("../pages/modals/modalAddReceita.php");
-include("../pages/modals/modalDeleteReceita.php");
+include_once("../include/header.php");
+include_once("../pages/modals/modalAddReceita.php");
+include_once("../pages/modals/modalDeleteReceita.php");
 setTitulo($title);
 
 ?>
@@ -18,13 +18,13 @@ setTitulo($title);
     <div id="containerDashboard">
 
         <?php
-        include("../include/sideBar.php");
+        include_once("../include/sideBar.php");
         ?>
 
         <main>
 
             <?php
-            include("../include/navBar_logged.php");
+            include_once("../include/navBar_logged.php");
             ?>
 
             <div id="contentDashboard">
@@ -34,7 +34,7 @@ setTitulo($title);
 
                 <?php
                 $userId = $_SESSION['userId'];
-                $sql = $conexao->prepare("SELECT r.*, c.nome_conta FROM receita as r, conta as c WHERE r.fk_usuario = :userId AND r.fk_conta = c.id GROUP BY r.id");
+                $sql = $conexao->prepare("SELECT r.*, c.nome_conta, c.id as id_conta FROM receita as r, conta as c WHERE r.fk_usuario = :userId AND r.fk_conta = c.id GROUP BY r.id");
                 $sql->bindValue(":userId", $userId);
 
                 try {
@@ -64,18 +64,18 @@ setTitulo($title);
                                 <?php
                                 foreach ($data as $row) {
                                     $valor = $row['valor'];
-                                    $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
+                                    $data_receita_formatada = date('d/m/Y', strtotime($row['data_receita']));
                                 ?>
 
                                     <tr>
                                         <td><?php echo $row['descricao_receita'] ?></td>
-                                        <td><?php echo $row['data_receita'] ?></td>
+                                        <td><?php echo $data_receita_formatada ?></td>
                                         <td><?php echo ($formatter->formatCurrency($valor, 'BRL')); ?></td>
                                         <td><?php echo $row['nome_conta'] ?></td>
                                         <td>
                                             <div class="col-12 d-flex justify-content-center">
                                                 <i class="fas fa-edit"></i>
-                                                <?php echo '<a href="../pages/receitas.php?delete=true&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
+                                                <?php echo '<a href="../pages/receitas.php?delete=true&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
                                             </div>
                                         </td>
                                     </tr>
@@ -96,7 +96,7 @@ setTitulo($title);
 </body>
 
 <?php
-include("../include/footer.php");
+include_once("../include/footer.php");
 
 if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
     echo    "<script>$(document).ready(function(){

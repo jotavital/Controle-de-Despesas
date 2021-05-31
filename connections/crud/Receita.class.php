@@ -1,13 +1,15 @@
 <?php
 
-include_once("../connection.php");
-include("../loginVerify.php");
+include_once("../Connection.class.php");
+include_once("../loginVerify.php");
+include_once("../crud/Conta.class.php");
 
 class Receita
 {
 
     function insertReceita()
     {
+
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -35,6 +37,9 @@ class Receita
                     echo $th->errorInfo;
                 }
             }
+
+            $conta = new Conta;
+            $conta->somarValorReceita($_POST['contaSelect'], $_POST['valorInput']);
         } catch (PDOException $th) {
             echo $th->errorInfo;
         }
@@ -97,6 +102,9 @@ class Receita
 
         try {
             $stm2->execute();
+
+            $conta = new Conta;
+            $conta->subtrairValorReceita($_POST['idConta'], $_POST['valorReceita']);
 
             header('Location: ../../pages/receitas.php');
         } catch (PDOException $e) {

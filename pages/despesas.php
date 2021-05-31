@@ -1,15 +1,15 @@
 <?php
 
-include("../connections/loginVerify.php");
+include_once("../connections/loginVerify.php");
 
-include("../connections/connection.php");
+include_once("../connections/Connection.class.php");
 $conn = new Connection;
 $conexao = $conn->conectar();
 
 $title = "Despesas";
-include("../include/header.php");
-include("../pages/modals/modalAddDespesa.php");
-include("../pages/modals/modalDeleteDespesa.php");
+include_once("../include/header.php");
+include_once("../pages/modals/modalAddDespesa.php");
+include_once("../pages/modals/modalDeleteDespesa.php");
 setTitulo($title);
 
 ?>
@@ -18,13 +18,13 @@ setTitulo($title);
     <div id="containerDashboard">
 
         <?php
-        include("../include/sideBar.php");
+        include_once("../include/sideBar.php");
         ?>
 
         <main>
 
             <?php
-            include("../include/navBar_logged.php");
+            include_once("../include/navBar_logged.php");
             ?>
 
             <div id="contentDashboard">
@@ -66,13 +66,14 @@ setTitulo($title);
                                     <?php
                                     foreach ($data as $row) {
                                         $valor = $row['valor'];
-                                        $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
+                                        $data_despesa_formatada = date('d/m/Y', strtotime($row['data_despesa']));
+                                        $data_vencimento_formatada = date('d/m/Y', strtotime($row['data_vencimento']));
                                     ?>
 
                                         <tr>
                                             <td><?php echo $row['descricao_despesa'] ?></td>
-                                            <td><?php echo $row['data_despesa'] ?></td>
-                                            <td><?php echo $row['data_vencimento'] ?></td>
+                                            <td><?php echo $data_despesa_formatada ?></td>
+                                            <td><?php echo $data_vencimento_formatada ?></td>
                                             <td><?php echo ($formatter->formatCurrency($valor, 'BRL')); ?></td>
                                             <td><?php echo $row['nome_conta'] ?></td>
                                             <td>
@@ -100,7 +101,7 @@ setTitulo($title);
 </body>
 
 <?php
-include("../include/footer.php");
+include_once("../include/footer.php");
 ?>
 
 <?php

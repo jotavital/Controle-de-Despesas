@@ -1,9 +1,9 @@
 <?php
 
-include("../loginVerify.php");
-include("../connection.php");
-include("../crud/Receita.class.php");
-include("../crud/Despesa.class.php");
+include_once("../loginVerify.php");
+include_once("../Connection.class.php");
+include_once("../crud/Receita.class.php");
+include_once("../crud/Despesa.class.php");
 
 class Conta
 {
@@ -50,13 +50,45 @@ class Conta
         $deleteDespesa->deletarTodasDespesasConta($idConta);
 
         $stm = $conexao->prepare("DELETE FROM conta WHERE id = :idConta");
-        $stm->bindValue("idConta", $idConta);
+        $stm->bindValue(":idConta", $idConta);
 
         try {
             $stm->execute();
             header('Location: ../../pages/contas.php');
         } catch (PDOException $e) {
             echo $e->getMessage();
+        }
+    }
+
+    function somarValorReceita($idConta, $valorReceita)
+    {
+        
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("UPDATE conta SET saldo_atual = saldo_atual + :valorReceita WHERE id = :idConta");
+        $stm->bindValue(":valorReceita", $valorReceita);
+        $stm->bindValue(":idConta", $idConta);
+
+        try {
+            $stm->execute();
+        } catch (PDOException $e) {
+            $e->getMessage();
+        }
+    }
+
+    function subtrairValorReceita($idConta, $valorReceita){
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("UPDATE conta SET saldo_atual = saldo_atual - :valorReceita WHERE id = :idConta");
+        $stm->bindValue(":valorReceita", $valorReceita);
+        $stm->bindValue(":idConta", $idConta);
+
+        try {
+            $stm->execute();
+        } catch (PDOException $e) {
+            $e->getMessage();
         }
     }
 }
@@ -66,7 +98,7 @@ if (isset($_POST['deleteConta'])) {
     $conta->deletarConta($_POST['idConta']);
 }
 
-if(isset($_POST['insertConta'])){
+if (isset($_POST['insertConta'])) {
     $conta = new Conta;
     $conta->insertConta();
 }

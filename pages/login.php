@@ -5,7 +5,7 @@ if (!isset($_SESSION)) {
     }
 }
 $title = "Login"; //titulo para o header.php
-include("../include/header.php"); //cabecalho da pagina
+include_once("../include/header.php"); //cabecalho da pagina
 setTitulo($title); //passa titulo pro header.php
 
 if (isset($_SESSION['userEmail'])) {
@@ -14,7 +14,7 @@ if (isset($_SESSION['userEmail'])) {
     }
 }
 
-include("../include/navBar_unlogged.php");
+include_once("../include/navBar_unlogged.php");
 ?>
 
 <body>
@@ -88,6 +88,6 @@ include("../include/navBar_unlogged.php");
     </div>
 
     <?php
-    include("../include/footer.php");
+    include_once("../include/footer.php");
     ?>
 </body>

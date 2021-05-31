@@ -1,15 +1,15 @@
 <?php
 
-include("../connections/loginVerify.php");
+include_once("../connections/loginVerify.php");
 
-include("../connections/connection.php");
+include_once("../connections/Connection.class.php");
 $conn = new Connection;
 $conexao = $conn->conectar();
 
 $title = "Contas";
-include("../include/header.php");
-include("../pages/modals/modalAddConta.php");
-include("../pages/modals/modalDeleteConta.php");
+include_once("../include/header.php");
+include_once("../pages/modals/modalAddConta.php");
+include_once("../pages/modals/modalDeleteConta.php");
 setTitulo($title);
 
 ?>
@@ -18,13 +18,13 @@ setTitulo($title);
     <div id="containerDashboard">
 
         <?php
-        include("../include/sideBar.php");
+        include_once("../include/sideBar.php");
         ?>
 
         <main>
 
             <?php
-            include("../include/navBar_logged.php");
+            include_once("../include/navBar_logged.php");
             ?>
 
             <div id="contentDashboard">
@@ -57,7 +57,7 @@ setTitulo($title);
 
                                         <?php
                                         $valor = $row['saldo_atual'];
-                                        $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
+                                        
                                         echo ($formatter->formatCurrency($valor, 'BRL'));
                                         ?>
 
@@ -82,7 +82,7 @@ setTitulo($title);
 </body>
 
 <?php
-include("../include/footer.php");
+include_once("../include/footer.php");
 ?>
 
 <?php

@@ -1,7 +1,7 @@
 <?php
 
-include("../pages/modals/modalAddConta.php");
-include("modalAddCategoriaReceita.php");
+include_once("../pages/modals/modalAddConta.php");
+include_once("modalAddCategoriaReceita.php");
 
 ?>
 
@@ -42,7 +42,7 @@ include("modalAddCategoriaReceita.php");
                                         $sql->bindValue(':userId', $userId);
                                         $sql->execute();
                                         $data = $sql->fetchAll();
-                                        $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
+                                        
 
 
                                         foreach ($data as $row) {

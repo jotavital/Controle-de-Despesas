@@ -1,15 +1,15 @@
 <?php
 
-include("../connections/loginVerify.php");
+include_once("../connections/loginVerify.php");
 
-include("../connections/connection.php");
+include_once("../connections/Connection.class.php");
 $conn = new Connection;
 $conexao = $conn->conectar();
 
 $title = "Transações";
-include("../include/header.php");
-include("../pages/modals/modalDeleteDespesa.php");
-include("../pages/modals/modalDeleteReceita.php");
+include_once("../include/header.php");
+include_once("../pages/modals/modalDeleteDespesa.php");
+include_once("../pages/modals/modalDeleteReceita.php");
 setTitulo($title);
 
 ?>
@@ -18,13 +18,13 @@ setTitulo($title);
     <div id="containerDashboard">
 
         <?php
-        include("../include/sideBar.php");
+        include_once("../include/sideBar.php");
         ?>
 
         <main>
 
             <?php
-            include("../include/navBar_logged.php");
+            include_once("../include/navBar_logged.php");
             ?>
 
             <div id="contentDashboard">
@@ -69,7 +69,7 @@ setTitulo($title);
                                     <?php
                                     foreach ($result as $row) {
                                         $valor = $row['valor'];
-                                        $formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
+                                        
                                         if (isset($row['descricao_despesa'])) {
                                     ?>
 
@@ -129,7 +129,7 @@ setTitulo($title);
 </body>
 
 <?php
-include("../include/footer.php");
+include_once("../include/footer.php");
 ?>
 
 <?php
