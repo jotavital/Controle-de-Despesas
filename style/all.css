@@ -15,8 +15,8 @@ h4 {
     margin: 0;
 }
 
-.p-warning{
-    color:#ef8354;
+.p-warning {
+    color: #ef8354;
 }
 
 div.ss-single-selected {
@@ -29,7 +29,7 @@ div.ss-multi-selected {
     min-height: 38px !important;
 }
 
-div.ss-add{
+div.ss-add {
     width: 8px;
     height: 24px;
     padding: 3px;
@@ -39,11 +39,11 @@ div.ss-add{
     display: none;
 }
 
-.fa-trash-alt{
+.fa-trash-alt {
     color: red;
 }
 
-.fa-edit{
+.fa-edit {
     color: #4895ef;
 }
 
@@ -60,7 +60,6 @@ div.ss-add{
 }
 
 /* fim modais */
-
 
 /* login e cadastro */
 
@@ -88,7 +87,6 @@ h1.mainTitle {
 
 }
 
-
 /* fim login e cadastro */
 
 .navBar {
@@ -104,7 +102,6 @@ h1.mainTitle {
     color: #EBEBEB !important;
 }
 
-
 /* navbar logged */
 
 .menuToggler {
@@ -114,7 +111,6 @@ h1.mainTitle {
 }
 
 /* fim navbar logged */
-
 
 /* dashboard css */
 
@@ -247,7 +243,6 @@ div.sideBarItem:hover a, div.sideBarItem:hover i {
 
 /* fim dashboard css */
 
-
 /* receitas css */
 
 .tableReceitas {
@@ -255,7 +250,6 @@ div.sideBarItem:hover a, div.sideBarItem:hover i {
 }
 
 /* fim receitas css */
-
 
 /* perfil do usuario css */
 
