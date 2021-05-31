@@ -44,7 +44,9 @@ class Receita
 
     function insertCategoriaReceita()
     {
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
         $conn = new Connection;
         $conexao = $conn->conectar();
 

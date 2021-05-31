@@ -1,18 +1,20 @@
 <?php
+if (!isset($_SESSION)) {
     if (!isset($_SESSION)) {
-    session_start();
-}
-    $title = "Login"; //titulo para o header.php
-    include("../include/header.php"); //cabecalho da pagina
-    setTitulo($title); //passa titulo pro header.php
-
-    if(isset($_SESSION['userEmail'])){
-        if($_SESSION['userEmail']){
-            header("Location: ../pages/dashboard.php");
-        }
+        session_start();
     }
-    
-    include("../include/navBar_unlogged.php");
+}
+$title = "Login"; //titulo para o header.php
+include("../include/header.php"); //cabecalho da pagina
+setTitulo($title); //passa titulo pro header.php
+
+if (isset($_SESSION['userEmail'])) {
+    if ($_SESSION['userEmail']) {
+        header("Location: ../pages/dashboard.php");
+    }
+}
+
+include("../include/navBar_unlogged.php");
 ?>
 
 <body>
@@ -23,17 +25,16 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-md">
                         <div class="form-floating mb-3">
-                            <input type="email" name="email" id="emailInput" class="form-control" placeholder="E-mail"
-                                required>
+                            <input type="email" name="email" id="emailInput" class="form-control" placeholder="E-mail" required>
                             <label class="floatingLabel">E-mail</label>
                             <div class="invalid-feedback">
                                 <?php
-                                    echo($invalidFeedback);
+                                echo ($invalidFeedback);
                                 ?>
                             </div>
                             <div class="valid-feedback">
                                 <?php
-                                    echo($validFeedback);
+                                echo ($validFeedback);
                                 ?>
                             </div>
                         </div>
@@ -42,17 +43,16 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-md">
                         <div class="form-floating mb-3">
-                            <input type="password" name="password" id="passwordInput" class="form-control"
-                                placeholder="Senha" required>
+                            <input type="password" name="password" id="passwordInput" class="form-control" placeholder="Senha" required>
                             <label class="floatingLabel">Senha</label>
                             <div class="invalid-feedback">
                                 <?php
-                                    echo($invalidFeedback);
+                                echo ($invalidFeedback);
                                 ?>
                             </div>
                             <div class="valid-feedback">
                                 <?php
-                                    echo($validFeedback);
+                                echo ($validFeedback);
                                 ?>
                             </div>
                         </div>
@@ -60,15 +60,15 @@
                 </div>
 
                 <?php
-                    if(isset($_SESSION['msg'])) {
+                if (isset($_SESSION['msg'])) {
 
-                        echo("<div class='alert alert-danger alert-dismissible fade show' role='alert'>" 
-                                . "<p class='mt-3'>" . $_SESSION['msg'] . "</p>"
-                                . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>"
-                            . "</div>");
-                            
-                        unset($_SESSION['msg']);
-                    }
+                    echo ("<div class='alert alert-danger alert-dismissible fade show' role='alert'>"
+                        . "<p class='mt-3'>" . $_SESSION['msg'] . "</p>"
+                        . "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>"
+                        . "</div>");
+
+                    unset($_SESSION['msg']);
+                }
                 ?>
 
                 <div class="row d-flex justify-content-center">
@@ -88,6 +88,6 @@
     </div>
 
     <?php
-        include("../include/footer.php");
+    include("../include/footer.php");
     ?>
 </body>

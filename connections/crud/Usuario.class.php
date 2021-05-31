@@ -30,7 +30,9 @@ class Usuario
     function login()
     {
         if (!isset($_SESSION)) {
-            session_start();
+            if (!isset($_SESSION)) {
+                session_start();
+            }
         }
 
         $conn = new Connection;
@@ -64,7 +66,9 @@ class Usuario
     function logout()
     {
         if (!isset($_SESSION)) {
-            session_start();
+            if (!isset($_SESSION)) {
+                session_start();
+            }
         }
         session_destroy();
         header("Location: ../../pages/login.php");

@@ -1,18 +1,20 @@
 <?php
+if (!isset($_SESSION)) {
     if (!isset($_SESSION)) {
-    session_start();
-}
-    $title = "Cadastro";
-    include("../include/header.php");
-    setTitulo($title);
-
-    if(isset($_SESSION['userEmail'])){
-        if($_SESSION['userEmail']){
-            header("Location: ../pages/dashboard.php");
-        }
+        session_start();
     }
-    
-    include("../include/navBar_unlogged.php");
+}
+$title = "Cadastro";
+include("../include/header.php");
+setTitulo($title);
+
+if (isset($_SESSION['userEmail'])) {
+    if ($_SESSION['userEmail']) {
+        header("Location: ../pages/dashboard.php");
+    }
+}
+
+include("../include/navBar_unlogged.php");
 ?>
 
 <div id="container">
@@ -21,33 +23,33 @@
             <h1 class="mb-4">Cadastro</h1>
             <div class="row g-2 col-md">
                 <div class="col-md">
-                    <div class="form-floating mb-3"> 
+                    <div class="form-floating mb-3">
                         <input type="text" name="name" id="nameInput" class="form-control" placeholder="Nome" required>
                         <label for="nameInput" class="floatingLabel">Nome</label>
                         <div class="invalid-feedback">
                             <?php
-                                echo($invalidFeedback);
+                            echo ($invalidFeedback);
                             ?>
                         </div>
                         <div class="valid-feedback">
                             <?php
-                                echo($validFeedback);
+                            echo ($validFeedback);
                             ?>
                         </div>
                     </div>
                 </div>
                 <div class="col-md">
-                    <div class="form-floating mb-3"> 
+                    <div class="form-floating mb-3">
                         <input type="text" name="surname" id="surnameInput" class="form-control" placeholder="Sobrenome" required>
                         <label for="surnameInput" class="floatingLabel">Sobrenome</label>
                         <div class="invalid-feedback">
                             <?php
-                                echo($invalidFeedback);
+                            echo ($invalidFeedback);
                             ?>
                         </div>
                         <div class="valid-feedback">
                             <?php
-                                echo($validFeedback);
+                            echo ($validFeedback);
                             ?>
                         </div>
                     </div>
@@ -55,17 +57,17 @@
             </div>
             <div class="row d-flex justify-content-md-center">
                 <div class="col-md">
-                    <div class="form-floating mb-3"> 
+                    <div class="form-floating mb-3">
                         <input type="email" name="email" id="emailInput" class="form-control" placeholder="nome@exemplo.com" required>
                         <label for="emailInput" class="floatingLabel">E-mail</label>
                         <div class="invalid-feedback">
                             <?php
-                                echo($invalidFeedback);
+                            echo ($invalidFeedback);
                             ?>
                         </div>
                         <div class="valid-feedback">
                             <?php
-                                echo($validFeedback);
+                            echo ($validFeedback);
                             ?>
                         </div>
                     </div>
@@ -78,12 +80,12 @@
                         <label for="passwordInput" class="floatingLabel">Senha</label>
                         <div class="invalid-feedback">
                             <?php
-                                echo($invalidFeedback);
+                            echo ($invalidFeedback);
                             ?>
                         </div>
                         <div class="valid-feedback">
                             <?php
-                                echo($validFeedback);
+                            echo ($validFeedback);
                             ?>
                         </div>
                     </div>
@@ -105,5 +107,5 @@
 </div>
 
 <?php
-    include("../include/footer.php");
+include("../include/footer.php");
 ?>
