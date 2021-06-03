@@ -25,10 +25,19 @@ function totalReceitasDespesas($mes)
     return json_encode($arrayTotal);
 }
 
+$mesAtual = date('m');
+
+if (!isset($_GET['selectMesGraficoGeral'])) {
+    header("Location: ../pages/estatisticas.php?selectMesGraficoGeral=" . $mesAtual);
+    $json = totalReceitasDespesas($mesAtual);
+} else {
+    $json = totalReceitasDespesas($_GET['selectMesGraficoGeral']);
+}
+
 ?>
 
 <script>
-    
+    var mes = <?php echo $_GET['selectMesGraficoGeral'] ?>;
 </script>
 
 <body>
@@ -42,18 +51,15 @@ function totalReceitasDespesas($mes)
 
             <?php
             include_once("../include/navBar_logged.php");
-
-            
-
             ?>
 
-            <div style="height:300px; width:300px" id="contentDashboard">
+            <div style="height:400px; width:350px" id="contentDashboard">
                 <div class="col-md-12">
                     <h3 class="col-12 d-flex justify-content-center">Estatísticas mensais</h3>
-                    <form class="col-12" id="formSelectMes">
+                    <form class="col-12" method="GET" action="../pages/estatisticas.php" id="formSelectMes">
                         <div class="form-group">
-                            <div class="col-md d-flex align-items-center justify-content-between">
-                                <label for="">Filtre por mês:</label>
+                            <div class="col-md mb-3 d-flex align-items-center justify-content-between">
+                                <label for="selectMesGraficoGeral">Filtre por mês:</label>
                                 <div class="col-6">
                                     <select class="form-select" name="selectMesGraficoGeral" id="selectMesGraficoGeral">
                                         <option value="0" selected class="hide"></option>
@@ -75,6 +81,10 @@ function totalReceitasDespesas($mes)
                         </div>
                     </form>
 
+                    <script>
+                        $('#selectMesGraficoGeral').val(mes);
+                    </script>
+
                     <div id="graficoGeral">
 
                     </div>
@@ -87,25 +97,95 @@ function totalReceitasDespesas($mes)
 
 <script>
     $(document).ready(function() {
+        var json = <?php echo $json; ?>;
+        var mesAtual = <?php echo $mesAtual ?>;
 
         // gráficos
-
         var options = {
-            chart: {
-                type: 'bar'
-            },
             series: [{
-                name: 'Valor',
-                data: [34, 35]
+                name: 'Valor total',
+                data: [json['totalDespesas'][0], json['totalReceitas'][0]]
             }],
+            chart: {
+                type: 'bar',
+                width: '100%',
+                height: '100%'
+            },
+            plotOptions: {
+                bar: {
+                    barHeight: '100%',
+                    distributed: true
+                }
+            },
+            colors: ['#CF1C1C', '#239E18'],
             xaxis: {
-                categories: ['Receitas', 'Despesas']
+                categories: ['Despesas', 'Receitas'],
+                labels: {
+                    show: false
+                }
+            },
+            title: {
+                text: 'Mês atual',
+                align: 'center',
+                floating: true
+            },
+            subtitle: {
+                text: 'Valor mensal de receitas e despesas em reais',
+                align: 'center',
+                margin: 15
             }
+        };
+
+        var newOptions = {
+            series: [{
+                data: [json['totalDespesas'][0], json['totalReceitas'][0]]
+            }],
+            chart: {
+                type: 'bar',
+                width: '100%',
+                height: '100%'
+            },
+            plotOptions: {
+                bar: {
+                    barHeight: '100%',
+                    distributed: true
+                }
+            },
+            colors: ['#CF1C1C', '#239E18'],
+            xaxis: {
+                categories: ['Despesas', 'Receitas'],
+                labels: {
+                    show: false
+                }
+            },
+            title: {
+                text: 'Mês de ' + $('#selectMesGraficoGeral :selected').text(),
+                align: 'center',
+                floating: true
+            },
+            subtitle: {
+                text: 'Valor mensal de receitas e despesas em reais',
+                align: 'center',
+                margin: 15
+            }
+        };
+
+        if ($('#selectMesGraficoGeral').val() == mesAtual) {
+            var chart = new ApexCharts(document.querySelector("#graficoGeral"), options);
+            chart.render();
+        } else {
+            var chart = new ApexCharts(document.querySelector("#graficoGeral"), newOptions);
+            chart.render();
         }
 
-        var chart = new ApexCharts(document.querySelector("#graficoGeral"), options);
 
-        chart.render();
+        $('#selectMesGraficoGeral').change(function() {
+
+            $('#formSelectMes').submit();
+
+        });
+
+
     });
 </script>
 
