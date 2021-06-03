@@ -73,7 +73,7 @@ setTitulo($title);
                                         <td><?php echo "<span class='p-success'><strong>" . ($formatter->formatCurrency($valor, 'BRL')) . "</strong></span>"; ?></td>
                                         <td><?php echo $row['nome_conta'] ?></td>
                                         <td>
-                                            <div class="col-12 d-flex justify-content-center">
+                                            <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
                                                 <i class="fas fa-edit"></i>
                                                 <?php echo '<a href="../pages/receitas.php?delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
                                             </div>

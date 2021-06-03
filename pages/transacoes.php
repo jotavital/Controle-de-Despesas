@@ -136,18 +136,20 @@ include_once("../include/footer.php");
 
 <?php
 
-if ($_GET['delete'] != null && $_GET['delete'] == "true") {
+if (isset($_GET['delete'])) {
+    if ($_GET['delete'] != null && $_GET['delete'] == "true") {
 
-    if (isset($_GET['desc_despesa'])) {
+        if (isset($_GET['desc_despesa'])) {
 
-        echo    "<script>$(document).ready(function(){
-                    $('#modalDeleteDespesa').modal('show');
-                });</script>";
-    } elseif (isset($_GET['type']) == "receita") {
+            echo    "<script>$(document).ready(function(){
+                        $('#modalDeleteDespesa').modal('show');
+                    });</script>";
+        } elseif (isset($_GET['type']) == "receita") {
 
-        echo    "<script>$(document).ready(function(){
-                    $('#modalDeleteReceita').modal('show');
-                });</script>";
+            echo    "<script>$(document).ready(function(){
+                        $('#modalDeleteReceita').modal('show');
+                    });</script>";
+        }
     }
 }
 
