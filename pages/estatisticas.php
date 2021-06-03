@@ -1,7 +1,6 @@
 <?php
 
 include_once("../connections/loginVerify.php");
-
 include_once("../connections/Connection.class.php");
 $conn = new Connection;
 $conexao = $conn->conectar();
@@ -9,10 +8,12 @@ $conexao = $conn->conectar();
 $title = "Estatísticas";
 include_once("../include/header.php");
 include_once(__DIR__ . "/../include/header.php");
+setTitulo($title);
 
 include_once(__DIR__ . "/../connections/crud/Receita.class.php");
-
-setTitulo($title);
+$receita = new Receita;
+include_once(__DIR__ . "/../connections/crud/Despesa.class.php");
+$despesa = new Despesa;
 
 ?>
 
@@ -27,11 +28,14 @@ setTitulo($title);
 
             <?php
             include_once("../include/navBar_logged.php");
+
+            $totalReceitas = $receita->selectValorTotalReceitasByMonth(6);
+            $totalDespesas = $despesa->selectValorTotalDespesasByMonth(6);
             ?>
 
             <div style="height:300px; width:300px" id="contentDashboard">
                 <div class="row col-md">
-                    <h3>Este mês</h3>
+                    <h3>Estatísticas mensais</h3>
                     <div id="chart">
                     </div>
                 </div>
@@ -47,16 +51,19 @@ setTitulo($title);
 
 <script>
 
+    var totalReceitas = <?php echo json_encode($totalReceitas); ?>;
+    var totalDespesas = <?php echo json_encode($totalDespesas); ?>;
+
     var options = {
         chart: {
             type: 'bar'
         },
         series: [{
-            name: 'sales',
-            data: [300, 450, 356]
+            name: 'Valor',
+            data: [totalReceitas[0], totalDespesas[0]]
         }],
         xaxis: {
-            categories: ['Receitas', 'Despesas', 'Geral']
+            categories: ['Receitas', 'Despesas']
         }
     }
 

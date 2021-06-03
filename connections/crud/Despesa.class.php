@@ -159,6 +159,27 @@ class Despesa
 
         $conn->desconectar();
     }
+
+    function selectValorTotalDespesasByMonth($mes){
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("SELECT SUM(valor) FROM despesa WHERE month(despesa.data_despesa) = :mes AND despesa.fk_usuario = :userId");
+        $stm->bindValue(":mes", $mes);
+        $stm->bindValue(":userId", $_SESSION['userId']);
+
+        try {
+            $stm->execute();
+            $result = $stm->fetch();
+
+            return $result;
+        } catch (PDOException $e) {
+            $e->getMessage();
+            return null;
+        }
+        
+        $conn->desconectar();
+    }
 }
 
 if (isset($_POST['deleteDespesa'])) {

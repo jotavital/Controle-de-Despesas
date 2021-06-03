@@ -4,6 +4,10 @@ include_once(__DIR__ . "/../Connection.class.php");
 include_once(__DIR__ . "/../loginVerify.php");
 include_once(__DIR__ . "/../crud/Conta.class.php");
 
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 class Receita
 {
 
@@ -49,9 +53,7 @@ class Receita
 
     function insertCategoriaReceita()
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
+        
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -149,8 +151,25 @@ class Receita
         $conn->desconectar();
     }
 
-    function selectReceitasByMonth($mes){
-        return "oks";
+    function selectValorTotalReceitasByMonth($mes){
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("SELECT SUM(valor) FROM receita WHERE month(receita.data_receita) = :mes AND receita.fk_usuario = :userId");
+        $stm->bindValue(":mes", $mes);
+        $stm->bindValue(":userId", $_SESSION['userId']);
+
+        try {
+            $stm->execute();
+            $result = $stm->fetch();
+
+            return $result;
+        } catch (PDOException $e) {
+            $e->getMessage();
+            return null;
+        }
+        
+        $conn->desconectar();
     }
 }
 
