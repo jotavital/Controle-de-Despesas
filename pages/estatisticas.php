@@ -11,11 +11,25 @@ include_once(__DIR__ . "/../include/header.php");
 setTitulo($title);
 
 include_once(__DIR__ . "/../connections/crud/Receita.class.php");
-$receita = new Receita;
 include_once(__DIR__ . "/../connections/crud/Despesa.class.php");
-$despesa = new Despesa;
+
+
+function totalReceitasDespesas($mes)
+{
+    $receita = new Receita;
+    $despesa = new Despesa;
+    $totalReceitas = $receita->selectValorTotalReceitasByMonth($mes);
+    $totalDespesas = $despesa->selectValorTotalDespesasByMonth($mes);
+    $arrayTotal = array('totalDespesas' => $totalDespesas, 'totalReceitas' => $totalReceitas);
+
+    return json_encode($arrayTotal);
+}
 
 ?>
+
+<script>
+    
+</script>
 
 <body>
     <div id="containerDashboard">
@@ -29,18 +43,40 @@ $despesa = new Despesa;
             <?php
             include_once("../include/navBar_logged.php");
 
-            $totalReceitas = $receita->selectValorTotalReceitasByMonth(6);
-            $totalDespesas = $despesa->selectValorTotalDespesasByMonth(6);
+            
+
             ?>
 
             <div style="height:300px; width:300px" id="contentDashboard">
-                <div class="row col-md">
-                    <h3>Estatísticas mensais</h3>
-                    <div id="chart">
-                    </div>
-                </div>
-                <div class="row col-md">
-                    <div id="chart2">
+                <div class="col-md-12">
+                    <h3 class="col-12 d-flex justify-content-center">Estatísticas mensais</h3>
+                    <form class="col-12" id="formSelectMes">
+                        <div class="form-group">
+                            <div class="col-md d-flex align-items-center justify-content-between">
+                                <label for="">Filtre por mês:</label>
+                                <div class="col-6">
+                                    <select class="form-select" name="selectMesGraficoGeral" id="selectMesGraficoGeral">
+                                        <option value="0" selected class="hide"></option>
+                                        <option value="1">Janeiro</option>
+                                        <option value="2">Fevereiro</option>
+                                        <option value="3">Março</option>
+                                        <option value="4">Abril</option>
+                                        <option value="5">Maio</option>
+                                        <option value="6">Junho</option>
+                                        <option value="7">Julho</option>
+                                        <option value="8">Agosto</option>
+                                        <option value="9">Setembro</option>
+                                        <option value="10">Outubro</option>
+                                        <option value="11">Novembro</option>
+                                        <option value="12">Dezembro</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="graficoGeral">
+
                     </div>
                 </div>
             </div>
@@ -50,26 +86,27 @@ $despesa = new Despesa;
 </body>
 
 <script>
+    $(document).ready(function() {
 
-    var totalReceitas = <?php echo json_encode($totalReceitas); ?>;
-    var totalDespesas = <?php echo json_encode($totalDespesas); ?>;
+        // gráficos
 
-    var options = {
-        chart: {
-            type: 'bar'
-        },
-        series: [{
-            name: 'Valor',
-            data: [totalReceitas[0], totalDespesas[0]]
-        }],
-        xaxis: {
-            categories: ['Receitas', 'Despesas']
+        var options = {
+            chart: {
+                type: 'bar'
+            },
+            series: [{
+                name: 'Valor',
+                data: [34, 35]
+            }],
+            xaxis: {
+                categories: ['Receitas', 'Despesas']
+            }
         }
-    }
 
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
+        var chart = new ApexCharts(document.querySelector("#graficoGeral"), options);
 
-    chart.render();
+        chart.render();
+    });
 </script>
 
 <?php
