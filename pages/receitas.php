@@ -99,9 +99,11 @@ setTitulo($title);
 include_once(__DIR__ . "/../include/footer.php");
 
 if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
-    echo    "<script>$(document).ready(function(){
-                $('#modalDeleteReceita').modal('show');
-            });</script>";
+    echo    "<script>
+                $(document).ready(function(){
+                    $('#modalDeleteReceita').modal('show');
+                });
+            </script>";
 }
 
 ?>

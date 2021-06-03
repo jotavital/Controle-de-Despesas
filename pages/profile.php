@@ -10,6 +10,7 @@ $title = "Seu Perfil";
 include_once(__DIR__ . "/../include/header.php");
 setTitulo($title);
 
+include_once(__DIR__ . "/../pages/modals/modalEditNomeSobrenome.php");
 ?>
 
 <body>
@@ -51,7 +52,9 @@ setTitulo($title);
                         <div class="row">
                             <div class="d-flex justify-content-center align-items-center">
                                 <h5><?php echo ($resultado['nome'] . " " . $resultado['sobrenome']); ?></h5>
-                                <i class="fas fa-edit"></i>
+                                <div class="editIcon">
+                                    <?php echo '<a href="../pages/profile.php?nome=' . $resultado['nome'] . '&sobrenome=' . $resultado['sobrenome']  . '"' . 'id="btnEditNomeSobrenome"><i class="fas fa-edit"></i></a>' ?>
+                                </div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center">
                                 <p>Membro desde: <?php echo ($data_cadastro_formatada); ?></p>
@@ -80,4 +83,22 @@ setTitulo($title);
 
 <?php
 include_once(__DIR__ . "/../include/footer.php");
+
+if (isset($_GET['nome']) && isset($_GET['sobrenome'])) {
+    echo "  <script>
+                $(document).ready(function(){
+                    $('#modalEditNomeSobrenome').modal('show');
+                });
+            </script>";
+}
+
 ?>
+
+<script>
+    $(document).ready(function() {
+
+        $('#modalEditNomeSobrenome').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
+    });
+</script>

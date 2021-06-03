@@ -29,10 +29,9 @@ class Usuario
 
     function login()
     {
+
         if (!isset($_SESSION)) {
-            if (!isset($_SESSION)) {
-                session_start();
-            }
+            session_start();
         }
 
         $conn = new Connection;
@@ -65,13 +64,34 @@ class Usuario
 
     function logout()
     {
+
         if (!isset($_SESSION)) {
-            if (!isset($_SESSION)) {
-                session_start();
-            }
+            session_start();
         }
         session_destroy();
         header("Location: ../../pages/login.php");
+    }
+
+    function updateNomeSobrenome($novoNome, $novoSobrenome)
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("UPDATE usuario SET nome = :novoNome, sobrenome = :novoSobrenome WHERE usuario.id = :userId");
+        $stm->bindValue(":novoNome", $novoNome);
+        $stm->bindValue(":novoSobrenome", $novoSobrenome);
+        $stm->bindValue(":userId", $_SESSION['userId']);
+
+        try {
+            $stm->execute();
+            header("Location: ../../pages/profile.php");
+        } catch (PDOException $e) {
+            $e->getMessage();
+        }
     }
 }
 
@@ -88,4 +108,9 @@ if (isset($_POST['registerUser'])) {
 if (isset($_GET['logout'])) {
     $usuario = new Usuario;
     $usuario->logout();
+}
+
+if (isset($_POST['editNomeSobrenome'])) {
+    $usuario = new Usuario;
+    $usuario->updateNomeSobrenome($_POST['inputNovoNome'], $_POST['inputNovoSobrenome']);
 }
