@@ -11,6 +11,7 @@ include_once(__DIR__ . "/../include/header.php");
 setTitulo($title);
 
 include_once(__DIR__ . "/../pages/modals/modalEditNomeSobrenome.php");
+include_once(__DIR__ . "/../pages/modals/modalEditSenha.php");
 ?>
 
 <body>
@@ -53,7 +54,7 @@ include_once(__DIR__ . "/../pages/modals/modalEditNomeSobrenome.php");
                             <div class="d-flex justify-content-center align-items-center">
                                 <h5><?php echo ($resultado['nome'] . " " . $resultado['sobrenome']); ?></h5>
                                 <div class="editIcon">
-                                    <?php echo '<a href="../pages/profile.php?nome=' . $resultado['nome'] . '&sobrenome=' . $resultado['sobrenome']  . '"' . 'id="btnEditNomeSobrenome"><i class="fas fa-edit"></i></a>' ?>
+                                    <?php echo '<a href="../pages/profile.php?editNomeSobrenome=true&nome=' . $resultado['nome'] . '&sobrenome=' . $resultado['sobrenome']  . '"' . 'id="btnEditNomeSobrenome"><i class="fas fa-edit"></i></a>' ?>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center">
@@ -69,7 +70,9 @@ include_once(__DIR__ . "/../pages/modals/modalEditNomeSobrenome.php");
                         <div class="col-md-4 d-flex align-items-center">
                             <label>Senha:</label>
                             <input class="form-control" type="password" value=<?php echo ($resultado['email']); ?> readonly>
-                            <i class="fas fa-edit"></i>
+                            <div class="editIcon">
+                                <?php echo '<a href="../pages/profile.php?editSenha=true" id="btnEditSenha"><i class="fas fa-edit"></i></a>' ?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md d-flex justify-content-center">
@@ -84,10 +87,18 @@ include_once(__DIR__ . "/../pages/modals/modalEditNomeSobrenome.php");
 <?php
 include_once(__DIR__ . "/../include/footer.php");
 
-if (isset($_GET['nome']) && isset($_GET['sobrenome'])) {
+if (isset($_GET['editNomeSobrenome']) && $_GET['editNomeSobrenome'] == 'true') {
     echo "  <script>
                 $(document).ready(function(){
                     $('#modalEditNomeSobrenome').modal('show');
+                });
+            </script>";
+}
+
+if (isset($_GET['editSenha']) && $_GET['editSenha'] == 'true') {
+    echo "  <script>
+                $(document).ready(function(){
+                    $('#modalEditSenha').modal('show');
                 });
             </script>";
 }
@@ -98,6 +109,10 @@ if (isset($_GET['nome']) && isset($_GET['sobrenome'])) {
     $(document).ready(function() {
 
         $('#modalEditNomeSobrenome').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
+
+        $('#modalEditSenha').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
     });

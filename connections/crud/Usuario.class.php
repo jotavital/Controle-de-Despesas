@@ -21,7 +21,7 @@ class Usuario
             $stm->execute();
             header("Location:  ../../pages/login.php");
         } catch (PDOException $e) {
-            $e->getMessage();
+            echo $e->getMessage();
         }
 
         $conn->desconectar();
@@ -90,7 +90,52 @@ class Usuario
             $stm->execute();
             header("Location: ../../pages/profile.php");
         } catch (PDOException $e) {
-            $e->getMessage();
+            echo $e->getMessage();
+        }
+    }
+
+    function updateSenha($senhaAtual, $novaSenha)
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("SELECT senha FROM usuario WHERE usuario.id = :userId AND usuario.senha = md5(:senhaAtual)");
+        $stm->bindValue(":userId", $_SESSION['userId']);
+        $stm->bindValue(":senhaAtual", $senhaAtual);
+
+        try {
+            $stm->execute();
+            $result = $stm->fetch();
+
+            if ($result != null) {
+
+                if ($result[0] == md5($novaSenha)) {
+                    $e = new Exception("A nova senha não deve ser igual à antiga");
+                    echo $e->getMessage();
+                    return false;
+                } else {
+                    $stm2 = $conexao->prepare("UPDATE usuario SET senha = md5(:novaSenha) WHERE usuario.id = :userId");
+                    $stm2->bindValue(":novaSenha", $novaSenha);
+                    $stm2->bindValue(":userId", $_SESSION['userId']);
+
+                    try {
+                        $stm2->execute();
+                        echo "Senha alterada com sucesso!";
+                    } catch (PDOException $e) {
+                        echo "Erro ao alterar senha: " . $e->getMessage();
+                    }
+                }
+            } else {
+                $e = new Exception("A senha atual está incorreta");
+                echo $e->getMessage();
+                return false;
+            }
+        } catch (PDOException $e) {
+            echo "Erro ao alterar senha: " . $e->getMessage();
         }
     }
 }
@@ -98,6 +143,11 @@ class Usuario
 if (isset($_POST['loginUser'])) {
     $usuario = new Usuario;
     $usuario->login();
+}
+
+if (isset($_POST['editSenha'])) {
+    $usuario = new Usuario;
+    $usuario->updateSenha($_POST['inputSenhaAtual'], $_POST['inputNovaSenha']);
 }
 
 if (isset($_POST['registerUser'])) {

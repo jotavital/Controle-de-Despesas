@@ -77,7 +77,7 @@ class Despesa
             $conta = new Conta;
             $conta->subtrairValorDespesa($_POST['contaSelect'], $_POST['valorInput']);
         } catch (PDOException $e) {
-            $_SESSION['msg'] = "Erro ao criar despesa! " . $e->getMessage();
+            echo $e->getMessage();
         }
 
         $conexao = null;
@@ -94,7 +94,7 @@ class Despesa
 
             $stm->execute();
         } catch (PDOException $e) {
-            $e->getMessage();
+            echo $e->getMessage();
         }
 
         $conn->desconectar();
@@ -151,10 +151,10 @@ class Despesa
             try {
                 $stmDespesa->execute();
             } catch (PDOException $e) {
-                $e->getMessage();
+                echo $e->getMessage();
             }
         } catch (PDOException $e) {
-            $e->getMessage();
+            echo $e->getMessage();
         }
 
         $conn->desconectar();
@@ -174,7 +174,7 @@ class Despesa
 
             return $result;
         } catch (PDOException $e) {
-            $e->getMessage();
+            echo $e->getMessage();
             return null;
         }
         

@@ -140,10 +140,10 @@ class Receita
             try {
                 $stmReceita->execute();
             } catch (PDOException $e) {
-                $e->getMessage();
+                echo $e->getMessage();
             }
         } catch (PDOException $e) {
-            $e->getMessage();
+            echo $e->getMessage();
         }
 
 
@@ -165,7 +165,7 @@ class Receita
 
             return $result;
         } catch (PDOException $e) {
-            $e->getMessage();
+            echo $e->getMessage();
             return null;
         }
         

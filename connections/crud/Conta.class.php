@@ -68,7 +68,7 @@ class Conta
         try {
             $stm->execute();
         } catch (PDOException $e) {
-            $e->getMessage();
+            echo $e->getMessage();
         }
     }
 
@@ -84,7 +84,7 @@ class Conta
         try {
             $stm->execute();
         } catch (PDOException $e) {
-            $e->getMessage();
+            echo $e->getMessage();
         }
     }
 
@@ -100,7 +100,7 @@ class Conta
         try {
             $stm->execute();
         } catch (PDOException $e) {
-            $e->getMessage();
+            echo $e->getMessage();
         }
     }
 
@@ -116,7 +116,7 @@ class Conta
         try {
             $stm->execute();
         } catch (PDOException $e) {
-            $e->getMessage();
+            echo $e->getMessage();
         }
     }
 }
