@@ -1,6 +1,6 @@
 <?php
 
-include_once("../Connection.class.php");
+include_once(__DIR__ . "/../Connection.class.php");
 
 
 class Usuario

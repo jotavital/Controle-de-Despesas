@@ -1,7 +1,7 @@
 <?php
 
-include_once("modalAddConta.php");
-include_once("modalAddCategoriaDespesa.php");
+include_once(__DIR__ . "/modalAddConta.php");
+include_once(__DIR__ . "/modalAddCategoriaDespesa.php");
 
 ?>
 

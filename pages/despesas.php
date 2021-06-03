@@ -1,15 +1,15 @@
 <?php
 
-include_once("../connections/loginVerify.php");
+include_once(__DIR__ . "/../connections/loginVerify.php");
 
-include_once("../connections/Connection.class.php");
+include_once(__DIR__ . "/../connections/Connection.class.php");
 $conn = new Connection;
 $conexao = $conn->conectar();
 
 $title = "Despesas";
-include_once("../include/header.php");
-include_once("../pages/modals/modalAddDespesa.php");
-include_once("../pages/modals/modalDeleteDespesa.php");
+include_once(__DIR__ . "/../include/header.php");
+include_once(__DIR__ . "/modals/modalAddDespesa.php");
+include_once(__DIR__ . "/modals/modalDeleteDespesa.php");
 setTitulo($title);
 
 ?>
@@ -18,13 +18,13 @@ setTitulo($title);
     <div id="containerDashboard">
 
         <?php
-        include_once("../include/sideBar.php");
+        include_once(__DIR__ . "/../include/sideBar.php");
         ?>
 
         <main>
 
             <?php
-            include_once("../include/navBar_logged.php");
+            include_once(__DIR__ . "/../include/navBar_logged.php");
             ?>
 
             <div id="contentDashboard">
@@ -101,7 +101,7 @@ setTitulo($title);
 </body>
 
 <?php
-include_once("../include/footer.php");
+include_once(__DIR__ . "/../include/footer.php");
 ?>
 
 <?php

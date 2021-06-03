@@ -1,8 +1,8 @@
 <?php
 
-include_once("../Connection.class.php");
-include_once("../loginVerify.php");
-include_once("../crud/Conta.class.php");
+include_once(__DIR__ . "/../Connection.class.php");
+include_once(__DIR__ . "/../loginVerify.php");
+include_once(__DIR__ . "/../crud/Conta.class.php");
 
 class Receita
 {
@@ -147,6 +147,10 @@ class Receita
 
 
         $conn->desconectar();
+    }
+
+    function selectReceitasByMonth($mes){
+        return "oks";
     }
 }
 

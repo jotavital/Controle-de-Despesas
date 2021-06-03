@@ -1,7 +1,7 @@
 <?php
 
-include_once("../pages/modals/modalAddConta.php");
-include_once("modalAddCategoriaReceita.php");
+include_once(__DIR__ . "/modalAddConta.php");
+include_once(__DIR__ . "/modalAddCategoriaReceita.php");
 
 ?>
 

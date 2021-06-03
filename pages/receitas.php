@@ -1,15 +1,15 @@
 <?php
 
-include_once("../connections/loginVerify.php");
+include_once(__DIR__ . "/../connections/loginVerify.php");
 
-include_once("../connections/Connection.class.php");
+include_once(__DIR__ . "/../connections/Connection.class.php");
 $conn = new Connection;
 $conexao = $conn->conectar();
 
 $title = "Receitas";
-include_once("../include/header.php");
-include_once("../pages/modals/modalAddReceita.php");
-include_once("../pages/modals/modalDeleteReceita.php");
+include_once(__DIR__ . "/../include/header.php");
+include_once(__DIR__ . "/modals/modalAddReceita.php");
+include_once(__DIR__ . "/modals/modalDeleteReceita.php");
 setTitulo($title);
 
 ?>
@@ -18,13 +18,13 @@ setTitulo($title);
     <div id="containerDashboard">
 
         <?php
-        include_once("../include/sideBar.php");
+        include_once(__DIR__ . "/../include/sideBar.php");
         ?>
 
         <main>
 
             <?php
-            include_once("../include/navBar_logged.php");
+            include_once(__DIR__ . "/../include/navBar_logged.php");
             ?>
 
             <div id="contentDashboard">
@@ -96,7 +96,7 @@ setTitulo($title);
 </body>
 
 <?php
-include_once("../include/footer.php");
+include_once(__DIR__ . "/../include/footer.php");
 
 if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
     echo    "<script>$(document).ready(function(){

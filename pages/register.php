@@ -5,7 +5,7 @@ if (!isset($_SESSION)) {
     }
 }
 $title = "Cadastro";
-include_once("../include/header.php");
+include_once(__DIR__ . "/../include/header.php");
 setTitulo($title);
 
 if (isset($_SESSION['userEmail'])) {
@@ -14,7 +14,7 @@ if (isset($_SESSION['userEmail'])) {
     }
 }
 
-include_once("../include/navBar_unlogged.php");
+include_once(__DIR__ . "/../include/navBar_unlogged.php");
 ?>
 
 <div id="container">
@@ -107,5 +107,5 @@ include_once("../include/navBar_unlogged.php");
 </div>
 
 <?php
-include_once("../include/footer.php");
+include_once(__DIR__ . "/../include/footer.php");
 ?>
