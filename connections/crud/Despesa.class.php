@@ -180,6 +180,17 @@ class Despesa
         
         $conn->desconectar();
     }
+
+    function deletarTodasDespesasUsuario(){
+        $conta = new Conta;
+        $despesa = new Despesa;
+
+        $todasContasUsuario = $conta->selectTodasContasUsuario();
+
+        foreach ($todasContasUsuario as $idContaUsuario) {
+            $despesa->deletarTodasDespesasConta($idContaUsuario['id']);
+        }
+    }
 }
 
 if (isset($_POST['deleteDespesa'])) {

@@ -171,6 +171,17 @@ class Receita
         
         $conn->desconectar();
     }
+
+    function deletarTodasReceitasUsuario(){
+        $conta = new Conta;
+        $receita = new Receita;
+
+        $todasContasUsuario = $conta->selectTodasContasUsuario();
+
+        foreach ($todasContasUsuario as $idContaUsuario) {
+            $receita->deletarTodasReceitasConta($idContaUsuario['id']);
+        }
+    }
 }
 
 if (isset($_POST['deleteReceita'])) {

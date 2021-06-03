@@ -12,6 +12,7 @@ setTitulo($title);
 
 include_once(__DIR__ . "/../pages/modals/modalEditNomeSobrenome.php");
 include_once(__DIR__ . "/../pages/modals/modalEditSenha.php");
+include_once(__DIR__ . "/../pages/modals/modalDeleteUsuario.php");
 ?>
 
 <body>
@@ -75,6 +76,9 @@ include_once(__DIR__ . "/../pages/modals/modalEditSenha.php");
                             </div>
                         </div>
                     </div>
+                    <div class="mb-4 d-flex justify-content-center align-items-center">
+                        <?php echo '<a href="../pages/profile.php?excluirUsuario=true" id="btnExcluirConta">Excluir minha conta</a>' ?>
+                    </div>
                     <div class="col-md d-flex justify-content-center">
                         <a class="btn btn-danger col-1.5" href="../connections/crud/Usuario.class.php?logout" role="button">Logout</a>
                     </div>
@@ -103,6 +107,14 @@ if (isset($_GET['editSenha']) && $_GET['editSenha'] == 'true') {
             </script>";
 }
 
+if (isset($_GET['excluirUsuario']) && $_GET['excluirUsuario'] == 'true') {
+    echo "  <script>
+                $(document).ready(function(){
+                    $('#modalDeleteUsuario').modal('show');
+                });
+            </script>";
+}
+
 ?>
 
 <script>
@@ -113,6 +125,10 @@ if (isset($_GET['editSenha']) && $_GET['editSenha'] == 'true') {
         });
 
         $('#modalEditSenha').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
+
+        $('#modalDeleteUsuario').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
     });

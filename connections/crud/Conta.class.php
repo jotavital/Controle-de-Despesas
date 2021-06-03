@@ -119,6 +119,36 @@ class Conta
             echo $e->getMessage();
         }
     }
+
+    function selectTodasContasUsuario(){
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("SELECT id FROM conta WHERE fk_usuario = :userId");
+        $stm->bindValue(":userId", $_SESSION['userId']);
+
+        try {
+            $stm->execute();
+            $result = $stm->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    function deletarTodasContasUsuario(){
+        $conta = new Conta;
+
+        $result = $conta->selectTodasContasUsuario();
+
+        foreach ($result as $idConta) {
+            $conta->deletarConta($idConta['id']);
+        }
+    }
 }
 
 if (isset($_POST['deleteConta'])) {

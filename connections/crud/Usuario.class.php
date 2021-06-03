@@ -1,7 +1,10 @@
 <?php
 
 include_once(__DIR__ . "/../Connection.class.php");
-
+include_once(__DIR__ . "/../crud/Despesa.class.php");
+include_once(__DIR__ . "/../crud/Receita.class.php");
+include_once(__DIR__ . "/../crud/Conta.class.php");
+include_once(__DIR__ . "/../crud/Categoria.class.php");
 
 class Usuario
 {
@@ -138,11 +141,47 @@ class Usuario
             echo "Erro ao alterar senha: " . $e->getMessage();
         }
     }
+
+    function deleteUsuario()
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("DELETE FROM usuario WHERE usuario.id = :userId");
+        $stm->bindValue(":userId", $_SESSION['userId']);
+
+        try {
+            $receita = new Receita;
+            $despesa = new Despesa;
+            $conta = new Conta;
+            $categoria = new Categoria;
+
+            $receita->deletarTodasReceitasUsuario();
+            $despesa->deletarTodasDespesasUsuario();
+            $conta->deletarTodasContasUsuario();
+            $categoria->deletarTodasCategoriasUsuario();
+
+            $stm->execute();
+            echo "Usuário deletado com sucesso!";
+            session_destroy();
+        } catch (PDOException $e) {
+            echo "Erro ao deletar usuário: " . $e->getMessage();
+        }
+    }
 }
 
 if (isset($_POST['loginUser'])) {
     $usuario = new Usuario;
     $usuario->login();
+}
+
+if (isset($_POST['deleteUsuario'])) {
+    $usuario = new Usuario;
+    $usuario->deleteUsuario();
 }
 
 if (isset($_POST['editSenha'])) {
