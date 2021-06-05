@@ -42,12 +42,12 @@ include_once(__DIR__ . "/modalAddCategoriaReceita.php");
                                         $sql->bindValue(':userId', $userId);
                                         $sql->execute();
                                         $data = $sql->fetchAll();
-                                        
+
 
 
                                         foreach ($data as $row) {
                                         ?>
-                                            <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_conta'] . " - " . $formatter->formatCurrency($row['saldo_atual'], 'BRL') ?></option>
+                                            <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_conta'] . " - " . $functions->formatarReal($row['saldo_atual']) ?></option>
                                         <?php
                                         }
 
@@ -97,6 +97,10 @@ include_once(__DIR__ . "/modalAddCategoriaReceita.php");
 </div>
 
 <script>
+    $("#categoriasReceitaSelect option").filter(function() {
+        return $(this).text() == 'Outros';
+    }).prop('selected', true);
+
     $('#formAddReceitas').submit(function() {
 
         var x = $('#valorInput').val();
@@ -107,14 +111,14 @@ include_once(__DIR__ . "/modalAddCategoriaReceita.php");
         var dados = new FormData(this);
 
         $.ajax({
-            url: "../connections/crud/Receita.class.php",
+            url: "../connections/classes/Receita.class.php",
             method: "POST",
             data: dados,
             processData: false,
             contentType: false,
             success: function(msg) {
                 alert("Receita cadastrada com sucesso!");
-                window.location.href = "../pages/receitas.php";
+                window.location.reload();
             },
             error: function(msg) {
                 alert("Erro ao cadastrar a receita!");

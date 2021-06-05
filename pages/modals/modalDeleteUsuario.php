@@ -25,14 +25,13 @@
         var dados = new FormData(this);
 
         $.ajax({
-            url: '../connections/crud/Usuario.class.php',
+            url: '../connections/classes/Usuario.class.php',
             method: 'POST',
             data: dados,
             processData: false,
             contentType: false,
             success: function(msg) {
-                alert(msg);
-                location.reload();
+                window.location.replace("../pages/register.php");
             },
             error: function(msg) {
                 alert(msg);

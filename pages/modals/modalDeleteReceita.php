@@ -7,12 +7,12 @@
             </div>
             <div class="modal-body">
                 <p>Confirme a exclusão desta receita:</p>
-                <?php echo "<p>" . $_GET['desc_receita'] . " com valor de <span class='p-success'><strong>" . $formatter->formatCurrency($_GET['valor'], 'BRL') . "</strong></span></p>"; ?>
+                <?php echo "<p>" . $_GET['desc_receita'] . " com valor de <span class='p-success'><strong>" . $functions->formatarReal($_GET['valor']) . "</strong></span></p>"; ?>
                 <p class="p-warning"><strong>ATENÇÃO! A exclusão desta receita irá refletir no saldo atual da conta à qual ela pertence!</strong></p>
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-                <form method="POST" action="../../connections/crud/Receita.class.php">
+                <form method="POST" action="../../connections/classes/Receita.class.php">
                     <input type="text" name="idReceita" value="<?php echo $_GET['id'] ?>" class="hide">
                     <input type="text" name="valorReceita" value="<?php echo $_GET['valor'] ?>" class="hide">
                     <input type="text" name="idConta" value="<?php echo $_GET['id_conta'] ?>" class="hide">

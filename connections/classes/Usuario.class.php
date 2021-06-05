@@ -1,10 +1,10 @@
 <?php
 
 include_once(__DIR__ . "/../Connection.class.php");
-include_once(__DIR__ . "/../crud/Despesa.class.php");
-include_once(__DIR__ . "/../crud/Receita.class.php");
-include_once(__DIR__ . "/../crud/Conta.class.php");
-include_once(__DIR__ . "/../crud/Categoria.class.php");
+include_once(__DIR__ . "/../classes/Despesa.class.php");
+include_once(__DIR__ . "/../classes/Receita.class.php");
+include_once(__DIR__ . "/../classes/Conta.class.php");
+include_once(__DIR__ . "/../classes/Categoria.class.php");
 
 class Usuario
 {

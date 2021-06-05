@@ -30,14 +30,14 @@
         var dados = new FormData(this);
 
         $.ajax({
-            url: '../connections/crud/Despesa.class.php',
+            url: '../connections/classes/Despesa.class.php',
             method: 'POST',
             data: dados,
             processData: false,
             contentType: false,
             success: function(msg) {
                 alert("Categoria cadastrada com sucesso! " + msg);
-                window.location.href = "../pages/despesas.php";
+                window.location.reload();
             },
             error: function(msg) {
                 alert("Erro ao cadastrar a categoria!" + msg);

@@ -20,8 +20,8 @@ h4 {
     margin: 0;
 }
 
-div.divBtnSuperiores .btn-circle{
-    margin-right: 10px;
+.cardsContainer .card{
+    min-height: 170px !important;
 }
 
 .btn-circle{

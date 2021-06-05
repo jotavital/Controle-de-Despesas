@@ -74,7 +74,7 @@ setTitulo($title);
                                             <td><?php echo $row['descricao_despesa'] ?></td>
                                             <td><?php echo $data_despesa_formatada ?></td>
                                             <td><?php echo $data_vencimento_formatada ?></td>
-                                            <td><?php echo "<span class='p-danger'><strong>" . ($formatter->formatCurrency($valor, 'BRL')) . "</strong></span>"; ?></td>
+                                            <td><?php echo "<span class='p-danger'><strong>" . $functions->formatarReal($valor) . "</strong></span>"; ?></td>
                                             <td><?php echo $row['nome_conta'] ?></td>
                                             <td>
                                                 <div class="actionIcons col-12 d-flex align-items-center justify-content-center">

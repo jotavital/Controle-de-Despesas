@@ -46,6 +46,7 @@
 </div>
 
 <script>
+
     $('#formAddContas').submit(function() {
         var x = $('#saldoInput').val();
         x = x.replace(/[.]/gim, "");
@@ -54,7 +55,7 @@
         var dados = jQuery(this).serialize();
 
         $.ajax({
-            url: '../connections/crud/Conta.class.php',
+            url: '../connections/classes/Conta.class.php',
             method: 'POST',
             data: dados,
             success: function(msg) {

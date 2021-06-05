@@ -2,7 +2,7 @@
 
 include_once(__DIR__ . "/../Connection.class.php");
 include_once(__DIR__ . "/../loginVerify.php");
-include_once(__DIR__ . "/../crud/Conta.class.php");
+include_once(__DIR__ . "/../classes/Conta.class.php");
 
 if (!isset($_SESSION)) {
     session_start();

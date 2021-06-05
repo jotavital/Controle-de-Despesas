@@ -47,14 +47,14 @@
             } else {
 
                 $.ajax({
-                    url: '../connections/crud/Usuario.class.php',
+                    url: '../connections/classes/Usuario.class.php',
                     method: 'POST',
                     data: dados,
                     processData: false,
                     contentType: false,
                     success: function(msg) {
                         alert(msg);
-                        window.location.href = "../pages/profile.php";
+                        window.location.reload();
                     },
                     error: function(msg) {
                         alert(msg);

@@ -7,7 +7,12 @@ function setTitulo($title)
 
 $invalidFeedback = "Campo obrigatório!";
 $validFeedback = "Muito bom!";
-$formatter = new NumberFormatter('pt_BR',  NumberFormatter::CURRENCY);
+
+$mesAtual = date('m');
+
+include_once(__DIR__ . "/../connections/functions/Functions.class.php");
+
+$functions = new Functions;
 ?>
 
 <!DOCTYPE html>

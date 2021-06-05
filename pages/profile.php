@@ -80,7 +80,7 @@ include_once(__DIR__ . "/../pages/modals/modalDeleteUsuario.php");
                         <?php echo '<a href="../pages/profile.php?excluirUsuario=true" id="btnExcluirConta">Excluir minha conta</a>' ?>
                     </div>
                     <div class="col-md d-flex justify-content-center">
-                        <a class="btn btn-danger col-1.5" href="../connections/crud/Usuario.class.php?logout" role="button">Logout</a>
+                        <a class="btn btn-danger col-1.5" href="../connections/classes/Usuario.class.php?logout" role="button">Logout</a>
                     </div>
                 </div>
             </div>

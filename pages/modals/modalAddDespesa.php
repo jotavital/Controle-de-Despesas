@@ -53,7 +53,7 @@ include_once(__DIR__ . "/modalAddCategoriaDespesa.php");
 
                                         foreach ($data as $row) {
                                         ?>
-                                            <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_conta'] . " - " . $formatter->formatCurrency($row['saldo_atual'], 'BRL') ?></option>
+                                            <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_conta'] . " - " . $functions->formatarReal($row['saldo_atual']) ?></option>
                                         <?php
                                         }
 
@@ -102,6 +102,10 @@ include_once(__DIR__ . "/modalAddCategoriaDespesa.php");
 </div>
 
 <script>
+    $("#categoriasSelect option").filter(function() {
+        return $(this).text() == 'Outros';
+    }).prop('selected', true);
+
     $('#formAddDespesas').submit(function() {
         var x = $('#valorInput').val();
         x = x.replace(/[.]/gim, "");
@@ -110,14 +114,14 @@ include_once(__DIR__ . "/modalAddCategoriaDespesa.php");
         var dados = new FormData(this);
 
         $.ajax({
-            url: '../connections/crud/Despesa.class.php',
+            url: '../connections/classes/Despesa.class.php',
             method: 'POST',
             data: dados,
             processData: false,
             contentType: false,
             success: function(msg) {
                 alert("Despesa cadastrada com sucesso!" + msg);
-                window.location.href = "../pages/despesas.php";
+                window.location.reload();
             },
             error: function(msg) {
                 alert("Erro ao cadastrar a despesa!");

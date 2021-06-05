@@ -13,6 +13,29 @@ include_once(__DIR__ . "/../pages/modals/modalAddDespesa.php");
 include_once(__DIR__ . "/../pages/modals/modalAddReceita.php");
 setTitulo($title);
 
+include_once(__DIR__ . "/../connections/classes/Despesa.class.php");
+include_once(__DIR__ . "/../connections/classes/Receita.class.php");
+include_once(__DIR__ . "/../connections/classes/Conta.class.php");
+
+$despesa = new Despesa;
+$receita = new Receita;
+$conta = new Conta;
+
+$totalDespesasMes = $despesa->selectValorTotalDespesasByMonth($mesAtual);
+$totalReceitasMes = $receita->selectValorTotalReceitasByMonth($mesAtual);
+
+
+
+if ($totalReceitasMes[0] == null) {
+    $totalReceitasMes[0] = 0;
+}
+
+if ($totalDespesasMes[0] == null) {
+    $totalDespesasMes[0] = 0;
+}
+
+$saldoTotal = $conta->selectTotalSaldoTodasContas();
+
 ?>
 
 <body>
@@ -36,7 +59,10 @@ setTitulo($title);
                                     <h5 class="card-title">Despesas</h5>
                                 </div>
                                 <div class="cardContent d-flex justify-content-center">
-                                    <p>conteudo</p>
+                                    <p id="avisoDespesa"></p>
+                                    <div id="graficoDespesas">
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +86,10 @@ setTitulo($title);
                                     <h5 class="card-title">Receitas</h5>
                                 </div>
                                 <div class="cardContent d-flex justify-content-center">
-                                    <p>conteudo</p>
+                                    <p id="avisoReceita"></p>
+                                    <div id="graficoReceitas">
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -81,10 +110,10 @@ setTitulo($title);
                         <div class="card-body">
                             <div>
                                 <div class="cardTitle d-flex justify-content-center">
-                                    <h5 class="card-title">Saldo</h5>
+                                    <h5 class="card-title">Saldo total em conta</h5>
                                 </div>
                                 <div class="cardContent d-flex justify-content-center">
-                                    <p>conteudo</p>
+                                    <h4><?php echo $functions->formatarReal($saldoTotal); ?></h4>
                                 </div>
                             </div>
                         </div>
@@ -108,6 +137,90 @@ setTitulo($title);
         </main>
     </div>
 </body>
+
+
+
+<script>
+    $(document).ready(function() {
+        var totalDespesas = <?php echo $totalDespesasMes[0]; ?>;
+        var totalReceitas = <?php echo $totalReceitasMes[0]; ?>;
+
+        // gráficos
+        var optionsDespesas = {
+            series: [{
+                name: 'Valor total',
+                data: [totalDespesas]
+            }],
+            chart: {
+                type: 'bar',
+                width: '100%',
+                height: '100%'
+            },
+            plotOptions: {
+                bar: {
+                    barHeight: '100%',
+                    distributed: false
+                }
+            },
+            colors: ['#CF1C1C'],
+            xaxis: {
+                categories: ['Despesas'],
+                labels: {
+                    show: false
+                }
+            },
+            title: {
+                text: 'Este mês',
+                align: 'center',
+                floating: true
+            }
+        };
+
+        var optionsReceitas = {
+            series: [{
+                name: 'Valor total',
+                data: [totalReceitas]
+            }],
+            chart: {
+                type: 'bar',
+                width: '100%',
+                height: '100%'
+            },
+            plotOptions: {
+                bar: {
+                    barHeight: '100%',
+                    distributed: false
+                }
+            },
+            colors: ['#239E18'],
+            xaxis: {
+                categories: ['Receitas'],
+                labels: {
+                    show: false
+                }
+            },
+            title: {
+                text: 'Este mês',
+                align: 'center',
+                floating: true
+            }
+        };
+
+        if (!totalReceitas == 0) {
+            var chartReceitas = new ApexCharts(document.querySelector("#graficoReceitas"), optionsReceitas);
+            chartReceitas.render();
+        } else {
+            document.getElementById('avisoReceita').textContent = "Nenhuma receita ainda!";
+        }
+
+        if (!totalDespesas == 0) {
+            var chartDespesas = new ApexCharts(document.querySelector("#graficoDespesas"), optionsDespesas);
+            chartDespesas.render();
+        } else {
+            document.getElementById('avisoDespesa').textContent = "Nenhuma despesa ainda!";
+        }
+    });
+</script>
 
 <?php
 include_once(__DIR__ . "/../include/footer.php");

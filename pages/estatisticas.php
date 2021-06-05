@@ -10,8 +10,8 @@ include_once("../include/header.php");
 include_once(__DIR__ . "/../include/header.php");
 setTitulo($title);
 
-include_once(__DIR__ . "/../connections/crud/Receita.class.php");
-include_once(__DIR__ . "/../connections/crud/Despesa.class.php");
+include_once(__DIR__ . "/../connections/classes/Receita.class.php");
+include_once(__DIR__ . "/../connections/classes/Despesa.class.php");
 
 
 function totalReceitasDespesas($mes)
@@ -24,8 +24,6 @@ function totalReceitasDespesas($mes)
 
     return json_encode($arrayTotal);
 }
-
-$mesAtual = date('m');
 
 if (!isset($_GET['selectMesGraficoGeral'])) {
     header("Location: ../pages/estatisticas.php?selectMesGraficoGeral=" . $mesAtual);
@@ -98,7 +96,7 @@ if (!isset($_GET['selectMesGraficoGeral'])) {
 <script>
     $(document).ready(function() {
         var json = <?php echo $json; ?>;
-        var mesAtual = <?php echo $mesAtual ?>;
+        var mesAtual = <?php echo $mesAtual; ?>;
 
         // gráficos
         var options = {

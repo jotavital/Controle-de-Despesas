@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-                <form method="POST" action="../../connections/crud/Despesa.class.php">
+                <form method="POST" action="../../connections/classes/Despesa.class.php">
                     <input type="text" name="idDespesa" value="<?php echo $_GET['id'] ?>" class="hide">
                     <input type="text" name="idConta" value="<?php echo $_GET['id_conta'] ?>" class="hide">
                     <input type="text" name="valorDespesa" value="<?php echo $_GET['valor'] ?>" class="hide">

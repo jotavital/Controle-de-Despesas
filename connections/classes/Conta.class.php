@@ -2,8 +2,8 @@
 
 include_once(__DIR__ . "/../loginVerify.php");
 include_once(__DIR__ . "/../Connection.class.php");
-include_once(__DIR__ . "/../crud/Receita.class.php");
-include_once(__DIR__ . "/../crud/Despesa.class.php");
+include_once(__DIR__ . "/../classes/Receita.class.php");
+include_once(__DIR__ . "/../classes/Despesa.class.php");
 
 class Conta
 {
@@ -147,6 +147,26 @@ class Conta
 
         foreach ($result as $idConta) {
             $conta->deletarConta($idConta['id']);
+        }
+    }
+
+    function selectTotalSaldoTodasContas(){
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+        
+        $stm = $conexao->prepare("SELECT SUM(saldo_atual) FROM conta WHERE fk_usuario = :userId");
+        $stm->bindValue(":userId", $_SESSION['userId']);
+
+        try {
+            $stm->execute();
+            $result = $stm->fetch();
+            return $result[0];
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
     }
 }
