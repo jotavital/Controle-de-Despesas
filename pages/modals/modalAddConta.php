@@ -1,5 +1,5 @@
 <div class="modal fade" id="modalAddConta" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalAddContaLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalAddContaLabel">Adicione uma conta</h5>
@@ -8,15 +8,15 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <form method="POST" id="formAddContas">
-                        <div class="mb-3">
+                        <div class="col-sm-12 mb-3">
                             <label for="nomeContaInput" class="form-label">Nome da conta</label>
                             <input type="text" class="form-control" id="nomeContaInput" name="nomeConta" aria-describedby="Nome" placeholder="Ex.: Minha Poupança" required>
                         </div>
-                        <div class="mb-3">
+                        <div class="col-sm-12 mb-3">
                             <label for="saldoInput" class="form-label">Saldo atual</label>
                             <input type="text" class="form-control" name="saldoConta" id="saldoInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});" required>
                         </div>
-                        <div class="mb-3">
+                        <div class="col-sm-12 mb-3">
                             <label for="categoriaSelect" class="form-label">Categoria</label>
                             <select class="form-select" name="categoriaSelect" id="categoriaSelect">
 

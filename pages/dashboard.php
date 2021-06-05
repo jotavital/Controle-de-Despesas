@@ -29,19 +29,25 @@ setTitulo($title);
             <div id="contentDashboard">
 
                 <div class="col-md-12 cardsContainer d-flex justify-content-center align-items-center">
-                    <div class="card bg-ultralight-gray text-primary col-md-3 mb-3 me-3">
+                    <div class="card bg-ultralight-gray text-danger col-md-3 mb-3 me-3">
                         <div class="card-body">
-                            <h5 class="card-title">Contas</h5>
-                            <p>conteudo</p>
+                            <div>
+                                <div class="cardTitle d-flex justify-content-center">
+                                    <h5 class="card-title">Despesas</h5>
+                                </div>
+                                <div class="cardContent d-flex justify-content-center">
+                                    <p>conteudo</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer d-flex justify-content-center" style="border:none;">
-                            <span data-bs-toggle="modal" data-bs-target="#modalAddConta">
-                                <button class="btn btn-primary btn-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova conta">
+                            <span data-bs-toggle="modal" data-bs-target="#modalAddDespesa">
+                                <button class="btn btn-danger btn-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova despesa">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </span>
-                            <a href="../pages/contas.php">
-                                <button class="btn bg-orange btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Todas as contas">
+                            <a href="../pages/despesas.php">
+                                <button class="btn bg-orange btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Todas as receitas">
                                     <i class="fas fa-list"></i>
                                 </button>
                             </a>
@@ -49,8 +55,14 @@ setTitulo($title);
                     </div>
                     <div class="card bg-ultralight-gray text-success col-md-3 mb-3 me-3">
                         <div class="card-body">
-                            <h5 class="card-title">Receitas</h5>
-                            <p>conteudo</p>
+                            <div>
+                                <div class="cardTitle d-flex justify-content-center">
+                                    <h5 class="card-title">Receitas</h5>
+                                </div>
+                                <div class="cardContent d-flex justify-content-center">
+                                    <p>conteudo</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer d-flex justify-content-center" style="border:none;">
                             <span data-bs-toggle="modal" data-bs-target="#modalAddReceita">
@@ -65,19 +77,25 @@ setTitulo($title);
                             </a>
                         </div>
                     </div>
-                    <div class="card bg-ultralight-gray text-danger col-md-3 mb-3 me-3">
+                    <div class="card bg-ultralight-gray text-primary col-md-3 mb-3 me-3">
                         <div class="card-body">
-                            <h5 class="card-title">Despesas</h5>
-                            <p>conteudo</p>
+                            <div>
+                                <div class="cardTitle d-flex justify-content-center">
+                                    <h5 class="card-title">Saldo</h5>
+                                </div>
+                                <div class="cardContent d-flex justify-content-center">
+                                    <p>conteudo</p>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer d-flex justify-content-center" style="border:none;">
-                            <span data-bs-toggle="modal" data-bs-target="#modalAddDespesa">
-                                <button class="btn btn-danger btn-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova despesa">
+                            <span data-bs-toggle="modal" data-bs-target="#modalAddConta">
+                                <button class="btn btn-primary btn-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova conta">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </span>
-                            <a href="../pages/despesas.php">
-                                <button class="btn bg-orange btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Todas as receitas">
+                            <a href="../pages/contas.php">
+                                <button class="btn bg-orange btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Todas as contas">
                                     <i class="fas fa-list"></i>
                                 </button>
                             </a>
