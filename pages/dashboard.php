@@ -21,70 +21,72 @@ setTitulo($title);
         include_once(__DIR__ . "/../include/sideBar.php");
         ?>
         <main>
+            <!-- F2F2F2 -->
             <?php
             include_once(__DIR__ . "/../include/navBar_logged.php");
             ?>
 
             <div id="contentDashboard">
-                <div class="divBtnSuperiores col-12 mb-3 d-flex justify-content-center">
-                    <span data-bs-toggle="modal" data-bs-target="#modalAddConta">
-                        <button class="btn btn-primary btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova conta">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </span>
-                    <span data-bs-toggle="modal" data-bs-target="#modalAddReceita">
-                        <button class="btn btn-success btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova receita">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </span>
-                    <span data-bs-toggle="modal" data-bs-target="#modalAddDespesa">
-                        <button class="btn btn-danger btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova despesa">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </span>
+
+                <div class="col-md-12 cardsContainer d-flex justify-content-center align-items-center">
+                    <div class="card bg-ultralight-gray text-primary col-md-3 mb-3 me-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Contas</h5>
+                            <p>conteudo</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-center" style="border:none;">
+                            <span data-bs-toggle="modal" data-bs-target="#modalAddConta">
+                                <button class="btn btn-primary btn-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova conta">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </span>
+                            <a href="../pages/contas.php">
+                                <button class="btn bg-orange btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Todas as contas">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card bg-ultralight-gray text-success col-md-3 mb-3 me-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Receitas</h5>
+                            <p>conteudo</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-center" style="border:none;">
+                            <span data-bs-toggle="modal" data-bs-target="#modalAddReceita">
+                                <button class="btn btn-success btn-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova receita">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </span>
+                            <a href="../pages/receitas.php">
+                                <button class="btn bg-orange btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Todas as receitas">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card bg-ultralight-gray text-danger col-md-3 mb-3 me-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Despesas</h5>
+                            <p>conteudo</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-center" style="border:none;">
+                            <span data-bs-toggle="modal" data-bs-target="#modalAddDespesa">
+                                <button class="btn btn-danger btn-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova despesa">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </span>
+                            <a href="../pages/despesas.php">
+                                <button class="btn bg-orange btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Todas as receitas">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- <div class="row cardsContainer">
-                    <div class="col-sm-3">
-                        <div class="card">
-                            <div class="card-body p-4">
-                                <h5 class="card-title d-flex justify-content-center">Contas</h5>
-                                <p class="card-text d-flex justify-content-center">Adicione suas contas</p>
-                                <div class="row col-sm d-flex justify-content-center">
-                                    <button class="btn btn-outline-success col-sm me-3" data-bs-toggle="modal" data-bs-target="#modalAddConta">Adicionar</button>
-                                    <a href="../pages/contas.php" class="btn btn-outline-primary col-sm">Ver tudo</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="card">
-                            <div class="card-body p-4">
-                                <h5 class="card-title d-flex justify-content-center">Receitas</h5>
-                                <p class="card-text d-flex justify-content-center">Adicione seus ganhos</p>
-                                <div class="row col-sm d-flex justify-content-center">
-                                    <button class="btn btn-outline-success col-sm me-3" data-bs-toggle="modal" data-bs-target="#modalAddReceita">Adicionar</button>
-                                    <a href="../pages/receitas.php" class="btn btn-outline-primary col-sm">Ver tudo</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="card">
-                            <div class="card-body p-4">
-                                <h5 class="card-title d-flex justify-content-center">Despesas</h5>
-                                <p class="card-text d-flex justify-content-center">Adicione seus gastos</p>
-                                <div class="row col-sm d-flex justify-content-center">
-                                    <button class="btn btn-outline-success col-sm me-3" data-bs-toggle="modal" data-bs-target="#modalAddDespesa">Adicionar</button>
-                                    <a href="../pages/despesas.php" class="btn btn-outline-primary col-sm">Ver tudo</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                
             </div>
-            
+
         </main>
     </div>
 </body>

@@ -9,6 +9,11 @@
 
 a {
     cursor: pointer;
+    color: inherit;
+}
+
+a:hover{
+    color: inherit;
 }
 
 h4 {
@@ -189,48 +194,18 @@ main {
     height: 100%;
 }
 
-.cardsContainer .card-body {
-    -webkit-box-shadow: 3px 3px 24px -6px rgba(61, 61, 61, 1);
-    -moz-box-shadow: 3px 3px 24px -6px rgba(61, 61, 61, 1);
-    box-shadow: 3px 3px 24px -6px rgba(61, 61, 61, 1);
-    min-height: 160px;
-    max-height: 200px;
-    border-radius: .7rem;
+.bg-light-blue{
+    background-color: #4895EF;
+    color: white;
 }
 
-.cardsContainer .card {
-    border: none;
-    border-radius: 15px;
+.bg-orange{
+    background-color: #ef8354;
+    color: white;
 }
 
-.cardsContainer .col-sm-3 {
-    min-width: 250px;
-}
-
-.cardsContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@media screen and (max-width: 941px) {
-    .card {
-        margin-bottom: 15px;
-    }
-}
-
-@media screen and (max-width: 575px) {
-    .card {
-        width: 250px;
-    }
-    main {
-        width: 100%;
-    }
-    .row.cardsContainer .col-sm-3 {
-        display: flex;
-        justify-content: center;
-    }
+.bg-ultralight-gray{
+    background-color: #f8f8f8;
 }
 
 @media screen and (max-width: 450px) {
