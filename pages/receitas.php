@@ -12,7 +12,32 @@ include_once(__DIR__ . "/modals/modalAddReceita.php");
 include_once(__DIR__ . "/modals/modalDeleteReceita.php");
 setTitulo($title);
 
+include_once(__DIR__ . "/../connections/classes/Receita.class.php");
+include_once(__DIR__ . "/../connections/classes/Despesa.class.php");
+
+function totalReceitasDespesas($mes)
+{
+    $receita = new Receita;
+    $despesa = new Despesa;
+    $totalReceitas = $receita->selectValorTotalReceitasByMonth($mes);
+    $totalDespesas = $despesa->selectValorTotalDespesasByMonth($mes);
+    $arrayTotal = array('totalDespesas' => $totalDespesas, 'totalReceitas' => $totalReceitas);
+
+    return json_encode($arrayTotal);
+}
+
+if (!isset($_GET['selectMesGraficoReceitas'])) {
+    echo "<script> window.location.href = '../pages/receitas.php?selectMesGraficoReceitas=" . $mesAtual . "';</script>";
+    $json = totalReceitasDespesas($mesAtual);
+} else {
+    $json = totalReceitasDespesas($_GET['selectMesGraficoReceitas']);
+}
+
 ?>
+
+<script>
+    var mes = <?php echo $_GET['selectMesGraficoReceitas'] ?>;
+</script>
 
 <body>
     <div id="containerDashboard">
@@ -45,6 +70,47 @@ setTitulo($title);
                 }
 
                 ?>
+
+                <!-- grafico receitas -->
+                <div class="col-md-12 d-flex justify-content-center">
+                    <div style="height:400px; width:350px" id="contentDashboard">
+                        <div class="col-md-12">
+                            <h3 class="col-12 d-flex justify-content-center">Estatísticas mensais</h3>
+                            <form class="col-12" method="GET" action="../pages/receitas.php" id="formSelectMes">
+                                <div class="form-group">
+                                    <div class="col-md mb-3 d-flex align-items-center justify-content-between">
+                                        <label for="selectMesGraficoReceitas">Filtre por mês:</label>
+                                        <div class="col-6">
+                                            <select class="form-select" name="selectMesGraficoReceitas" id="selectMesGraficoReceitas">
+                                                <option value="0" selected class="hide"></option>
+                                                <option value="1">Janeiro</option>
+                                                <option value="2">Fevereiro</option>
+                                                <option value="3">Março</option>
+                                                <option value="4">Abril</option>
+                                                <option value="5">Maio</option>
+                                                <option value="6">Junho</option>
+                                                <option value="7">Julho</option>
+                                                <option value="8">Agosto</option>
+                                                <option value="9">Setembro</option>
+                                                <option value="10">Outubro</option>
+                                                <option value="11">Novembro</option>
+                                                <option value="12">Dezembro</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <script>
+                                $('#selectMesGraficoReceitas').val(mes);
+                            </script>
+
+                            <div id="graficoReceitas">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- tabela do dataTables -->
                 <div class="d-flex justify-content-center">
@@ -94,6 +160,63 @@ setTitulo($title);
         </main>
     </div>
 </body>
+
+<script>
+    $(document).ready(function() {
+        var json = <?php echo $json; ?>;
+        var mesAtual = <?php echo $mesAtual; ?>;
+
+        // gráficos
+
+        var optionsReceitas = {
+            series: [{
+                name: 'Valor total',
+                data: [35, 36, 34, 36, 36, 34, 23, 24]
+            }],
+            stroke: {
+                curve: 'smooth',
+            },
+            markers: {
+                size: 7
+            },
+            chart: {
+                type: 'line',
+                width: '100%',
+                height: '100%'
+            },
+            plotOptions: {
+                bar: {
+                    barHeight: '100%',
+                    distributed: false
+                }
+            },
+            colors: ['#239E18'],
+            xaxis: {
+                categories: ['Receitas'],
+                labels: {
+                    show: false
+                }
+            }
+        };
+
+        if ($('#selectMesGraficoReceitas').val() == mesAtual) {
+            var chart = new ApexCharts(document.querySelector("#graficoReceitas"), optionsReceitas);
+            chart.render();
+        } else {
+            var chart = new ApexCharts(document.querySelector("#graficoReceitas"), optionsReceitas);
+            chart.render();
+        }
+
+
+        $('#selectMesGraficoReceitas').change(function() {
+
+            $('#formSelectMes').submit();
+
+        });
+
+
+    });
+</script>
 
 <?php
 include_once(__DIR__ . "/../include/footer.php");
