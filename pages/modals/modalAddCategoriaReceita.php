@@ -31,7 +31,7 @@
         var dados = new FormData(this);
 
         $.ajax({
-            url: '../connections/classes/Receita.class.php',
+            url: '../classes/Receita.class.php',
             method: 'POST',
             data: dados,
             processData: false,

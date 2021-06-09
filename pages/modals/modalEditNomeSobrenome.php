@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form method="POST" action="../../connections/classes/Usuario.class.php" id="formEditNomeSobrenome">
+                    <form method="POST" action="../../classes/Usuario.class.php" id="formEditNomeSobrenome">
                         <div class="row col-md-12">
                             <div class="col-md-6">
                                 <label for="inputNovoNome" class="form-label">Nome</label>

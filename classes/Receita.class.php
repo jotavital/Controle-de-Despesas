@@ -1,7 +1,7 @@
 <?php
 
-include_once(__DIR__ . "/../Connection.class.php");
-include_once(__DIR__ . "/../loginVerify.php");
+include_once(__DIR__ . "/../connections/Connection.class.php");
+include_once(__DIR__ . "/../connections/loginVerify.php");
 include_once(__DIR__ . "/../classes/Conta.class.php");
 
 if (!isset($_SESSION)) {
@@ -179,13 +179,15 @@ class Receita
         $conexao = $conn->conectar();
 
         $stm = $conexao->prepare(
-            "SELECT valor, 
-            DAY(data_receita) as dia
+            "SELECT sum(valor) as valor, 
+            DAY(data_receita) as dia,
+            data_receita
             FROM receita 
-            WHERE month(receita.data_receita) = :mes 
+            WHERE month(receita.data_receita) = :mes
             AND receita.fk_usuario = :userId 
-            AND receita.data_receita > DATE_SUB(CURRENT_DATE,INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) 
-            AND receita.data_receita < LAST_DAY(CURRENT_DATE)"
+            AND receita.data_receita > DATE_SUB(data_receita,INTERVAL DAYOFMONTH(data_receita)-1 DAY) 
+            AND receita.data_receita < LAST_DAY(data_receita)
+            GROUP BY dia"
         );
 
         $stm->bindValue(":mes", $mes);

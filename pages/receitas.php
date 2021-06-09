@@ -12,8 +12,7 @@ include_once(__DIR__ . "/modals/modalAddReceita.php");
 include_once(__DIR__ . "/modals/modalDeleteReceita.php");
 setTitulo($title);
 
-include_once(__DIR__ . "/../connections/classes/Receita.class.php");
-include_once(__DIR__ . "/../connections/classes/Despesa.class.php");
+include_once(__DIR__ . "/../classes/Receita.class.php");
 
 function totalReceitasTodosDiasDoMes($mes)
 {
@@ -23,6 +22,7 @@ function totalReceitasTodosDiasDoMes($mes)
 
     return json_encode($arrayTotal);
 }
+
 
 if (!isset($_GET['selectMesGraficoReceitas'])) {
     echo "<script> window.location.href = '../pages/receitas.php?selectMesGraficoReceitas=" . $mesAtual . "';</script>";
@@ -80,7 +80,6 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                                         <label for="selectMesGraficoReceitas">Filtre por mês:</label>
                                         <div class="col-6">
                                             <select class="form-select" name="selectMesGraficoReceitas" id="selectMesGraficoReceitas">
-                                                <option value="0" selected class="hide"></option>
                                                 <option value="1">Janeiro</option>
                                                 <option value="2">Fevereiro</option>
                                                 <option value="3">Março</option>
@@ -141,7 +140,7 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                                         <td>
                                             <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
                                                 <i class="fas fa-edit"></i>
-                                                <?php echo '<a href="../pages/receitas.php?delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
+                                                <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
                                             </div>
                                         </td>
                                     </tr>
@@ -191,7 +190,7 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                 height: '100%'
             },
             title: {
-                text: 'Receitas diárias',
+                text: 'Receitas diárias (reais)',
                 align: 'left',
                 floating: false
             },

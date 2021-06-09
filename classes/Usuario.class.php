@@ -1,6 +1,6 @@
 <?php
 
-include_once(__DIR__ . "/../Connection.class.php");
+include_once(__DIR__ . "/../connections/Connection.class.php");
 include_once(__DIR__ . "/../classes/Despesa.class.php");
 include_once(__DIR__ . "/../classes/Receita.class.php");
 include_once(__DIR__ . "/../classes/Conta.class.php");
@@ -47,7 +47,7 @@ class Usuario
 
             if ($stm->execute()) {
                 if ($stm->rowCount() == 0) {
-                    $_SESSION['msg'] = "OPS... Não te encontramos no nosso sistema";
+                    $_SESSION['msg'] = "OPS... E-mail ou senha incorretos";
                     header("Location: ../../pages/login.php");
                 } else {
                     $_SESSION['userEmail'] = $_POST['email'];
@@ -128,6 +128,7 @@ class Usuario
                     try {
                         $stm2->execute();
                         echo "Senha alterada com sucesso!";
+                        session_destroy();
                     } catch (PDOException $e) {
                         echo "Erro ao alterar senha: " . $e->getMessage();
                     }

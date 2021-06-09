@@ -1,9 +1,9 @@
 <?php
 
-include_once(__DIR__ . "/../loginVerify.php");
-include_once(__DIR__ . "/../Connection.class.php");
-include_once(__DIR__ . "/../classes/Receita.class.php");
-include_once(__DIR__ . "/../classes/Despesa.class.php");
+include_once(__DIR__ . "/../connections/Connection.class.php");
+include_once(__DIR__ . "/../connections/loginVerify.php");
+include_once(__DIR__ . "/Receita.class.php");
+include_once(__DIR__ . "/Despesa.class.php");
 
 class Conta
 {

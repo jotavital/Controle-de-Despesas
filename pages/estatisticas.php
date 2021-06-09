@@ -10,8 +10,8 @@ include_once("../include/header.php");
 include_once(__DIR__ . "/../include/header.php");
 setTitulo($title);
 
-include_once(__DIR__ . "/../connections/classes/Receita.class.php");
-include_once(__DIR__ . "/../connections/classes/Despesa.class.php");
+include_once(__DIR__ . "/../classes/Receita.class.php");
+include_once(__DIR__ . "/../classes/Despesa.class.php");
 
 
 function totalReceitasDespesas($mes)

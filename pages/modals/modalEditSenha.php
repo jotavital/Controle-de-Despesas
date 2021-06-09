@@ -47,7 +47,7 @@
             } else {
 
                 $.ajax({
-                    url: '../connections/classes/Usuario.class.php',
+                    url: '../classes/Usuario.class.php',
                     method: 'POST',
                     data: dados,
                     processData: false,

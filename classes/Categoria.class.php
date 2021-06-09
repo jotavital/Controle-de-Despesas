@@ -1,6 +1,6 @@
 <?php
 
-include_once(__DIR__ . "/../Connection.class.php");
+include_once(__DIR__ . "/../connections/Connection.class.php");
 
 class Categoria{
 

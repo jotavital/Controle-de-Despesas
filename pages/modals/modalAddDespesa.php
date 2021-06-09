@@ -114,7 +114,7 @@ include_once(__DIR__ . "/modalAddCategoriaDespesa.php");
         var dados = new FormData(this);
 
         $.ajax({
-            url: '../connections/classes/Despesa.class.php',
+            url: '../classes/Despesa.class.php',
             method: 'POST',
             data: dados,
             processData: false,

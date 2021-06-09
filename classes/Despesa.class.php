@@ -1,8 +1,8 @@
 <?php
 
-include_once(__DIR__ . "/../Connection.class.php");
-include_once(__DIR__ . "/../loginVerify.php");
-include_once(__DIR__ . "/../classes/Conta.class.php");
+include_once(__DIR__ . "/../connections/Connection.class.php");
+include_once(__DIR__ . "/../connections/loginVerify.php");
+include_once(__DIR__ . "/Conta.class.php");
 
 class Despesa
 {
@@ -160,7 +160,8 @@ class Despesa
         $conn->desconectar();
     }
 
-    function selectValorTotalDespesasByMonth($mes){
+    function selectValorTotalDespesasByMonth($mes)
+    {
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -177,11 +178,56 @@ class Despesa
             echo $e->getMessage();
             return null;
         }
-        
+
         $conn->desconectar();
     }
 
-    function deletarTodasDespesasUsuario(){
+    function selectValorTotalDespesasTodosDiasByMonth($mes)
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare(
+            "SELECT sum(valor) as valor, 
+            DAY(data_despesa) as dia,
+            data_despesa
+            FROM despesa 
+            WHERE month(despesa.data_despesa) = :mes
+            AND despesa.fk_usuario = :userId 
+            AND despesa.data_despesa > DATE_SUB(data_despesa,INTERVAL DAYOFMONTH(data_despesa)-1 DAY) 
+            AND despesa.data_despesa < LAST_DAY(data_despesa)
+            GROUP BY dia"
+        );
+
+        $stm->bindValue(":mes", $mes);
+        $stm->bindValue(":userId", $_SESSION['userId']);
+
+        try {
+            $stm->execute();
+            $result = $stm->fetchAll();
+
+            $array = array();
+
+
+            for ($i = 0; $i < 31; $i++) {
+                array_push($array, 0);
+            }
+
+            foreach ($result as $row) {
+                $array[$row["dia"]] = $row["valor"];
+            }
+
+            return $array;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return null;
+        }
+
+        $conn->desconectar();
+    }
+
+    function deletarTodasDespesasUsuario()
+    {
         $conta = new Conta;
         $despesa = new Despesa;
 

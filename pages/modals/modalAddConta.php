@@ -55,7 +55,7 @@
         var dados = jQuery(this).serialize();
 
         $.ajax({
-            url: '../connections/classes/Conta.class.php',
+            url: '../classes/Conta.class.php',
             method: 'POST',
             data: dados,
             success: function(msg) {
@@ -63,7 +63,7 @@
                 location.reload();
             },
             error: function(msg) {
-                alert("Erro ao cadastrar a conta!");
+                alert("Erro ao cadastrar a conta! " + msg);
             }
         });
 

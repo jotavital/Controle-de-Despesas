@@ -93,7 +93,7 @@
                         <i class="fas fa-sign-out-alt"></i>
                     </div>
                     <div class="sideBarLink">
-                        <a href="../connections/classes/Usuario.class.php?logout">Sair</a>
+                        <a href="../classes/Usuario.class.php?logout">Sair</a>
                     </div>
                 </div>
             </li>

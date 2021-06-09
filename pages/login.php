@@ -20,7 +20,7 @@ include_once(__DIR__ . "/../include/navBar_unlogged.php");
 <body>
     <div id="container">
         <div class="divForm">
-            <form action="../connections/classes/Usuario.class.php" method="POST" id="formLogin" class="col-5 needs-validation" novalidate>
+            <form action="../classes/Usuario.class.php" method="POST" id="formLogin" class="col-5 needs-validation" novalidate>
                 <h1 class="mb-3">Entrar</h1>
                 <div class="row d-flex justify-content-center">
                     <div class="col-md">

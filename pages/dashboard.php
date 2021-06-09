@@ -13,9 +13,9 @@ include_once(__DIR__ . "/../pages/modals/modalAddDespesa.php");
 include_once(__DIR__ . "/../pages/modals/modalAddReceita.php");
 setTitulo($title);
 
-include_once(__DIR__ . "/../connections/classes/Despesa.class.php");
-include_once(__DIR__ . "/../connections/classes/Receita.class.php");
-include_once(__DIR__ . "/../connections/classes/Conta.class.php");
+include_once(__DIR__ . "/../classes/Despesa.class.php");
+include_once(__DIR__ . "/../classes/Receita.class.php");
+include_once(__DIR__ . "/../classes/Conta.class.php");
 
 $despesa = new Despesa;
 $receita = new Receita;
