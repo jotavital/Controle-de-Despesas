@@ -26,7 +26,8 @@ h4 {
 }
 
 .cardsContainer .card {
-    min-height: 170px !important;
+    min-height: 180px !important;
+    min-width: 220px !important;
 }
 
 .btn-circle {

@@ -52,8 +52,11 @@ class Despesa
 
             //armazena imagem da despesa na pasta
             if ($nomeImg != null) {
-                $directory = '../../uploaded/user_images/despesas_images/' . $_SESSION['userId'];
-                mkdir($directory);
+                $directory = '../uploaded/user_images/despesas_images/' . $_SESSION['userId'];
+
+                if (!file_exists($directory)) {
+                    mkdir($directory, 0777);
+                }
                 $directory = $directory . '/' . $conexao->lastInsertId() . '/';
                 mkdir($directory);
 
@@ -100,8 +103,24 @@ class Despesa
         $conn->desconectar();
     }
 
+    function deletarImagensDespesa($path)
+    {
+        $files = glob($path . '/*'); // get all file names
+        foreach ($files as $file) { // iterate files
+            if (is_file($file)) {
+                unlink($file); // delete file
+            }
+        }
+
+        rmdir($path);
+    }
+
     function deletarDespesa($idDespesa)
     {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -117,6 +136,9 @@ class Despesa
 
             $conta = new Conta;
             $conta->somarValorDespesa($_POST['idConta'], $_POST['valorDespesa']);
+
+            $path = "../uploaded/user_images/despesas_images/" . $_SESSION['userId'] . "/" . $idDespesa;
+            $this->deletarImagensDespesa($path);
 
             header('Location: ../../pages/despesas.php');
         } catch (PDOException $e) {

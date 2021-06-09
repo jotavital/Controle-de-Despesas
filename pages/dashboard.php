@@ -49,10 +49,10 @@ $saldoTotal = $conta->selectTotalSaldoTodasContas();
             include_once(__DIR__ . "/../include/navBar_logged.php");
             ?>
 
-            <div id="contentDashboard">
+            <div class="col-md-12" id="contentDashboard">
 
-                <div class="col-md-12 cardsContainer d-flex justify-content-center align-items-center">
-                    <div class="card bg-ultralight-gray text-danger col-md-3 mb-3 me-3">
+                <div class="row col-12 cardsContainer d-flex justify-content-center">
+                    <div class="card bg-ultralight-gray text-danger col-md-3 mb-3 me-3 ms-3">
                         <div class="card-body">
                             <div>
                                 <div class="cardTitle d-flex justify-content-center">
@@ -79,7 +79,7 @@ $saldoTotal = $conta->selectTotalSaldoTodasContas();
                             </a>
                         </div>
                     </div>
-                    <div class="card bg-ultralight-gray text-success col-md-3 mb-3 me-3">
+                    <div class="card bg-ultralight-gray text-success col-md-3 mb-3 me-3 ms-3">
                         <div class="card-body">
                             <div>
                                 <div class="cardTitle d-flex justify-content-center">
@@ -106,14 +106,14 @@ $saldoTotal = $conta->selectTotalSaldoTodasContas();
                             </a>
                         </div>
                     </div>
-                    <div class="card bg-ultralight-gray text-primary col-md-3 mb-3 me-3">
+                    <div class="card bg-ultralight-gray text-primary col-md-3 me-3 ms-3">
                         <div class="card-body">
                             <div>
                                 <div class="cardTitle d-flex justify-content-center">
                                     <h5 class="card-title">Saldo total em conta</h5>
                                 </div>
                                 <div class="cardContent d-flex justify-content-center">
-                                    <h4><?php echo $functions->formatarReal($saldoTotal); ?></h4>
+                                    <h4 class="<?php echo ($saldoTotal < 0) ? 'p-danger'  : 'p-primary'; ?>"><?php echo $functions->formatarReal($saldoTotal); ?></h4>
                                 </div>
                             </div>
                         </div>

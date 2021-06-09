@@ -64,11 +64,11 @@ include_once(__DIR__ . "/../pages/modals/modalDeleteUsuario.php");
                         </div>
                     </div>
                     <div class="row mb-4 col-12 camposInfo d-flex justify-content-center">
-                        <div class="col-md-4 d-flex align-items-center">
+                        <div class="col-md-4 mb-3 d-flex align-items-center">
                             <label>Email:</label>
                             <input class="form-control" type="text" value=<?php echo ($resultado['email']); ?> readonly>
                         </div>
-                        <div class="col-md-4 d-flex align-items-center">
+                        <div class="col-md-4 mb-3 d-flex align-items-center">
                             <label>Senha:</label>
                             <input class="form-control" type="password" value=<?php echo ($resultado['email']); ?> readonly>
                             <div class="editIcon">
