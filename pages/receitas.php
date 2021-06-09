@@ -15,22 +15,20 @@ setTitulo($title);
 include_once(__DIR__ . "/../connections/classes/Receita.class.php");
 include_once(__DIR__ . "/../connections/classes/Despesa.class.php");
 
-function totalReceitasDespesas($mes)
+function totalReceitasTodosDiasDoMes($mes)
 {
     $receita = new Receita;
-    $despesa = new Despesa;
-    $totalReceitas = $receita->selectValorTotalReceitasByMonth($mes);
-    $totalDespesas = $despesa->selectValorTotalDespesasByMonth($mes);
-    $arrayTotal = array('totalDespesas' => $totalDespesas, 'totalReceitas' => $totalReceitas);
+    $totalReceitasDias = $receita->selectValorTotalReceitasTodosDiasByMonth($mes);
+    $arrayTotal = array('totalReceitasDias' => $totalReceitasDias);
 
     return json_encode($arrayTotal);
 }
 
 if (!isset($_GET['selectMesGraficoReceitas'])) {
     echo "<script> window.location.href = '../pages/receitas.php?selectMesGraficoReceitas=" . $mesAtual . "';</script>";
-    $json = totalReceitasDespesas($mesAtual);
+    $json = totalReceitasTodosDiasDoMes($mesAtual);
 } else {
-    $json = totalReceitasDespesas($_GET['selectMesGraficoReceitas']);
+    $json = totalReceitasTodosDiasDoMes($_GET['selectMesGraficoReceitas']);
 }
 
 ?>
@@ -73,7 +71,7 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
 
                 <!-- grafico receitas -->
                 <div class="col-md-12 d-flex justify-content-center">
-                    <div style="height:400px; width:350px" id="contentDashboard">
+                    <div style="height:400px; width:500px" id="contentDashboard">
                         <div class="col-md-12">
                             <h3 class="col-12 d-flex justify-content-center">Estatísticas mensais</h3>
                             <form class="col-12" method="GET" action="../pages/receitas.php" id="formSelectMes">
@@ -111,6 +109,8 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                         </div>
                     </div>
                 </div>
+
+                <h3 class="col-12 d-flex justify-content-center">Todas as receitas</h3>
 
                 <!-- tabela do dataTables -->
                 <div class="d-flex justify-content-center">
@@ -163,6 +163,12 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
 
 <script>
     $(document).ready(function() {
+        var dias = new Array();
+
+        for (var i = 1; i <= 31; i++) {
+            dias.push(i);
+        }
+
         var json = <?php echo $json; ?>;
         var mesAtual = <?php echo $mesAtual; ?>;
 
@@ -171,7 +177,7 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
         var optionsReceitas = {
             series: [{
                 name: 'Valor total',
-                data: [35, 36, 34, 36, 36, 34, 23, 24]
+                data: [json['totalReceitasDias'][0], json['totalReceitasDias'][1], json['totalReceitasDias'][2], json['totalReceitasDias'][3], json['totalReceitasDias'][4], json['totalReceitasDias'][5], json['totalReceitasDias'][6], json['totalReceitasDias'][7], json['totalReceitasDias'][8], json['totalReceitasDias'][9], json['totalReceitasDias'][10], json['totalReceitasDias'][11], json['totalReceitasDias'][12], json['totalReceitasDias'][13], json['totalReceitasDias'][14], json['totalReceitasDias'][15], json['totalReceitasDias'][16], json['totalReceitasDias'][17], json['totalReceitasDias'][18], json['totalReceitasDias'][19], json['totalReceitasDias'][20], json['totalReceitasDias'][21], json['totalReceitasDias'][22], json['totalReceitasDias'][23], json['totalReceitasDias'][24], json['totalReceitasDias'][25], json['totalReceitasDias'][26], json['totalReceitasDias'][27], json['totalReceitasDias'][28], json['totalReceitasDias'][29], json['totalReceitasDias'][30]]
             }],
             stroke: {
                 curve: 'smooth',
@@ -184,6 +190,11 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                 width: '100%',
                 height: '100%'
             },
+            title: {
+                text: 'Receitas diárias',
+                align: 'left',
+                floating: false
+            },
             plotOptions: {
                 bar: {
                     barHeight: '100%',
@@ -192,11 +203,50 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
             },
             colors: ['#239E18'],
             xaxis: {
-                categories: ['Receitas'],
+                type: "categories",
+                categories: [dias[0], dias[1], dias[2], dias[3], dias[4], dias[5], dias[6], dias[7], dias[8], dias[9], dias[10], dias[11], dias[12], dias[13], dias[14], dias[15], dias[16], dias[17], dias[18], dias[19], dias[20], dias[21], dias[22], dias[23], dias[24], dias[25], dias[26], dias[27], dias[28], dias[29], dias[30]],
                 labels: {
-                    show: false
+                    show: true
                 }
-            }
+            },
+            // responsive: [{
+            //     breakpoint: 699,
+            //     options: {
+            //         series: [{
+            //             name: 'Valor total',
+            //             data: [dias[0], dias[1], dias[2], dias[3], dias[4]]
+            //         }],
+            //         stroke: {
+            //             curve: 'smooth',
+            //         },
+            //         markers: {
+            //             size: 7
+            //         },
+            //         chart: {
+            //             type: 'line',
+            //             width: '100%',
+            //             height: '100%'
+            //         },
+            //         title: {
+            //             text: 'Receitas semanais',
+            //             align: 'left',
+            //             floating: false
+            //         },
+            //         plotOptions: {
+            //             bar: {
+            //                 barHeight: '100%',
+            //                 distributed: false
+            //             }
+            //         },
+            //         colors: ['#239E18'],
+            //         xaxis: {
+            //             categories: ["Semana 1", "Semana 2", "Semana 3", "Semana 4", "Semana 5"],
+            //             labels: {
+            //                 show: true
+            //             }
+            //         }
+            //     },
+            // }]
         };
 
         if ($('#selectMesGraficoReceitas').val() == mesAtual) {

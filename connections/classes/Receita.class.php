@@ -53,7 +53,7 @@ class Receita
 
     function insertCategoriaReceita()
     {
-        
+
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -151,7 +151,8 @@ class Receita
         $conn->desconectar();
     }
 
-    function selectValorTotalReceitasByMonth($mes){
+    function selectValorTotalReceitasByMonth($mes)
+    {
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -168,11 +169,54 @@ class Receita
             echo $e->getMessage();
             return null;
         }
-        
+
         $conn->desconectar();
     }
 
-    function deletarTodasReceitasUsuario(){
+    function selectValorTotalReceitasTodosDiasByMonth($mes)
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare(
+            "SELECT valor, 
+            DAY(data_receita) as dia
+            FROM receita 
+            WHERE month(receita.data_receita) = :mes 
+            AND receita.fk_usuario = :userId 
+            AND receita.data_receita > DATE_SUB(CURRENT_DATE,INTERVAL DAYOFMONTH(CURRENT_DATE)-1 DAY) 
+            AND receita.data_receita < LAST_DAY(CURRENT_DATE)"
+        );
+
+        $stm->bindValue(":mes", $mes);
+        $stm->bindValue(":userId", $_SESSION['userId']);
+
+        try {
+            $stm->execute();
+            $result = $stm->fetchAll();
+
+            $array = array();
+
+
+            for ($i = 0; $i < 31; $i ++) {
+                array_push($array, 0);
+            }
+
+            foreach ($result as $row) {
+                $array[$row["dia"]] = $row["valor"];
+            }
+
+            return $array;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return null;
+        }
+
+        $conn->desconectar();
+    }
+
+    function deletarTodasReceitasUsuario()
+    {
         $conta = new Conta;
         $receita = new Receita;
 

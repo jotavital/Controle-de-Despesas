@@ -7,12 +7,16 @@
     color: #ebebeb;
 }
 
+body, main{
+    height: auto;
+}
+
 a {
     cursor: pointer;
     color: inherit;
 }
 
-a:hover{
+a:hover {
     color: inherit;
 }
 
@@ -20,11 +24,11 @@ h4 {
     margin: 0;
 }
 
-.cardsContainer .card{
+.cardsContainer .card {
     min-height: 170px !important;
 }
 
-.btn-circle{
+.btn-circle {
     width: 40px;
     height: 40px;
     border-radius: 100%;
@@ -34,15 +38,15 @@ h4 {
     color: #ef8354;
 }
 
-.p-danger{
+.p-danger {
     color: #CF1C1C;
 }
 
-.p-primary{
+.p-primary {
     color: #4361EE;
 }
 
-.p-success{
+.p-success {
     color: #239E18;
 }
 
@@ -148,14 +152,14 @@ h1.mainTitle {
 #containerDashboard {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    height: 100%;
 }
 
 sidebar {
     display: block;
     width: var(--sideBarWidth);
     min-width: 150px;
-    height: 100%;
+    height: auto;
     background-color: #EBEBEB;
 }
 
@@ -194,17 +198,17 @@ main {
     height: 100%;
 }
 
-.bg-light-blue{
+.bg-light-blue {
     background-color: #4895EF;
     color: white;
 }
 
-.bg-orange{
+.bg-orange {
     background-color: #ef8354;
     color: white;
 }
 
-.bg-ultralight-gray{
+.bg-ultralight-gray {
     background-color: #f8f8f8;
 }
 
