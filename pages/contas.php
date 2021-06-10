@@ -43,7 +43,7 @@ setTitulo($title);
                     foreach ($data as $index => $row) {
                     ?>
 
-                        <div class="col-sm-3">
+                        <div class="col-md-3">
                             <div class="card">
                                 <div class="card-body p-4">
                                     <h5 class="card-title d-flex justify-content-center">
@@ -66,7 +66,7 @@ setTitulo($title);
                                         ?>
 
                                     </p>
-                                    <div class="row col-sm d-flex justify-content-center">
+                                    <div class="col-sm d-flex justify-content-center">
                                         <a href="#" class="btn btn-outline-primary col-sm me-3">Gerenciar</a>
                                         <?php echo '<a href="../pages/contas.php?delete=true&id=' . $row['id'] . '&nome_conta=' . $row['nome_conta'] . "&saldo_atual=" . sprintf("%.2f", $row['saldo_atual']) . '"' . 'class="btn btn-outline-danger col-sm btnExcluirConta">Excluir</a>' ?>
                                     </div>

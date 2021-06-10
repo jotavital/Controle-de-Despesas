@@ -52,82 +52,56 @@ $saldoTotal = $conta->selectTotalSaldoTodasContas();
             <div class="col-md-12" id="contentDashboard">
 
                 <div class="row col-12 cardsContainer d-flex justify-content-center">
-                    <div class="card bg-ultralight-gray text-danger col-md-3 mb-3 me-3 ms-3">
+                    <div class="card col-md-3 mb-3 ms-3" onclick="window.location.assign('contas.php');">
                         <div class="card-body">
                             <div>
                                 <div class="cardTitle d-flex justify-content-center">
-                                    <h5 class="card-title">Despesas</h5>
+                                    <h6 class="card-title">Saldo total em conta</h6>
                                 </div>
                                 <div class="cardContent d-flex justify-content-center">
-                                    <p id="avisoDespesa"></p>
-                                    <div id="graficoDespesas">
-
+                                    <div class="cardContent">
+                                        <h4 class="<?php echo ($saldoTotal < 0) ? 'p-danger'  : 'p-primary'; ?>"><?php echo $functions->formatarReal($saldoTotal); ?></h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer d-flex justify-content-center" style="border:none;">
-                            <span data-bs-toggle="modal" data-bs-target="#modalAddDespesa">
-                                <button class="btn btn-danger btn-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova despesa">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </span>
-                            <a href="../pages/despesas.php">
-                                <button class="btn bg-orange btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Todas as receitas">
-                                    <i class="fas fa-list"></i>
-                                </button>
-                            </a>
-                        </div>
                     </div>
-                    <div class="card bg-ultralight-gray text-success col-md-3 mb-3 me-3 ms-3">
+                    <div class="card col-md-3 mb-3 ms-3" onclick="window.location.assign('receitas.php');">
                         <div class="card-body">
                             <div>
                                 <div class="cardTitle d-flex justify-content-center">
-                                    <h5 class="card-title">Receitas</h5>
+                                    <h6 class="card-title">Receitas</h6>
                                 </div>
                                 <div class="cardContent d-flex justify-content-center">
-                                    <p id="avisoReceita"></p>
-                                    <div id="graficoReceitas">
+                                    <p class="p-success" id="avisoReceita"></p>
+                                    <h4 class="hide p-success" id="totalReceitas">
+                                        <?php
 
-                                    </div>
+                                        echo ($functions->formatarReal($totalReceitasMes[0]));
+
+                                        ?>
+                                    </h4>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer d-flex justify-content-center" style="border:none;">
-                            <span data-bs-toggle="modal" data-bs-target="#modalAddReceita">
-                                <button class="btn btn-success btn-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova receita">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </span>
-                            <a href="../pages/receitas.php">
-                                <button class="btn bg-orange btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Todas as receitas">
-                                    <i class="fas fa-list"></i>
-                                </button>
-                            </a>
-                        </div>
                     </div>
-                    <div class="card bg-ultralight-gray text-primary col-md-3 me-3 ms-3">
+                    <div class="card col-md-3 mb-3 ms-3" onclick="window.location.assign('despesas.php');">
                         <div class="card-body">
                             <div>
                                 <div class="cardTitle d-flex justify-content-center">
-                                    <h5 class="card-title">Saldo total em conta</h5>
+                                    <h6 class="card-title">Despesas</h6>
                                 </div>
                                 <div class="cardContent d-flex justify-content-center">
-                                    <h4 class="<?php echo ($saldoTotal < 0) ? 'p-danger'  : 'p-primary'; ?>"><?php echo $functions->formatarReal($saldoTotal); ?></h4>
+                                    <p class="p-danger" id="avisoDespesa"></p>
+                                    <h4 class="hide p-danger" id="totalDespesas">
+                                        <?php
+
+                                        echo ($functions->formatarReal($totalDespesasMes[0]));
+
+                                        ?>
+                                    </h4>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-footer d-flex justify-content-center" style="border:none;">
-                            <span data-bs-toggle="modal" data-bs-target="#modalAddConta">
-                                <button class="btn btn-primary btn-circle me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nova conta">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </span>
-                            <a href="../pages/contas.php">
-                                <button class="btn bg-orange btn-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Todas as contas">
-                                    <i class="fas fa-list"></i>
-                                </button>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -145,78 +119,17 @@ $saldoTotal = $conta->selectTotalSaldoTodasContas();
         var totalDespesas = <?php echo $totalDespesasMes[0]; ?>;
         var totalReceitas = <?php echo $totalReceitasMes[0]; ?>;
 
-        // gráficos
-        var optionsDespesas = {
-            series: [{
-                name: 'Valor total',
-                data: [totalDespesas]
-            }],
-            chart: {
-                type: 'bar',
-                width: '100%',
-                height: '100%'
-            },
-            plotOptions: {
-                bar: {
-                    barHeight: '100%',
-                    distributed: false
-                }
-            },
-            colors: ['#CF1C1C'],
-            xaxis: {
-                categories: ['Despesas'],
-                labels: {
-                    show: false
-                }
-            },
-            title: {
-                text: 'Este mês',
-                align: 'center',
-                floating: true
-            }
-        };
-
-        var optionsReceitas = {
-            series: [{
-                name: 'Valor total',
-                data: [totalReceitas]
-            }],
-            chart: {
-                type: 'bar',
-                width: '100%',
-                height: '100%'
-            },
-            plotOptions: {
-                bar: {
-                    barHeight: '100%',
-                    distributed: false
-                }
-            },
-            colors: ['#239E18'],
-            xaxis: {
-                categories: ['Receitas'],
-                labels: {
-                    show: false
-                }
-            },
-            title: {
-                text: 'Este mês',
-                align: 'center',
-                floating: true
-            }
-        };
-
         if (!totalReceitas == 0) {
-            var chartReceitas = new ApexCharts(document.querySelector("#graficoReceitas"), optionsReceitas);
-            chartReceitas.render();
+            document.getElementById('totalReceitas').classList.remove("hide");
         } else {
+            document.getElementById('totalReceitas').classList.add("hide");
             document.getElementById('avisoReceita').textContent = "Nenhuma receita ainda!";
         }
 
         if (!totalDespesas == 0) {
-            var chartDespesas = new ApexCharts(document.querySelector("#graficoDespesas"), optionsDespesas);
-            chartDespesas.render();
+            document.getElementById('totalDespesas').classList.remove("hide");
         } else {
+            document.getElementById('totalDespesas').classList.add("hide");
             document.getElementById('avisoDespesa').textContent = "Nenhuma despesa ainda!";
         }
     });
