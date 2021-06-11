@@ -110,7 +110,7 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
                         </div>
                     </div>
 
-                    <h3 class="col-12 d-flex justify-content-center">Todas as despesas</h3>
+                    <h3 class="col-12 mb-3 d-flex justify-content-center">Todas as despesas</h3>
 
                     <!-- tabela do dataTables -->
                     <div class="d-flex justify-content-center">
