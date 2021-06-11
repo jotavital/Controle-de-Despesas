@@ -70,53 +70,59 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
                 ?>
 
                 <!-- grafico despesas -->
-                <div class="col-md-12 d-flex justify-content-center">
-                    <div style="height:400px; width:500px" id="contentDashboard">
-                        <div class="col-md-12">
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="card mb-4 col-10 overflow-auto">
+                        <div class="card-header text-white bg-light-blue">
                             <h3 class="col-12 d-flex justify-content-center">Estatísticas mensais</h3>
-                            <form class="col-12" method="GET" action="../pages/despesas.php" id="formSelectMes">
-                                <div class="form-group">
-                                    <div class="col-md mb-3 d-flex align-items-center justify-content-between">
-                                        <label for="selectMesGraficoDespesas">Filtre por mês:</label>
-                                        <div class="col-6">
-                                            <select class="form-select" name="selectMesGraficoDespesas" id="selectMesGraficoDespesas">
-                                                <option value="1">Janeiro</option>
-                                                <option value="2">Fevereiro</option>
-                                                <option value="3">Março</option>
-                                                <option value="4">Abril</option>
-                                                <option value="5">Maio</option>
-                                                <option value="6">Junho</option>
-                                                <option value="7">Julho</option>
-                                                <option value="8">Agosto</option>
-                                                <option value="9">Setembro</option>
-                                                <option value="10">Outubro</option>
-                                                <option value="11">Novembro</option>
-                                                <option value="12">Dezembro</option>
-                                            </select>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <div style="height:400px; width:500px" id="contentDashboard">
+                                    <div class="col-md-12">
+                                        <form class="col-12" method="GET" action="../pages/despesas.php" id="formSelectMes">
+                                            <div class="form-group">
+                                                <div class="col-md mb-3 d-flex align-items-center justify-content-between">
+                                                    <label for="selectMesGraficoDespesas">Filtre por mês:</label>
+                                                    <div class="col-6">
+                                                        <select class="form-select" name="selectMesGraficoDespesas" id="selectMesGraficoDespesas">
+                                                            <option value="1">Janeiro</option>
+                                                            <option value="2">Fevereiro</option>
+                                                            <option value="3">Março</option>
+                                                            <option value="4">Abril</option>
+                                                            <option value="5">Maio</option>
+                                                            <option value="6">Junho</option>
+                                                            <option value="7">Julho</option>
+                                                            <option value="8">Agosto</option>
+                                                            <option value="9">Setembro</option>
+                                                            <option value="10">Outubro</option>
+                                                            <option value="11">Novembro</option>
+                                                            <option value="12">Dezembro</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <script>
+                                            $('#selectMesGraficoDespesas').val(mes);
+                                        </script>
+
+                                        <div id="graficoDespesas">
+
                                         </div>
                                     </div>
                                 </div>
-                            </form>
-
-                            <script>
-                                $('#selectMesGraficoDespesas').val(mes);
-                            </script>
-
-                            <div id="graficoDespesas">
-
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <h3 class="col-12 mb-3 d-flex justify-content-center">Todas as despesas</h3>
-
                 <!-- tabela do dataTables -->
                 <div class="cardTabela">
                     <div class="col-md-12 d-flex justify-content-center">
                         <div class="card col-10 overflow-auto">
-                            <div class="card-header bg-danger">
-
+                            <div class="card-header bg-danger text-white">
+                                <h3 class="col-12 mb-3 d-flex justify-content-center">Todas as despesas</h3>
                             </div>
                             <div class="card-body">
                                 <div class="d-flex justify-content-center">

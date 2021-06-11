@@ -53,6 +53,9 @@ setTitulo($title);
                     <div class="cardTabela">
                         <div class="col-md-12 d-flex justify-content-center">
                             <div class="card col-10 overflow-auto">
+                                <div class="card-header bg-light-blue text-white">
+                                    <h3 class="col-12 d-flex justify-content-center">Histórico de Transações</h3>
+                                </div>
                                 <div class="card-body">
                                     <div class="d-flex justify-content-center">
                                         <div class="col-12 tableDespesas" id="tableDespesasContainer">
