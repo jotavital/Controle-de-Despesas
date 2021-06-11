@@ -54,110 +54,118 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
                 <div class="col-12 mb-3 d-flex justify-content-center">
                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddDespesa">Nova despesa</button>
                 </div>
-                <div class="row col-12 cardsContainer" id="containerCardsDespesas">
 
-                    <?php
-                    $userId = $_SESSION['userId'];
-                    $stm = $conexao->prepare("SELECT d.*, c.nome_conta FROM despesa as d, conta as c WHERE d.fk_usuario = :userId AND d.fk_conta = c.id GROUP BY d.id");
-                    $stm->bindValue(":userId", $userId);
+                <?php
+                $userId = $_SESSION['userId'];
+                $stm = $conexao->prepare("SELECT d.*, c.nome_conta FROM despesa as d, conta as c WHERE d.fk_usuario = :userId AND d.fk_conta = c.id GROUP BY d.id");
+                $stm->bindValue(":userId", $userId);
 
-                    try {
-                        $stm->execute();
-                        $data = $stm->fetchAll();
-                    } catch (PDOException $e) {
-                        echo $e->getMessage();
-                    }
+                try {
+                    $stm->execute();
+                    $data = $stm->fetchAll();
+                } catch (PDOException $e) {
+                    echo $e->getMessage();
+                }
 
-                    ?>
+                ?>
 
-                    <!-- grafico despesas -->
-                    <div class="col-md-12 d-flex justify-content-center">
-                        <div style="height:400px; width:500px" id="contentDashboard">
-                            <div class="col-md-12">
-                                <h3 class="col-12 d-flex justify-content-center">Estatísticas mensais</h3>
-                                <form class="col-12" method="GET" action="../pages/despesas.php" id="formSelectMes">
-                                    <div class="form-group">
-                                        <div class="col-md mb-3 d-flex align-items-center justify-content-between">
-                                            <label for="selectMesGraficoDespesas">Filtre por mês:</label>
-                                            <div class="col-6">
-                                                <select class="form-select" name="selectMesGraficoDespesas" id="selectMesGraficoDespesas">
-                                                    <option value="1">Janeiro</option>
-                                                    <option value="2">Fevereiro</option>
-                                                    <option value="3">Março</option>
-                                                    <option value="4">Abril</option>
-                                                    <option value="5">Maio</option>
-                                                    <option value="6">Junho</option>
-                                                    <option value="7">Julho</option>
-                                                    <option value="8">Agosto</option>
-                                                    <option value="9">Setembro</option>
-                                                    <option value="10">Outubro</option>
-                                                    <option value="11">Novembro</option>
-                                                    <option value="12">Dezembro</option>
-                                                </select>
-                                            </div>
+                <!-- grafico despesas -->
+                <div class="col-md-12 d-flex justify-content-center">
+                    <div style="height:400px; width:500px" id="contentDashboard">
+                        <div class="col-md-12">
+                            <h3 class="col-12 d-flex justify-content-center">Estatísticas mensais</h3>
+                            <form class="col-12" method="GET" action="../pages/despesas.php" id="formSelectMes">
+                                <div class="form-group">
+                                    <div class="col-md mb-3 d-flex align-items-center justify-content-between">
+                                        <label for="selectMesGraficoDespesas">Filtre por mês:</label>
+                                        <div class="col-6">
+                                            <select class="form-select" name="selectMesGraficoDespesas" id="selectMesGraficoDespesas">
+                                                <option value="1">Janeiro</option>
+                                                <option value="2">Fevereiro</option>
+                                                <option value="3">Março</option>
+                                                <option value="4">Abril</option>
+                                                <option value="5">Maio</option>
+                                                <option value="6">Junho</option>
+                                                <option value="7">Julho</option>
+                                                <option value="8">Agosto</option>
+                                                <option value="9">Setembro</option>
+                                                <option value="10">Outubro</option>
+                                                <option value="11">Novembro</option>
+                                                <option value="12">Dezembro</option>
+                                            </select>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
+                            </form>
 
-                                <script>
-                                    $('#selectMesGraficoDespesas').val(mes);
-                                </script>
+                            <script>
+                                $('#selectMesGraficoDespesas').val(mes);
+                            </script>
 
-                                <div id="graficoDespesas">
+                            <div id="graficoDespesas">
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="col-12 mb-3 d-flex justify-content-center">Todas as despesas</h3>
+
+                <!-- tabela do dataTables -->
+                <div class="cardTabela">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="card col-10 overflow-auto">
+                            <div class="card-header bg-danger">
+
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-center">
+                                    <div class="col-12 tableDespesas" id="tableDespesasContainer">
+                                        <table id="tableDespesas" class="tabela hover order-column row-border">
+                                            <thead>
+                                                <tr>
+                                                    <th>Descrição</th>
+                                                    <th>Data</th>
+                                                    <th>Vencimento</th>
+                                                    <th>Valor</th>
+                                                    <th>Conta</th>
+                                                    <th>Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <?php
+                                                foreach ($data as $row) {
+                                                    $valor = $row['valor'];
+                                                    $data_despesa_formatada = date('d/m/Y', strtotime($row['data_despesa']));
+                                                    $data_vencimento_formatada = ($row['data_vencimento'] == "0000-00-00") ? ("-") : date('d/m/Y', strtotime($row['data_vencimento']));
+                                                ?>
+
+                                                    <tr>
+                                                        <td><?php echo $row['descricao_despesa'] ?></td>
+                                                        <td><?php echo $data_despesa_formatada ?></td>
+                                                        <td><?php echo $data_vencimento_formatada ?></td>
+                                                        <td><?php echo "<span class='p-danger'><strong>" . $functions->formatarReal($valor) . "</strong></span>"; ?></td>
+                                                        <td><?php echo $row['nome_conta'] ?></td>
+                                                        <td>
+                                                            <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
+                                                                <i class="fas fa-edit"></i>
+                                                                <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa"><i class="fas fa-trash-alt"></i></a>' ?>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                <?php
+                                                }
+                                                ?>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <h3 class="col-12 mb-3 d-flex justify-content-center">Todas as despesas</h3>
-
-                    <!-- tabela do dataTables -->
-                    <div class="d-flex justify-content-center">
-                        <div class="col-12 tableDespesas" id="tableDespesasContainer">
-                            <table id="tableDespesas" class="tabela display">
-                                <thead>
-                                    <tr>
-                                        <th>Descrição</th>
-                                        <th>Data</th>
-                                        <th>Vencimento</th>
-                                        <th>Valor</th>
-                                        <th>Conta</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <?php
-                                    foreach ($data as $row) {
-                                        $valor = $row['valor'];
-                                        $data_despesa_formatada = date('d/m/Y', strtotime($row['data_despesa']));
-                                        $data_vencimento_formatada = ($row['data_vencimento'] == "0000-00-00") ? ("-") : date('d/m/Y', strtotime($row['data_vencimento']));
-                                    ?>
-
-                                        <tr>
-                                            <td><?php echo $row['descricao_despesa'] ?></td>
-                                            <td><?php echo $data_despesa_formatada ?></td>
-                                            <td><?php echo $data_vencimento_formatada ?></td>
-                                            <td><?php echo "<span class='p-danger'><strong>" . $functions->formatarReal($valor) . "</strong></span>"; ?></td>
-                                            <td><?php echo $row['nome_conta'] ?></td>
-                                            <td>
-                                                <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                    <i class="fas fa-edit"></i>
-                                                    <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa"><i class="fas fa-trash-alt"></i></a>' ?>
-                                                </div>
-                                            </td>
-                                        </tr>
-
-                                    <?php
-                                    }
-                                    ?>
-
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </main>

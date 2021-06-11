@@ -31,15 +31,16 @@ h4 {
     min-width: 220px !important;
     cursor: pointer;
     background-color: white;
+    padding: 15px;
+    border-radius: 30px;
 }
 
 .card-body {
     padding: 0;
 }
 
-.card {
-    padding: 15px;
-    border-radius: 30px;
+.cardTabela .card{
+    border-radius: 20px;
 }
 
 .btn-circle {
@@ -58,6 +59,14 @@ h4 {
 
 .p-primary {
     color: #4361EE;
+}
+
+.bg-light-danger{
+    background-color: #f8d7da;
+}
+
+.bg-light-success{
+    background-color: #f8d7da;
 }
 
 .p-success {
@@ -129,7 +138,6 @@ h1.mainTitle {
     color: #589b33;
     margin-top: 5px;
     text-shadow: 4px 4px 3px #3D6B24";
-
 }
 
 /* fim login e cadastro */
@@ -261,7 +269,7 @@ div.sideBarItem:hover a, div.sideBarItem:hover i {
 
 /* receitas css */
 
-.tableReceitas {
+.tableReceitas, .tableDespesas {
     padding: 10px;
 }
 

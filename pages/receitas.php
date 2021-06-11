@@ -112,45 +112,56 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                 <h3 class="col-12 d-flex justify-content-center">Todas as receitas</h3>
 
                 <!-- tabela do dataTables -->
-                <div class="d-flex justify-content-center">
-                    <div class="col-12 tableReceitas" id="tableReceitasContainer">
-                        <table id="tableReceitas" class="tabela display">
-                            <thead>
-                                <tr>
-                                    <th>Descrição</th>
-                                    <th>Data</th>
-                                    <th>Valor</th>
-                                    <th>Conta</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <?php
-                                foreach ($data as $row) {
-                                    $valor = $row['valor'];
-                                    $data_receita_formatada = date('d/m/Y', strtotime($row['data_receita']));
-                                ?>
-
-                                    <tr>
-                                        <td><?php echo $row['descricao_receita'] ?></td>
-                                        <td><?php echo $data_receita_formatada ?></td>
-                                        <td><?php echo "<span class='p-success'><strong>" . $functions->formatarReal($valor) . "</strong></span>"; ?></td>
-                                        <td><?php echo $row['nome_conta'] ?></td>
-                                        <td>
-                                            <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                <i class="fas fa-edit"></i>
-                                                <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                <?php
-                                }
-                                ?>
-
-                            </tbody>
-                        </table>
+                <div class="cardTabela">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="card col-10 overflow-auto">
+                            <div class="card-header bg-success">
+    
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-center">
+                                    <div class="col-12 tableReceitas" id="tableReceitasContainer">
+                                        <table id="tableReceitas" class="tabela hover order-column row-border">
+                                            <thead>
+                                                <tr>
+                                                    <th>Descrição</th>
+                                                    <th>Data</th>
+                                                    <th>Valor</th>
+                                                    <th>Conta</th>
+                                                    <th>Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+    
+                                                <?php
+                                                foreach ($data as $row) {
+                                                    $valor = $row['valor'];
+                                                    $data_receita_formatada = date('d/m/Y', strtotime($row['data_receita']));
+                                                ?>
+    
+                                                    <tr>
+                                                        <td><?php echo $row['descricao_receita'] ?></td>
+                                                        <td><?php echo $data_receita_formatada ?></td>
+                                                        <td><?php echo "<span class='p-success'><strong>" . $functions->formatarReal($valor) . "</strong></span>"; ?></td>
+                                                        <td><?php echo $row['nome_conta'] ?></td>
+                                                        <td>
+                                                            <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
+                                                                <i class="fas fa-edit"></i>
+                                                                <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+    
+                                                <?php
+                                                }
+                                                ?>
+    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

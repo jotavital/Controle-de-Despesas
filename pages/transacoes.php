@@ -50,76 +50,84 @@ setTitulo($title);
                     ?>
 
                     <!-- tabela do dataTables -->
-                    <div class="d-flex justify-content-center">
-                        <div class="col-12 tableDespesas" id="tableDespesasContainer">
-                            <table id="tableDespesas" class="tabela display">
-                                <thead>
-                                    <tr>
-                                        <th>Tipo</th>
-                                        <th>Descrição</th>
-                                        <th>Data</th>
-                                        <th>Vencimento</th>
-                                        <th>Valor</th>
-                                        <th>Conta</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                    <div class="cardTabela">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <div class="card col-10 overflow-auto">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="col-12 tableDespesas" id="tableDespesasContainer">
+                                            <table id="tableDespesas" class="tabela hover order-column row-border">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tipo</th>
+                                                        <th>Descrição</th>
+                                                        <th>Data</th>
+                                                        <th>Vencimento</th>
+                                                        <th>Valor</th>
+                                                        <th>Conta</th>
+                                                        <th>Ações</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
 
-                                    <?php
-                                    foreach ($result as $row) {
-                                        $valor = $row['valor'];
-                                        if (isset($row['descricao_despesa'])) {
-                                            $data_despesa_formatada = date('d/m/Y', strtotime($row['data_despesa']));
-                                            $data_vencimento_formatada = date('d/m/Y', strtotime($row['data_despesa']));
-                                    ?>
+                                                    <?php
+                                                    foreach ($result as $row) {
+                                                        $valor = $row['valor'];
+                                                        if (isset($row['descricao_despesa'])) {
+                                                            $data_despesa_formatada = date('d/m/Y', strtotime($row['data_despesa']));
+                                                            $data_vencimento_formatada = date('d/m/Y', strtotime($row['data_despesa']));
+                                                    ?>
 
-                                            <tr>
-                                                <td class="d-flex justify-content-center">
-                                                    <i class="p-danger fas fa-arrow-circle-down"></i>
-                                                </td>
-                                                <td><?php echo $row['descricao_despesa'] ?></td>
-                                                <td><?php echo $data_despesa_formatada ?></td>
-                                                <td><?php echo $data_vencimento_formatada ?></td>
-                                                <td><?php echo "<span class='p-danger'><strong>" . $functions->formatarReal($valor) . "</strong></span>"; ?></td>
-                                                <td><?php echo $row['nome_conta'] ?></td>
-                                                <td>
-                                                    <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                        <i class="fas fa-edit"></i>
-                                                        <?php echo '<a href="../pages/transacoes.php?delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa"><i class="fas fa-trash-alt"></i></a>' ?>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                            <tr>
+                                                                <td class="d-flex justify-content-center">
+                                                                    <i class="p-danger fas fa-arrow-circle-down"></i>
+                                                                </td>
+                                                                <td><?php echo $row['descricao_despesa'] ?></td>
+                                                                <td><?php echo $data_despesa_formatada ?></td>
+                                                                <td><?php echo $data_vencimento_formatada ?></td>
+                                                                <td><?php echo "<span class='p-danger'><strong>" . $functions->formatarReal($valor) . "</strong></span>"; ?></td>
+                                                                <td><?php echo $row['nome_conta'] ?></td>
+                                                                <td>
+                                                                    <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
+                                                                        <i class="fas fa-edit"></i>
+                                                                        <?php echo '<a href="../pages/transacoes.php?delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa"><i class="fas fa-trash-alt"></i></a>' ?>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
 
-                                        <?php
-                                        } elseif (isset($row['descricao_receita'])) {
-                                            $data_receita_formatada = date('d/m/Y', strtotime($row['data_receita']));
-                                        ?>
+                                                        <?php
+                                                        } elseif (isset($row['descricao_receita'])) {
+                                                            $data_receita_formatada = date('d/m/Y', strtotime($row['data_receita']));
+                                                        ?>
 
-                                            <tr>
-                                                <td class="d-flex justify-content-center">
-                                                    <i class="p-success fas fa-arrow-circle-up"></i>
-                                                </td>
-                                                <td><?php echo $row['descricao_receita'] ?></td>
-                                                <td><?php echo $data_receita_formatada ?></td>
-                                                <td> - </td>
-                                                <td><?php echo "<span class='p-success'><strong>" . $functions->formatarReal($valor) . "</strong></span>"; ?></td>
-                                                <td><?php echo $row['nome_conta'] ?></td>
-                                                <td>
-                                                    <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                        <i class="fas fa-edit"></i>
-                                                        <?php echo '<a href="../pages/transacoes.php?delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                            <tr>
+                                                                <td class="d-flex justify-content-center">
+                                                                    <i class="p-success fas fa-arrow-circle-up"></i>
+                                                                </td>
+                                                                <td><?php echo $row['descricao_receita'] ?></td>
+                                                                <td><?php echo $data_receita_formatada ?></td>
+                                                                <td> - </td>
+                                                                <td><?php echo "<span class='p-success'><strong>" . $functions->formatarReal($valor) . "</strong></span>"; ?></td>
+                                                                <td><?php echo $row['nome_conta'] ?></td>
+                                                                <td>
+                                                                    <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
+                                                                        <i class="fas fa-edit"></i>
+                                                                        <?php echo '<a href="../pages/transacoes.php?delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
 
-                                    <?php
-                                        }
-                                    }
-                                    ?>
+                                                    <?php
+                                                        }
+                                                    }
+                                                    ?>
 
-                                </tbody>
-                            </table>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
