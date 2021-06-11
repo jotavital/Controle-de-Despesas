@@ -33,7 +33,12 @@ h4 {
     background-color: white;
 }
 
+.card-body{
+    padding: 0;
+}
+
 .card {
+    padding: 15px;
     border-radius: 30px;
 }
 

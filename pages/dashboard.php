@@ -52,54 +52,79 @@ $saldoTotal = $conta->selectTotalSaldoTodasContas();
             <div class="col-md-12" id="contentDashboard">
 
                 <div class="row col-12 cardsContainer d-flex justify-content-center">
-                    <div class="card col-md-3 mb-3 ms-3" onclick="window.location.assign('contas.php');">
-                        <div class="card-body">
-                            <div>
-                                <div class="cardTitle d-flex justify-content-center">
-                                    <h6 class="card-title">Saldo total em conta</h6>
-                                </div>
-                                <div class="cardContent d-flex justify-content-center">
-                                    <div class="cardContent">
-                                        <h4 class="<?php echo ($saldoTotal < 0) ? 'p-danger'  : 'p-primary'; ?>"><?php echo $functions->formatarReal($saldoTotal); ?></h4>
+                    <div class="card col-3 mb-3 ms-3" onclick="window.location.assign('contas.php');">
+                        <div class="card-body d-flex align-items-center justify-content-between">
+                            <div class="col-12 d-flex justify-content-between">
+                                <div class="col-10">
+                                    <div class="cardTitle">
+                                        <h6 class="card-title">Saldo em contas</h6>
+                                    </div>
+                                    <div class="cardContent col-md-12">
+                                        <div class="col-md-12 d-flex align-items-center">
+                                            <h5 class="<?php echo ($saldoTotal < 0) ? 'p-danger'  : 'p-primary'; ?>">
+                                                <?php
+
+                                                echo $functions->formatarReal($saldoTotal);
+
+                                                ?>
+                                            </h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card col-md-3 mb-3 ms-3" onclick="window.location.assign('receitas.php');">
-                        <div class="card-body">
-                            <div>
-                                <div class="cardTitle d-flex justify-content-center">
-                                    <h6 class="card-title">Receitas</h6>
-                                </div>
-                                <div class="cardContent d-flex justify-content-center">
-                                    <p class="p-success" id="avisoReceita"></p>
-                                    <h4 class="hide p-success" id="totalReceitas">
-                                        <?php
-
-                                        echo ($functions->formatarReal($totalReceitasMes[0]));
-
-                                        ?>
-                                    </h4>
+                                <div class="col-2 cardIcon d-flex align-items-center">
+                                    <i class="p-primary fas fa-wallet" style="font-size:40px;"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card col-md-3 mb-3 ms-3" onclick="window.location.assign('despesas.php');">
-                        <div class="card-body">
-                            <div>
-                                <div class="cardTitle d-flex justify-content-center">
-                                    <h6 class="card-title">Despesas</h6>
+                    <div class="card col-3 mb-3 ms-3" onclick="window.location.assign('receitas.php');">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="col-12 d-flex justify-content-between">
+                                <div class="col-10">
+                                    <div class="cardTitle">
+                                        <h6 class="card-title">Receitas</h6>
+                                    </div>
+                                    <div class="cardContent col-md-12">
+                                        <div class="col-md-12 d-flex align-items-center">
+                                            <p class="p-danger" id="avisoReceita"></p>
+                                            <h4 class="hide p-success" id="totalReceitas">
+                                                <?php
+
+                                                echo ($functions->formatarReal($totalReceitasMes[0]));
+
+                                                ?>
+                                            </h4>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="cardContent d-flex justify-content-center">
-                                    <p class="p-danger" id="avisoDespesa"></p>
-                                    <h4 class="hide p-danger" id="totalDespesas">
-                                        <?php
+                                <div class="col-2 cardIcon d-flex align-items-center">
+                                    <i class="p-success fas fa-arrow-circle-up" style="font-size:40px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card col-3 mb-3 ms-3" onclick="window.location.assign('despesas.php');">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="col-12 d-flex justify-content-between">
+                                <div class="col-10">
+                                    <div class="cardTitle">
+                                        <h6 class="card-title">Despesas</h6>
+                                    </div>
+                                    <div class="cardContent col-md-12">
+                                        <div class="col-md-12 d-flex align-items-center">
+                                            <p class="p-danger" id="avisoDespesa"></p>
+                                            <h4 class="hide p-danger" id="totalDespesas">
+                                                <?php
 
-                                        echo ($functions->formatarReal($totalDespesasMes[0]));
+                                                echo ($functions->formatarReal($totalDespesasMes[0]));
 
-                                        ?>
-                                    </h4>
+                                                ?>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 cardIcon d-flex align-items-center">
+                                    <i class="p-danger fas fa-arrow-circle-down" style="font-size:40px;"></i>
                                 </div>
                             </div>
                         </div>

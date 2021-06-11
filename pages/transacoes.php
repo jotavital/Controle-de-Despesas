@@ -76,7 +76,7 @@ setTitulo($title);
 
                                             <tr>
                                                 <td class="d-flex justify-content-center">
-                                                    <i class="p-danger fas fa-hand-holding-usd"></i>
+                                                    <i class="p-danger fas fa-arrow-circle-down"></i>
                                                 </td>
                                                 <td><?php echo $row['descricao_despesa'] ?></td>
                                                 <td><?php echo $data_despesa_formatada ?></td>
@@ -98,7 +98,7 @@ setTitulo($title);
 
                                             <tr>
                                                 <td class="d-flex justify-content-center">
-                                                    <i class="p-success fas fa-chart-line"></i>
+                                                    <i class="p-success fas fa-arrow-circle-up"></i>
                                                 </td>
                                                 <td><?php echo $row['descricao_receita'] ?></td>
                                                 <td><?php echo $data_receita_formatada ?></td>
