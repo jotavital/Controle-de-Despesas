@@ -14,6 +14,7 @@ body, main {
 }
 
 a {
+    text-decoration: none;
     cursor: pointer;
     color: inherit;
 }
@@ -26,13 +27,16 @@ h4 {
     margin: 0;
 }
 
-.cardsContainer .card {
+.cardsContainerDashboard .card {
     min-height: 40px !important;
     min-width: 220px !important;
-    cursor: pointer;
-    background-color: white;
-    padding: 15px;
-    border-radius: 30px;
+    padding: 10px;
+}
+
+#containerCardsContas .card{
+    min-height: 40px !important;
+    min-width: 220px !important;
+    padding: 0;
 }
 
 .card-body {
@@ -59,6 +63,10 @@ h4 {
 
 .p-primary {
     color: #4361EE;
+}
+
+.p-gray{
+    color: #4F5D75;
 }
 
 .bg-light-danger{

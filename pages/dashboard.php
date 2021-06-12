@@ -51,8 +51,8 @@ $saldoTotal = $conta->selectTotalSaldoTodasContas();
 
             <div class="col-md-12" id="contentDashboard">
 
-                <div class="row col-12 cardsContainer d-flex justify-content-center">
-                    <div class="card col-3 mb-3 ms-3" onclick="window.location.assign('contas.php');">
+                <div class="row col-12 cardsContainerDashboard d-flex justify-content-center">
+                    <div class="card br-25 col-3 mb-3 ms-3" onclick="window.location.assign('contas.php');">
                         <div class="card-body d-flex align-items-center justify-content-between">
                             <div class="col-12 d-flex justify-content-between">
                                 <div class="col-10">
@@ -77,7 +77,7 @@ $saldoTotal = $conta->selectTotalSaldoTodasContas();
                             </div>
                         </div>
                     </div>
-                    <div class="card col-3 mb-3 ms-3" onclick="window.location.assign('receitas.php');">
+                    <div class="card br-25 col-3 mb-3 ms-3" onclick="window.location.assign('receitas.php');">
                         <div class="card-body d-flex align-items-center">
                             <div class="col-12 d-flex justify-content-between">
                                 <div class="col-10">
@@ -103,7 +103,7 @@ $saldoTotal = $conta->selectTotalSaldoTodasContas();
                             </div>
                         </div>
                     </div>
-                    <div class="card col-3 mb-3 ms-3" onclick="window.location.assign('despesas.php');">
+                    <div class="card br-25 col-3 mb-3 ms-3" onclick="window.location.assign('despesas.php');">
                         <div class="card-body d-flex align-items-center">
                             <div class="col-12 d-flex justify-content-between">
                                 <div class="col-10">
