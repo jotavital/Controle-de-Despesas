@@ -6,6 +6,9 @@ include_once(__DIR__ . "/../connections/Connection.class.php");
 $conn = new Connection;
 $conexao = $conn->conectar();
 
+include_once(__DIR__ . "/../classes/Conta.class.php");
+$contasObj = new Conta;
+
 $title = "Contas";
 include_once(__DIR__ . "/../include/header.php");
 include_once(__DIR__ . "/modals/modalAddConta.php");
@@ -36,11 +39,8 @@ setTitulo($title);
                 <div class="row col-12 cardsContainer" id="containerCardsContas">
 
                     <?php
-                    $userId = $_SESSION['userId'];
-                    $sql = $conexao->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
-                    $sql->bindValue(":userId", $userId);
-                    $sql->execute();
-                    $data = $sql->fetchAll();
+
+                    $data = $contasObj->selectAllFromConta();
 
                     foreach ($data as $index => $row) {
                     ?>

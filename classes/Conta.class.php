@@ -55,6 +55,20 @@ class Conta
         }
     }
 
+    function selectAllFromConta()
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $userId = $_SESSION['userId'];
+        $sql = $conexao->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
+        $sql->bindValue(":userId", $userId);
+        $sql->execute();
+        $data = $sql->fetchAll();
+
+        return $data;
+    }
+
     function somarValorReceita($idConta, $valorReceita)
     {
 
@@ -72,7 +86,8 @@ class Conta
         }
     }
 
-    function subtrairValorReceita($idConta, $valorReceita){
+    function subtrairValorReceita($idConta, $valorReceita)
+    {
 
         $conn = new Connection;
         $conexao = $conn->conectar();
@@ -88,7 +103,8 @@ class Conta
         }
     }
 
-    function subtrairValorDespesa($idConta, $valorDespesa){
+    function subtrairValorDespesa($idConta, $valorDespesa)
+    {
 
         $conn = new Connection;
         $conexao = $conn->conectar();
@@ -104,7 +120,8 @@ class Conta
         }
     }
 
-    function somarValorDespesa($idConta, $valorDespesa){
+    function somarValorDespesa($idConta, $valorDespesa)
+    {
 
         $conn = new Connection;
         $conexao = $conn->conectar();
@@ -120,7 +137,8 @@ class Conta
         }
     }
 
-    function selectTodasContasUsuario(){
+    function selectTodasContasUsuario()
+    {
         if (!isset($_SESSION)) {
             session_start();
         }
@@ -140,7 +158,8 @@ class Conta
         }
     }
 
-    function deletarTodasContasUsuario(){
+    function deletarTodasContasUsuario()
+    {
         $conta = new Conta;
 
         $result = $conta->selectTodasContasUsuario();
@@ -150,14 +169,15 @@ class Conta
         }
     }
 
-    function selectTotalSaldoTodasContas(){
+    function selectTotalSaldoTodasContas()
+    {
         if (!isset($_SESSION)) {
             session_start();
         }
 
         $conn = new Connection;
         $conexao = $conn->conectar();
-        
+
         $stm = $conexao->prepare("SELECT SUM(saldo_atual) FROM conta WHERE fk_usuario = :userId");
         $stm->bindValue(":userId", $_SESSION['userId']);
 
