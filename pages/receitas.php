@@ -52,7 +52,9 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
 
             <div id="contentDashboard">
                 <div class="col-12 mb-3 d-flex justify-content-center">
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAddReceita">Nova receita</button>
+                    <button class="btn btn-success rounded-circle" data-bs-toggle="modal" data-bs-target="#modalAddReceita">
+                        <i class="fas fa-plus"></i>
+                    </button>
                 </div>
 
                 <?php
@@ -71,7 +73,7 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
 
                 <!-- grafico receitas -->
                 <div class="col-12 d-flex justify-content-center">
-                    <div class="card col-10">
+                    <div class="card mb-4 br-25 col-10 overflow-auto">
                         <div class="card-header text-white bg-light-blue">
                             <h3 class="col-12 d-flex justify-content-center">Estatísticas mensais</h3>
                         </div>
@@ -118,53 +120,51 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                 </div>
 
                 <!-- tabela do dataTables -->
-                <div class="cardTabela">
-                    <div class="col-md-12 d-flex justify-content-center">
-                        <div class="card col-10 overflow-auto">
-                            <div class="card-header bg-success text-white">
-                                <h3 class="col-12 d-flex justify-content-center">Todas as receitas</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex justify-content-center">
-                                    <div class="col-12 tableReceitas" id="tableReceitasContainer">
-                                        <table id="tableReceitas" class="tabela hover order-column row-border">
-                                            <thead>
+                <div class="col-md-12 d-flex justify-content-center">
+                    <div class="card br-25 col-10 overflow-auto">
+                        <div class="card-header bg-success text-white">
+                            <h3 class="col-12 d-flex justify-content-center">Todas as receitas</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-center">
+                                <div class="col-12 tableReceitas" id="tableReceitasContainer">
+                                    <table id="tableReceitas" class="tabela hover order-column row-border">
+                                        <thead>
+                                            <tr>
+                                                <th>Descrição</th>
+                                                <th>Data</th>
+                                                <th>Valor</th>
+                                                <th>Conta</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <?php
+                                            foreach ($data as $row) {
+                                                $valor = $row['valor'];
+                                                $data_receita_formatada = date('d/m/Y', strtotime($row['data_receita']));
+                                            ?>
+
                                                 <tr>
-                                                    <th>Descrição</th>
-                                                    <th>Data</th>
-                                                    <th>Valor</th>
-                                                    <th>Conta</th>
-                                                    <th>Ações</th>
+                                                    <td><?php echo $row['descricao_receita'] ?></td>
+                                                    <td><?php echo $data_receita_formatada ?></td>
+                                                    <td><?php echo "<span class='p-success'><strong>" . $functions->formatarReal($valor) . "</strong></span>"; ?></td>
+                                                    <td><?php echo $row['nome_conta'] ?></td>
+                                                    <td>
+                                                        <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
+                                                            <i class="fas fa-edit"></i>
+                                                            <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
+                                                        </div>
+                                                    </td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
 
-                                                <?php
-                                                foreach ($data as $row) {
-                                                    $valor = $row['valor'];
-                                                    $data_receita_formatada = date('d/m/Y', strtotime($row['data_receita']));
-                                                ?>
+                                            <?php
+                                            }
+                                            ?>
 
-                                                    <tr>
-                                                        <td><?php echo $row['descricao_receita'] ?></td>
-                                                        <td><?php echo $data_receita_formatada ?></td>
-                                                        <td><?php echo "<span class='p-success'><strong>" . $functions->formatarReal($valor) . "</strong></span>"; ?></td>
-                                                        <td><?php echo $row['nome_conta'] ?></td>
-                                                        <td>
-                                                            <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                                <i class="fas fa-edit"></i>
-                                                                <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-                                                <?php
-                                                }
-                                                ?>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -207,7 +207,7 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                 height: '100%'
             },
             title: {
-                text: 'Receitas diárias (reais)',
+                text: 'Receitas diárias (R$)',
                 align: 'left',
                 floating: false
             },
@@ -217,7 +217,7 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                     distributed: false
                 }
             },
-            colors: ['#239E18'],
+            colors: ['#198754'],
             xaxis: {
                 type: "categories",
                 categories: [dias[0], dias[1], dias[2], dias[3], dias[4], dias[5], dias[6], dias[7], dias[8], dias[9], dias[10], dias[11], dias[12], dias[13], dias[14], dias[15], dias[16], dias[17], dias[18], dias[19], dias[20], dias[21], dias[22], dias[23], dias[24], dias[25], dias[26], dias[27], dias[28], dias[29], dias[30]],
