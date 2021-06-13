@@ -11,7 +11,8 @@ include_once(__DIR__ . "/../include/navBar_unlogged.php");
 ?>
 
 <body>
-    <h1 class="mainTitle">Easylize Finanças</h1>
+    <h1 class="mainTitle" style="visibility: hidden;" >Easylize Finanças</h1>
+    <img class="logo-inicio" src="../image/logo_inicio.png" alt="logo da pagina de inicio">
 
 
     <?php

@@ -305,3 +305,19 @@ div.camposInfo label, div.camposInfo input {
 }
 
 /* fim perfil do usuario css */
+
+
+/*estilo das imagens das logos*/
+
+.logo-inicio {
+    padding-top: 20px;
+    margin-bottom: -200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo-titulo {
+    width: 30px;
+    margin-left: 40px;
+}

@@ -1,5 +1,6 @@
 <sidebar class="sideBarMenu">
     <div id="sidebarHeader" class="d-flex align-items-center">
+        <img class="logo-titulo" src="../image/logo-branco.png" alt="logo do titulo">
         <h4 class="col d-flex justify-content-center">Easylize</h4>
         <div class="menuToggler">
             <i class="fas fa-bars fa-2x"></i>
