@@ -77,9 +77,9 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
                         <div class="card-header text-white bg-light-blue">
                             <h3 class="col-12 d-flex justify-content-center">Estatísticas mensais</h3>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body p-2">
                             <div class="col-md-12 d-flex justify-content-center">
-                                <div style="height:400px; width:500px" id="contentDashboard">
+                                <div class="d-flex align-items-center" style="height:400px; width:500px">
                                     <div class="col-md-12">
                                         <form class="col-12" method="GET" action="../pages/despesas.php" id="formSelectMes">
                                             <div class="form-group">

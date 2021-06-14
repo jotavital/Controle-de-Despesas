@@ -79,7 +79,7 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                         </div>
                         <div class="card-body">
                             <div class="col-md-12 d-flex justify-content-center">
-                                <div style="height:400px; width:500px" id="contentDashboard">
+                                <div class="d-flex align-items-center" style="height:400px; width:500px">
                                     <div class="col-md-12">
                                         <form class="col-12" method="GET" action="../pages/receitas.php" id="formSelectMes">
                                             <div class="form-group">
