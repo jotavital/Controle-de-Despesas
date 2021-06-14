@@ -59,7 +59,7 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
 
                 <?php
                 $userId = $_SESSION['userId'];
-                $sql = $conexao->prepare("SELECT r.*, c.nome_conta, c.id as id_conta FROM receita as r, conta as c WHERE r.fk_usuario = :userId AND r.fk_conta = c.id GROUP BY r.id");
+                $sql = $conexao->prepare("SELECT r.*, c.nome_conta, c.id as id_conta FROM receita as r, conta as c WHERE r.fk_usuario = :userId AND r.fk_conta = c.id GROUP BY r.id ORDER BY data_receita DESC");
                 $sql->bindValue(":userId", $userId);
 
                 try {
@@ -128,14 +128,34 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                         <div class="card-body">
                             <div class="d-flex justify-content-center">
                                 <div class="col-12 tableReceitas" id="tableReceitasContainer">
-                                    <table id="tableReceitas" class="tabela hover order-column row-border">
+                                    <table id="tableReceitas" class="tabela table hover order-column row-border table-hover table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Descrição</th>
-                                                <th>Data</th>
-                                                <th>Valor</th>
-                                                <th>Conta</th>
-                                                <th>Ações</th>
+                                                <th>
+                                                    <div class="d-flex justify-content-center">
+                                                        Descrição
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="d-flex justify-content-center">
+                                                        Data
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="d-flex justify-content-center">
+                                                        Valor
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="d-flex justify-content-center">
+                                                        Conta
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="d-flex justify-content-center">
+                                                        Ações
+                                                    </div>
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>

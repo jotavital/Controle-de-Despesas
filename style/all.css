@@ -31,6 +31,7 @@ h4 {
     min-height: 40px !important;
     min-width: 220px !important;
     padding: 10px;
+    cursor: pointer;
 }
 
 #containerCardsContas .card{

@@ -56,19 +56,47 @@ setTitulo($title);
                                 <div class="card-header bg-light-blue text-white">
                                     <h3 class="col-12 d-flex justify-content-center">Histórico de Transações</h3>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body p-1">
                                     <div class="d-flex justify-content-center">
-                                        <div class="col-12 tableDespesas" id="tableDespesasContainer">
-                                            <table id="tableDespesas" class="tabela hover order-column row-border">
+                                        <div class="col-12 tableTransacoes" id="tableDespesasContainer">
+                                            <table id="tableTransacoes" class="tabela table hover order-column row-border table-hover table-bordered table-responsive">
                                                 <thead>
                                                     <tr>
-                                                        <th>Tipo</th>
-                                                        <th>Descrição</th>
-                                                        <th>Data</th>
-                                                        <th>Vencimento</th>
-                                                        <th>Valor</th>
-                                                        <th>Conta</th>
-                                                        <th>Ações</th>
+                                                        <th>
+                                                            <div class="d-flex justify-content-center">
+                                                                Tipo
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="d-flex justify-content-center">
+                                                                Descrição
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="d-flex justify-content-center">
+                                                                Data
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="d-flex justify-content-center">
+                                                                Vencimento
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="d-flex justify-content-center">
+                                                                Valor
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="d-flex justify-content-center">
+                                                                Conta
+                                                            </div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="d-flex justify-content-center">
+                                                                Ações
+                                                            </div>
+                                                        </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -82,8 +110,10 @@ setTitulo($title);
                                                     ?>
 
                                                             <tr>
-                                                                <td class="d-flex justify-content-center">
-                                                                    <i class="p-danger fas fa-arrow-circle-down"></i>
+                                                                <td>
+                                                                    <div class="d-flex justify-content-center">
+                                                                        <i class="p-danger fas fa-arrow-circle-down"></i>
+                                                                    </div>
                                                                 </td>
                                                                 <td><?php echo $row['descricao_despesa'] ?></td>
                                                                 <td><?php echo $data_despesa_formatada ?></td>
@@ -104,8 +134,10 @@ setTitulo($title);
                                                         ?>
 
                                                             <tr>
-                                                                <td class="d-flex justify-content-center">
-                                                                    <i class="p-success fas fa-arrow-circle-up"></i>
+                                                                <td>
+                                                                    <div class="d-flex justify-content-center">
+                                                                        <i class="p-success fas fa-arrow-circle-up"></i>
+                                                                    </div>
                                                                 </td>
                                                                 <td><?php echo $row['descricao_receita'] ?></td>
                                                                 <td><?php echo $data_receita_formatada ?></td>
@@ -133,7 +165,6 @@ setTitulo($title);
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </main>

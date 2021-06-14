@@ -59,7 +59,7 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
 
                 <?php
                 $userId = $_SESSION['userId'];
-                $stm = $conexao->prepare("SELECT d.*, c.nome_conta FROM despesa as d, conta as c WHERE d.fk_usuario = :userId AND d.fk_conta = c.id GROUP BY d.id");
+                $stm = $conexao->prepare("SELECT d.*, c.nome_conta FROM despesa as d, conta as c WHERE d.fk_usuario = :userId AND d.fk_conta = c.id GROUP BY d.id ORDER BY data_despesa DESC");
                 $stm->bindValue(":userId", $userId);
 
                 try {
@@ -128,15 +128,39 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
                         <div class="card-body">
                             <div class="d-flex justify-content-center">
                                 <div class="col-12 tableDespesas" id="tableDespesasContainer">
-                                    <table id="tableDespesas" class="tabela hover order-column row-border">
+                                    <table id="tableDespesas" class="tabela table hover order-column row-border table-hover table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>Descrição</th>
-                                                <th>Data</th>
-                                                <th>Vencimento</th>
-                                                <th>Valor</th>
-                                                <th>Conta</th>
-                                                <th>Ações</th>
+                                                <th>
+                                                    <div class="d-flex justify-content-center">
+                                                        Descrição
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="d-flex justify-content-center">
+                                                        Data
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="d-flex justify-content-center">
+                                                        Vencimento
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="d-flex justify-content-center">
+                                                        Valor
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="d-flex justify-content-center">
+                                                        Conta
+                                                    </div>
+                                                </th>
+                                                <th>
+                                                    <div class="d-flex justify-content-center">
+                                                        Ações
+                                                    </div>
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
