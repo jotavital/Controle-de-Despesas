@@ -16,6 +16,7 @@ include_once(__DIR__ . "/../include/header.php");
 include_once(__DIR__ . "/modals/modalAddConta.php");
 include_once(__DIR__ . "/modals/modalDeleteConta.php");
 include_once(__DIR__ . "/modals/modalEditConta.php");
+include_once(__DIR__ . "/modals/modalReajusteSaldo.php");
 setTitulo($title);
 
 ?>
@@ -75,7 +76,15 @@ setTitulo($title);
                                                             <i class="fas fa-edit"></i>
                                                             Editar
                                                         </li>
-                                                    </a>' ?>
+                                                    </a>' 
+                                        ?>
+                                        <?php echo '<a href="../pages/contas.php?reajuste=true&id=' . $row['id'] . '&nome_conta=' . $row['nome_conta'] . '&saldoAtual=' . $row['saldo_atual'] . '"' . 'class="btnReajusteSaldo dropdown-item">
+                                                        <li>
+                                                            <i class="fas fa-wrench"></i>
+                                                            Reajustar saldo
+                                                        </li>
+                                                    </a>' 
+                                        ?>
                                     </ul>
                                 </div>
                             </div>
@@ -129,6 +138,12 @@ if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
 if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
     echo    "<script>$(document).ready(function(){
                 $('#modalEditConta').modal('show');
+            });</script>";
+}
+
+if (@$_GET['reajuste'] != null && @$_GET['reajuste'] == "true") {
+    echo    "<script>$(document).ready(function(){
+                $('#modalReajusteSaldo').modal('show');
             });</script>";
 }
 

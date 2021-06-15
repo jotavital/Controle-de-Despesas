@@ -233,11 +233,39 @@ class Conta
             echo $e->getMessage();
         }
     }
+
+    function updateSaldoConta($idConta, $novoSaldo)
+    {
+        echo "<script>alert('chamo');</script>";
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("UPDATE conta SET saldo_atual = :novoSaldo WHERE fk_usuario = :userId AND conta.id = :idConta");
+        $stm->bindValue(":userId", $_SESSION['userId']);
+        $stm->bindValue(":idConta", $idConta);
+        $stm->bindValue(":novoSaldo", $novoSaldo); 
+
+        try {
+            $stm->execute();
+            header("Location: ../../pages/contas.php");
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
 
 if (isset($_POST['editNomeConta'])) {
     $conta = new Conta;
     $conta->updateNomeConta($_POST['idConta'], $_POST['inputNovoNome']);
+}
+
+if (isset($_POST['reajusteSaldo'])) {
+    $conta = new Conta;
+    $conta->updateSaldoConta($_POST['idConta'], $_POST['novoSaldoInput']);
 }
 
 if (isset($_POST['editCategoriaConta'])) {
