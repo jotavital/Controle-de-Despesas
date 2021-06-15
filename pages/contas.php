@@ -7,7 +7,9 @@ $conn = new Connection;
 $conexao = $conn->conectar();
 
 include_once(__DIR__ . "/../classes/Conta.class.php");
+include_once(__DIR__ . "/../classes/Categoria.class.php");
 $contasObj = new Conta;
+$categoriaObj = new Categoria;
 
 $title = "Contas";
 include_once(__DIR__ . "/../include/header.php");
@@ -44,30 +46,36 @@ setTitulo($title);
                     $data = $contasObj->selectAllFromConta();
 
                     foreach ($data as $index => $row) {
+                        $categoria = $categoriaObj->selectAllFromCategoria("id = " . $row['fk_categoria']);
                     ?>
 
                         <div class="card mb-3 ms-3 col-3 br-25 overflow-auto">
                             <div class="card-header col-12 bg-light-blue overflow-auto d-flex justify-content-between align-items-center">
                                 <div class="col-11">
-                                    <h5 class="card-title">
+                                    <h5 class="card-title" style="margin:0;">
 
                                         <?php
                                         echo $row['nome_conta'];
                                         ?>
 
                                     </h5>
+                                    <p style="margin:0;">
+                                        <?php
+                                        echo $categoria[0]['nome_categoria'];
+                                        ?>
+                                    </p>
                                 </div>
                                 <div class="col-1 d-flex align-items-center" style="cursor:pointer;">
                                     <div class="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v" style="font-size: 1.3rem;"></i>
                                     </div>
                                     <ul class="dropdown-menu">
-                                        <?php echo '<a href="../pages/contas.php?edit=true&id=' . $row['id'] . '&nome_conta=' . $row['nome_conta'] . '"' . 'class="btnEditarConta dropdown-item">
-                                                            <li>
-                                                                <i class="fas fa-edit"></i>
-                                                                Editar
-                                                            </li>
-                                                        </a>' ?>
+                                        <?php echo '<a href="../pages/contas.php?edit=true&id=' . $row['id'] . '&nome_conta=' . $row['nome_conta'] . '&idCategoria=' . $categoria[0]['id'] . '"' . 'class="btnEditarConta dropdown-item">
+                                                        <li>
+                                                            <i class="fas fa-edit"></i>
+                                                            Editar
+                                                        </li>
+                                                    </a>' ?>
                                     </ul>
                                 </div>
                             </div>

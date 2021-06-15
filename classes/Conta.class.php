@@ -211,11 +211,38 @@ class Conta
             echo $e->getMessage();
         }
     }
+
+    function updateCategoriaConta($idConta, $novaCategoria)
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("UPDATE conta SET fk_categoria = :novaCategoria WHERE fk_usuario = :userId AND conta.id = :idConta");
+        $stm->bindValue(":novaCategoria", $novaCategoria);
+        $stm->bindValue(":userId", $_SESSION['userId']);
+        $stm->bindValue(":idConta", $idConta);
+
+        try {
+            $stm->execute();
+            header("Location: ../../pages/contas.php");
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
 
 if (isset($_POST['editNomeConta'])) {
     $conta = new Conta;
     $conta->updateNomeConta($_POST['idConta'], $_POST['inputNovoNome']);
+}
+
+if (isset($_POST['editCategoriaConta'])) {
+    $conta = new Conta;
+    $conta->updateCategoriaConta($_POST['idConta'], $_POST['categoriaSelect']);
 }
 
 if (isset($_POST['deleteConta'])) {
