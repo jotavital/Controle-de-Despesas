@@ -1,12 +1,13 @@
 <sidebar class="sideBarMenu">
-    <div id="sidebarHeader" class="d-flex align-items-center">
-        <img class="logo-titulo" src="../image/logo-branco.png" alt="logo do titulo">
-        <h4 class="col d-flex justify-content-center">Easylize</h4>
+    <div id="sidebarHeader" class="col-12 d-flex align-items-center justify-content-end">
         <div class="menuToggler">
             <i class="fas fa-bars fa-2x"></i>
         </div>
     </div>
     <div id="sidebarItems">
+        <div class="col-12 mt-3 mb-3 d-flex justify-content-center logoSidebar">
+            <img src="../image/favicon.ico" style="width:40px;">
+        </div>
         <ul>
             <li>
                 <div class="mb-1 sideBarItem d-flex align-items-center">

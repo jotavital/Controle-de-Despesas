@@ -19,7 +19,9 @@ include_once(__DIR__ . "/../include/navBar_unlogged.php");
 
 <body>
     <div id="container">
-        <img class="logo-inicio" src="../image/logo_inicio.png" alt="logo da pagina de inicio">
+        <div class="col-12 mt-5 d-flex justify-content-center">
+            <img class="logo-inicio" src="../image/logo_inicio.png" alt="logo da pagina de inicio">
+        </div>
         <div class="divForm">
             <form action="../classes/Usuario.class.php" method="POST" id="formLogin" class="col-5 needs-validation" novalidate>
                 <h1 class="mb-3">Entrar</h1>

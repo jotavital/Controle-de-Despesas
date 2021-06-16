@@ -236,7 +236,6 @@ class Conta
 
     function updateSaldoConta($idConta, $novoSaldo)
     {
-        echo "<script>alert('chamo');</script>";
         if (!isset($_SESSION)) {
             session_start();
         }

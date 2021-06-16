@@ -158,5 +158,9 @@ if (@$_GET['reajuste'] != null && @$_GET['reajuste'] == "true") {
         $('#modalEditConta').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
+
+        $('#modalReajusteSaldo').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
     });
 </script>

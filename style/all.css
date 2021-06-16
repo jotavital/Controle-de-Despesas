@@ -132,7 +132,6 @@ div.ss-add {
 
 .divForm {
     padding: 30px;
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -198,10 +197,6 @@ sidebar {
     background-color: white;
 }
 
-#sidebarItems {
-    padding-top: 2rem;
-}
-
 #sidebarItems li, #sidebarItems a {
     list-style-type: none;
     text-decoration: none;
@@ -212,9 +207,6 @@ sidebar {
     height: 50px;
     padding: .1rem;
     background-color: #4895ef;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     flex-direction: row;
 }
 
@@ -314,15 +306,7 @@ div.camposInfo label, div.camposInfo input {
 
 /*estilo das imagens das logos*/
 
-.logo-inicio {
-    padding-top: 20px;
-    margin-bottom: -200px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .logo-titulo {
     width: 30px;
-    margin-left: 40px;
+    color: black;
 }
