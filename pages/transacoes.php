@@ -65,8 +65,6 @@ $transacaoObj = new Transacao;
                                                             <div class="d-flex justify-content-center">
                                                                 Data
                                                                 <div class="ms-2 iconOrdenacao">
-                                                                    <!-- <i class="fas fa-caret-up"></i> -->
-                                                                    <!-- <i class="fas fa-sort-amount-up"></i> -->
                                                                     <i class="p-warning fas fa-sort-amount-down"></i>
                                                                 </div>
                                                             </div>

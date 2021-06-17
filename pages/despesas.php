@@ -10,6 +10,7 @@ $title = "Despesas";
 include_once(__DIR__ . "/../include/header.php");
 include_once(__DIR__ . "/modals/modalAddDespesa.php");
 include_once(__DIR__ . "/modals/modalDeleteDespesa.php");
+include_once(__DIR__ . "/modals/modalEditDespesa.php");
 setTitulo($title);
 
 include_once(__DIR__ . "/../classes/Despesa.class.php");
@@ -139,6 +140,9 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
                                                 <th>
                                                     <div class="d-flex justify-content-center">
                                                         Data
+                                                        <div class="ms-2 iconOrdenacao">
+                                                            <i class="p-warning fas fa-sort-amount-down"></i>
+                                                        </div>
                                                     </div>
                                                 </th>
                                                 <th>
@@ -180,8 +184,14 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
                                                     <td><?php echo $row['nome_conta'] ?></td>
                                                     <td>
                                                         <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                            <i class="fas fa-edit"></i>
-                                                            <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa"><i class="fas fa-trash-alt"></i></a>' ?>
+                                                            <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&edit=true"' . 'id="btnEditDespesa" class="me-2">
+                                                                            <i class="fas fa-edit"></i>
+                                                                        </a>'
+                                                            ?>
+                                                            <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa">
+                                                                            <i class="fas fa-trash-alt"></i>
+                                                                        </a>'
+                                                            ?>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -212,6 +222,12 @@ include_once(__DIR__ . "/../include/footer.php");
 if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
     echo    "<script>$(document).ready(function(){
                 $('#modalDeleteDespesa').modal('show');
+            });</script>";
+}
+
+if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
+    echo    "<script>$(document).ready(function(){
+                $('#modalEditDespesa').modal('show');
             });</script>";
 }
 
@@ -320,12 +336,15 @@ if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
 
         });
 
-
     });
 
     $(document).ready(function() {
 
         $('#modalDeleteDespesa').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
+
+        $('#modalEditDespesa').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
     });

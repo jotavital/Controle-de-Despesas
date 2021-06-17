@@ -10,7 +10,7 @@
         </div>
         <ul>
             <li>
-                <div class="mb-1 sideBarItem d-flex align-items-center">
+                <div class="mb-2 sideBarItem d-flex align-items-center">
                     <div class="sideBarIcon">
                         <i class="fas fa-tachometer-alt"></i>
                     </div>
@@ -20,7 +20,7 @@
                 </div>
             </li>
             <li>
-                <div class="mb-1 sideBarItem d-flex align-items-center">
+                <div class="mb-2 sideBarItem d-flex align-items-center">
                     <div class="sideBarIcon">
                         <i class="fas fa-wallet"></i>
                     </div>
@@ -30,7 +30,7 @@
                 </div>
             </li>
             <li>
-                <div class="mb-1 sideBarItem d-flex align-items-center">
+                <div class="mb-2 sideBarItem d-flex align-items-center">
                     <div class="sideBarIcon">
                         <i class="fas fa-dollar-sign"></i>
                     </div>
@@ -40,7 +40,7 @@
                 </div>
             </li>
             <li>
-                <div class="mb-1 sideBarItem d-flex align-items-center">
+                <div class="mb-2 sideBarItem d-flex align-items-center">
                     <div class="sideBarIcon">
                         <i class="fas fa-chart-line"></i>
                     </div>
@@ -50,7 +50,7 @@
                 </div>
             </li>
             <li>
-                <div class="mb-1 sideBarItem d-flex align-items-center">
+                <div class="mb-2 sideBarItem d-flex align-items-center">
                     <div class="sideBarIcon">
                         <i class="fas fa-receipt"></i>
                     </div>
@@ -60,7 +60,7 @@
                 </div>
             </li>
             <li>
-                <div class="mb-1 sideBarItem d-flex align-items-center">
+                <div class="mb-2 sideBarItem d-flex align-items-center">
                     <div class="sideBarIcon">
                         <i class="fas fa-chart-pie"></i>
                     </div>
@@ -70,7 +70,7 @@
                 </div>
             </li>
             <li>
-                <div class="mb-1 sideBarItem d-flex align-items-center">
+                <div class="mb-2 sideBarItem d-flex align-items-center">
                     <div class="sideBarIcon">
                         <i class="fas fa-bullseye"></i>
                     </div>
@@ -80,7 +80,7 @@
                 </div>
             </li>
             <li>
-                <div class="mb-1 sideBarItem d-flex align-items-center">
+                <div class="mb-2 sideBarItem d-flex align-items-center">
                     <div class="sideBarIcon">
                         <i class="fas fa-user-circle"></i>
                     </div>
@@ -90,7 +90,7 @@
                 </div>
             </li>
             <li>
-                <div class="mb-1 sideBarItem d-flex align-items-center">
+                <div class="mb-2 sideBarItem d-flex align-items-center">
                     <div class="sideBarIcon">
                         <i class="fas fa-sign-out-alt"></i>
                     </div>

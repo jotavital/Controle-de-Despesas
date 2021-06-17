@@ -139,6 +139,9 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                                                 <th>
                                                     <div class="d-flex justify-content-center">
                                                         Data
+                                                        <div class="ms-2 iconOrdenacao">
+                                                            <i class="p-warning fas fa-sort-amount-down"></i>
+                                                        </div>
                                                     </div>
                                                 </th>
                                                 <th>

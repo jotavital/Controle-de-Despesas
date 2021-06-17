@@ -34,6 +34,11 @@ h4 {
     cursor: pointer;
 }
 
+.modal-content{
+    border-radius: 20px;
+    overflow: hidden;
+}
+
 #containerCardsContas .card{
     min-height: 40px !important;
     min-width: 220px !important;
