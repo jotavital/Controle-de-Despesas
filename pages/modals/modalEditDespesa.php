@@ -9,13 +9,15 @@ if (isset($_POST['newRow'])) {
     $newRow = unserialize(base64_decode($_POST['newRow']));
 }
 
-
 $functions = new Functions;
 
 if (isset($_GET['type']) && $_GET['type'] == 'despesa') {
-    $despesaObj = new Despesa;
-    $newRow = $despesaObj->selectFromDespesa('', 'id = ' . $newRow['id']);
-    $newRow = $newRow[0];
+    if (isset($_POST['newRow'])) {
+        $newRow = unserialize(base64_decode($_POST['newRow']));
+        $despesaObj = new Despesa;
+        $newRow = $despesaObj->selectFromDespesa('', 'id = ' . $newRow['id']);
+        $newRow = $newRow[0];
+    }
 }
 ?>
 

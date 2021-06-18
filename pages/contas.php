@@ -47,6 +47,8 @@ setTitulo($title);
                     $data = $contasObj->selectAllFromConta();
 
                     foreach ($data as $index => $row) {
+                        $dataToEdit = base64_encode(serialize($row));
+
                         $categoria = $categoriaObj->selectAllFromCategoria("id = " . $row['fk_categoria']);
                     ?>
 
@@ -71,20 +73,33 @@ setTitulo($title);
                                         <i class="fas fa-ellipsis-v" style="font-size: 1.3rem;"></i>
                                     </div>
                                     <ul class="dropdown-menu">
-                                        <?php echo '<a href="../pages/contas.php?edit=true&id=' . $row['id'] . '&nome_conta=' . $row['nome_conta'] . '&idCategoria=' . $categoria[0]['id'] . '"' . 'class="btnEditarConta dropdown-item">
-                                                        <li>
-                                                            <i class="fas fa-edit"></i>
-                                                            Editar
-                                                        </li>
-                                                    </a>' 
-                                        ?>
-                                        <?php echo '<a href="../pages/contas.php?reajuste=true&id=' . $row['id'] . '&nome_conta=' . $row['nome_conta'] . '&saldoAtual=' . $row['saldo_atual'] . '"' . 'class="btnReajusteSaldo dropdown-item">
-                                                        <li>
-                                                            <i class="fas fa-wrench"></i>
-                                                            Reajustar saldo
-                                                        </li>
-                                                    </a>' 
-                                        ?>
+                                        <form method="post" action="?edit=true">
+                                            <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                            
+                                                <?php echo '<a class="btnEditarConta dropdown-item">
+                                                                <button type="submit" class="iconButton">
+                                                                    <li>
+                                                                        <i class="fas fa-edit"></i>
+                                                                        Editar
+                                                                    </li>
+                                                                </button>
+                                                            </a>'
+                                                ?>
+                                            
+                                        </form>
+                                        <form action="?reajuste=true" method="post">
+                                            <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                            <?php echo '<a class="btnReajusteSaldo dropdown-item">
+                                                            <button type="submit" class="iconButton">
+                                                                <li>
+                                                                    <i class="fas fa-wrench"></i>
+                                                                    Reajustar saldo
+                                                                </li>
+                                                            </button>
+                                                        </a>'
+                                            ?>
+
+                                        </form>
                                     </ul>
                                 </div>
                             </div>
@@ -105,9 +120,20 @@ setTitulo($title);
                                     ?>
 
                                 </p>
-                                <div class="col-sm d-flex justify-content-center">
-                                    <a href="#" class="btn btn-outline-primary col-sm me-3">Transações</a>
-                                    <?php echo '<a href="../pages/contas.php?delete=true&id=' . $row['id'] . '&nome_conta=' . $row['nome_conta'] . "&saldo_atual=" . sprintf("%.2f", $row['saldo_atual']) . '"' . 'class="btn btn-outline-danger col-sm btnExcluirConta">Excluir</a>' ?>
+                                <div class="col-12 d-flex justify-content-center">
+                                    <a href="#" class="btn btn-outline-primary col-sm-6 me-3">Transações</a>
+
+                                    <form action="?delete=true" method="post" class="col-6">
+                                        <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                        <?php 
+
+                                            echo '  <button type="submit" class="btn btn-outline-danger col-12 btnExcluirConta">
+                                                        Excluir
+                                                    </button>
+                                                    ' 
+                                        
+                                        ?>
+                                    </form>
                                 </div>
                             </div>
                         </div>

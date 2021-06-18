@@ -1,3 +1,11 @@
+<?php
+
+if (isset($_POST['newRow'])) {
+    $newRow = unserialize(base64_decode($_POST['newRow']));
+}
+
+?>
+
 <div class="modal fade" id="modalEditConta" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalEditContaLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
@@ -10,7 +18,7 @@
                     <form method="POST" action="../../classes/Conta.class.php" id="formEditConta">
                         <div class="col-sm-12">
                             <label for="inputNovoNome" class="form-label">Nome</label>
-                            <input value="<?php echo $_GET['nome_conta']; ?>" type="text" class="mb-3 form-control" id="inputNovoNome" name="inputNovoNome" aria-describedby="Nome" placeholder="Novo nome da conta" required>
+                            <input value="<?php echo $newRow['nome_conta']; ?>" type="text" class="mb-3 form-control" id="inputNovoNome" name="inputNovoNome" aria-describedby="Nome" placeholder="Novo nome da conta" required>
                         </div>
                         <div class="col-sm-12 mb-3">
                             <label for="categoriaSelect" class="form-label">Categoria</label>
@@ -23,7 +31,7 @@
 
                                 foreach ($data as $row) {
                                 ?>
-                                    <option value="<?php echo $row['id'] ?>" <?php echo ($_GET['idCategoria'] == $row['id']) ? ("selected") : (""); ?> ><?php echo $row['nome_categoria'] ?></option>
+                                    <option value="<?php echo $row['id'] ?>" <?php echo ($newRow['fk_categoria'] == $row['id']) ? ("selected") : (""); ?> ><?php echo $row['nome_categoria'] ?></option>
                                 <?php
                                 }
                                 ?>
@@ -32,7 +40,7 @@
                         </div>
                         <input name="editNomeConta" class="hide">
                         <input name="editCategoriaConta" class="hide">
-                        <input name="idConta" class="hide" value="<?php echo $_GET['id'] ?>">
+                        <input name="idConta" class="hide" value="<?php echo $newRow['id'] ?>">
                         <div class="modal-footer d-flex justify-content-center">
                             <button type="submit" id="submit" class="btn btn-primary">Salvar</button>
                         </div>
