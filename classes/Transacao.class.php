@@ -40,6 +40,5 @@ class Transacao
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-
     }
 }

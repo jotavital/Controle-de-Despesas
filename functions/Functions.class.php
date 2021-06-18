@@ -9,4 +9,8 @@ class Functions
         $valor = ($formatter->formatCurrency($valor, 'BRL'));
         return $valor;
     }
+
+    function formatarRealSemCifrao($valor){
+        return number_format($valor, 2, ',', '.');
+    }
 }

@@ -10,6 +10,7 @@ $title = "Transações";
 include_once(__DIR__ . "/../include/header.php");
 include_once(__DIR__ . "/modals/modalDeleteDespesa.php");
 include_once(__DIR__ . "/modals/modalDeleteReceita.php");
+include_once(__DIR__ . "/modals/modalEditDespesa.php");
 setTitulo($title);
 
 include_once(__DIR__ . "/../classes/Transacao.class.php");
@@ -96,6 +97,8 @@ $transacaoObj = new Transacao;
                                                     <?php
                                                     foreach ($result as $row) {
                                                         $valor = $row['valor'];
+                                                        $dataToEdit = base64_encode(serialize($row));
+
                                                         if ($row['tipo'] == 'despesa') {
                                                             $data_despesa_formatada = date('d/m/Y', strtotime($row['data_transacao']));
                                                             $data_vencimento_formatada = date('d/m/Y', strtotime($row['data_vencimento']));
@@ -114,7 +117,12 @@ $transacaoObj = new Transacao;
                                                                 <td><?php echo $row['nome_conta'] ?></td>
                                                                 <td>
                                                                     <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                                        <i class="fas fa-edit"></i>
+                                                                        <form action="?edit=true&type=despesa" method="post" id="triggerEdit">
+                                                                            <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                                                            <button type="submit" class="iconButton">
+                                                                                <?php echo "<i class='fas fa-edit'></i>" ?>
+                                                                            </button>
+                                                                        </form>
                                                                         <?php echo '<a href="../pages/transacoes.php?delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa"><i class="fas fa-trash-alt"></i></a>' ?>
                                                                     </div>
                                                                 </td>
@@ -178,12 +186,28 @@ if (isset($_GET['delete'])) {
             echo    "<script>$(document).ready(function(){
                         $('#modalDeleteDespesa').modal('show');
                     });</script>";
+
         } elseif ($_GET['type'] == "receita") {
 
             echo    "<script>$(document).ready(function(){
                         $('#modalDeleteReceita').modal('show');
                     });</script>";
         }
+    }
+}
+
+if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
+    if ($_GET['type'] == "despesa") {
+
+        echo    "<script>$(document).ready(function(){
+                    $('#modalEditDespesa').modal('show');
+                });</script>";
+
+    } elseif ($_GET['type'] == "receita") {
+
+        echo    "<script>$(document).ready(function(){
+                    $('#modalEditReceita').modal('show');
+                });</script>";
     }
 }
 

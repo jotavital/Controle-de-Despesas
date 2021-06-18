@@ -3,6 +3,7 @@
 include_once(__DIR__ . "/../connections/Connection.class.php");
 include_once(__DIR__ . "/../connections/loginVerify.php");
 include_once(__DIR__ . "/Conta.class.php");
+include_once(__DIR__ . "/Categoria.class.php");
 
 class Despesa
 {
@@ -260,18 +261,18 @@ class Despesa
         }
     }
 
-    function selectFromDespesa($campos = '', $condicao = ''){
+    function selectFromDespesa($campos = '', $condicao = '')
+    {
         $conn = new Connection;
         $conexao = $conn->conectar();
 
-        if($campos == ''){
+        if ($campos == '') {
             $campos = '*';
         }
 
-        if($condicao != ''){
+        if ($condicao != '') {
             $sql = "SELECT " . $campos .  " FROM despesa WHERE " . $condicao . "";
-            
-        }else{
+        } else {
             $sql = "SELECT " . $campos .  " FROM despesa ";
         }
 
@@ -289,6 +290,8 @@ class Despesa
 
     function updateDespesa($idDespesa)
     {
+        $conta = new Conta;
+        $despesaObj = new Despesa;
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -312,6 +315,8 @@ class Despesa
         $stm->bindValue(':fk_conta', $_POST['contaSelect']);
         $stm->bindValue(':fk_usuario', $_SESSION['userId']);
         $stm->bindValue(':idDespesa', $idDespesa);
+
+        $dadosDespesa = $despesaObj->selectFromDespesa('valor, fk_conta', 'id = ' . $idDespesa);
 
         try {
             $stm->execute();
@@ -338,6 +343,7 @@ class Despesa
             }
 
             //relacionando categorias com despesa
+            $despesaObj->desvincularTodasCategoriasDespesa($idDespesa);
 
             foreach ($_POST['categoriasSelect'] as $categoria) {
                 $stm2 = $conexao->prepare("INSERT IGNORE INTO categoria_despesa (fk_categoria, fk_despesa) VALUES (:fk_categoria, :fk_despesa)");
@@ -346,10 +352,6 @@ class Despesa
                 $stm2->execute();
             }
 
-            $despesaObj = new Despesa;
-            $dadosDespesa = $despesaObj->selectFromDespesa('valor, fk_conta', 'id = ' . $idDespesa);
-
-            $conta = new Conta;
             $conta->somarValorDespesa($dadosDespesa[0]['fk_conta'], $dadosDespesa[0]['valor']);
             $conta->subtrairValorDespesa($_POST['contaSelect'], $_POST['valorInput']);
         } catch (PDOException $e) {

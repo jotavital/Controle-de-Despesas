@@ -10,7 +10,7 @@ $validFeedback = "Muito bom!";
 
 $mesAtual = date('m');
 
-include_once(__DIR__ . "/../connections/functions/Functions.class.php");
+include_once(__DIR__ . "/../functions/Functions.class.php");
 
 $functions = new Functions;
 ?>

@@ -1,5 +1,6 @@
 <?php
 
+include_once(__DIR__ . "/../../classes/Despesa.class.php");
 include_once(__DIR__ . "/modalAddConta.php");
 include_once(__DIR__ . "/modalAddCategoriaDespesa.php");
 include_once(__DIR__ . "/../../classes/Categoria.class.php");
@@ -10,6 +11,12 @@ if (isset($_POST['newRow'])) {
 
 
 $functions = new Functions;
+
+if (isset($_GET['type']) && $_GET['type'] == 'despesa') {
+    $despesaObj = new Despesa;
+    $newRow = $despesaObj->selectFromDespesa('', 'id = ' . $newRow['id']);
+    $newRow = $newRow[0];
+}
 ?>
 
 <div class="modal fade" id="modalEditDespesa" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalEditDespesaLabel" aria-hidden="true">
@@ -28,8 +35,8 @@ $functions = new Functions;
                                 <input type="text" class="form-control" id="descDespesaInput" name="descDespesaInput" aria-describedby="Nome" placeholder="Ex.: Mercado" value="<?php echo $newRow['descricao_despesa'] ?>" required>
                             </div>
                             <div class="mb-3 col-4">
-                                <label for="valorInput" class="form-label">Valor</label>
-                                <input type="text" class="form-control" name="valorInput" id="valorInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});" value="<?php echo $functions->formatarReal($newRow['valor']) ?>" required autocomplete="off">
+                                <label for="novoValorInput" class="form-label">Valor</label>
+                                <input type="text" class="form-control" name="valorInput" id="novoValorInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});" value="<?php echo $functions->formatarRealSemCifrao($newRow['valor']) ?>" required autocomplete="off">
                             </div>
                         </div>
                         <div class="row col-md">
@@ -75,7 +82,7 @@ $functions = new Functions;
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="categoriaSelect" class="form-label">Categorias</label>
                             <div class="row col-12 d-flex align-items-center">
@@ -130,10 +137,10 @@ $functions = new Functions;
     }).prop('selected', true);
 
     $('#formEditDespesas').submit(function() {
-        var x = $('#valorInput').val();
+        var x = $('#novoValorInput').val();
         x = x.replace(/[.]/gim, "");
         x = x.replace(/[,]/gim, ".");
-        document.getElementById('valorInput').value = x;
+        document.getElementById('novoValorInput').value = x;
         var dados = new FormData(this);
 
         $.ajax({
@@ -143,11 +150,12 @@ $functions = new Functions;
             processData: false,
             contentType: false,
             success: function(msg) {
-                alert("Despesa cadastrada com sucesso!" + msg);
+                alert("Despesa editada com sucesso!" + msg);
+                window.history.pushState(null, null, window.location.pathname);
                 window.location.reload();
             },
             error: function(msg) {
-                alert("Erro ao cadastrar a despesa!");
+                alert("Erro ao editada a despesa!");
             }
         });
 
