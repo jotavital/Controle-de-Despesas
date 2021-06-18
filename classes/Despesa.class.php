@@ -259,11 +259,115 @@ class Despesa
             $despesa->deletarTodasDespesasConta($idContaUsuario['id']);
         }
     }
+
+    function selectFromDespesa($campos = '', $condicao = ''){
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        if($campos == ''){
+            $campos = '*';
+        }
+
+        if($condicao != ''){
+            $sql = "SELECT " . $campos .  " FROM despesa WHERE " . $condicao . "";
+            
+        }else{
+            $sql = "SELECT " . $campos .  " FROM despesa ";
+        }
+
+        $stm = $conexao->prepare($sql);
+
+        try {
+            $stm->execute();
+
+            $result = $stm->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    function updateDespesa($idDespesa)
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("  UPDATE despesa 
+                                    SET descricao_despesa = :descricao_despesa,
+                                    imagem = :imagem, 
+                                    data_despesa = :data_despesa, 
+                                    data_vencimento = :data_vencimento, 
+                                    valor = :valor, 
+                                    fk_conta = :fk_conta, 
+                                    fk_usuario = :fk_usuario
+                                    WHERE id = :idDespesa
+                                    ");
+
+        $nomeImg = $_FILES['imgInput']['name'];
+        $stm->bindValue(':descricao_despesa', $_POST['descDespesaInput']);
+        $stm->bindValue(':imagem', $nomeImg);
+        $stm->bindValue(':data_despesa', $_POST['dataDespesa']);
+        $stm->bindValue(':data_vencimento', $_POST['dataVencimentoDespesa']);
+        $stm->bindValue(':valor', $_POST['valorInput']);
+        $stm->bindValue(':fk_conta', $_POST['contaSelect']);
+        $stm->bindValue(':fk_usuario', $_SESSION['userId']);
+        $stm->bindValue(':idDespesa', $idDespesa);
+
+        try {
+            $stm->execute();
+            $_SESSION['msg'] = "Despesa editada!";
+
+            if ($nomeImg != null) {
+
+                $path = "../uploaded/user_images/despesas_images/" . $_SESSION['userId'] . "/" . $idDespesa;
+                $this->deletarImagensDespesa($path);
+
+                $directory = '../uploaded/user_images/despesas_images/' . $_SESSION['userId'];
+
+                if (!file_exists($directory)) {
+                    mkdir($directory, 0777);
+                }
+                $directory = $directory . '/' . $idDespesa . '/';
+                mkdir($directory);
+
+                if (copy($_FILES['imgInput']['tmp_name'], $directory . $nomeImg)) {
+                    $_SESSION['msg'] = "Foto adicionada com sucesso! ";
+                } else {
+                    $_SESSION['msg'] = "Erro ao adicionar foto! ";
+                }
+            }
+
+            //relacionando categorias com despesa
+
+            foreach ($_POST['categoriasSelect'] as $categoria) {
+                $stm2 = $conexao->prepare("INSERT IGNORE INTO categoria_despesa (fk_categoria, fk_despesa) VALUES (:fk_categoria, :fk_despesa)");
+                $stm2->bindValue(':fk_categoria', $categoria);
+                $stm2->bindValue(':fk_despesa', $idDespesa);
+                $stm2->execute();
+            }
+
+            $despesaObj = new Despesa;
+            $dadosDespesa = $despesaObj->selectFromDespesa('valor, fk_conta', 'id = ' . $idDespesa);
+
+            $conta = new Conta;
+            $conta->somarValorDespesa($dadosDespesa[0]['fk_conta'], $dadosDespesa[0]['valor']);
+            $conta->subtrairValorDespesa($_POST['contaSelect'], $_POST['valorInput']);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        $conexao = null;
+    }
 }
 
 if (isset($_POST['deleteDespesa'])) {
     $deleteDespesa = new Despesa;
     $deleteDespesa->deletarDespesa($_POST['idDespesa']);
+}
+
+if (isset($_POST['editDespesa'])) {
+    $editDespesa = new Despesa;
+    $editDespesa->updateDespesa($_POST['idDespesa']);
 }
 
 if (isset($_POST['insertCategoriaDespesa'])) {

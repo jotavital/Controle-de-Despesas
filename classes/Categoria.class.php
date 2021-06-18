@@ -50,4 +50,25 @@ class Categoria
             echo $e->getMessage();
         }
     }
+
+    function selectAllCategoriaDespesaByDespesaId($idDespesa){
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("SELECT fk_categoria FROM categoria_despesa WHERE fk_despesa = :idDespesa");
+        $stm->bindValue(":idDespesa", $idDespesa);
+
+        try {
+            $stm->execute();
+            $resultado = $stm->fetchAll();
+
+            return $resultado;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }

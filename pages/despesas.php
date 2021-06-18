@@ -26,7 +26,7 @@ function totalDespesasTodosDiasDoMes($mes)
 
 
 if (!isset($_GET['selectMesGraficoDespesas'])) {
-    echo "<script> window.location.href = '../pages/despesas.php?selectMesGraficoDespesas=" . $mesAtual . "';</script>";
+    $_GET['selectMesGraficoDespesas'] = $mesAtual;
     $json = totalDespesasTodosDiasDoMes($mesAtual);
 } else {
     $json = totalDespesasTodosDiasDoMes($_GET['selectMesGraficoDespesas']);
@@ -170,10 +170,13 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
                                         <tbody>
 
                                             <?php
+
                                             foreach ($data as $row) {
                                                 $valor = $row['valor'];
                                                 $data_despesa_formatada = date('d/m/Y', strtotime($row['data_despesa']));
                                                 $data_vencimento_formatada = ($row['data_vencimento'] == "0000-00-00") ? ("-") : date('d/m/Y', strtotime($row['data_vencimento']));
+
+                                                $dataToEdit = base64_encode(serialize($row));
                                             ?>
 
                                                 <tr>
@@ -184,11 +187,13 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
                                                     <td><?php echo $row['nome_conta'] ?></td>
                                                     <td>
                                                         <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                            <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&edit=true"' . 'id="btnEditDespesa" class="me-2">
-                                                                            <i class="fas fa-edit"></i>
-                                                                        </a>'
-                                                            ?>
-                                                            <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa">
+                                                            <form action="?edit=true" method="post" id="triggerEdit">
+                                                                <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                                                <button type="submit" class="iconButton">
+                                                                    <?php echo "<i class='fas fa-edit'></i>" ?>
+                                                                </button>
+                                                            </form>
+                                                            <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '?delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . '&valor=' . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa">
                                                                             <i class="fas fa-trash-alt"></i>
                                                                         </a>'
                                                             ?>
