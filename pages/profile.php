@@ -55,7 +55,7 @@ include_once(__DIR__ . "/../pages/modals/modalDeleteUsuario.php");
                             <div class="d-flex justify-content-center align-items-center">
                                 <h5><?php echo ($resultado['nome'] . " " . $resultado['sobrenome']); ?></h5>
                                 <div class="editIcon">
-                                    <?php echo '<a href="../pages/profile.php?editNomeSobrenome=true&nome=' . $resultado['nome'] . '&sobrenome=' . $resultado['sobrenome']  . '"' . 'id="btnEditNomeSobrenome"><i class="fas fa-edit"></i></a>' ?>
+                                    <?php echo '<a href="../pages/profile.php?editNomeSobrenome=true&nome=' . $resultado['nome'] . '&sobrenome=' . $resultado['sobrenome']  . '"' . 'id="btnEditNomeSobrenome"><i class="fas fa-edit p-primary"></i></a>' ?>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center">
@@ -72,7 +72,7 @@ include_once(__DIR__ . "/../pages/modals/modalDeleteUsuario.php");
                             <label>Senha:</label>
                             <input class="form-control" type="password" value=<?php echo ($resultado['email']); ?> readonly>
                             <div class="editIcon">
-                                <?php echo '<a href="../pages/profile.php?editSenha=true" id="btnEditSenha"><i class="fas fa-edit"></i></a>' ?>
+                                <?php echo '<a href="../pages/profile.php?editSenha=true" id="btnEditSenha"><i class="fas fa-edit p-primary"></i></a>' ?>
                             </div>
                         </div>
                     </div>

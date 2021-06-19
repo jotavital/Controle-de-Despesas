@@ -190,11 +190,11 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
                                                             <form action="?edit=true" method="post" id="triggerEdit">
                                                                 <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
                                                                 <button type="submit" class="iconButton">
-                                                                    <?php echo "<i class='fas fa-edit'></i>" ?>
+                                                                    <?php echo "<i class='fas fa-edit p-primary'></i>" ?>
                                                                 </button>
                                                             </form>
                                                             <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '?delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao_despesa'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . '&valor=' . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa">
-                                                                            <i class="fas fa-trash-alt"></i>
+                                                                            <i class="fas fas fa-trash p-danger"></i>
                                                                         </a>'
                                                             ?>
                                                         </div>

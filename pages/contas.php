@@ -52,9 +52,9 @@ setTitulo($title);
                         $categoria = $categoriaObj->selectAllFromCategoria("id = " . $row['fk_categoria']);
                     ?>
 
-                        <div class="card mb-3 ms-3 col-3 br-25 overflow-auto">
+                        <div class="card mb-3 ms-3 col-4 br-25 overflow-hidden position-static">
                             <div class="card-header col-12 bg-light-blue overflow-auto d-flex justify-content-between align-items-center">
-                                <div class="col-11">
+                                <div class="col-10">
                                     <h5 class="card-title" style="margin:0;">
 
                                         <?php
@@ -68,42 +68,56 @@ setTitulo($title);
                                         ?>
                                     </p>
                                 </div>
-                                <div class="col-1 d-flex align-items-center" style="cursor:pointer;">
-                                    <div class="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v" style="font-size: 1.3rem;"></i>
+                                <div class="col-2 d-flex align-items-center">
+                                    <div class="col-12 d-flex justify-content-center" style="cursor:pointer;">
+                                        <div class="dropdown d-flex justify-content-center" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-h" style="font-size:30px;"></i>
+                                        </div>
+                                        <ul class="dropdown-menu">
+                                            <form method="post" action="?edit=true">
+                                                <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                                <button type="submit" class="p-0 col-12 justify-content-start iconButton">
+                                                    <a class="btnEditarConta dropdown-item">
+                                                        <li class="d-flex justify-content-start align-items-center">
+                                                            <i class="me-2 fas fa-edit p-gray"></i>
+                                                            Editar
+                                                        </li>
+                                                    </a>
+                                                </button>
+                                            </form>
+                                            <form action="?reajuste=true" method="post">
+                                                <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                                <button type="submit" class="p-0 col-12 justify-content-start iconButton">
+                                                    <a class="btnReajusteSaldo dropdown-item">
+                                                        <li class="d-flex justify-content-start align-items-center">
+                                                            <i class="me-2 fas fa-wrench p-gray"></i>
+                                                            Reajustar saldo
+                                                        </li>
+                                                    </a>
+                                                </button>
+                                            </form>
+                                            <form action="?delete=true" method="post">
+                                                <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                                <button type="submit" class="p-0 col-12 justify-content-start iconButton">
+                                                    <a class="dropdown-item">
+                                                        <li class="d-flex justify-content-start align-items-center">
+                                                            <i class="me-2 fas fa-trash p-gray" style="width:16px"></i>
+                                                            Excluir
+                                                        </li>
+                                                    </a>
+                                                </button>
+                                            </form>
+                                            <a class="dropdown-item" href="../pages/transacoes.php">
+                                                <li class="d-flex justify-content-start align-items-center">
+                                                    <i class="me-2 fas fa-history p-gray"></i>
+                                                    Transações
+                                                </li>
+                                            </a>
+                                        </ul>
                                     </div>
-                                    <ul class="dropdown-menu">
-                                        <form method="post" action="?edit=true">
-                                            <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
-                                            
-                                                <?php echo '<a class="btnEditarConta dropdown-item">
-                                                                <button type="submit" class="iconButton">
-                                                                    <li>
-                                                                        <i class="fas fa-edit"></i>
-                                                                        Editar
-                                                                    </li>
-                                                                </button>
-                                                            </a>'
-                                                ?>
-                                            
-                                        </form>
-                                        <form action="?reajuste=true" method="post">
-                                            <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
-                                            <?php echo '<a class="btnReajusteSaldo dropdown-item">
-                                                            <button type="submit" class="iconButton">
-                                                                <li>
-                                                                    <i class="fas fa-wrench"></i>
-                                                                    Reajustar saldo
-                                                                </li>
-                                                            </button>
-                                                        </a>'
-                                            ?>
-
-                                        </form>
-                                    </ul>
                                 </div>
                             </div>
-                            <div class="card-body p-4">
+                            <div class="card-body p-4 col-12">
                                 <div class="d-flex justify-content-center">
                                     <h5>Saldo atual</h5>
                                 </div>
@@ -120,21 +134,6 @@ setTitulo($title);
                                     ?>
 
                                 </p>
-                                <div class="col-12 d-flex justify-content-center">
-                                    <a href="#" class="btn btn-outline-primary col-sm-6 me-3">Transações</a>
-
-                                    <form action="?delete=true" method="post" class="col-6">
-                                        <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
-                                        <?php 
-
-                                            echo '  <button type="submit" class="btn btn-outline-danger col-12 btnExcluirConta">
-                                                        Excluir
-                                                    </button>
-                                                    ' 
-                                        
-                                        ?>
-                                    </form>
-                                </div>
                             </div>
                         </div>
 

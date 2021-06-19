@@ -176,8 +176,8 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                                                     <td><?php echo $row['nome_conta'] ?></td>
                                                     <td>
                                                         <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                            <i class="fas fa-edit"></i>
-                                                            <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
+                                                            <i class="fas fa-edit p-primary"></i>
+                                                            <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fas fa-trash p-danger"></i></a>' ?>
                                                         </div>
                                                     </td>
                                                 </tr>

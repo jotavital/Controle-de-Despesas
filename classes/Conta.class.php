@@ -8,7 +8,12 @@ include_once(__DIR__ . "/Despesa.class.php");
 class Conta
 {
 
-    private $idConta;
+    function __construct()
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+    }
 
     function insertConta()
     {
@@ -67,6 +72,33 @@ class Conta
         $data = $sql->fetchAll();
 
         return $data;
+    }
+
+    function selectFromConta($campos = '', $condicao = '')
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        if ($campos == '') {
+            $campos = '*';
+        }
+
+        if ($condicao != '') {
+            $sql = "SELECT " . $campos .  " FROM conta WHERE " . $condicao . "";
+        } else {
+            $sql = "SELECT " . $campos .  " FROM conta ";
+        }
+
+        $stm = $conexao->prepare($sql);
+
+        try {
+            $stm->execute();
+
+            $result = $stm->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
 
     function somarValorReceita($idConta, $valorReceita)
@@ -139,9 +171,6 @@ class Conta
 
     function selectTodasContasUsuario()
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
 
         $conn = new Connection;
         $conexao = $conn->conectar();
@@ -171,9 +200,6 @@ class Conta
 
     function selectTotalSaldoTodasContas()
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
 
         $conn = new Connection;
         $conexao = $conn->conectar();
@@ -192,9 +218,6 @@ class Conta
 
     function updateNomeConta($idConta, $novoNome)
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
 
         $conn = new Connection;
         $conexao = $conn->conectar();
@@ -214,9 +237,6 @@ class Conta
 
     function updateCategoriaConta($idConta, $novaCategoria)
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
 
         $conn = new Connection;
         $conexao = $conn->conectar();
@@ -236,24 +256,26 @@ class Conta
 
     function updateSaldoConta($idConta, $novoSaldo)
     {
-        if (!isset($_SESSION)) {
-            session_start();
+        $contaObj = new Conta;
+        $saldoAtual = $contaObj->selectFromConta("saldo_atual", "id = " . $idConta);
+        $saldoAtual = $saldoAtual[0][0];
+
+        // $stm = $conexao->prepare("UPDATE conta SET saldo_atual = :novoSaldo WHERE fk_usuario = :userId AND conta.id = :idConta");
+        // $stm->bindValue(":userId", $_SESSION['userId']);
+        // $stm->bindValue(":idConta", $idConta);
+        // $stm->bindValue(":novoSaldo", $novoSaldo);
+
+        if($novoSaldo < $saldoAtual){
+            $despesaObj = new Despesa;
+            $valorDespesa = ($saldoAtual - $novoSaldo);
+            $despesaObj->insertDespesaReajuste($valorDespesa, $idConta);
+        }else{
+            $receitaObj = new Receita;
+            $valorReceita = ($novoSaldo - $saldoAtual);
+            $receitaObj->insertReceitaReajuste($valorReceita, $idConta);
         }
 
-        $conn = new Connection;
-        $conexao = $conn->conectar();
-
-        $stm = $conexao->prepare("UPDATE conta SET saldo_atual = :novoSaldo WHERE fk_usuario = :userId AND conta.id = :idConta");
-        $stm->bindValue(":userId", $_SESSION['userId']);
-        $stm->bindValue(":idConta", $idConta);
-        $stm->bindValue(":novoSaldo", $novoSaldo); 
-
-        try {
-            $stm->execute();
-            header("Location: ../../pages/contas.php");
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
+        header("Location: ../../pages/contas.php");
     }
 }
 

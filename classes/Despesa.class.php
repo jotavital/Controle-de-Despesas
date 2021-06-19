@@ -4,10 +4,17 @@ include_once(__DIR__ . "/../connections/Connection.class.php");
 include_once(__DIR__ . "/../connections/loginVerify.php");
 include_once(__DIR__ . "/Conta.class.php");
 include_once(__DIR__ . "/Categoria.class.php");
+include_once(__DIR__ . "/Categoria_Despesa.class.php");
 
 class Despesa
 {
 
+    function __construct()
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+    }
 
     function insertCategoriaDespesa()
     {
@@ -71,15 +78,45 @@ class Despesa
             //relacionando categorias com despesa
             $despesaId = $conexao->lastInsertId();
 
+            $categoriaDespesaObj = new Categoria_Despesa;
+
             foreach ($_POST['categoriasSelect'] as $categoria) {
-                $stm2 = $conexao->prepare("INSERT INTO categoria_despesa (fk_categoria, fk_despesa) VALUES (:fk_categoria, :fk_despesa)");
-                $stm2->bindValue(':fk_categoria', $categoria);
-                $stm2->bindValue(':fk_despesa', $despesaId);
-                $stm2->execute();
+                $categoriaDespesaObj->relacionarCategoriaDespesa($categoria, $despesaId);
             }
 
             $conta = new Conta;
             $conta->subtrairValorDespesa($_POST['contaSelect'], $_POST['valorInput']);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        $conexao = null;
+    }
+
+    function insertDespesaReajuste($valor, $fk_conta)
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("INSERT INTO despesa (descricao_despesa, data_despesa, valor, data_inclusao, fk_conta, fk_usuario) VALUES (:descricao_despesa, :data_despesa, :valor, :data_inclusao, :fk_conta, :fk_usuario)");
+        $stm->bindValue(':descricao_despesa', "Reajuste de saldo");
+        $stm->bindValue(':data_despesa', date('Y' . '-' . 'm' . '-' . 'd'));
+        $stm->bindValue(':valor', $valor);
+        $stm->bindValue(':data_inclusao', date('Y' . '-' . 'm' . '-' . 'd'));
+        $stm->bindValue(':fk_conta', $fk_conta);
+        $stm->bindValue(':fk_usuario', $_SESSION['userId']);
+
+        try {
+            $stm->execute();
+
+            //relacionando categorias com despesa
+            $despesaId = $conexao->lastInsertId();
+
+            $categoriaDespesaObj = new Categoria_Despesa;
+            $categoriaDespesaObj->relacionarCategoriaDespesa(19, $despesaId);
+
+            $conta = new Conta;
+            $conta->subtrairValorDespesa($fk_conta, $valor);
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -118,9 +155,6 @@ class Despesa
 
     function deletarDespesa($idDespesa)
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
 
         $conn = new Connection;
         $conexao = $conn->conectar();

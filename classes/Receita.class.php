@@ -3,17 +3,20 @@
 include_once(__DIR__ . "/../connections/Connection.class.php");
 include_once(__DIR__ . "/../connections/loginVerify.php");
 include_once(__DIR__ . "/../classes/Conta.class.php");
-
-if (!isset($_SESSION)) {
-    session_start();
-}
+include_once(__DIR__ . "/../classes/Categoria_Receita.class.php");
 
 class Receita
 {
 
+    function __construct()
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+    }
+
     function insertReceita()
     {
-
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -30,22 +33,46 @@ class Receita
 
             $receitaId = $conexao->lastInsertId();
 
-            foreach ($_POST['categoriasSelect'] as $categoria) {
-                $stm2 = $conexao->prepare("INSERT INTO categoria_receita (fk_categoria, fk_receita) VALUES (:fk_categoria, :fk_receita)");
-                $stm2->bindValue(':fk_categoria', $categoria);
-                $stm2->bindValue(':fk_receita', $receitaId);
+            $categoriaReceitaObj = new Categoria_Receita;
 
-                try {
-                    $stm2->execute();
-                } catch (PDOException $th) {
-                    echo $th->errorInfo;
-                }
+            foreach ($_POST['categoriasSelect'] as $categoria) {
+                $categoriaReceitaObj->relacionarCategoriaReceita($categoria, $receitaId);
             }
 
             $conta = new Conta;
             $conta->somarValorReceita($_POST['contaSelect'], $_POST['valorInput']);
         } catch (PDOException $th) {
             echo $th->errorInfo;
+        }
+
+        $conn->desconectar();
+    }
+
+    function insertReceitaReajuste($valor, $fk_conta)
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("INSERT INTO receita (descricao_receita, data_receita, valor, data_inclusao, fk_usuario, fk_conta) VALUES (:descricao_receita, :data_receita, :valor, :data_inclusao, :fk_usuario, :fk_conta)");
+        $stm->bindValue(':descricao_receita', "Reajuste de saldo");
+        $stm->bindValue(':data_receita', date('Y' . '-' . 'm' . '-' . 'd'));
+        $stm->bindValue(':valor', $valor);
+        $stm->bindValue(':data_inclusao', date('Y' . '-' . 'm' . '-' . 'd'));
+        $stm->bindValue(':fk_usuario', $_SESSION['userId']);
+        $stm->bindValue(':fk_conta', $fk_conta);
+
+        try {
+            $stm->execute();
+
+            $receitaId = $conexao->lastInsertId();
+
+            $categoriaReceitaObj = new Categoria_Receita;
+            $categoriaReceitaObj->relacionarCategoriaReceita(19, $receitaId);
+
+            $conta = new Conta;
+            $conta->somarValorReceita($fk_conta, $valor);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
 
         $conn->desconectar();
@@ -200,7 +227,7 @@ class Receita
             $array = array();
 
 
-            for ($i = 0; $i < 31; $i ++) {
+            for ($i = 0; $i < 31; $i++) {
                 array_push($array, 0);
             }
 

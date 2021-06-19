@@ -4,6 +4,7 @@ include_once(__DIR__ . "/../../classes/Despesa.class.php");
 include_once(__DIR__ . "/modalAddConta.php");
 include_once(__DIR__ . "/modalAddCategoriaDespesa.php");
 include_once(__DIR__ . "/../../classes/Categoria.class.php");
+include_once(__DIR__ . "/../../classes/Categoria_Despesa.class.php");
 
 if (isset($_POST['newRow'])) {
     $newRow = unserialize(base64_decode($_POST['newRow']));
@@ -97,8 +98,8 @@ if (isset($_GET['type']) && $_GET['type'] == 'despesa') {
                                         $sql->execute();
                                         $data = $sql->fetchAll();
 
-                                        $categoriasObj = new Categoria;
-                                        $categoriasDespesa = $categoriasObj->selectAllCategoriaDespesaByDespesaId($newRow['id']);
+                                        $categoriaDespesaObj = new Categoria_Despesa;
+                                        $categoriasDespesa = $categoriaDespesaObj->selectAllCategoriaDespesaByDespesaId($newRow['id']);
 
                                         foreach ($data as $row) {
                                             foreach ($categoriasDespesa as $categoria) {

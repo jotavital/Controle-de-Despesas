@@ -120,10 +120,10 @@ $transacaoObj = new Transacao;
                                                                         <form action="?edit=true&type=despesa" method="post" id="triggerEdit">
                                                                             <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
                                                                             <button type="submit" class="iconButton">
-                                                                                <?php echo "<i class='fas fa-edit'></i>" ?>
+                                                                                <?php echo "<i class='fas fa-edit p-primary'></i>" ?>
                                                                             </button>
                                                                         </form>
-                                                                        <?php echo '<a href="../pages/transacoes.php?delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa"><i class="fas fa-trash-alt"></i></a>' ?>
+                                                                        <?php echo '<a href="../pages/transacoes.php?delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa"><i class="fas fas fa-trash p-danger"></i></a>' ?>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -146,8 +146,8 @@ $transacaoObj = new Transacao;
                                                                 <td><?php echo $row['nome_conta'] ?></td>
                                                                 <td>
                                                                     <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                                        <i class="fas fa-edit"></i>
-                                                                        <?php echo '<a href="../pages/transacoes.php?delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['fk_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fa-trash-alt"></i></a>' ?>
+                                                                        <i class="fas fa-edit p-primary"></i>
+                                                                        <?php echo '<a href="../pages/transacoes.php?delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['fk_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fas fa-trash p-danger"></i></a>' ?>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -186,7 +186,6 @@ if (isset($_GET['delete'])) {
             echo    "<script>$(document).ready(function(){
                         $('#modalDeleteDespesa').modal('show');
                     });</script>";
-
         } elseif ($_GET['type'] == "receita") {
 
             echo    "<script>$(document).ready(function(){
@@ -202,7 +201,6 @@ if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
         echo    "<script>$(document).ready(function(){
                     $('#modalEditDespesa').modal('show');
                 });</script>";
-
     } elseif ($_GET['type'] == "receita") {
 
         echo    "<script>$(document).ready(function(){

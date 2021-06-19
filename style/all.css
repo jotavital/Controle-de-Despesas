@@ -72,6 +72,10 @@ h4 {
     color: #ef8354;
 }
 
+.p-white{
+    color: white;
+}
+
 .p-danger {
     color: #CF1C1C;
 }
@@ -96,6 +100,10 @@ h4 {
     color: #239E18;
 }
 
+.p-primary {
+    color: #4895ef;
+}
+
 div.ss-single-selected {
     min-height: 38px;
 }
@@ -114,18 +122,6 @@ div.ss-add {
 
 .hide {
     display: none;
-}
-
-.fa-trash-alt {
-    color: red;
-}
-
-.fa-edit {
-    color: #4895ef;
-}
-
-.fa-wrench{
-    color: #ef8354;
 }
 
 /* modais */
