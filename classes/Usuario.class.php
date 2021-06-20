@@ -22,7 +22,7 @@ class Usuario
 
         try {
             $stm->execute();
-            header("Location:  ../../pages/login.php");
+            header("Location:  ../pages/login.php");
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -52,15 +52,15 @@ class Usuario
                 } else {
                     $_SESSION['userEmail'] = $_POST['email'];
                     $_SESSION['userId'] = $stm->fetchColumn();
-                    header("Location: ../../pages/dashboard.php");
+                    header("Location: ../pages/dashboard.php");
                     exit();
                 }
             } else {
-                header("Location: ../../pages/login.php");
+                header("Location: ../pages/login.php");
                 exit();
             }
         } else {
-            header("Location: ../../pages/login.php");
+            header("Location: ../pages/login.php");
             exit();
         }
     }
@@ -72,7 +72,7 @@ class Usuario
             session_start();
         }
         session_destroy();
-        header("Location: ../../pages/login.php");
+        header("Location: ../pages/login.php");
     }
 
     function updateNomeSobrenome($novoNome, $novoSobrenome)
@@ -91,7 +91,7 @@ class Usuario
 
         try {
             $stm->execute();
-            header("Location: ../../pages/profile.php");
+            header("Location: ../pages/profile.php");
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
