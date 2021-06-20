@@ -10,7 +10,12 @@ class Functions
         return $valor;
     }
 
-    function formatarRealSemCifrao($valor){
+    function formatarRealSemCifrao($valor)
+    {
         return number_format($valor, 2, ',', '.');
+    }
+
+    function calcularPorcentagem($atingido, $total){
+        return ($atingido * 100) / $total;
     }
 }

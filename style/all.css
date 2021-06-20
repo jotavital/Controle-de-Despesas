@@ -48,7 +48,7 @@ h4 {
     overflow: hidden;
 }
 
-#containerCardsContas .card{
+#containerCardsContas .card, #containerCardsMetas .card{
     min-height: 40px !important;
     min-width: 220px !important;
     padding: 0;
@@ -70,6 +70,10 @@ h4 {
 
 .p-warning {
     color: #ef8354;
+}
+
+.bg-orange{
+    background-color: #ef8354;
 }
 
 .p-white{
