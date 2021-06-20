@@ -11,7 +11,7 @@ include_once(__DIR__ . "/../include/header.php");
 setTitulo($title);
 
 include_once(__DIR__ . "/../pages/modals/modalAddMeta.php");
-
+include_once(__DIR__ . "/../pages/modals/modalDepositoMeta.php");
 include_once(__DIR__ . "/../classes/Meta.class.php");
 
 $metaObj = new Meta;
@@ -87,17 +87,6 @@ $metaObj = new Meta;
                                                     </a>
                                                 </button>
                                             </form>
-                                            <form action="?depositoMeta=true" method="post">
-                                                <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
-                                                <button type="submit" class="p-0 col-12 justify-content-start iconButton">
-                                                    <a class="dropdown-item">
-                                                        <li class="d-flex justify-content-start align-items-center">
-                                                            <i class="me-2 p-gray fas fa-arrow-circle-up"></i>
-                                                            Depositar
-                                                        </li>
-                                                    </a>
-                                                </button>
-                                            </form>
                                             <form action="?delete=true" method="post">
                                                 <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
                                                 <button type="submit" class="p-0 col-12 justify-content-start iconButton">
@@ -114,19 +103,38 @@ $metaObj = new Meta;
                                 </div>
                             </div>
                             <div class="card-body p-4 col-12">
-                                <div class="col-12 mb-3 valores">
-                                    <h6 class="p-gray">Valor total: <strong> <?php echo $functions->formatarReal($row['valor_total']);?> </strong></h6>
-                                    <h6 class="p-gray">Valor atingido: <strong> <?php echo $functions->formatarReal($row['valor_atingido']);?> </strong></h6>
+                                <div class="row d-flex justify-content-center mb-3 valores">
+                                    <div class="col d-flex flex-column justify-content-center">
+                                        <h6 class="d-flex justify-content-center p-gray">Valor total</h6>
+                                        <p class="card-text d-flex justify-content-center">
+                                            <strong> <?php echo $functions->formatarReal($row['valor_total']); ?> </strong>
+                                        </p>
+                                    </div>
+                                    <div class="col d-flex flex-column justify-content-center">
+                                        <h6 class="d-flex justify-content-center p-gray">Valor atingido</h6>
+                                        <p class="card-text d-flex justify-content-center">
+                                            <strong> <?php echo $functions->formatarReal($row['valor_atingido']); ?> </strong>
+                                        </p>
+                                    </div>
                                 </div>
 
                                 <?php
-                                
-                                    $porcentagemAtingida = $functions->calcularPorcentagem($row['valor_atingido'], $row['valor_total']);
+
+                                $porcentagemAtingida = $functions->calcularPorcentagem($row['valor_atingido'], $row['valor_total']);
 
                                 ?>
 
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $porcentagemAtingida?>%;" aria-valuenow="<?php echo $porcentagemAtingida?>" aria-valuemin="0" aria-valuemax="100"><?php echo $porcentagemAtingida?>%</div>
+                                <div class="mb-3 progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $porcentagemAtingida ?>%;" aria-valuenow="<?php echo $porcentagemAtingida ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $porcentagemAtingida ?>%</div>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <form action="?depositoMeta=true" method="post">
+                                        <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                        <button type="submit" class="btn btn-outline-primary">
+                                            Depositar
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -145,4 +153,14 @@ $metaObj = new Meta;
 
 <?php
 include_once(__DIR__ . "/../include/footer.php");
+?>
+
+<?php
+
+if (@$_GET['depositoMeta'] != null && @$_GET['depositoMeta'] == "true") {
+    echo    "<script>$(document).ready(function(){
+                $('#modalDepositoMeta').modal('show');
+            });</script>";
+}
+
 ?>

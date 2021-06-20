@@ -16,6 +16,8 @@ class Functions
     }
 
     function calcularPorcentagem($atingido, $total){
-        return ($atingido * 100) / $total;
+        $porcento = ($atingido * 100) / $total;
+        $porcento = sprintf("%.2f", $porcento);
+        return $porcento;
     }
 }

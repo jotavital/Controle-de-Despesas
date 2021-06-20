@@ -34,10 +34,10 @@ class Meta
         } catch (PDOException $e) {
             $_SESSION['msg'] = "Erro " . $e->getMessage();
         }
-            $metaUsuarioObj = new Meta_Usuario;
-            $metaUsuarioObj->relacionarMetaUsuario($idMeta, $idUsuario);
+        $metaUsuarioObj = new Meta_Usuario;
+        $metaUsuarioObj->relacionarMetaUsuario($idMeta, $idUsuario);
 
-            $_SESSION['msg'] = "Meta adicionada!";
+        $_SESSION['msg'] = "Meta adicionada!";
 
         $conexao = null;
     }
@@ -47,17 +47,39 @@ class Meta
         $conn = new Connection;
         $conexao = $conn->conectar();
 
-        $sql = $conexao->prepare("SELECT * FROM meta, meta_usuario WHERE meta_usuario.fk_usuario = :userId AND meta_usuario.fk_meta = meta.id");
-        $sql->bindValue(":userId", $_SESSION['userId']);
-        $sql->execute();
-        $data = $sql->fetchAll();
+        $stm = $conexao->prepare("SELECT * FROM meta, meta_usuario WHERE meta_usuario.fk_usuario = :userId AND meta_usuario.fk_meta = meta.id");
+        $stm->bindValue(":userId", $_SESSION['userId']);
+        $stm->execute();
+        $data = $stm->fetchAll();
 
         return $data;
     }
-    
+
+    function depositarMeta($valorDeposito, $idMeta)
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("UPDATE meta SET valor_atingido = (valor_atingido + :valorDeposito) WHERE id = :idMeta");
+        $stm->bindValue(":valorDeposito", $valorDeposito);
+        $stm->bindValue(":idMeta", $idMeta);
+
+        try {
+            $stm->execute();
+
+            header("Location: ../pages/metas.php");
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
 
 if (isset($_POST['insertMeta'])) {
     $metaObj = new Meta;
     $metaObj->insertMeta();
+}
+
+if (isset($_POST['depositoMeta'])) {
+    $metaObj = new Meta;
+    $metaObj->depositarMeta($_POST['valorInput'], $_POST['idMeta']);
 }
