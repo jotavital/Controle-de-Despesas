@@ -159,16 +159,27 @@ include_once(__DIR__ . "/../include/footer.php");
 
 <?php
 
-if (@$_GET['depositoMeta'] != null && @$_GET['depositoMeta'] == "true") {
-    echo    "<script>$(document).ready(function(){
-                $('#modalDepositoMeta').modal('show');
-            });</script>";
-}
+if (isset($_POST['newRow'])) {
 
-if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
-    echo    "<script>$(document).ready(function(){
-                $('#modalEditMeta').modal('show');
-            });</script>";
+    if (@$_GET['depositoMeta'] != null && @$_GET['depositoMeta'] == "true") {
+
+
+        echo    "<script>
+                    $(document).ready(function(){
+                        $('#modalDepositoMeta').modal('show');
+                    });
+                </script>";
+    }
+
+    if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
+
+
+        echo    "<script>
+                    $(document).ready(function(){
+                        $('#modalEditMeta').modal('show');
+                    });
+                </script>";
+    }
 }
 
 ?>

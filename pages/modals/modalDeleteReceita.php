@@ -1,3 +1,11 @@
+<?php
+
+if (isset($_POST['newRow'])) {
+    $newRow = unserialize(base64_decode($_POST['newRow']));
+}
+
+?>
+
 <div class="modal fade" id="modalDeleteReceita" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalDeleteReceitaLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -7,15 +15,15 @@
             </div>
             <div class="modal-body">
                 <p>Confirme a exclusão desta receita:</p>
-                <?php echo "<p>" . $_GET['desc_receita'] . " com valor de <span class='p-success'><strong>" . $functions->formatarReal($_GET['valor']) . "</strong></span></p>"; ?>
+                <?php echo "<p>" . $newRow['descricao_receita'] . " com valor de <span class='p-success'><strong>" . $functions->formatarReal($newRow['valor']) . "</strong></span></p>"; ?>
                 <p class="p-warning"><strong>ATENÇÃO! A exclusão desta receita irá refletir no saldo atual da conta à qual ela pertence!</strong></p>
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
                 <form method="POST" action="../../classes/Receita.class.php">
-                    <input type="text" name="idReceita" value="<?php echo $_GET['id'] ?>" class="hide">
-                    <input type="text" name="valorReceita" value="<?php echo $_GET['valor'] ?>" class="hide">
-                    <input type="text" name="idConta" value="<?php echo $_GET['id_conta'] ?>" class="hide">
+                    <input type="text" name="idReceita" value="<?php echo $newRow['id'] ?>" class="hide">
+                    <input type="text" name="valorReceita" value="<?php echo $newRow['valor'] ?>" class="hide">
+                    <input type="text" name="idConta" value="<?php echo $newRow['id_conta'] ?>" class="hide">
                     <input type="text" name="deleteReceita" class="hide">
                     <button type="submit" class="btn btn-danger">Excluir</button>
                 </form>

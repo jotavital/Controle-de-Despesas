@@ -124,23 +124,6 @@ class Despesa
         $conexao = null;
     }
 
-    function desvincularTodasCategoriasDespesa($idDespesa)
-    {
-        $conn = new Connection;
-        $conexao = $conn->conectar();
-
-        try {
-            $stm = $conexao->prepare("DELETE FROM categoria_despesa WHERE fk_despesa = :idDespesa");
-            $stm->bindValue("idDespesa", $idDespesa);
-
-            $stm->execute();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-
-        $conn->desconectar();
-    }
-
     function deletarImagensDespesa($path)
     {
         $files = glob($path . '/*'); // get all file names
@@ -159,8 +142,8 @@ class Despesa
         $conn = new Connection;
         $conexao = $conn->conectar();
 
-        $deleteDespesa = new Despesa;
-        $deleteDespesa->desvincularTodasCategoriasDespesa($idDespesa);
+        $categoriaDespesaObj = new Categoria_Despesa;
+        $categoriaDespesaObj->desvincularTodasCategoriasDespesa($idDespesa);
 
         $stm = $conexao->prepare("DELETE FROM despesa WHERE id = :idDespesa");
         $stm->bindValue("idDespesa", $idDespesa);
@@ -185,10 +168,9 @@ class Despesa
 
     function deletarTodasDespesasConta($idConta)
     {
-        echo "<h1>Entrou no deletar</h1>";
         $conn = new Connection;
         $conexao = $conn->conectar();
-        $deleteDespesa = new Despesa;
+        $categoriaDespesaObj = new Categoria_Despesa;
 
         $stmSelectDespesasConta = $conexao->prepare("SELECT id as despesa_id FROM despesa where fk_conta = :idConta");
         $stmSelectDespesasConta->bindValue("idConta", $idConta);
@@ -199,7 +181,7 @@ class Despesa
             $resultDespesasConta = $stmSelectDespesasConta->fetchAll();
 
             foreach ($resultDespesasConta as $despesa) {
-                $deleteDespesa->desvincularTodasCategoriasDespesa($despesa['despesa_id']);
+                $categoriaDespesaObj->desvincularTodasCategoriasDespesa($despesa['despesa_id']);
             }
 
             $stmDespesa = $conexao->prepare("DELETE FROM despesa WHERE fk_conta = :idConta");
@@ -326,6 +308,7 @@ class Despesa
     {
         $conta = new Conta;
         $despesaObj = new Despesa;
+        $categoriaDespesaObj = new Categoria_Despesa;
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -377,13 +360,10 @@ class Despesa
             }
 
             //relacionando categorias com despesa
-            $despesaObj->desvincularTodasCategoriasDespesa($idDespesa);
+            $categoriaDespesaObj->desvincularTodasCategoriasDespesa($idDespesa);
 
             foreach ($_POST['categoriasSelect'] as $categoria) {
-                $stm2 = $conexao->prepare("INSERT IGNORE INTO categoria_despesa (fk_categoria, fk_despesa) VALUES (:fk_categoria, :fk_despesa)");
-                $stm2->bindValue(':fk_categoria', $categoria);
-                $stm2->bindValue(':fk_despesa', $idDespesa);
-                $stm2->execute();
+                $categoriaDespesaObj->relacionarCategoriaDespesa($categoria, $idDespesa);
             }
 
             $conta->somarValorDespesa($dadosDespesa[0]['fk_conta'], $dadosDespesa[0]['valor']);

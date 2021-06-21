@@ -255,11 +255,80 @@ class Receita
             $receita->deletarTodasReceitasConta($idContaUsuario['id']);
         }
     }
+
+    function selectFromReceita($campos = '', $condicao = '')
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        if ($campos == '') {
+            $campos = '*';
+        }
+
+        if ($condicao != '') {
+            $sql = "SELECT " . $campos .  " FROM receita WHERE " . $condicao . "";
+        } else {
+            $sql = "SELECT " . $campos .  " FROM receita ";
+        }
+
+        $stm = $conexao->prepare($sql);
+
+        try {
+            $stm->execute();
+
+            $result = $stm->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    function updateReceita($idReceita)
+    {
+        $categoriaReceitaObj = new Categoria_Receita;
+        $receitaObj = new Receita;
+        $conta = new Conta;
+
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("UPDATE receita SET descricao_receita = :descricao_receita, data_receita = :data_receita, valor = :valor, data_inclusao = :data_inclusao, fk_conta = :fk_conta WHERE id = :idReceita");
+        $stm->bindValue(':descricao_receita', $_POST['descReceitaInput']);
+        $stm->bindValue(':data_receita', $_POST['dataReceita']);
+        $stm->bindValue(':valor', $_POST['valorInput']);
+        $stm->bindValue(':data_inclusao', date('Y' . '-' . 'm' . '-' . 'd'));
+        $stm->bindValue(':fk_conta', $_POST['contaSelect']);
+        $stm->bindValue(':idReceita', $idReceita);
+
+        $dadosReceita = $receitaObj->selectFromReceita('valor, fk_conta', 'id = ' . $idReceita);
+
+        try {
+            $stm->execute();
+
+            $categoriaReceitaObj->desvincularTodasCategoriasReceita($idReceita);
+
+            foreach ($_POST['categoriasSelect'] as $categoria) {
+                $categoriaReceitaObj->relacionarCategoriaReceita($categoria, $idReceita);
+            }
+
+            $conta->subtrairValorReceita($dadosReceita[0]['fk_conta'], $dadosReceita[0]['valor']);
+            $conta->somarValorReceita($_POST['contaSelect'], $_POST['valorInput']);
+        } catch (PDOException $th) {
+            echo $th->errorInfo;
+        }
+
+        $conn->desconectar();
+    }
 }
 
 if (isset($_POST['deleteReceita'])) {
     $receita = new Receita;
     $receita->deletarReceita($_POST['idReceita']);
+}
+
+if (isset($_POST['editReceita'])) {
+    $receita = new Receita;
+    $receita->updateReceita($_POST['idReceita']);
 }
 
 if (isset($_POST['insertReceita'])) {

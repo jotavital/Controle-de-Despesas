@@ -5,6 +5,23 @@ include_once(__DIR__ . "/../connections/Connection.class.php");
 class Categoria_Despesa
 {
 
+    function desvincularTodasCategoriasDespesa($idDespesa)
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        try {
+            $stm = $conexao->prepare("DELETE FROM categoria_despesa WHERE fk_despesa = :idDespesa");
+            $stm->bindValue("idDespesa", $idDespesa);
+
+            $stm->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+        $conn->desconectar();
+    }
+
     function relacionarCategoriaDespesa($categoria, $despesaId)
     {
         $conn = new Connection;

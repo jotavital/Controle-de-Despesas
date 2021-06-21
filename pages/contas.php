@@ -154,23 +154,28 @@ include_once(__DIR__ . "/../include/footer.php");
 
 <?php
 
-if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
-    echo    "<script>$(document).ready(function(){
-                $('#modalDeleteConta').modal('show');
-            });</script>";
+if(isset($_POST['newRow'])){
+
+    if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
+        echo    "<script>$(document).ready(function(){
+                    $('#modalDeleteConta').modal('show');
+                });</script>";
+    }
+    
+    if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
+        echo    "<script>$(document).ready(function(){
+                    $('#modalEditConta').modal('show');
+                });</script>";
+    }
+    
+    if (@$_GET['reajuste'] != null && @$_GET['reajuste'] == "true") {
+        echo    "<script>$(document).ready(function(){
+                    $('#modalReajusteSaldo').modal('show');
+                });</script>";
+    }
+    
 }
 
-if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
-    echo    "<script>$(document).ready(function(){
-                $('#modalEditConta').modal('show');
-            });</script>";
-}
-
-if (@$_GET['reajuste'] != null && @$_GET['reajuste'] == "true") {
-    echo    "<script>$(document).ready(function(){
-                $('#modalReajusteSaldo').modal('show');
-            });</script>";
-}
 
 ?>
 

@@ -9,6 +9,7 @@ $conexao = $conn->conectar();
 $title = "Receitas";
 include_once(__DIR__ . "/../include/header.php");
 include_once(__DIR__ . "/modals/modalAddReceita.php");
+include_once(__DIR__ . "/modals/modalEditReceita.php");
 include_once(__DIR__ . "/modals/modalDeleteReceita.php");
 setTitulo($title);
 
@@ -25,7 +26,7 @@ function totalReceitasTodosDiasDoMes($mes)
 
 
 if (!isset($_GET['selectMesGraficoReceitas'])) {
-    echo "<script> window.location.href = '../pages/receitas.php?selectMesGraficoReceitas=" . $mesAtual . "';</script>";
+    $_GET['selectMesGraficoReceitas'] = $mesAtual;
     $json = totalReceitasTodosDiasDoMes($mesAtual);
 } else {
     $json = totalReceitasTodosDiasDoMes($_GET['selectMesGraficoReceitas']);
@@ -167,6 +168,8 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                                             foreach ($data as $row) {
                                                 $valor = $row['valor'];
                                                 $data_receita_formatada = date('d/m/Y', strtotime($row['data_receita']));
+
+                                                $dataToEdit = base64_encode(serialize($row));
                                             ?>
 
                                                 <tr>
@@ -176,8 +179,18 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                                                     <td><?php echo $row['nome_conta'] ?></td>
                                                     <td>
                                                         <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                            <i class="fas fa-edit p-primary"></i>
-                                                            <?php echo '<a href="' . $_SERVER["REQUEST_URI"] . '&delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao_receita'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['id_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fas fa-trash p-danger"></i></a>' ?>
+                                                            <form action="?edit=true" method="post" id="triggerEdit">
+                                                                <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                                                <button type="submit" class="iconButton">
+                                                                    <?php echo "<i class='fas fa-edit p-primary'></i>" ?>
+                                                                </button>
+                                                            </form>
+                                                            <form action="?delete=true" method="post" id="triggerEdit">
+                                                                <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                                                <button type="submit" class="iconButton">
+                                                                    <?php echo "<i class='fas fas fa-trash p-danger'></i>" ?>
+                                                                </button>
+                                                            </form>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -310,13 +323,25 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
 <?php
 include_once(__DIR__ . "/../include/footer.php");
 
-if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
-    echo    "<script>
-                $(document).ready(function(){
-                    $('#modalDeleteReceita').modal('show');
-                });
-            </script>";
+if (isset($_POST['newRow'])) {
+
+    if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
+        echo    "<script>
+                    $(document).ready(function(){
+                        $('#modalDeleteReceita').modal('show');
+                    });
+                </script>";
+    }
+
+    if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
+        echo    "<script>
+                    $(document).ready(function(){
+                        $('#modalEditReceita').modal('show');
+                    });
+                </script>";
+    }
 }
+
 
 ?>
 
