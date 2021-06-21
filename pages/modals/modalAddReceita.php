@@ -2,6 +2,10 @@
 
 include_once(__DIR__ . "/modalAddConta.php");
 include_once(__DIR__ . "/modalAddCategoriaReceita.php");
+include_once(__DIR__ . "/../../classes/Categoria.class.php");
+
+$categoriaObj = new Categoria;
+$categorias = $categoriaObj->selectAllFromCategoria("fk_tipo = 4");
 
 ?>
 
@@ -66,13 +70,7 @@ include_once(__DIR__ . "/modalAddCategoriaReceita.php");
                                     <select id="categoriasReceitaSelect" name="categoriasSelect[]" multiple required>
                                         <?php
 
-                                        $userId = $_SESSION['userId'];
-                                        $sql = $conexao->prepare("SELECT * FROM categoria WHERE fk_tipo = 4 AND fk_usuario = :userId OR fk_tipo = 4 AND fk_usuario IS NULL");
-                                        $sql->bindValue(':userId', $userId);
-                                        $sql->execute();
-                                        $data = $sql->fetchAll();
-
-                                        foreach ($data as $row) {
+                                        foreach ($categorias as $row) {
                                         ?>
                                             <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_categoria'] ?></option>
                                         <?php
@@ -81,7 +79,7 @@ include_once(__DIR__ . "/modalAddCategoriaReceita.php");
                                     </select>
                                 </div>
                                 <div class="col-1">
-                                    <a id="btnAddConta" data-bs-target="#modalAddCategoriaReceita" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-plus-square"></i></a>
+                                    <a id="btnAddCategoria" data-bs-target="#modalAddCategoriaReceita" data-bs-toggle="modal" data-bs-dismiss="modal"><i class="fas fa-plus-square"></i></a>
                                 </div>
                             </div>
                         </div>

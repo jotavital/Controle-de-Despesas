@@ -12,6 +12,8 @@ setTitulo($title);
 
 include_once(__DIR__ . "/../pages/modals/modalAddMeta.php");
 include_once(__DIR__ . "/../pages/modals/modalDepositoMeta.php");
+include_once(__DIR__ . "/../pages/modals/modalEditMeta.php");
+include_once(__DIR__ . "/../pages/modals/modalAddCategoriaMeta.php");
 include_once(__DIR__ . "/../classes/Meta.class.php");
 
 $metaObj = new Meta;
@@ -163,4 +165,22 @@ if (@$_GET['depositoMeta'] != null && @$_GET['depositoMeta'] == "true") {
             });</script>";
 }
 
+if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
+    echo    "<script>$(document).ready(function(){
+                $('#modalEditMeta').modal('show');
+            });</script>";
+}
+
 ?>
+
+<script>
+    $(document).ready(function() {
+        $('#modalDepositoMeta').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
+
+        $('#modalEditMeta').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
+    });
+</script>

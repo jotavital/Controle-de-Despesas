@@ -9,7 +9,7 @@ $functions = new Functions;
 ?>
 
 <div class="modal fade" id="modalDepositoMeta" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalDepositoMetaLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalDepositoMetaLabel">Depositar na meta: <?php echo $newRow['nome_meta']?></h5>
@@ -26,7 +26,7 @@ $functions = new Functions;
                         <input name="depositoMeta" class="hide">
                         <input type="hidden" name="idMeta" value="<?php echo $newRow['id']?>">
                         <div class="modal-footer d-flex justify-content-center">
-                            <button type="submit" id="submit" class="btn btn-primary">Salvar</button>
+                            <button type="submit" id="submit" class="btn btn-primary">Depositar</button>
                         </div>
                     </form>
                 </div>
