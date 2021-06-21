@@ -24,7 +24,7 @@ include_once(__DIR__ . "/../include/navBar_unlogged.php");
         </div>
         <div class="divForm">
             <form action="../classes/Usuario.class.php" method="POST" id="formRegister" class="col-5 needs-validation" novalidate>
-                <h1 class="mb-4">Cadastro</h1>
+                <h1 class="mb-4">Cadastre-se!</h1>
                 <div class="row g-2 col-md">
                     <div class="col-md">
                         <div class="form-floating mb-3">
