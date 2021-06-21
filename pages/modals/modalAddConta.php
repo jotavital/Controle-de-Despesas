@@ -1,3 +1,11 @@
+<?php
+
+include_once(__DIR__ . "/../../classes/Categoria.class.php");
+
+$categoriaObj = new Categoria;
+
+?>
+
 <div class="modal fade" id="modalAddConta" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalAddContaLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
@@ -21,13 +29,13 @@
                             <select class="form-select" name="categoriaSelect" id="categoriaSelect">
 
                                 <?php
-                                $sql = $conexao->prepare("SELECT * FROM categoria WHERE fk_tipo = 5");
-                                $sql->execute();
-                                $data = $sql->fetchAll();
+                                $data = $categoriaObj->selectAllFromCategoria("fk_tipo = 5");
 
                                 foreach ($data as $row) {
                                 ?>
+
                                     <option value="<?php echo $row['id'] ?>"><?php echo $row['nome_categoria'] ?></option>
+
                                 <?php
                                 }
                                 ?>
