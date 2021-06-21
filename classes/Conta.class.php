@@ -259,12 +259,7 @@ class Conta
         $contaObj = new Conta;
         $saldoAtual = $contaObj->selectFromConta("saldo_atual", "id = " . $idConta);
         $saldoAtual = $saldoAtual[0][0];
-
-        // $stm = $conexao->prepare("UPDATE conta SET saldo_atual = :novoSaldo WHERE fk_usuario = :userId AND conta.id = :idConta");
-        // $stm->bindValue(":userId", $_SESSION['userId']);
-        // $stm->bindValue(":idConta", $idConta);
-        // $stm->bindValue(":novoSaldo", $novoSaldo);
-
+        
         if($novoSaldo < $saldoAtual){
             $despesaObj = new Despesa;
             $valorDespesa = ($saldoAtual - $novoSaldo);

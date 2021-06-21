@@ -98,9 +98,10 @@ class Despesa
         $conn = new Connection;
         $conexao = $conn->conectar();
 
-        $stm = $conexao->prepare("INSERT INTO despesa (descricao_despesa, data_despesa, valor, data_inclusao, fk_conta, fk_usuario) VALUES (:descricao_despesa, :data_despesa, :valor, :data_inclusao, :fk_conta, :fk_usuario)");
+        $stm = $conexao->prepare("INSERT INTO despesa (descricao_despesa, data_despesa, data_vencimento, valor, data_inclusao, fk_conta, fk_usuario) VALUES (:descricao_despesa, :data_despesa, :data_vencimento, :valor, :data_inclusao, :fk_conta, :fk_usuario)");
         $stm->bindValue(':descricao_despesa', "Reajuste de saldo");
         $stm->bindValue(':data_despesa', date('Y' . '-' . 'm' . '-' . 'd'));
+        $stm->bindValue(':data_vencimento', "0000-00-00");
         $stm->bindValue(':valor', $valor);
         $stm->bindValue(':data_inclusao', date('Y' . '-' . 'm' . '-' . 'd'));
         $stm->bindValue(':fk_conta', $fk_conta);

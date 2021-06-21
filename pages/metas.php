@@ -15,6 +15,7 @@ include_once(__DIR__ . "/../pages/modals/modalDepositoMeta.php");
 include_once(__DIR__ . "/../pages/modals/modalEditMeta.php");
 include_once(__DIR__ . "/../pages/modals/modalDeleteMeta.php");
 include_once(__DIR__ . "/../pages/modals/modalAddCategoriaMeta.php");
+include_once(__DIR__ . "/../pages/modals/modalAddParticipantesMeta.php");
 include_once(__DIR__ . "/../classes/Meta.class.php");
 
 $metaObj = new Meta;
@@ -101,6 +102,12 @@ $metaObj = new Meta;
                                                     </a>
                                                 </button>
                                             </form>
+                                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalAddParticipantesMeta">
+                                                <li class="d-flex justify-content-start align-items-center">
+                                                    <i class="me-2 fas fa-user-plus p-gray" style="width:16px"></i>
+                                                    Convidar participantes
+                                                </li>
+                                            </a>
                                         </ul>
                                     </div>
                                 </div>
@@ -196,6 +203,10 @@ if (isset($_POST['newRow'])) {
         });
 
         $('#modalEditMeta').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
+
+        $('#modalDeleteMeta').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
     });
