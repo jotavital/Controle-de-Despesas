@@ -99,11 +99,42 @@ class Meta
             echo $e->getMessage();
         }
     }
+
+    function deleteMeta($idMeta)
+    {
+        $metaUsuarioObj = new Meta_Usuario;
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        if (isset($_POST['apagarParaTodos'])) {
+            $metaUsuarioObj->desvincularMetaUsuario($idMeta, $_SESSION['userId']);
+
+            $stm = $conexao->prepare("DELETE FROM meta WHERE id = :idMeta");
+            $stm->bindValue(":idMeta", $idMeta);
+
+            try {
+                $stm->execute();
+
+                header("Location: ../pages/metas.php");
+            } catch (PDOException $e) {
+                echo $e->getMessage();
+            }
+        } else {
+            $metaUsuarioObj->desvincularMetaUsuario($idMeta, $_SESSION['userId']);
+
+            header("Location: ../pages/metas.php");
+        }
+    }
 }
 
 if (isset($_POST['insertMeta'])) {
     $metaObj = new Meta;
     $metaObj->insertMeta();
+}
+
+if (isset($_POST['deleteMeta'])) {
+    $metaObj = new Meta;
+    $metaObj->deleteMeta($_POST['idMeta']);
 }
 
 if (isset($_POST['depositoMeta'])) {

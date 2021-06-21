@@ -13,6 +13,7 @@ setTitulo($title);
 include_once(__DIR__ . "/../pages/modals/modalAddMeta.php");
 include_once(__DIR__ . "/../pages/modals/modalDepositoMeta.php");
 include_once(__DIR__ . "/../pages/modals/modalEditMeta.php");
+include_once(__DIR__ . "/../pages/modals/modalDeleteMeta.php");
 include_once(__DIR__ . "/../pages/modals/modalAddCategoriaMeta.php");
 include_once(__DIR__ . "/../classes/Meta.class.php");
 
@@ -162,8 +163,6 @@ include_once(__DIR__ . "/../include/footer.php");
 if (isset($_POST['newRow'])) {
 
     if (@$_GET['depositoMeta'] != null && @$_GET['depositoMeta'] == "true") {
-
-
         echo    "<script>
                     $(document).ready(function(){
                         $('#modalDepositoMeta').modal('show');
@@ -172,11 +171,17 @@ if (isset($_POST['newRow'])) {
     }
 
     if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
-
-
         echo    "<script>
                     $(document).ready(function(){
                         $('#modalEditMeta').modal('show');
+                    });
+                </script>";
+    }
+
+    if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
+        echo    "<script>
+                    $(document).ready(function(){
+                        $('#modalDeleteMeta').modal('show');
                     });
                 </script>";
     }

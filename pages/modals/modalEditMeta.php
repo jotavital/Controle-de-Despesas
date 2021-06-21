@@ -104,7 +104,8 @@ $functions = new Functions;
             data: dados,
             success: function(msg) {
                 alert("Meta atualizada com sucesso!");
-                $('#modalEditMeta').modal('hide');
+                window.history.pushState(null, null, window.location.pathname);
+                window.location.reload();
             },
             error: function(msg) {
                 alert("Erro ao atualizar a meta! " + msg);
