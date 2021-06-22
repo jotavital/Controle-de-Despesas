@@ -176,7 +176,6 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
                                                 $data_despesa_formatada = date('d/m/Y', strtotime($row['data_despesa']));
                                                 $data_vencimento_formatada = ($row['data_vencimento'] == "0000-00-00") ? ("-") : date('d/m/Y', strtotime($row['data_vencimento']));
 
-                                                $dataToEdit = base64_encode(serialize($row));
                                             ?>
 
                                                 <tr>
@@ -187,14 +186,14 @@ if (!isset($_GET['selectMesGraficoDespesas'])) {
                                                     <td><?php echo $row['nome_conta'] ?></td>
                                                     <td>
                                                         <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                            <form action="?edit=true" method="post" id="triggerEdit">
-                                                                <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                                            <form action="?edit=true" method="post">
+                                                                <input type="hidden" name="idDespesa" value="<?php echo $row['id']; ?>">
                                                                 <button type="submit" class="iconButton">
                                                                     <?php echo "<i class='fas fa-edit p-primary'></i>" ?>
                                                                 </button>
                                                             </form>
-                                                            <form action="?delete=true" method="post" id="triggerEdit">
-                                                                <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                                            <form action="?delete=true" method="post">
+                                                                <input type="hidden" name="idDespesa" value="<?php echo $row['id']; ?>">
                                                                 <button type="submit" class="iconButton">
                                                                     <?php echo "<i class='fas fas fa-trash p-danger'></i>" ?>
                                                                 </button>

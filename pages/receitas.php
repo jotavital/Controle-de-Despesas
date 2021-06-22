@@ -169,7 +169,6 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                                                 $valor = $row['valor'];
                                                 $data_receita_formatada = date('d/m/Y', strtotime($row['data_receita']));
 
-                                                $dataToEdit = base64_encode(serialize($row));
                                             ?>
 
                                                 <tr>
@@ -179,14 +178,14 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
                                                     <td><?php echo $row['nome_conta'] ?></td>
                                                     <td>
                                                         <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                            <form action="?edit=true" method="post" id="triggerEdit">
-                                                                <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                                            <form action="?edit=true" method="POST">
+                                                                <input type="hidden" name="idReceita" value="<?php echo $row['id']; ?>">
                                                                 <button type="submit" class="iconButton">
                                                                     <?php echo "<i class='fas fa-edit p-primary'></i>" ?>
                                                                 </button>
                                                             </form>
-                                                            <form action="?delete=true" method="post" id="triggerEdit">
-                                                                <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                                            <form action="?delete=true" method="POST">
+                                                                <input type="hidden" name="idReceita" value="<?php echo $row['id']; ?>">
                                                                 <button type="submit" class="iconButton">
                                                                     <?php echo "<i class='fas fas fa-trash p-danger'></i>" ?>
                                                                 </button>
@@ -323,23 +322,20 @@ if (!isset($_GET['selectMesGraficoReceitas'])) {
 <?php
 include_once(__DIR__ . "/../include/footer.php");
 
-if (isset($_POST['newRow'])) {
+if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
+    echo    "<script>
+                $(document).ready(function(){
+                    $('#modalDeleteReceita').modal('show');
+                });
+            </script>";
+}
 
-    if (@$_GET['delete'] != null && @$_GET['delete'] == "true") {
-        echo    "<script>
-                    $(document).ready(function(){
-                        $('#modalDeleteReceita').modal('show');
-                    });
-                </script>";
-    }
-
-    if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
-        echo    "<script>
-                    $(document).ready(function(){
-                        $('#modalEditReceita').modal('show');
-                    });
-                </script>";
-    }
+if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
+    echo    "<script>
+                $(document).ready(function(){
+                    $('#modalEditReceita').modal('show');
+                });
+            </script>";
 }
 
 

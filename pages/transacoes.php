@@ -11,10 +11,13 @@ include_once(__DIR__ . "/../include/header.php");
 include_once(__DIR__ . "/modals/modalDeleteDespesa.php");
 include_once(__DIR__ . "/modals/modalDeleteReceita.php");
 include_once(__DIR__ . "/modals/modalEditDespesa.php");
+include_once(__DIR__ . "/modals/modalEditReceita.php");
 setTitulo($title);
 
 include_once(__DIR__ . "/../classes/Transacao.class.php");
 $transacaoObj = new Transacao;
+
+$result = $transacaoObj->selectTodasTransacoesUsuario();
 
 ?>
 
@@ -33,12 +36,6 @@ $transacaoObj = new Transacao;
 
             <div id="contentDashboard">
                 <div class="row col-md">
-
-                    <?php
-
-                    $result = $transacaoObj->selectTodasTransacoesUsuario();
-
-                    ?>
 
                     <div class="cardTabela">
                         <div class="col-md-12 d-flex justify-content-center">
@@ -97,7 +94,6 @@ $transacaoObj = new Transacao;
                                                     <?php
                                                     foreach ($result as $row) {
                                                         $valor = $row['valor'];
-                                                        $dataToEdit = base64_encode(serialize($row));
 
                                                         if ($row['tipo'] == 'despesa') {
                                                             $data_despesa_formatada = date('d/m/Y', strtotime($row['data_transacao']));
@@ -118,12 +114,17 @@ $transacaoObj = new Transacao;
                                                                 <td>
                                                                     <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
                                                                         <form action="?edit=true&type=despesa" method="post" id="triggerEdit">
-                                                                            <input type="hidden" name="newRow" value="<?php echo $dataToEdit; ?>">
+                                                                            <input type="hidden" name="idDespesa" value="<?php echo $row['id']; ?>">
                                                                             <button type="submit" class="iconButton">
                                                                                 <?php echo "<i class='fas fa-edit p-primary'></i>" ?>
                                                                             </button>
                                                                         </form>
-                                                                        <?php echo '<a href="../pages/transacoes.php?delete=true&type=despesa&id=' . $row['id'] . '&desc_despesa=' . $row['descricao'] . '&id_conta=' . $row['fk_conta'] . '&nome_conta=' . $row['nome_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirDespesa"><i class="fas fas fa-trash p-danger"></i></a>' ?>
+                                                                        <form action="?delete=true&type=despesa" method="post">
+                                                                            <input type="hidden" name="idDespesa" value="<?php echo $row['id']; ?>">
+                                                                            <button type="submit" class="iconButton">
+                                                                                <?php echo "<i class='fas fas fa-trash p-danger'></i>" ?>
+                                                                            </button>
+                                                                        </form>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -146,8 +147,18 @@ $transacaoObj = new Transacao;
                                                                 <td><?php echo $row['nome_conta'] ?></td>
                                                                 <td>
                                                                     <div class="actionIcons col-12 d-flex align-items-center justify-content-center">
-                                                                        <i class="fas fa-edit p-primary"></i>
-                                                                        <?php echo '<a href="../pages/transacoes.php?delete=true&type=receita&id=' . $row['id'] . '&desc_receita=' . $row['descricao'] . '&nome_conta=' . $row['nome_conta'] . "&id_conta=" . $row['fk_conta'] . "&valor=" . sprintf("%.2f", $row['valor']) . '"' . 'id="btnExcluirReceita"><i class="fas fas fa-trash p-danger"></i></a>' ?>
+                                                                        <form action="?edit=true&type=receita" method="post" id="triggerEdit">
+                                                                            <input type="hidden" name="idReceita" value="<?php echo $row['id']; ?>">
+                                                                            <button type="submit" class="iconButton">
+                                                                                <?php echo "<i class='fas fa-edit p-primary'></i>" ?>
+                                                                            </button>
+                                                                        </form>
+                                                                        <form action="?delete=true&type=receita" method="post" id="triggerEdit">
+                                                                            <input type="hidden" name="idReceita" value="<?php echo $row['id']; ?>">
+                                                                            <button type="submit" class="iconButton">
+                                                                                <?php echo "<i class='fas fas fa-trash p-danger'></i>" ?>
+                                                                            </button>
+                                                                        </form>
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -215,6 +226,14 @@ if (@$_GET['edit'] != null && @$_GET['edit'] == "true") {
     $(document).ready(function() {
 
         $('#modalDeleteDespesa').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
+
+        $('#modalEditDespesa').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
+
+        $('#modalEditReceita').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
 

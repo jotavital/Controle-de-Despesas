@@ -3,15 +3,18 @@
 include_once(__DIR__ . "/modalAddConta.php");
 include_once(__DIR__ . "/modalAddCategoriaReceita.php");
 include_once(__DIR__ . "/../../classes/Categoria.class.php");
+include_once(__DIR__ . "/../../classes/Receita.class.php");
 include_once(__DIR__ . "/../../classes/Categoria_Receita.class.php");
 
 $categoriaObj = new Categoria;
 $categorias = $categoriaObj->selectAllFromCategoria("fk_tipo = 4");
 $categoriaReceitaObj = new Categoria_Receita;
 
-if (isset($_POST['newRow'])) {
-    $newRow = unserialize(base64_decode($_POST['newRow']));
-    $categoriasReceita = $categoriaReceitaObj->selectAllCategoriaReceitaByReceitaId($newRow['id']);
+if (isset($_POST['idReceita'])) {
+    $receitaObj = new Receita;
+    $receita = $receitaObj->selectFromReceita('', 'id = ' . $_POST['idReceita']);
+    $receita = $receita[0];
+    $categoriasReceita = $categoriaReceitaObj->selectAllCategoriaReceitaByReceitaId($receita['id']);
 }
 
 $functions = new Functions;
@@ -31,24 +34,24 @@ $functions = new Functions;
                         <div class="row col-md">
                             <div class="mb-3">
                                 <label for="descReceitaInput" class="form-label">Descrição da receita</label>
-                                <input type="text" class="form-control" id="descReceitaInput" name="descReceitaInput" aria-describedby="Descrição despesa" placeholder="Ex.: Salário de maio" value="<?php echo $newRow['descricao_receita'] ?>" required>
+                                <input type="text" class="form-control" id="descReceitaInput" name="descReceitaInput" aria-describedby="Descrição despesa" placeholder="Ex.: Salário de maio" value="<?php echo $receita['descricao_receita'] ?>" required>
                             </div>
                         </div>
                         <div class="row col-md">
                             <div class="mb-3 col-6">
                                 <label for="dataReceita" class="form-label">Data da receita</label>
-                                <input type="date" class="form-control" id="dataReceita" name="dataReceita" aria-describedby="Data da receita" value="<?php echo $newRow['data_receita'] ?>" required>
+                                <input type="date" class="form-control" id="dataReceita" name="dataReceita" aria-describedby="Data da receita" value="<?php echo $receita['data_receita'] ?>" required>
                             </div>
                             <div class="mb-3 col-6">
-                                <label for="novoValorInput" class="form-label">Valor</label>
-                                <input type="text" class="form-control" name="valorInput" id="novoValorInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});" value="<?php echo $functions->formatarRealSemCifrao($newRow['valor']) ?>" required autocomplete="off">
+                                <label for="novoValorReceitaInput" class="form-label">Valor</label>
+                                <input type="text" class="form-control" name="valorInput" id="novoValorReceitaInput" onkeypress="$(this).mask('000.000.000,00', {reverse: true});" value="<?php echo $functions->formatarRealSemCifrao($receita['valor']) ?>" required autocomplete="off">
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="contaSelectEdit" class="form-label">Conta</label>
                             <div class="row col-12 d-flex align-items-center">
                                 <div class="col-11">
-                                    <select name="contaSelect" id="contaSelectEdit">
+                                    <select name="contaSelect" id="contaSelectEditReceita">
                                         <?php
                                         $userId = $_SESSION['userId'];
                                         $sql = $conexao->prepare("SELECT * FROM conta WHERE fk_usuario = :userId");
@@ -60,7 +63,7 @@ $functions = new Functions;
 
                                         foreach ($data as $row) {
                                         ?>
-                                            <option value="<?php echo $row['id'] ?>" <?php echo ($newRow['fk_conta'] == $row['id']) ? ("selected") : (""); ?>> <?php echo $row['nome_conta'] . " - " . $functions->formatarReal($row['saldo_atual']) ?></option>
+                                            <option value="<?php echo $row['id'] ?>" <?php echo ($receita['fk_conta'] == $row['id']) ? ("selected") : (""); ?>> <?php echo $row['nome_conta'] . " - " . $functions->formatarReal($row['saldo_atual']) ?></option>
                                         <?php
                                         }
 
@@ -76,7 +79,7 @@ $functions = new Functions;
                         <label for="categoriasSelectEdit" class="form-label">Categorias</label>
                             <div class="row col-12 d-flex align-items-center">
                                 <div class="col-11">
-                                    <select id="categoriasSelectEdit" name="categoriasSelect[]" multiple required>
+                                    <select id="categoriasSelectEditReceita" name="categoriasSelect[]" multiple required>
                                         <?php
 
                                         foreach ($categorias as $row) {
@@ -101,7 +104,7 @@ $functions = new Functions;
                             </div>
                         </div>
                         <input name="editReceita" class="hide">
-                        <input name="idReceita" class="hide" value="<?php echo $newRow['id'] ?>">
+                        <input name="idReceita" class="hide" value="<?php echo $receita['id'] ?>">
                         <div class="modal-footer d-flex justify-content-center">
                             <button type="submit" id="submit" class="btn btn-success">Salvar</button>
                         </div>
@@ -116,10 +119,10 @@ $functions = new Functions;
 
     $('#formEditReceitas').submit(function() {
 
-        var x = $('#novoValorInput').val();
+        var x = $('#novoValorReceitaInput').val();
         x = x.replace(/[.]/gim, "");
         x = x.replace(/[,]/gim, ".");
-        document.getElementById('novoValorInput').value = x;
+        document.getElementById('novoValorReceitaInput').value = x;
 
         var dados = new FormData(this);
 
@@ -144,7 +147,7 @@ $functions = new Functions;
     });
 
     new SlimSelect({
-        select: '#categoriasSelectEdit',
+        select: '#categoriasSelectEditReceita',
         allowDeselect: true,
         searchPlaceholder: 'Pesquise categorias',
         searchText: 'Nada com esse nome :/',
@@ -155,7 +158,7 @@ $functions = new Functions;
     });
 
     new SlimSelect({
-        select: '#contaSelectEdit',
+        select: '#contaSelectEditReceita',
         searchPlaceholder: 'Pesquise a conta',
         searchText: 'Não achamos essa conta :/',
         placeholder: "Selecione",

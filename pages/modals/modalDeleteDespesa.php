@@ -1,7 +1,16 @@
 <?php
 
-if (isset($_POST['newRow'])) {
-    $newRow = unserialize(base64_decode($_POST['newRow']));
+include_once(__DIR__ . "/../../classes/Despesa.class.php");
+include_once(__DIR__ . "/../../classes/Conta.class.php");
+
+if(isset($_POST['idDespesa'])){
+    $despesaObj = new Despesa;
+    $despesa = $despesaObj->selectFromDespesa('', 'id = ' . $_POST['idDespesa']);
+    $despesa = $despesa[0];
+    
+    $contaObj = new Conta;
+    $conta = $contaObj->selectFromConta('', 'id = ' . $despesa['fk_conta']);
+    $conta = $conta[0];
 }
 
 ?>
@@ -15,15 +24,15 @@ if (isset($_POST['newRow'])) {
             </div>
             <div class="modal-body">
                 <p>Confirme a exclusão desta despesa:</p>
-                <?php echo "<p>" . $newRow['descricao_despesa'] . " da conta " . $newRow['nome_conta'] . " com valor de <span class='p-danger'><strong>" . $newRow['valor'] . "</strong></span></p>"; ?>
+                <?php echo "<p>" . $despesa['descricao_despesa'] . " da conta " . $conta['nome_conta'] . " com valor de <span class='p-danger'><strong>" . $despesa['valor'] . "</strong></span></p>"; ?>
                 <p class="p-warning"><strong>ATENÇÃO! A exclusão desta despesa irá refletir no saldo atual da conta à qual ela pertence!</strong></p>
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
                 <form method="POST" action="../../classes/Despesa.class.php">
-                    <input type="text" name="idDespesa" value="<?php echo $newRow['id'] ?>" class="hide">
-                    <input type="text" name="idConta" value="<?php echo $newRow['fk_conta'] ?>" class="hide">
-                    <input type="text" name="valorDespesa" value="<?php echo $newRow['valor'] ?>" class="hide">
+                    <input type="text" name="idDespesa" value="<?php echo $despesa['id'] ?>" class="hide">
+                    <input type="text" name="idConta" value="<?php echo $despesa['fk_conta'] ?>" class="hide">
+                    <input type="text" name="valorDespesa" value="<?php echo $despesa['valor'] ?>" class="hide">
                     <input type="text" name="deleteDespesa" class="hide">
                     <button type="submit" class="btn btn-danger">Excluir</button>
                 </form>
