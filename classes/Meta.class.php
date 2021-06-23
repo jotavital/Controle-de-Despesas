@@ -125,11 +125,21 @@ class Meta
             header("Location: ../pages/metas.php");
         }
     }
+
+    function insertParticipanteMeta()
+    {
+        
+    }
 }
 
 if (isset($_POST['insertMeta'])) {
     $metaObj = new Meta;
     $metaObj->insertMeta();
+}
+
+if (isset($_POST['insertParticipanteMeta'])) {
+    $metaObj = new Meta;
+    $metaObj->insertParticipanteMeta();
 }
 
 if (isset($_POST['deleteMeta'])) {

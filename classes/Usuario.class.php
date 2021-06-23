@@ -9,6 +9,13 @@ include_once(__DIR__ . "/../classes/Categoria.class.php");
 class Usuario
 {
 
+    function __construct()
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+    }
+
     function insertUsuario()
     {
         $conn = new Connection;
@@ -32,11 +39,6 @@ class Usuario
 
     function login()
     {
-
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -67,20 +69,12 @@ class Usuario
 
     function logout()
     {
-
-        if (!isset($_SESSION)) {
-            session_start();
-        }
         session_destroy();
         header("Location: ../pages/login.php");
     }
 
     function updateNomeSobrenome($novoNome, $novoSobrenome)
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -99,10 +93,6 @@ class Usuario
 
     function updateSenha($senhaAtual, $novaSenha)
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -145,9 +135,6 @@ class Usuario
 
     function deleteUsuario()
     {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
 
         $conn = new Connection;
         $conexao = $conn->conectar();
@@ -173,11 +160,41 @@ class Usuario
             echo "Erro ao deletar usuário: " . $e->getMessage();
         }
     }
+
+    function verificarEmail($email)
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("SELECT count(email) as existeEmail FROM usuario WHERE email = :email");
+        $stm->bindValue(":email", $email);
+        
+        try {
+            $stm->execute();
+
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+
+            if($result['existeEmail'] == "1"){
+                echo 1;
+            }else{
+                echo 0;
+            }
+        } catch (PDOException $e) {
+            $e->getMessage();
+        }
+        
+        
+    }
 }
 
 if (isset($_POST['loginUser'])) {
     $usuario = new Usuario;
     $usuario->login();
+}
+
+if (isset($_POST['email'])) {
+    $usuario = new Usuario;
+    $usuario->verificarEmail($_POST['email']);
 }
 
 if (isset($_POST['deleteUsuario'])) {
