@@ -204,6 +204,7 @@ h1.mainTitle {
 }
 
 sidebar {
+    overflow: auto;
     display: block;
     width: var(--sideBarWidth);
     min-width: 150px;

@@ -1,16 +1,21 @@
 <?php
+
 if (!isset($_SESSION)) {
     if (!isset($_SESSION)) {
         session_start();
     }
 }
-$title = "Home";
-include_once(__DIR__ . "/../include/header.php");
-setTitulo($title);
-include_once(__DIR__ . "/../include/navBar_unlogged.php");
+
+header("Location: login.php");
+
+// $title = "Home";
+// include_once(__DIR__ . "/../include/header.php");
+// setTitulo($title);
+// include_once(__DIR__ . "/../include/navBar_unlogged.php");
+
 ?>
 
-<body>
+<!-- <body>
     <h1 class="mainTitle" style="visibility: hidden;" >Easylize Finanças</h1>
     <img class="logo-inicio" src="../image/logo_inicio.png" alt="logo da pagina de inicio">
 
@@ -20,4 +25,4 @@ include_once(__DIR__ . "/../include/navBar_unlogged.php");
     ?>
 </body>
 
-</html>
+</html> -->

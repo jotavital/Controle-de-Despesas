@@ -6,8 +6,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
-                <p>Tem certeza que deseja excluir o seu usuário?</p>
-                <p class="p-warning"><strong>ATENÇÃO! A exclusão do seu usuário não pode ser desfeita. Todas os seus registros serão permanentemente apagados!</strong></p>
+                <div class="col-12 d-flex justify-content-center">
+                    <p>Tem certeza que deseja excluir a sua conta?</p>
+                </div>
+                <p class="p-warning" style="text-align:center"><strong>ATENÇÃO! A exclusão do seu usuário não pode ser desfeita. Todas os seus registros serão permanentemente apagados!</strong></p>
             </div>
             <div class="modal-footer d-flex justify-content-center">
                 <button class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>

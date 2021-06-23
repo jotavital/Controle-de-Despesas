@@ -59,7 +59,8 @@ include_once(__DIR__ . "/../pages/modals/modalDeleteUsuario.php");
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center">
-                                <p>Membro desde: <?php echo ($data_cadastro_formatada); ?></p>
+                                <p class="me-2">Membro desde:</p>
+                                <strong><p class="p-success"><?php echo ($data_cadastro_formatada); ?></p></strong>
                             </div>
                         </div>
                     </div>
@@ -77,7 +78,7 @@ include_once(__DIR__ . "/../pages/modals/modalDeleteUsuario.php");
                         </div>
                     </div>
                     <div class="mb-4 d-flex justify-content-center align-items-center">
-                        <?php echo '<a href="../pages/profile.php?excluirUsuario=true" id="btnExcluirConta">Excluir minha conta</a>' ?>
+                        <strong><a class="p-danger" href="../pages/profile.php?excluirUsuario=true" id="btnExcluirConta">Excluir minha conta</a></strong>
                     </div>
                     <div class="col-md d-flex justify-content-center">
                         <a class="btn btn-danger col-1.5" href="../classes/Usuario.class.php?logout" role="button">Logout</a>

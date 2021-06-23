@@ -23,8 +23,8 @@ include_once(__DIR__ . "/../include/navBar_unlogged.php");
             <img class="logo-inicio" src="../image/logo_inicio.png" alt="logo da pagina de inicio">
         </div>
         <div class="divForm">
-            <form action="../classes/Usuario.class.php" method="POST" id="formLogin" class="col-5 needs-validation" novalidate>
-                <h1 class="mb-3">Entrar</h1>
+            <form action="../classes/Usuario.class.php" method="POST" id="formLogin" class="col-lg-5 needs-validation" novalidate>
+                <h1 class="mb-3 p-primary">Entrar</h1>
                 <div class="row d-flex justify-content-center">
                     <div class="col-md">
                         <div class="form-floating mb-3">
@@ -75,8 +75,7 @@ include_once(__DIR__ . "/../include/navBar_unlogged.php");
                 ?>
 
                 <div class="row d-flex justify-content-center">
-                    <p>Ainda não tem cadastro? <a style="text-decoration:none;" href="register.php">Cadastre-se aqui</a>
-                    </p>
+                    <p>Ainda não tem cadastro? <strong><a style="text-decoration:none;" class="p-warning" href="register.php">Cadastre-se aqui</a></strong></p>
                 </div>
                 <input name="loginUser" class="hide">
                 <div class="mt-2 row d-flex justify-content-center">
