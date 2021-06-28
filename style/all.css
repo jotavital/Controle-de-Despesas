@@ -13,13 +13,13 @@ body, main {
     background-color: #FAFAFA;
 }
 
-i{
+i {
     cursor: pointer;
 }
 
-.iconButton{
-    border:none; 
-    background-color:transparent;
+.iconButton {
+    border: none;
+    background-color: transparent;
 }
 
 a {
@@ -43,12 +43,12 @@ h4 {
     cursor: pointer;
 }
 
-.modal-content{
+.modal-content {
     border-radius: 20px;
     overflow: hidden;
 }
 
-#containerCardsContas .card, #containerCardsMetas .card{
+#containerCardsContas .card, #containerCardsMetas .card {
     min-height: 40px !important;
     min-width: 220px !important;
     padding: 0;
@@ -58,7 +58,7 @@ h4 {
     padding: 0;
 }
 
-.card.br-25{
+.card.br-25 {
     border-radius: 20px;
 }
 
@@ -72,11 +72,11 @@ h4 {
     color: #ef8354;
 }
 
-.bg-orange{
+.bg-orange {
     background-color: #ef8354;
 }
 
-.p-white{
+.p-white {
     color: white;
 }
 
@@ -88,15 +88,15 @@ h4 {
     color: #4361EE;
 }
 
-.p-gray{
+.p-gray {
     color: #4F5D75;
 }
 
-.bg-light-danger{
+.bg-light-danger {
     background-color: #f8d7da;
 }
 
-.bg-light-success{
+.bg-light-success {
     background-color: #f8d7da;
 }
 
@@ -125,7 +125,7 @@ div.ss-add {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 /* modais */
@@ -164,6 +164,7 @@ h1.mainTitle {
     color: #589b33;
     margin-top: 5px;
     text-shadow: 4px 4px 3px #3D6B24";
+
 }
 
 /* fim login e cadastro */
@@ -254,10 +255,21 @@ main {
     background-color: #f8f8f8;
 }
 
-@media screen and (max-width: 450px) {
-    sidebar {
+@media screen and (max-width: 700px) {
+    .nomeUsuarioNavBar {
         display: none;
     }
+}
+
+.notificationText p {
+    word-break: break-word;
+    white-space: pre-line;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.notificationAlert{
+    padding: 5px;
 }
 
 div.sideBarIcon {
@@ -318,10 +330,21 @@ div.camposInfo label, div.camposInfo input {
 
 /* fim perfil do usuario css */
 
-
 /*estilo das imagens das logos*/
 
 .logo-titulo {
     width: 30px;
     color: black;
+}
+
+/*  */
+
+#navBarProfilePicture {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+}
+
+.goToProfile {
+    cursor: pointer;
 }

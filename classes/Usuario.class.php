@@ -16,6 +16,33 @@ class Usuario
         }
     }
 
+    function selectFromUsuario($campos = "", $condicao = "")
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        if ($campos == '') {
+            $campos = '*';
+        }
+
+        if ($condicao != '') {
+            $sql = "SELECT " . $campos .  " FROM usuario WHERE " . $condicao . "";
+        } else {
+            $sql = "SELECT " . $campos .  " FROM usuario ";
+        }
+
+        $stm = $conexao->prepare($sql);
+
+        try {
+            $stm->execute();
+
+            $result = $stm->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
     function insertUsuario()
     {
         $conn = new Connection;
@@ -168,22 +195,20 @@ class Usuario
 
         $stm = $conexao->prepare("SELECT count(email) as existeEmail FROM usuario WHERE email = :email");
         $stm->bindValue(":email", $email);
-        
+
         try {
             $stm->execute();
 
             $result = $stm->fetch(PDO::FETCH_ASSOC);
 
-            if($result['existeEmail'] == "1"){
+            if ($result['existeEmail'] == "1") {
                 echo 1;
-            }else{
+            } else {
                 echo 0;
             }
         } catch (PDOException $e) {
             $e->getMessage();
         }
-        
-        
     }
 }
 

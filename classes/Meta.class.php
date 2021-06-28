@@ -3,6 +3,8 @@
 include_once(__DIR__ . "/../connections/Connection.class.php");
 include_once(__DIR__ . "/../connections/loginVerify.php");
 include_once(__DIR__ . "/Meta_Usuario.class.php");
+include_once(__DIR__ . "/Usuario.class.php");
+include_once(__DIR__ . "/Notificacao.class.php");
 
 class Meta
 {
@@ -128,7 +130,12 @@ class Meta
 
     function insertParticipanteMeta()
     {
-        
+        $email = $_POST['emailInput'];
+        $usuarioObj = new Usuario;
+        $userId = $usuarioObj->selectFromUsuario("id", "email = " . $email);
+
+        $notificacaoObj = new Notificacao;
+        $notificacaoObj->notificacaoConviteMeta($userId);
     }
 }
 

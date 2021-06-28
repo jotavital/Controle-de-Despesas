@@ -1,6 +1,6 @@
 <sidebar class="sideBarMenu">
     <div id="sidebarHeader" class="col-12 d-flex align-items-center justify-content-end">
-        <div class="menuToggler">
+        <div class="menuToggler me-3">
             <i class="fas fa-bars fa-2x"></i>
         </div>
     </div>

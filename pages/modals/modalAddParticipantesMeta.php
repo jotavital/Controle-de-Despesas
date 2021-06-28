@@ -11,7 +11,7 @@
                         <div class="row col-md">
                             <div class="mb-3">
                                 <label for="emailInput" class="form-label">E-mail do participante:</label>
-                                <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Ex.: joao@gmail.com" onkeyup="verificaEmail(this.value);" required>
+                                <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Ex.: joao@gmail.com" onkeyup="verificaEmail(this.value);" required autocomplete="nope" >
                                 <small>
                                     <p id="invalid-feedback" style="text-align:center;" class="p-danger hide">Não encontramos um usuário com este e-mail!</p>
                                 </small>
