@@ -16,6 +16,23 @@ class Usuario
         }
     }
 
+    function verificaSeExisteUsuario($userId){
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("SELECT id FROM usuario WHERE id = :userId");
+        $stm->bindValue(":userId", $userId);
+
+        $stm->execute();
+        $res = $stm->fetch();
+
+        if($res != null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     function selectFromUsuario($campos = "", $condicao = "")
     {
         $conn = new Connection;
