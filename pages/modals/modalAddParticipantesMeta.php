@@ -20,6 +20,7 @@
                                 </small>
                             </div>
                         </div>
+                        <input name="idMeta" class="hide" value="<?= $_POST['idMeta'] ?>">
                         <input name="insertParticipanteMeta" class="hide">
                         <div class="modal-footer d-flex justify-content-center">
                             <button type="submit" id="submit" class="btn btn-success">Adicionar</button>

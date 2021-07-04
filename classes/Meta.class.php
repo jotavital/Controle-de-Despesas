@@ -132,10 +132,10 @@ class Meta
     {
         $email = $_POST['emailInput'];
         $usuarioObj = new Usuario;
-        $userId = $usuarioObj->selectFromUsuario("id", "email = " . $email);
+        $usuario_destino = $usuarioObj->selectFromUsuario("id", "email = '" . $email . "'")[0]['id'];
 
         $notificacaoObj = new Notificacao;
-        $notificacaoObj->notificacaoConviteMeta($userId);
+        $notificacaoObj->notificacaoConviteMeta($_SESSION['userId'], $usuario_destino, $_POST['idMeta']);
     }
 }
 

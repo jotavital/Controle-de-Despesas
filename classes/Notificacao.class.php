@@ -13,6 +13,33 @@ class Notificacao
         }
     }
 
+    function selectFromNotificacao($campos = "", $condicao = "")
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        if ($campos == '') {
+            $campos = '*';
+        }
+
+        if ($condicao != '') {
+            $sql = "SELECT " . $campos .  " FROM notificacao WHERE " . $condicao . " AND lixo = 0";
+        } else {
+            $sql = "SELECT " . $campos .  " FROM notificacao WHERE lixo = 0";
+        }
+
+        $stm = $conexao->prepare($sql);
+
+        try {
+            $stm->execute();
+
+            $result = $stm->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
     function pegarTodasNotificacoesUsuario($userId)
     {
         $conn = new Connection;
@@ -31,13 +58,15 @@ class Notificacao
         }
     }
 
-    function notificacaoConviteMeta($fk_usuario)
+    function notificacaoConviteMeta($fk_usuario_remetente, $fk_usuario_destino, $fk_meta)
     {
         $conn = new Connection;
         $conexao = $conn->conectar();
 
-        $stm = $conexao->prepare("INSERT INTO notificacao (fk_usuario) VALUES :fk_usuario");
-        $stm->bindValue(":fk_usuario", $fk_usuario);
+        $stm = $conexao->prepare("INSERT INTO notificacao (fk_usuario_remetente, fk_usuario_destino, fk_tipo_notificacao, fk_meta) VALUES (:fk_usuario_remetente, :fk_usuario_destino, 1, :fk_meta)");
+        $stm->bindValue(":fk_usuario_remetente", $fk_usuario_remetente);
+        $stm->bindValue(":fk_usuario_destino", $fk_usuario_destino);
+        $stm->bindValue(":fk_meta", $fk_meta);
 
         try {
             $stm->execute();

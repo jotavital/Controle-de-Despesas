@@ -2,9 +2,13 @@
 
 include_once(__DIR__ . "/../classes/Usuario.class.php");
 include_once(__DIR__ . "/../classes/Notificacao.class.php");
+include_once(__DIR__ . "/../pages/modals/modalAceitarConviteMeta.php");
 
 $usuarioObj = new Usuario;
 $nomeUsuario = $usuarioObj->selectFromUsuario("nome", "id = " . $_SESSION['userId'])[0]['nome'];
+
+$notificacaoObj = new Notificacao;
+$qtdNotificacaoesNaoLidas = $notificacaoObj->selectFromNotificacao("count(*)", "fk_usuario_destino = " . $_SESSION['userId'] . " AND foi_lida = 0")[0][0];
 
 ?>
 
@@ -19,21 +23,21 @@ $nomeUsuario = $usuarioObj->selectFromUsuario("nome", "id = " . $_SESSION['userI
 
         <!-- notificacoes -->
         <div class="me-3 notificationIcon">
-            <div class="hide">
-                <i class="p-white fas fa-bell"></i>
-            </div>
             <div>
                 <div class="dropdown d-flex justify-content-center" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="p-white far fa-bell"></i>
+                    <i class="p-white fas fa-bell" id="notificationIcon">
+                        <span id="notificationBadge" class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+
+                        </span>
+                    </i>
                 </div>
                 <ul class="dropdown-menu col-3">
                     <?php
 
-                    $notificacaoObj = new Notificacao;
                     $todasNotificacoes = $notificacaoObj->pegarTodasNotificacoesUsuario($_SESSION['userId']);
 
-                    if($todasNotificacoes == null){
-                        ?>
+                    if ($todasNotificacoes == null) {
+                    ?>
 
                         <div class="d-flex justify-content-center">
                             Sem novas notificações
@@ -47,16 +51,19 @@ $nomeUsuario = $usuarioObj->selectFromUsuario("nome", "id = " . $_SESSION['userI
                         $nomeCompletoRemetente = $usuarioObj->selectFromUsuario("nome, sobrenome", "id = " . $notificacao['fk_usuario_remetente']);
 
                         if ($notificao['fk_tipo_notificacao'] = 1) {
-                            $textoNotificacao = "<strong>" . $nomeCompletoRemetente[0]['nome'] . " " . $nomeCompletoRemetente[0]['sobrenome'] . "</strong> te convidou para participar de uma meta. Clique para ver";
+                            $textoNotificacao = "<strong>" . $nomeCompletoRemetente[0]['nome'] . " " . $nomeCompletoRemetente[0]['sobrenome'] . "</strong> te convidou para participar de uma meta. <strong>Clique para ver</strong>";
                         }
 
                         if ($notificacao['foi_lida'] == 0) {
-                    ?>
+                        ?>
 
-                            <div class="mb-1 d-flex align-items-center alert alert-warning alert-dismissible fade show" role="alert" style="padding:0;">
-                                <div class="notificationText p-2">
-                                    <p style="font-size:.9rem; margin-bottom:0;"><?= $textoNotificacao ?></p>
-                                </div>
+                            <div class="mb-1 d-flex align-items-center alert alert-warning alert-dismissible fade show" role="alert" style="padding: 0;">
+                                <form id="formClickNotificacao" action="" method="POST">
+                                    <input type="hidden" name="tipoNotificacao" value="<?= $notificao['fk_tipo_notificacao'] ?>">
+                                    <div class="notificationText p-2">
+                                        <p style="font-size: .9rem; margin-bottom: 0;"><?= $textoNotificacao ?></p>
+                                    </div>
+                                </form>
                                 <div class="d-flex align-items-center alertButtons">
                                     <form id="formLida" action="" method="POST">
                                         <input type="hidden" name="notificacaoLida">
@@ -110,6 +117,18 @@ $nomeUsuario = $usuarioObj->selectFromUsuario("nome", "id = " . $_SESSION['userI
 </div>
 
 <script>
+    var qtdNotificacoesNaoLidas = <?= $qtdNotificacaoesNaoLidas ?>;
+    var notificationIcon = document.getElementById('notificationIcon');
+    var notificationBadge = document.getElementById('notificationBadge');
+
+    if (qtdNotificacoesNaoLidas == 0) {
+        notificationIcon.classList.replace('fas', 'far');
+        notificationBadge.classList.add('hide');
+    } else {
+        notificationIcon.classList.replace('far', 'fas');
+        notificationBadge.classList.remove('hide');
+    }
+
     $('.dropdown-menu').click(function(event) {
         event.stopPropagation();
     })
@@ -130,7 +149,7 @@ $nomeUsuario = $usuarioObj->selectFromUsuario("nome", "id = " . $_SESSION['userI
             processData: false,
             contentType: false,
             success: function(msg) {
-                <?= $todasNotificacoes = $notificacaoObj->pegarTodasNotificacoesUsuario($_SESSION['userId']); ?>
+                window.location.reload();
             },
             error: function(msg) {
                 alert("Um erro ocorreu ao tentar marcar essa notificação como lida.");
@@ -150,11 +169,16 @@ $nomeUsuario = $usuarioObj->selectFromUsuario("nome", "id = " . $_SESSION['userI
             processData: false,
             contentType: false,
             success: function(msg) {
-                <?= $todasNotificacoes = $notificacaoObj->pegarTodasNotificacoesUsuario($_SESSION['userId']); ?>
+                window.location.reload();
             },
             error: function(msg) {
                 alert("Um erro ocorreu ao tentar excluir essa notificação.");
             }
         });
+    })
+
+    $('.notificationText').on('click', function() {
+        $('#formClickNotificacao').attr('action', "../pages/metas.php?aceitarConviteMeta=true");
+        $('#formClickNotificacao').submit();
     })
 </script>

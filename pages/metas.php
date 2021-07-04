@@ -16,6 +16,7 @@ include_once(__DIR__ . "/../pages/modals/modalEditMeta.php");
 include_once(__DIR__ . "/../pages/modals/modalDeleteMeta.php");
 include_once(__DIR__ . "/../pages/modals/modalAddCategoriaMeta.php");
 include_once(__DIR__ . "/../pages/modals/modalAddParticipantesMeta.php");
+include_once(__DIR__ . "/../pages/modals/modalAceitarConviteMeta.php");
 include_once(__DIR__ . "/../classes/Meta.class.php");
 
 $metaObj = new Meta;
@@ -102,12 +103,17 @@ $metaObj = new Meta;
                                                     </a>
                                                 </button>
                                             </form>
-                                            <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalAddParticipantesMeta">
-                                                <li class="d-flex justify-content-start align-items-center">
-                                                    <i class="me-2 fas fa-user-plus p-gray" style="width:16px"></i>
-                                                    Convidar participantes
-                                                </li>
-                                            </a>
+                                            <form action="?addParticipante=true" method="post">
+                                                <input type="hidden" name="idMeta" value="<?php echo $row['id']; ?>">
+                                                <button type="submit" class="p-0 col-12 justify-content-start iconButton">
+                                                    <a class="dropdown-item">
+                                                        <li class="d-flex justify-content-start align-items-center">
+                                                            <i class="me-2 fas fa-user-plus p-gray" style="width:16px"></i>
+                                                            Convidar participantes
+                                                        </li>
+                                                    </a>
+                                                </button>
+                                            </form>
                                         </ul>
                                     </div>
                                 </div>
@@ -167,7 +173,7 @@ include_once(__DIR__ . "/../include/footer.php");
 
 <?php
 
-if (isset($_POST['newRow'])) {
+if (isset($_POST['newRow']) || $_POST['idMeta'] || $_POST['tipoNotificacao']) {
 
     if (@$_GET['depositoMeta'] != null && @$_GET['depositoMeta'] == "true") {
         echo    "<script>
@@ -192,6 +198,22 @@ if (isset($_POST['newRow'])) {
                     });
                 </script>";
     }
+
+    if (@$_GET['addParticipante'] != null && @$_GET['addParticipante'] == "true") {
+        echo    "<script>
+                    $(document).ready(function(){
+                        $('#modalAddParticipantesMeta').modal('show');
+                    });
+                </script>";
+    }
+
+    if (@$_GET['aceitarConviteMeta'] != null && @$_GET['aceitarConviteMeta'] == "true") {
+        echo    "<script>
+                    $(document).ready(function(){
+                        $('#modalAceitarConviteMeta').modal('show');
+                    });
+                </script>";
+    }
 }
 
 ?>
@@ -202,11 +224,19 @@ if (isset($_POST['newRow'])) {
             window.history.pushState(null, null, window.location.pathname);
         });
 
+        $('#modalAceitarConviteMeta').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
+
         $('#modalEditMeta').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
 
         $('#modalDeleteMeta').on('hidden.bs.modal', function() {
+            window.history.pushState(null, null, window.location.pathname);
+        });
+
+        $('#modalAddParticipantesMeta').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
     });
