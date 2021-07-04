@@ -15,7 +15,7 @@ $data = $categoriaObj->selectAllFromCategoria("fk_tipo = 2");
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
-                <div class="metainer-fluid">
+                <div class="container-fluid">
                     <form method="POST" id="formAddMetas">
                         <div class="row">
                             <div class="col-sm-6 mb-3">
