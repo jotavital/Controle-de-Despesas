@@ -352,3 +352,7 @@ div.camposInfo label, div.camposInfo input {
 .goToProfile {
     cursor: pointer;
 }
+
+#logoSideBar{
+    cursor: pointer;
+}

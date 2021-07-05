@@ -5,7 +5,7 @@
         </div>
     </div>
     <div id="sidebarItems">
-        <div class="col-12 mt-3 mb-3 d-flex justify-content-center logoSidebar">
+        <div id="logoSideBar" class="col-12 mt-3 mb-3 d-flex justify-content-center logoSidebar">
             <img src="../image/favicon.ico" style="width:40px;">
         </div>
         <ul>
@@ -104,3 +104,11 @@
 
     <script src="../js/sideBarCollapse.js"></script>
 </sidebar>
+
+<script>
+
+    $('#logoSideBar').on('click', function () {
+        window.location.href = "../pages/dashboard.php";
+    })
+
+</script>
