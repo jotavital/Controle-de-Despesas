@@ -15,9 +15,6 @@ include_once(__DIR__ . "/../pages/modals/modalEditNomeSobrenome.php");
 include_once(__DIR__ . "/../pages/modals/modalEditSenha.php");
 include_once(__DIR__ . "/../pages/modals/modalDeleteUsuario.php");
 
-$usuarioObj = new Usuario;
-
-$fotoPerfilUsuario = $usuarioObj->getProfilePicturePath();
 ?>
 
 <body>
