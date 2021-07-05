@@ -5,6 +5,8 @@ include_once(__DIR__ . "/../classes/Despesa.class.php");
 include_once(__DIR__ . "/../classes/Receita.class.php");
 include_once(__DIR__ . "/../classes/Conta.class.php");
 include_once(__DIR__ . "/../classes/Categoria.class.php");
+include_once(__DIR__ . "/../classes/Notificacao.class.php");
+include_once(__DIR__ . "/../classes/Meta_Usuario.class.php");
 
 class Usuario
 {
@@ -192,11 +194,15 @@ class Usuario
             $despesa = new Despesa;
             $conta = new Conta;
             $categoria = new Categoria;
+            $notificacaoObj = new Notificacao;
+            $metaUsuarioObj = new Meta_Usuario;
 
             $receita->deletarTodasReceitasUsuario();
             $despesa->deletarTodasDespesasUsuario();
             $conta->deletarTodasContasUsuario();
             $categoria->deletarTodasCategoriasUsuario();
+            $notificacaoObj->deletarTodasNotificacoesUsuario();
+            $metaUsuarioObj->desvincularTodasMetasUsuario();
 
             $stm->execute();
             echo "Usuário deletado com sucesso!";

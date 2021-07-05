@@ -5,7 +5,7 @@ include_once(__DIR__ . "/../../classes/Usuario.class.php");
 include_once(__DIR__ . "/../../classes/Meta_Usuario.class.php");
 include_once(__DIR__ . "/../../classes/Notificacao.class.php");
 
-if (isset($_POST['idMeta'])) {
+if (isset($_POST['idMeta']) && isset($_POST['idRemetente'])) {
     $idMeta = $_POST['idMeta'];
 
     $metaObj = new Meta;

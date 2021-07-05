@@ -104,6 +104,20 @@ class Notificacao
             echo $e->getMessage();
         }
     }
+
+    function deletarTodasNotificacoesUsuario(){
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("DELETE FROM notificacao WHERE fk_usuario_destino = :userId");
+        $stm->bindValue(":userId", $_SESSION['userId']);
+
+        try {
+            $stm->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 }
 
 if (isset($_POST['notificacaoLida'])) {

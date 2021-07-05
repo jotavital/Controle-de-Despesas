@@ -44,6 +44,20 @@ class Meta_Usuario
         }
     }
 
+    function desvincularTodasMetasUsuario(){
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $stm = $conexao->prepare("DELETE FROM meta_usuario WHERE fk_usuario = :userId");
+        $stm->bindValue(":userId", $_SESSION['userId']);
+
+        try {
+            $stm->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
 }
 
 if (isset($_POST['aceitarConviteMeta'])) {
