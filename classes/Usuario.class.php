@@ -16,7 +16,8 @@ class Usuario
         }
     }
 
-    function verificaSeExisteUsuario($userId){
+    function verificaSeExisteUsuario($userId)
+    {
         $conn = new Connection;
         $conexao = $conn->conectar();
 
@@ -26,9 +27,9 @@ class Usuario
         $stm->execute();
         $res = $stm->fetch();
 
-        if($res != null){
+        if ($res != null) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -227,6 +228,61 @@ class Usuario
             $e->getMessage();
         }
     }
+
+    function trocarFotoPerfil()
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $nomeImg = $_FILES['imgInput']['name'];
+
+        $nomeImgAntiga = $this->selectFromUsuario("imagem_perfil", "id = " . $_SESSION['userId'])[0][0];
+        $directoryImgAntiga = '../uploaded/user_images/fotos_perfil/' . $_SESSION['userId'] . '/' . $nomeImgAntiga;
+
+        try {
+            $stm = $conexao->prepare("UPDATE usuario SET imagem_perfil = :imagem_perfil WHERE usuario.id = :userId");
+            $stm->bindValue(":imagem_perfil", $nomeImg);
+            $stm->bindValue(":userId", $_SESSION['userId']);
+
+            if ($nomeImg != null) {
+                $directory = '../uploaded/user_images/fotos_perfil/' . $_SESSION['userId'] . '/';
+
+                if (!file_exists($directory)) {
+                    mkdir($directory, 0777);
+                }
+
+                if (copy($_FILES['imgInput']['tmp_name'], $directory . $nomeImg)) {
+                    $stm->execute();
+
+                    if ($nomeImgAntiga != null) {
+                        if (file_exists($directoryImgAntiga)) {
+                            unlink($directoryImgAntiga);
+                        }
+                    }
+                } else {
+                    throw new PDOException;
+                }
+            }
+
+            echo "Foto de perfil alterada com sucesso! ";
+        } catch (PDOException $e) {
+            echo "Erro ao alterar foto de perfil! " . $e->getMessage();
+        }
+    }
+
+    function getProfilePicturePath(){
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        $nomeImg = $this->selectFromUsuario("imagem_perfil", "id = " . $_SESSION['userId'])[0][0];
+        $directoryImgAntiga = '../uploaded/user_images/fotos_perfil/' . $_SESSION['userId'] . '/' . $nomeImg;
+
+        if($nomeImg != null){
+            return $directoryImgAntiga;
+        }else{
+            return null;
+        }
+    }
 }
 
 if (isset($_POST['loginUser'])) {
@@ -262,4 +318,9 @@ if (isset($_GET['logout'])) {
 if (isset($_POST['editNomeSobrenome'])) {
     $usuario = new Usuario;
     $usuario->updateNomeSobrenome($_POST['inputNovoNome'], $_POST['inputNovoSobrenome']);
+}
+
+if (isset($_POST['trocarFotoPerfil'])) {
+    $usuario = new Usuario;
+    $usuario->trocarFotoPerfil();
 }

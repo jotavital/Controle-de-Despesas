@@ -116,7 +116,7 @@ $qtdNotificacaoesNaoLidas = $notificacaoObj->selectFromNotificacao("count(*)", "
 
         <div class="goToProfile d-flex align-items-center">
             <div class="divNavBarProfilePicture">
-                <img id="navBarProfilePicture" src="../image/assets/no_profile_picture.png" alt="foto de perfil">
+                <img id="navBarProfilePicture" src="<?= ($fotoPerfilUsuario == null) ? "../image/assets/no_profile_picture.png" : $fotoPerfilUsuario ?>" alt="foto de perfil">
             </div>
             <div class="ms-1 nomeUsuarioNavBar">
                 <small class="p-white"><?php echo $nomeUsuario ?></small>

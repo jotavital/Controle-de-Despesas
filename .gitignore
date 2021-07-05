@@ -1,3 +1,5 @@
 uploaded/user_images/despesas_images/*
+uploaded/user_images/fotos_perfil/*
 
 !uploaded/user_images/despesas_images/.gitkeep
+!uploaded/user_images/fotos_perfil/.gitkeep

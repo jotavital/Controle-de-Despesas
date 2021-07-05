@@ -2,6 +2,7 @@
 
 include_once(__DIR__ . "/../connections/loginVerify.php");
 
+include_once(__DIR__ . "/../classes/Usuario.class.php");
 include_once(__DIR__ . "/../connections/Connection.class.php");
 $conn = new Connection;
 $conexao = $conn->conectar();
@@ -13,6 +14,10 @@ setTitulo($title);
 include_once(__DIR__ . "/../pages/modals/modalEditNomeSobrenome.php");
 include_once(__DIR__ . "/../pages/modals/modalEditSenha.php");
 include_once(__DIR__ . "/../pages/modals/modalDeleteUsuario.php");
+
+$usuarioObj = new Usuario;
+
+$fotoPerfilUsuario = $usuarioObj->getProfilePicturePath();
 ?>
 
 <body>
@@ -48,12 +53,18 @@ include_once(__DIR__ . "/../pages/modals/modalDeleteUsuario.php");
 
                 <div id="userInfo" class="col-md">
                     <div class="row mb-3">
-                        <div class="mb-3 divProfilePicture d-flex justify-content-center">
+                        <div class="mb-4 divProfilePicture d-flex justify-content-center">
                             <div class="position-relative">
-                                <span class="position-absolute top-100 start-50 translate-middle badge rounded-pill"">
-                                    <i class="fas fa-edit p-primary" style="font-size: 20px;"></i>
+                                <span class="position-absolute start-50 translate-middle badge rounded-pill" style="margin-top: 7.5rem;">
+                                    <form action="" method=" POST" id="formTrocarFotoPerfil" enctype="multipart/form-data">
+                                        <label for="imgInput">
+                                            <i class="fas fa-edit p-primary" style="font-size: 20px; "></i>
+                                        </label>
+                                        <input type="hidden" name="trocarFotoPerfil">
+                                        <input class="hide form-control" type="file" id="imgInput" name="imgInput" accept="image/*">
+                                    </form>
                                 </span>
-                                <img id="profilePicture" src="../image/assets/no_profile_picture.png" alt="foto de perfil">
+                                <img id="profilePicture" src="<?= ($fotoPerfilUsuario == null) ? "../image/assets/no_profile_picture.png" : $fotoPerfilUsuario ?>" alt="foto de perfil">
                             </div>
                         </div>
                         <div class="row">
@@ -139,5 +150,31 @@ if (isset($_GET['excluirUsuario']) && $_GET['excluirUsuario'] == 'true') {
         $('#modalDeleteUsuario').on('hidden.bs.modal', function() {
             window.history.pushState(null, null, window.location.pathname);
         });
+    });
+
+    $('#imgInput').bind('change', function() {
+        if (this.files[0].size > 5242880) {
+            alert('Escolha uma imagem de até 5 MB');
+            $('#imgInput').val('');
+        } else {
+            if (confirm('Deseja trocar a foto de perfil? A foto anterior não poderá ser recuperada!')) {
+                var dados = new FormData(document.getElementById('formTrocarFotoPerfil'));
+
+                $.ajax({
+                    url: '../classes/Usuario.class.php',
+                    method: 'POST',
+                    data: dados,
+                    processData: false,
+                    contentType: false,
+                    success: function(msg) {
+                        alert(msg);
+                        window.location.reload();
+                    },
+                    error: function(msg) {
+                        alert(msg);
+                    }
+                });
+            }
+        }
     });
 </script>
