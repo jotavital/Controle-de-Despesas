@@ -10,6 +10,11 @@ $nomeUsuario = $usuarioObj->selectFromUsuario("nome", "id = " . $_SESSION['userI
 $notificacaoObj = new Notificacao;
 $qtdNotificacaoesNaoLidas = $notificacaoObj->selectFromNotificacao("count(*)", "fk_usuario_destino = " . $_SESSION['userId'] . " AND foi_lida = 0")[0][0];
 
+include_once(__DIR__ . "/../classes/Usuario.class.php");
+
+$usuarioObj = new Usuario;
+$fotoPerfilUsuario = $usuarioObj->getProfilePicturePath();
+
 ?>
 
 <div id="navBarDashboard" class="col-12 navBar d-flex justify-content-start">
