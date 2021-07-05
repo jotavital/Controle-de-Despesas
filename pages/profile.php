@@ -49,7 +49,12 @@ include_once(__DIR__ . "/../pages/modals/modalDeleteUsuario.php");
                 <div id="userInfo" class="col-md">
                     <div class="row mb-3">
                         <div class="mb-3 divProfilePicture d-flex justify-content-center">
-                            <img id="profilePicture" src="../image/assets/no_profile_picture.png" alt="foto de perfil">
+                            <div class="position-relative">
+                                <span class="position-absolute top-100 start-50 translate-middle badge rounded-pill"">
+                                    <i class="fas fa-edit p-primary" style="font-size: 20px;"></i>
+                                </span>
+                                <img id="profilePicture" src="../image/assets/no_profile_picture.png" alt="foto de perfil">
+                            </div>
                         </div>
                         <div class="row">
                             <div class="d-flex justify-content-center align-items-center">
@@ -60,7 +65,9 @@ include_once(__DIR__ . "/../pages/modals/modalDeleteUsuario.php");
                             </div>
                             <div class="d-flex justify-content-center align-items-center">
                                 <p class="me-2">Membro desde:</p>
-                                <strong><p class="p-success"><?php echo ($data_cadastro_formatada); ?></p></strong>
+                                <strong>
+                                    <p class="p-success"><?php echo ($data_cadastro_formatada); ?></p>
+                                </strong>
                             </div>
                         </div>
                     </div>
