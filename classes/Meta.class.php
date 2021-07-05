@@ -16,6 +16,33 @@ class Meta
         }
     }
 
+    function selectFromMeta($campos = '', $condicao = '')
+    {
+        $conn = new Connection;
+        $conexao = $conn->conectar();
+
+        if ($campos == '') {
+            $campos = '*';
+        }
+
+        if ($condicao != '') {
+            $sql = "SELECT " . $campos .  " FROM meta WHERE " . $condicao . "";
+        } else {
+            $sql = "SELECT " . $campos .  " FROM meta ";
+        }
+
+        $stm = $conexao->prepare($sql);
+
+        try {
+            $stm->execute();
+
+            $result = $stm->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
     function insertMeta()
     {
         $conn = new Connection;

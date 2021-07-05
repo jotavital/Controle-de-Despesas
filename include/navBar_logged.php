@@ -59,6 +59,9 @@ $qtdNotificacaoesNaoLidas = $notificacaoObj->selectFromNotificacao("count(*)", "
 
                             <div class="mb-1 d-flex align-items-center alert alert-warning alert-dismissible fade show" role="alert" style="padding: 0;">
                                 <form id="formClickNotificacao" action="" method="POST">
+                                    <input type="hidden" name="idNotificacao" value="<?= $notificacao['id'] ?>">
+                                    <input type="hidden" name="idMeta" value="<?= $notificacao['fk_meta'] ?>">
+                                    <input type="hidden" name="idRemetente" value="<?= $notificacao['fk_usuario_remetente'] ?>">
                                     <input type="hidden" name="tipoNotificacao" value="<?= $notificao['fk_tipo_notificacao'] ?>">
                                     <div class="notificationText p-2">
                                         <p style="font-size: .9rem; margin-bottom: 0;"><?= $textoNotificacao ?></p>
@@ -83,9 +86,15 @@ $qtdNotificacaoesNaoLidas = $notificacaoObj->selectFromNotificacao("count(*)", "
                         ?>
 
                             <div class="mb-1 d-flex align-items-center alert alert-secondary alert-dismissible fade show" role="alert" style="padding:0">
-                                <div class="notificationText p-2">
-                                    <p style="font-size:.9rem; margin-bottom:0;"><?= $textoNotificacao ?></p>
-                                </div>
+                                <form id="formClickNotificacao" action="" method="POST">
+                                    <input type="hidden" name="idNotificacao" value="<?= $notificacao['id'] ?>">
+                                    <input type="hidden" name="idMeta" value="<?= $notificacao['fk_meta'] ?>">
+                                    <input type="hidden" name="idRemetente" value="<?= $notificacao['fk_usuario_remetente'] ?>">
+                                    <input type="hidden" name="tipoNotificacao" value="<?= $notificao['fk_tipo_notificacao'] ?>">
+                                    <div class="notificationText p-2">
+                                        <p style="font-size: .9rem; margin-bottom: 0;"><?= $textoNotificacao ?></p>
+                                    </div>
+                                </form>
                                 <div class="d-flex align-items-center alertButtons">
                                     <form id="formExcluirNotificacao" action="" method="POST">
                                         <input type="hidden" name="notificacaoExcluida">
